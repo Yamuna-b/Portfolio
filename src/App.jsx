@@ -12,32 +12,38 @@ import {
 } from "lucide-react";
 import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 import { SiLeetcode, SiHackerrank } from "react-icons/si";
+import Footer from "./components/Footer";
+import Badges from "./components/Badges";
 
-// --- Animated, drifting background stars ---
+// --- Animated, drifting background stars with enhanced effects ---
 function Bubbles() {
   return (
-    <div className="pointer-events-none fixed inset-0 z-0">
-      {Array.from({ length: 32 }).map((_, i) => {
+    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+      {Array.from({ length: 40 }).map((_, i) => {
         const top = Math.random() * 100;
         const left = Math.random() * 100;
-        const size = Math.random() * 12 + 8;
-        const driftX = (Math.random() - 0.5) * 40;
-        const driftY = (Math.random() - 0.5) * 40;
+        const size = Math.random() * 14 + 6;
+        const driftX = (Math.random() - 0.5) * 50;
+        const driftY = (Math.random() - 0.5) * 50;
+        const colors = ['bg-blue-300', 'bg-purple-300', 'bg-pink-300', 'bg-cyan-300'];
+        const color = colors[Math.floor(Math.random() * colors.length)];
         return (
           <motion.div
             key={i}
-            className="absolute rounded-full bg-blue-200 opacity-30 blur-md"
+            className={`absolute rounded-full ${color} opacity-20 blur-xl`}
             style={{ width: size, height: size }}
             initial={{ top: `${top}%`, left: `${left}%` }}
             animate={{
               top: [`${top}%`, `${top + driftY}%`, `${top}%`],
               left: [`${left}%`, `${left + driftX}%`, `${left}%`],
-              opacity: [0.6, 1, 0.6]
+              opacity: [0.4, 0.8, 0.4],
+              scale: [1, 1.2, 1]
             }}
             transition={{
-              duration: 18 + Math.random() * 10,
+              duration: 15 + Math.random() * 12,
               repeat: Infinity,
-              repeatType: "mirror"
+              repeatType: "mirror",
+              ease: "easeInOut"
             }}
           />
         );
@@ -127,15 +133,30 @@ const education = [
 ];
 
 const certifications = [
-  { src: "/cert1.jpg", title: "Designthon Euphoria’24" },
-  { src: "/cert2.jpg", title: "Project Expo Techathon’24" },
+  { src: "/cert1.jpg", title: "Designthon Euphoria'24" },
+  { src: "/cert2.jpg", title: "Project Expo Techathon'24" },
   { src: "/cert3.jpg", title: "Robotics MOBIUS 2k24" },
-  { src: "/cert4.jpg", title: "Designthon Euphoria’24" },
-  { src: "/cert5.jpg", title: "Project Expo Techathon’24" },
+  { src: "/cert4.jpg", title: "Designthon Euphoria'24" },
+  { src: "/cert5.jpg", title: "Project Expo Techathon'24" },
   { src: "/cert6.jpg", title: "Robotics MOBIUS 2k24" },
   { src: "/cert7.jpg", title: "Robotics MOBIUS 2k24" },
-  { src: "/cert8.jpg", title: "Designthon Euphoria’24" },
-  { src: "/cert9.jpg", title: "Project Expo Techathon’24" },
+  { src: "/cert8.jpg", title: "Designthon Euphoria'24" },
+  { src: "/cert9.jpg", title: "Project Expo Techathon'24" },
+];
+
+const platformBadges = [
+  { src: "/badge1.png", title: "Open Source Contributor" },
+  { src: "/badge2.png", title: "Social Media Marketing" },
+  { src: "/badge3.png", title: "AWS Certified" },
+  { src: "/badge4.png", title: "Holopin Badges" },
+  { src: "/badge5.png", title: "GitHub Achievements" },
+  { src: "/badge6.png", title: "HackerRank Stars" },
+  { src: "/badge7.png", title: "LeetCode Knight" },
+  { src: "/badge8.png", title: "CodeChef Star" },
+  { src: "/badge9.png", title: "Azure Certified" },
+  { src: "/badge10.png", title: "Docker Certified" },
+  { src: "/badge11.png", title: "Kubernetes Badge" },
+  { src: "/badge12.png", title: "Google Cloud" },
 ];
 
 const projects = {
@@ -169,6 +190,36 @@ const projects = {
       tags: ["AWS", "Monitoring"],
       tools: ["CloudWatch"],
       links: { github: "#" }
+    },
+    {
+      id: 4,
+      title: "Kubernetes Cluster",
+      images: ["/cloud2.png"],
+      shortDesc: "Container orchestration",
+      fullDesc: "Set up Kubernetes cluster for microservices deployment.",
+      tags: ["Kubernetes", "Docker"],
+      tools: ["K8s"],
+      links: { github: "#" }
+    },
+    {
+      id: 5,
+      title: "Terraform Infrastructure",
+      images: ["/cloud3.png"],
+      shortDesc: "Infrastructure as Code",
+      fullDesc: "Automated AWS infrastructure using Terraform.",
+      tags: ["Terraform", "IaC"],
+      tools: ["AWS"],
+      links: { github: "#" }
+    },
+    {
+      id: 6,
+      title: "Serverless API",
+      images: ["/cloud4.png"],
+      shortDesc: "AWS Lambda functions",
+      fullDesc: "Built serverless REST API using AWS Lambda and API Gateway.",
+      tags: ["Serverless", "Lambda"],
+      tools: ["AWS"],
+      links: { github: "#" }
     }
   ],
   fullstack: {
@@ -192,6 +243,26 @@ const projects = {
         tags: ["React", "Tailwind"],
         tools: ["TailwindCSS"],
         links: { github: "#" }
+      },
+      {
+        id: 3,
+        title: "Dashboard UI",
+        images: ["/fullstack2.png"],
+        shortDesc: "Analytics dashboard",
+        fullDesc: "Interactive dashboard with charts and data visualization.",
+        tags: ["React", "Charts"],
+        tools: ["Chart.js"],
+        links: { github: "#" }
+      },
+      {
+        id: 4,
+        title: "Landing Page",
+        images: ["/fullstack3.png"],
+        shortDesc: "Modern landing page",
+        fullDesc: "Responsive landing page with animations.",
+        tags: ["HTML", "CSS"],
+        tools: ["GSAP"],
+        links: { github: "#" }
       }
     ],
     backend: [
@@ -214,6 +285,26 @@ const projects = {
         tags: ["Django", "REST"],
         tools: ["DRF"],
         links: { github: "#" }
+      },
+      {
+        id: 3,
+        title: "GraphQL API",
+        images: ["/backend1.png"],
+        shortDesc: "GraphQL server",
+        fullDesc: "Built GraphQL API with Apollo Server.",
+        tags: ["GraphQL", "Apollo"],
+        tools: ["Node.js"],
+        links: { github: "#" }
+      },
+      {
+        id: 4,
+        title: "Microservices Backend",
+        images: ["/backend2.png"],
+        shortDesc: "Distributed services",
+        fullDesc: "Microservices architecture with message queues.",
+        tags: ["Microservices", "RabbitMQ"],
+        tools: ["Docker"],
+        links: { github: "#" }
       }
     ],
     both: [
@@ -224,6 +315,26 @@ const projects = {
         shortDesc: "MERN stack social media app",
         fullDesc: "A social platform built with MongoDB, Express, React, and Node.js.",
         tags: ["MERN", "Full Stack"],
+        tools: ["React", "Node.js"],
+        links: { github: "#" }
+      },
+      {
+        id: 2,
+        title: "E-learning Platform",
+        images: ["/fullstack4.png"],
+        shortDesc: "Complete LMS system",
+        fullDesc: "Learning management system with video courses.",
+        tags: ["MERN", "LMS"],
+        tools: ["MongoDB", "React"],
+        links: { github: "#" }
+      },
+      {
+        id: 3,
+        title: "Real-time Chat App",
+        images: ["/fullstack5.png"],
+        shortDesc: "Socket.io chat application",
+        fullDesc: "Real-time messaging with Socket.io and React.",
+        tags: ["Socket.io", "Real-time"],
         tools: ["React", "Node.js"],
         links: { github: "#" }
       }
@@ -430,7 +541,7 @@ const projects = {
       {
         id: 1,
         title: "Pro Planet Demo",
-        images: ["/planner1.png","video1.mp4"],
+        images: ["/planner1.png","/video1.mp4"],
         shortDesc: "Interactive PowerPoint",
         fullDesc: "Demo presentation for Smart India Hackathon.",
         tags: ["PowerPoint", "Demo"],
@@ -465,7 +576,7 @@ const projects = {
     {
       id: 2,
       title: "Face Recognition",
-      images: ["/ai2.jpg"],
+      images: ["/ai2.png"],
       shortDesc: "Real-time face recognition",
       fullDesc: "Built with OpenCV and deep learning.",
       tags: ["AI", "Vision"],
@@ -475,11 +586,41 @@ const projects = {
     {
       id: 3,
       title: "Face Recognition",
-      images: ["/ai1.jpg"],
+      images: ["/ai1.png"],
       shortDesc: "Real-time face recognition",
       fullDesc: "Built with OpenCV and deep learning.",
       tags: ["AI", "Vision"],
       tools: ["OpenCV"],
+      links: { github: "#" }
+    },
+    {
+      id: 4,
+      title: "NLP Sentiment Analysis",
+      images: ["/ai3.png"],
+      shortDesc: "Text sentiment analyzer",
+      fullDesc: "ML model to analyze sentiment in customer reviews.",
+      tags: ["NLP", "ML"],
+      tools: ["Python", "NLTK"],
+      links: { github: "#" }
+    },
+    {
+      id: 5,
+      title: "Image Classification",
+      images: ["/ai4.png"],
+      shortDesc: "CNN-based classifier",
+      fullDesc: "Deep learning image classification using CNN.",
+      tags: ["CNN", "Deep Learning"],
+      tools: ["TensorFlow"],
+      links: { github: "#" }
+    },
+    {
+      id: 6,
+      title: "Recommendation System",
+      images: ["/ai5.png"],
+      shortDesc: "Product recommendation AI",
+      fullDesc: "Collaborative filtering recommendation engine.",
+      tags: ["ML", "Recommendations"],
+      tools: ["Scikit-learn"],
       links: { github: "#" }
     }
   ],
@@ -492,15 +633,45 @@ const projects = {
     },
     {
       id: 2,
-      title: "Project Expo Techathon’24",
-      images: ["/showcase1.jpg", "video1.mp4"],
+      title: "Project Expo Techathon'24",
+      images: ["/showcase1.jpg", "/video1.mp4"],
       desc: ""
     },
     {
       id: 3,
       title: "Robotics Workshop",
-      images: ["showcase1.jpg"],
+      images: ["/showcase1.jpg"],
       desc: "Hands-on training and automation at Thiagarajar College."
+    },
+    {
+      id: 4,
+      title: "Hackathon Winner",
+      images: ["/showcase2.jpg"],
+      desc: "First prize at Smart India Hackathon 2024."
+    },
+    {
+      id: 5,
+      title: "UI/UX Competition",
+      images: ["/showcase3.jpg"],
+      desc: "Best design award at regional competition."
+    },
+    {
+      id: 6,
+      title: "Tech Talk Speaker",
+      images: ["/showcase4.jpg"],
+      desc: "Delivered keynote on cloud architecture."
+    },
+    {
+      id: 7,
+      title: "Open Source Contribution",
+      images: ["/showcase5.jpg"],
+      desc: "Major contributor to popular React libraries."
+    },
+    {
+      id: 8,
+      title: "Research Publication",
+      images: ["/showcase6.jpg"],
+      desc: "Published paper on sustainable technology."
     }
   ]
 };
@@ -522,13 +693,36 @@ function NavBar({ activeSection, setActiveSection, setExpandedCard }) {
     <>
       <style>{`
         .nav-shine {
-          transition: box-shadow 0.3s, color 0.3s;
-          box-shadow: 0 0 0 transparent;
+          position: relative;
+          transition: color 0.5s;
+          transition-delay: 0.5s;
         }
         .nav-shine:hover, .nav-shine:focus {
-          color: #fff;
-          box-shadow: 0 0 18px 2px #38bdf8, 0 0 8px 4px #a21caf;
-          text-shadow: 0 0 8px #38bdf8;
+          color: rgba(255, 255, 255, 0.2);
+          transition-delay: 0s;
+        }
+        .nav-shine::before {
+          content: attr(data-text);
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: #d83bff;
+          text-shadow: 0 0 10px #d83bff, 0 0 30px #d83bff, 0 0 80px #d83bff;
+          letter-spacing: 40px;
+          white-space: nowrap;
+          text-align: center;
+          opacity: 0;
+          transition: 0.5s;
+          font-size: 0.65em;
+          font-weight: 500;
+          z-index: -1;
+          pointer-events: none;
+        }
+        .nav-shine:hover::before {
+          opacity: 1;
+          letter-spacing: 6px;
+          transition-delay: 0.5s;
         }
       `}</style>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#13131c]/95 backdrop-blur border-b border-gray-800 flex items-center justify-between px-8 py-3">
@@ -539,18 +733,19 @@ function NavBar({ activeSection, setActiveSection, setExpandedCard }) {
             className="w-14 h-14 rounded-full object-cover border-2 border-blue-400 shadow"
             style={{ background: "#23233a" }}
           />
-          <span className="font-bold text-2xl text-white">Yamuna</span>
+          <span className="font-bold text-xl text-white">Yamuna</span>
         </div>
         <div className="flex-1 flex justify-center">
           <div className="flex items-center gap-x-12">
             {navItems.map(({ key, label }) => (
               <button
                 key={key}
+                data-text={label}
                 onClick={() => {
                   setExpandedCard(null);
                   setActiveSection(key);
                 }}
-                className={`nav-shine text-2xl font-bold ${activeSection === key ? (key === "showcase" ? "text-yellow-300 underline" : "text-blue-300") : "text-white"}`}
+                className={`nav-shine text-lg font-bold ${activeSection === key ? (key === "showcase" ? "text-yellow-300 underline" : "text-blue-300") : "text-white"}`}
                 style={key === "home" || key === "showcase" ? { marginLeft: 32, marginRight: 32 } : {}}
               >
                 {label}
@@ -600,17 +795,34 @@ const BackArrow = ({ activeSection, setActiveSection, show, setExpandedCard }) =
 
 // --- Profile Avatar with animated stars and your photo ---
 function ProfileAvatar() {
-  const stars = Array.from({ length: 16 }).map(() => ({
-    top: `${30 + Math.random() * 40}%`,
-    left: `${30 + Math.random() * 40}%`,
-    size: Math.random() * 12 + 8,
+  const stars = Array.from({ length: 20 }).map(() => ({
+    top: `${25 + Math.random() * 50}%`,
+    left: `${25 + Math.random() * 50}%`,
+    size: Math.random() * 14 + 6,
     delay: Math.random() * 2,
   }));
   return (
-    <div className="relative w-60 h-60 mx-auto flex items-center justify-center select-none">
-      <div className="absolute inset-0 rounded-full border-4 border-blue-400 shadow-2xl" style={{
-        boxShadow: "0 0 32px 8px rgba(80,180,255,0.5), 0 0 0 8px rgba(80,180,255,0.12)"
+    <motion.div 
+      initial={{ scale: 0.8, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="relative w-60 h-60 mx-auto flex items-center justify-center select-none"
+    >
+      {/* Rotating gradient ring */}
+      <motion.div 
+        className="absolute inset-0 rounded-full"
+        style={{
+          background: "conic-gradient(from 0deg, #38bdf8, #a21caf, #38bdf8)",
+          filter: "blur(8px)"
+        }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+      />
+      
+      <div className="absolute inset-0 rounded-full border-4 border-blue-400 shadow-2xl backdrop-blur" style={{
+        boxShadow: "0 0 40px 10px rgba(80,180,255,0.6), 0 0 0 8px rgba(80,180,255,0.15)"
       }} />
+      
       {stars.map((star, i) => (
         <motion.div
           key={i}
@@ -620,27 +832,35 @@ function ProfileAvatar() {
             left: star.left,
             width: star.size,
             height: star.size,
-            background: "radial-gradient(ellipse at center, #fff 60%, #77c7ff 100%)",
+            background: "radial-gradient(ellipse at center, #fff 50%, #38bdf8 100%)",
             opacity: 0.7,
-            filter: "blur(0.5px)",
+            filter: "blur(1px)",
           }}
-          animate={{ opacity: [0.5, 1, 0.5] }}
+          animate={{ 
+            opacity: [0.4, 1, 0.4],
+            scale: [1, 1.3, 1]
+          }}
           transition={{
-            duration: 2.5 + Math.random(),
+            duration: 2 + Math.random() * 2,
             delay: star.delay,
             repeat: Infinity,
             repeatType: "reverse"
           }}
         />
       ))}
-      <div className="w-44 h-44 bg-gradient-to-br from-[#23233a] via-[#181829] to-[#23233a] rounded-full flex items-center justify-center border-4 border-blue-300 shadow-xl z-10 overflow-hidden">
+      
+      <motion.div 
+        className="w-44 h-44 bg-gradient-to-br from-[#23233a] via-[#181829] to-[#23233a] rounded-full flex items-center justify-center border-4 border-blue-300 shadow-xl z-10 overflow-hidden"
+        whileHover={{ scale: 1.05 }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
         <img
           src="/profile.png"
           alt="Yamuna"
           className="w-full h-full object-cover"
         />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -676,24 +896,52 @@ function HomePage() {
     <section className="min-h-screen pt-32 pb-16 bg-gradient-to-br from-[#101018] via-[#181829] to-[#23233a]">
       <div className="max-w-6xl mx-auto px-4">
         <ProfileAvatar />
-        <div className="text-center mb-2">
-          <div className="text-2xl font-semibold text-blue-200">{personalInfo.tagline1}</div>
-          <div className="text-lg text-blue-300">{personalInfo.tagline2}</div>
-        </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="text-center mb-2"
+        >
+          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            {personalInfo.name}
+          </h1>
+          <div className="text-xl font-semibold bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
+            {personalInfo.tagline1}
+          </div>
+          <div className="text-base text-blue-300 mt-1">{personalInfo.tagline2}</div>
+        </motion.div>
         <div className="flex flex-col md:flex-row gap-8 mt-8">
-          <div className="flex-1 bg-[#181829] rounded-3xl shadow-xl p-8">
-            <h2 className="text-2xl font-bold text-blue-300 mb-4">About Me</h2>
-            <p className="text-blue-100 mb-4">{personalInfo.bio}</p>
-            <p className="text-blue-100 mb-4">{personalInfo.bio2}</p>
-            <h3 className="text-lg font-semibold text-blue-200 mt-4 mb-2">Skills</h3>
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="flex-1 bg-[#181829] rounded-3xl shadow-xl p-8 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
+          >
+            <h2 className="text-xl font-bold text-blue-300 mb-4">About Me</h2>
+            <p className="text-sm text-blue-100 mb-4 leading-relaxed">{personalInfo.bio}</p>
+            <p className="text-sm text-blue-100 mb-4 leading-relaxed">{personalInfo.bio2}</p>
+            <h3 className="text-base font-semibold text-blue-200 mt-4 mb-2">Skills</h3>
             <div className="flex flex-wrap gap-2">
-              {personalInfo.techStacks.map(skill => (
-                <span key={skill} className="px-3 py-1 bg-blue-900 text-blue-100 rounded-full text-xs">{skill}</span>
+              {personalInfo.techStacks.map((skill, idx) => (
+                <motion.span 
+                  key={skill} 
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3 + idx * 0.05 }}
+                  className="px-3 py-1 bg-blue-900 text-blue-100 rounded-full text-xs hover:bg-blue-800 hover:scale-110 transition-all duration-200 cursor-default"
+                >
+                  {skill}
+                </motion.span>
               ))}
             </div>
-          </div>
-          <div className="flex-1 bg-[#181829] rounded-3xl shadow-xl p-8">
-            <h2 className="text-2xl font-bold text-blue-300 mb-4">Get In Touch</h2>
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="flex-1 bg-[#181829] rounded-3xl shadow-xl p-8 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
+          >
+            <h2 className="text-xl font-bold text-blue-300 mb-4">Get In Touch</h2>
             <ContactSection />
             <div className="flex gap-3 mt-4">
               <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer"><Linkedin className="w-7 h-7 text-blue-400 hover:scale-110 transition" /></a>
@@ -706,19 +954,30 @@ function HomePage() {
             <button className="w-full mt-6 px-6 py-3 bg-gradient-to-r from-blue-900 to-fuchsia-800 text-white rounded-2xl font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
               <Download className="w-5 h-5" /> Download Resume
             </button>
-          </div>
+          </motion.div>
         </div>
         <div className="grid md:grid-cols-3 gap-8 mt-8">
           {/* Experience */}
-          <div className="bg-[#181829] rounded-3xl shadow-xl p-8">
-            <h2 className="text-2xl font-bold text-blue-300 mb-4">Experience</h2>
-            {experience.map(exp => (
-              <div key={exp.company} className="mb-4 flex items-start gap-2">
-                <img src={exp.logo} className="w-10 h-10 rounded-full mt-1 object-cover" alt="Logo" />
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="bg-[#181829] rounded-3xl shadow-xl p-8 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
+          >
+            <h2 className="text-xl font-bold text-blue-300 mb-4">Experience</h2>
+            {experience.map((exp, idx) => (
+              <motion.div 
+                key={exp.company} 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + idx * 0.1 }}
+                className="mb-4 flex items-start gap-2 p-3 rounded-xl hover:bg-[#23233a] transition-colors duration-200"
+              >
+                <img src={exp.logo} className="w-10 h-10 rounded-full mt-1 object-cover border-2 border-blue-400" alt="Logo" />
                 <div>
-                  <div className="font-semibold text-white">{exp.role} @ {exp.company}</div>
+                  <div className="text-sm font-semibold text-white">{exp.role} @ {exp.company}</div>
                   <div className="text-xs text-blue-400">{exp.duration}</div>
-                  <div className="text-blue-100">{exp.desc}</div>
+                  <div className="text-xs text-blue-100">{exp.desc}</div>
                   {/* Publication button for ECOSAUR */}
                   {exp.publication && (
                     <a
@@ -731,44 +990,65 @@ function HomePage() {
                     </a>
                   )}
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
           {/* Education */}
-          <div className="bg-[#181829] rounded-3xl shadow-xl p-8">
-            <h2 className="text-2xl font-bold text-blue-300 mb-4">Education</h2>
-            {education.map(edu => (
-              <div key={edu.degree} className="mb-3 flex items-center gap-2">
-                <img src={edu.logo} className="w-10 h-10 rounded-full object-cover" alt="Logo" />
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="bg-[#181829] rounded-3xl shadow-xl p-8 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
+          >
+            <h2 className="text-xl font-bold text-blue-300 mb-4">Education</h2>
+            {education.map((edu, idx) => (
+              <motion.div 
+                key={edu.degree} 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 + idx * 0.1 }}
+                className="mb-3 flex items-center gap-2 p-3 rounded-xl hover:bg-[#23233a] transition-colors duration-200"
+              >
+                <img src={edu.logo} className="w-10 h-10 rounded-full object-cover border-2 border-blue-400" alt="Logo" />
                 <div>
-                  <div className="font-semibold text-white">{edu.degree}</div>
+                  <div className="text-sm font-semibold text-white">{edu.degree}</div>
                   <div className="text-xs text-blue-400">{edu.year}</div>
-                  <div className="text-blue-100">{edu.org}</div>
+                  <div className="text-xs text-blue-100">{edu.org}</div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
           {/* Languages & Soft Skills */}
-          <div className="bg-[#181829] rounded-3xl shadow-xl p-8">
-            <h2 className="text-2xl font-bold text-blue-300 mb-4">Languages & Soft Skills</h2>
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4 }}
+            className="bg-[#181829] rounded-3xl shadow-xl p-8 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
+          >
+            <h2 className="text-xl font-bold text-blue-300 mb-4">Languages & Soft Skills</h2>
             <div className="mb-4">
-              <div className="font-semibold mb-1 text-white">Languages</div>
+              <div className="text-sm font-semibold mb-1 text-white">Languages</div>
               {personalInfo.languages.map(lang => (
-                <div key={lang.name} className="flex justify-between text-blue-100 text-sm">
+                <div key={lang.name} className="flex justify-between text-blue-100 text-sm py-1 px-2 rounded hover:bg-[#23233a] transition-colors">
                   <span>{lang.name}</span>
-                  <span>{lang.level}</span>
+                  <span className="text-blue-400 font-semibold">{lang.level}</span>
                 </div>
               ))}
             </div>
             <div>
-              <div className="font-semibold mb-1 text-white">Soft Skills</div>
+              <div className="text-sm font-semibold mb-1 text-white">Soft Skills</div>
               <div className="flex flex-wrap gap-2">
                 {personalInfo.softSkills.map(skill => (
-                  <span key={skill} className="px-3 py-1 bg-blue-900 text-blue-100 rounded-full text-xs">{skill}</span>
+                  <span key={skill} className="px-3 py-1 bg-blue-900 text-blue-100 rounded-full text-xs hover:bg-blue-800 hover:scale-105 transition-all duration-200 cursor-default">{skill}</span>
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
+        </div>
+        
+        {/* Badges Section */}
+        <div className="mt-12">
+          <Badges />
         </div>
       </div>
     </section>
@@ -780,7 +1060,7 @@ function ProjectGrid({ cards, expandedCard, setExpandedCard }) {
   const [hoveredCard, setHoveredCard] = useState(null);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 auto-rows-auto">
       {cards.map((project, idx) => {
         const images = (project.images && project.images.length > 0) ? project.images : [project.src];
         const onlyVideos = images.every(isVideo);
@@ -792,8 +1072,7 @@ function ProjectGrid({ cards, expandedCard, setExpandedCard }) {
         return (
           <div
             key={project.id || project.title}
-            className="relative group bg-[#181829] rounded-2xl shadow-lg border border-gray-800 cursor-pointer overflow-hidden"
-            style={{ aspectRatio: "1/1" }}
+            className="relative group rounded-2xl shadow-lg border border-gray-800 cursor-pointer overflow-hidden hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 flex items-center justify-center min-h-[220px] bg-[#0d0d15]"
             onMouseEnter={() => setHoveredCard(idx)}
             onMouseLeave={() => setHoveredCard(null)}
             onClick={() => setExpandedCard(idx)}
@@ -831,7 +1110,7 @@ function ProjectGrid({ cards, expandedCard, setExpandedCard }) {
                 className="w-full h-full"
               >
                 {images.map((img, i) => (
-                  <SwiperSlide key={i}>
+                  <SwiperSlide key={i} className="!h-full flex items-center justify-center">
                     <img
                       src={img}
                       alt={project.title}
@@ -854,8 +1133,8 @@ function ProjectGrid({ cards, expandedCard, setExpandedCard }) {
                   transition={{ duration: 0.2 }}
                   className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/70 backdrop-blur rounded-2xl p-6"
                 >
-                  <h2 className="text-xl font-bold text-white mb-2 text-center">{project.title}</h2>
-                  <p className="text-blue-100 mb-2 text-center">{project.shortDesc || project.desc}</p>
+                  <h2 className="text-lg font-bold text-white mb-2 text-center">{project.title}</h2>
+                  <p className="text-sm text-blue-100 mb-2 text-center">{project.shortDesc || project.desc}</p>
                   <div className="flex flex-wrap gap-2 mb-2 justify-center">
                     {(project.tags || []).map(tag => (
                       <span key={tag} className="px-3 py-1 bg-blue-900 text-blue-100 text-xs rounded-full">{tag}</span>
@@ -899,8 +1178,8 @@ function ProjectGrid({ cards, expandedCard, setExpandedCard }) {
                       mediaList={project.images || [project.src]}
                       className="w-full h-full mb-4 rounded-xl"
                     />
-                    <h2 className="text-2xl font-bold mb-2 text-white">{project.title}</h2>
-                    <p className="mb-2 text-blue-100 text-center">{project.fullDesc || project.desc}</p>
+                    <h2 className="text-xl font-bold mb-2 text-white">{project.title}</h2>
+                    <p className="mb-2 text-sm text-blue-100 text-center">{project.fullDesc || project.desc}</p>
                     <div className="flex flex-wrap gap-2 mb-2 justify-center">
                       {(project.tags || []).map(tag => (
                         <span key={tag} className="px-3 py-1 bg-blue-900 text-blue-100 text-xs rounded-full">{tag}</span>
@@ -917,7 +1196,7 @@ function ProjectGrid({ cards, expandedCard, setExpandedCard }) {
                         href={url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-8 py-3 bg-gradient-to-r from-blue-700 to-fuchsia-700 text-white rounded-xl font-bold text-lg shadow-lg hover:scale-105 hover:bg-blue-800 transition-all duration-200 mb-2"
+                        className="px-6 py-2 bg-gradient-to-r from-blue-700 to-fuchsia-700 text-white rounded-xl font-bold text-sm shadow-lg hover:scale-105 hover:bg-blue-800 transition-all duration-200 mb-2"
                         style={{ minWidth: 180, textAlign: "center", letterSpacing: 1 }}
                       >
                         {key.charAt(0).toUpperCase() + key.slice(1)}
@@ -964,12 +1243,12 @@ function TabbedSection({ title, tabs, cardsByTab, expandedCard, setExpandedCard 
   );
 }
 
-// Visual Highlights + Certifications Carousel
+// Visual Highlights + Certifications Carousel + Badges
 function ShowcaseSection() {
   return (
     <section className="min-h-screen pt-32 pb-16 bg-gradient-to-br from-[#101018] via-[#181829] to-[#23233a]">
       <div className="max-w-5xl mx-auto px-4">
-        <h1 className="text-4xl font-bold text-white mb-8 text-center">Visual Highlights</h1>
+        <h1 className="text-3xl font-bold text-white mb-8 text-center">Visual Highlights</h1>
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
           slidesPerView={1}
@@ -993,23 +1272,23 @@ function ShowcaseSection() {
                   >
                     {item.images.map((img, i) => (
                       <SwiperSlide key={i}>
-                        <img src={img} alt={item.title} className="object-contain h-48 w-auto max-w-full rounded-xl mx-auto" />
+                        <img src={img} alt={item.title} className="object-contain h-72 w-auto max-w-full rounded-xl mx-auto" />
                       </SwiperSlide>
                     ))}
                   </Swiper>
                 ) : item.images && item.images.length === 1 ? (
-                  <img src={item.images[0]} alt={item.title} className="object-contain h-48 w-auto max-w-full rounded-xl mx-auto mb-4" />
+                  <img src={item.images[0]} alt={item.title} className="object-contain h-72 w-auto max-w-full rounded-xl mx-auto mb-4" />
                 ) : (
-                  <div className="w-full h-48 bg-blue-900 rounded-xl flex items-center justify-center text-blue-300 text-lg mb-4">Coming Soon</div>
+                  <div className="w-full h-72 bg-blue-900 rounded-xl flex items-center justify-center text-blue-300 text-lg mb-4">Coming Soon</div>
                 )}
-                <div className="text-white text-xl font-semibold mb-2">{item.title}</div>
-                <div className="text-blue-100">{item.desc}</div>
+                <div className="text-white text-xl font-bold mb-2">{item.title}</div>
+                <div className="text-sm text-blue-100">{item.desc}</div>
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
         {/* Certifications Carousel */}
-        <h2 className="text-2xl font-bold text-blue-300 mt-12 mb-4 text-center">Certifications</h2>
+        <h2 className="text-xl font-bold text-blue-300 mt-12 mb-4 text-center">Certifications</h2>
         <Swiper
           modules={[Navigation, Autoplay]}
           slidesPerView={3}
@@ -1026,6 +1305,28 @@ function ShowcaseSection() {
                 : <div className="w-full h-48 bg-blue-900 rounded-xl flex items-center justify-center text-blue-300 text-lg">Coming Soon</div>
               }
               <div className="text-blue-100 text-center text-xs mt-2">{img.title}</div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        
+        {/* Platform Badges Carousel */}
+        <h2 className="text-xl font-bold text-blue-300 mt-12 mb-4 text-center">Platform Badges</h2>
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          slidesPerView={3}
+          spaceBetween={24}
+          navigation
+          loop
+          autoplay={{ delay: 2000, disableOnInteraction: false }}
+          className="rounded-2xl"
+        >
+          {platformBadges.map((badge, idx) => (
+            <SwiperSlide key={idx}>
+              {badge.src
+                ? <img src={badge.src} alt={badge.title} className="object-contain h-48 w-auto max-w-full rounded-xl mx-auto" />
+                : <div className="w-full h-48 bg-blue-900 rounded-xl flex items-center justify-center text-blue-300 text-lg">Coming Soon</div>
+              }
+              <div className="text-blue-100 text-center text-xs mt-2">{badge.title}</div>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -1135,6 +1436,9 @@ export default function App() {
             </div>
           </section>
         )}
+        
+        {/* Footer */}
+        <Footer personalInfo={personalInfo} />
       </div>
     </motion.div>
   );
