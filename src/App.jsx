@@ -14,6 +14,7 @@ import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 import { SiLeetcode, SiHackerrank } from "react-icons/si";
 import Footer from "./components/Footer";
 import Badges from "./components/Badges";
+import Stats from "./components/Stats";
 
 // --- Animated, drifting background stars with enhanced effects ---
 function Bubbles() {
@@ -1050,6 +1051,11 @@ function HomePage() {
         <div className="mt-12">
           <Badges />
         </div>
+
+        {/* Coding Stats Section */}
+        <div className="mt-12">
+          <Stats />
+        </div>
       </div>
     </section>
   );
@@ -1246,92 +1252,145 @@ function TabbedSection({ title, tabs, cardsByTab, expandedCard, setExpandedCard 
 // Visual Highlights + Certifications Carousel + Badges
 function ShowcaseSection() {
   return (
-    <section className="min-h-screen pt-32 pb-16 bg-gradient-to-br from-[#101018] via-[#181829] to-[#23233a]">
-      <div className="max-w-5xl mx-auto px-4">
-        <h1 className="text-3xl font-bold text-white mb-8 text-center">Visual Highlights</h1>
-        <Swiper
-          modules={[Navigation, Pagination, Autoplay]}
-          slidesPerView={1}
-          navigation
-          loop
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 3500, disableOnInteraction: false }}
-          className="rounded-2xl"
-        >
-          {projects.showcase.map(item => (
-            <SwiperSlide key={item.id}>
-              <div className="bg-[#181829] rounded-2xl shadow-xl p-6 flex flex-col items-center">
+    <div className="space-y-16 py-4">
+      <Stats />
+      <section className="min-h-screen pt-32 pb-16 bg-gradient-to-br from-[#101018] via-[#181829] to-[#23233a]">
+        <div className="max-w-5xl mx-auto px-4">
+          <h1 className="text-3xl font-bold text-white mb-8 text-center">Visual Highlights</h1>
+          <Swiper
+            modules={[Navigation, Pagination, Autoplay]}
+            slidesPerView={1}
+            navigation
+            loop
+            pagination={{ clickable: true }}
+            autoplay={{ delay: 3500, disableOnInteraction: false }}
+            className="rounded-2xl"
+          >
+            {projects.showcase.map(item => (
+              <SwiperSlide key={item.id}>
+                <div className="bg-[#181829] rounded-2xl shadow-xl p-6 flex flex-col items-center">
+                  {item.images && item.images.length > 1 ? (
+                    <Swiper
+                      modules={[Pagination, Autoplay]}
+                      slidesPerView={1}
+                      pagination={{ clickable: true }}
+                      autoplay={{ delay: 2500, disableOnInteraction: false }}
+                      loop
+                      className="rounded-xl w-full mb-4"
+                    >
+                      {item.images.map((img, i) => (
+                        <SwiperSlide key={i}>
+                          <img src={img} alt={item.title} className="object-contain h-72 w-auto max-w-full rounded-xl mx-auto" />
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  ) : item.images && item.images.length === 1 ? (
+                    <img src={item.images[0]} alt={item.title} className="object-contain h-72 w-auto max-w-full rounded-xl mx-auto mb-4" />
+                  ) : (
+                    <div className="w-full h-72 bg-blue-900 rounded-xl flex items-center justify-center text-blue-300 text-lg">Coming Soon</div>
+                  )}
+                  <div className="text-white text-xl font-bold mb-2">{item.title}</div>
+                  <div className="text-sm text-blue-100">{item.desc}</div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          
+          {/* Certifications Carousel */}
+          <h2 className="text-xl font-bold text-blue-300 mt-12 mb-4 text-center">Certifications</h2>
+          <Swiper
+            modules={[Navigation, Autoplay]}
+            slidesPerView={3}
+            spaceBetween={24}
+            navigation
+            loop
+            autoplay={{ delay: 2000, disableOnInteraction: false }}
+            className="rounded-2xl"
+          >
+            {certifications.map((img, idx) => (
+              <SwiperSlide key={idx}>
+                {img.src
+                  ? <img src={img.src} alt={img.title} className="object-contain h-48 w-auto max-w-full rounded-xl mx-auto" />
+                  : <div className="w-full h-48 bg-blue-900 rounded-xl flex items-center justify-center text-blue-300 text-lg">Coming Soon</div>
+                }
+                <div className="text-blue-100 text-center text-xs mt-2">{img.title}</div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          
+          {/* Platform Badges Carousel */}
+          <h2 className="text-xl font-bold text-blue-300 mt-12 mb-4 text-center">Platform Badges</h2>
+          <Swiper
+            modules={[Navigation, Autoplay]}
+            slidesPerView={3}
+            spaceBetween={24}
+            navigation
+            loop
+            autoplay={{ delay: 2000, disableOnInteraction: false }}
+            className="rounded-2xl"
+          >
+            {platformBadges.map((badge, idx) => (
+              <SwiperSlide key={idx}>
+                {badge.src
+                  ? <img src={badge.src} alt={badge.title} className="object-contain h-48 w-auto max-w-full rounded-xl mx-auto" />
+                  : <div className="w-full h-48 bg-blue-900 rounded-xl flex items-center justify-center text-blue-300 text-lg">Coming Soon</div>
+                }
+                <div className="text-blue-100 text-center text-xs mt-2">{badge.title}</div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </section>
+      <Badges />
+      
+      {/* Project Showcase */}
+      <section className="py-16 bg-gradient-to-br from-[#101018] via-[#181829] to-[#23233a]">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-white mb-12 text-center">Project Showcase</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.cloud.slice(0, 3).map((item) => (
+              <div key={item.id} className="bg-[#1a1a2e] p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
                 {item.images && item.images.length > 1 ? (
                   <Swiper
                     modules={[Pagination, Autoplay]}
                     slidesPerView={1}
                     pagination={{ clickable: true }}
                     autoplay={{ delay: 2500, disableOnInteraction: false }}
-                    loop
-                    className="rounded-xl w-full mb-4"
+                    className="w-full h-48 mb-4"
                   >
                     {item.images.map((img, i) => (
                       <SwiperSlide key={i}>
-                        <img src={img} alt={item.title} className="object-contain h-72 w-auto max-w-full rounded-xl mx-auto" />
+                        <img 
+                          src={img} 
+                          alt={item.title} 
+                          className="object-cover w-full h-full rounded-lg" 
+                        />
                       </SwiperSlide>
                     ))}
                   </Swiper>
                 ) : item.images && item.images.length === 1 ? (
-                  <img src={item.images[0]} alt={item.title} className="object-contain h-72 w-auto max-w-full rounded-xl mx-auto mb-4" />
+                  <div className="h-48 mb-4 overflow-hidden rounded-lg">
+                    <img 
+                      src={item.images[0]} 
+                      alt={item.title} 
+                      className="object-cover w-full h-full"
+                    />
+                  </div>
                 ) : (
-                  <div className="w-full h-72 bg-blue-900 rounded-xl flex items-center justify-center text-blue-300 text-lg mb-4">Coming Soon</div>
+                  <div className="h-48 bg-blue-900 rounded-lg flex items-center justify-center text-blue-300 text-lg mb-4">
+                    Coming Soon
+                  </div>
                 )}
-                <div className="text-white text-xl font-bold mb-2">{item.title}</div>
-                <div className="text-sm text-blue-100">{item.desc}</div>
+                <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                <p className="text-blue-100 text-sm">
+                  {item.desc || 'No description available.'}
+                </p>
               </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        {/* Certifications Carousel */}
-        <h2 className="text-xl font-bold text-blue-300 mt-12 mb-4 text-center">Certifications</h2>
-        <Swiper
-          modules={[Navigation, Autoplay]}
-          slidesPerView={3}
-          spaceBetween={24}
-          navigation
-          loop
-          autoplay={{ delay: 2000, disableOnInteraction: false }}
-          className="rounded-2xl"
-        >
-          {certifications.map((img, idx) => (
-            <SwiperSlide key={idx}>
-              {img.src
-                ? <img src={img.src} alt={img.title} className="object-contain h-48 w-auto max-w-full rounded-xl mx-auto" />
-                : <div className="w-full h-48 bg-blue-900 rounded-xl flex items-center justify-center text-blue-300 text-lg">Coming Soon</div>
-              }
-              <div className="text-blue-100 text-center text-xs mt-2">{img.title}</div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        
-        {/* Platform Badges Carousel */}
-        <h2 className="text-xl font-bold text-blue-300 mt-12 mb-4 text-center">Platform Badges</h2>
-        <Swiper
-          modules={[Navigation, Autoplay]}
-          slidesPerView={3}
-          spaceBetween={24}
-          navigation
-          loop
-          autoplay={{ delay: 2000, disableOnInteraction: false }}
-          className="rounded-2xl"
-        >
-          {platformBadges.map((badge, idx) => (
-            <SwiperSlide key={idx}>
-              {badge.src
-                ? <img src={badge.src} alt={badge.title} className="object-contain h-48 w-auto max-w-full rounded-xl mx-auto" />
-                : <div className="w-full h-48 bg-blue-900 rounded-xl flex items-center justify-center text-blue-300 text-lg">Coming Soon</div>
-              }
-              <div className="text-blue-100 text-center text-xs mt-2">{badge.title}</div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-    </section>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
 
