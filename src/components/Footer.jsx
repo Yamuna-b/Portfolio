@@ -1,7 +1,7 @@
 import React from "react";
 import { Linkedin, Github, Instagram, Mail, Phone } from "lucide-react";
 import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
-import { SiLeetcode, SiHackerrank } from "react-icons/si";
+import { SiLeetcode } from "react-icons/si";
 
 export default function Footer({ personalInfo }) {
   return (
@@ -42,10 +42,6 @@ export default function Footer({ personalInfo }) {
               <a href={personalInfo.social.leetcode} target="_blank" rel="noopener noreferrer"
                  className="w-10 h-10 rounded-full bg-yellow-600 hover:bg-yellow-500 flex items-center justify-center transition-all duration-300 hover:scale-110">
                 <SiLeetcode className="w-5 h-5 text-white" />
-              </a>
-              <a href={personalInfo.social.hackerrank} target="_blank" rel="noopener noreferrer"
-                 className="w-10 h-10 rounded-full bg-green-600 hover:bg-green-500 flex items-center justify-center transition-all duration-300 hover:scale-110">
-                <SiHackerrank className="w-5 h-5 text-white" />
               </a>
             </div>
           </div>

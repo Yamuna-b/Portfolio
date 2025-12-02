@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,10 +11,60 @@ import {
   ArrowLeft, Linkedin, Github, Instagram, Download, Mail, Phone
 } from "lucide-react";
 import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
-import { SiLeetcode, SiHackerrank } from "react-icons/si";
+import { SiLeetcode } from "react-icons/si";
 import Footer from "./components/Footer";
 import Badges from "./components/Badges";
 import Stats from "./components/Stats";
+
+// Search Bar Component
+const SearchBar = ({ searchQuery, setSearchQuery }) => {
+  return (
+    <div className="w-full max-w-2xl mx-auto mb-8 px-4">
+      <div className="relative">
+        <input
+          type="text"
+          placeholder="Search projects..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full bg-gray-800 text-white px-6 py-3 rounded-full border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent pl-12"
+        />
+        <svg
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          />
+        </svg>
+        {searchQuery && (
+          <button
+            onClick={() => setSearchQuery('')}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
 
 // --- Animated, drifting background stars with enhanced effects ---
 function Bubbles() {
@@ -31,12 +81,12 @@ function Bubbles() {
         return (
           <motion.div
             key={i}
-            className={`absolute rounded-full ${color} opacity-20 blur-xl`}
+            className={"absolute rounded-full " + color + " opacity-20 blur-xl"}
             style={{ width: size, height: size }}
-            initial={{ top: `${top}%`, left: `${left}%` }}
+            initial={{ top: top + '%', left: left + '%' }}
             animate={{
-              top: [`${top}%`, `${top + driftY}%`, `${top}%`],
-              left: [`${left}%`, `${left + driftX}%`, `${left}%`],
+              top: [top + '%', (top + driftY) + '%', top + '%'],
+              left: [left + '%', (left + driftX) + '%', left + '%'],
               opacity: [0.4, 0.8, 0.4],
               scale: [1, 1.2, 1]
             }}
@@ -56,15 +106,15 @@ function Bubbles() {
 // --- Personal Data ---
 const personalInfo = {
   name: "Yamuna",
-  tagline1: "Cloud Developer & DevOps Engineer",
-  tagline2: "Full Stack Developer | UI/UX Designer",
+  tagline1: "Aspiring DevOps & Cloud Engineer",
+  tagline2: "Full Stack Enthusiast | Open Source Contributor",
   email: "yamuna.bsvy@gmail.com",
   phone: "+91-9629163099",
   whatsapp: "919629163099",
-  bio: "Full-stack developer and second-year Computer Science student. Skilled in React.js, Node.js, Python, Java, and MongoDB, with interests in quantum computing, AI, cloud computing, and DevOps. Passionate about building impactful applications and contributing to innovative projects.",
-  bio2: "Experienced Cloud Developer and DevOps Engineer with a strong background in cloud infrastructure, automation, and continuous integration. Skilled in full-stack development and UI/UX design, with a growing interest in AI/ML. Adept at designing and implementing robust cloud solutions, managing DevOps pipelines, and creating user-centric web and mobile applications.",
+  bio: "Flexible and quick-adapting Computer Science undergraduate passionate about DevOps and Cloud. Eager to learn and experiment with new technologies; thrive in innovative environments and open source communities. Recognized for adaptability, creative problem-solving.",
+  bio2: "Computer Science Student | Aspiring DevOps & Cloud Engineer | Full Stack Enthusiast & Open Source Contributor",
   techStacks: [
-    "React", "Node.js", "Python", "Java", "MongoDB", "AWS", "Docker", "Figma", "TypeScript", "Django", "Kubernetes"
+    "Python", "JavaScript", "Java", "C", "React.js", "Node.js", "Express.js", "Next.js", "HTML5", "CSS3", "Tailwind CSS", "MongoDB", "PostgreSQL", "MySQL", "AWS", "Google Cloud", "Docker", "Kubernetes", "Git", "GitHub Actions", "Heroku CI/CD", "WebSockets", "Redis", "LaTeX", "Postman"
   ],
   languages: [
     { name: "English", level: "Very Well" },
@@ -79,8 +129,7 @@ const personalInfo = {
     instagram: "https://www.instagram.com/_._yamu_._/",
     github: "https://github.com/Yamuna-b",
     telegram: "#",
-    leetcode: "https://leetcode.com/u/Yamuna_bsvy/",
-    hackerrank: "https://www.hackerrank.com/profile/yamuna_bsvy"
+    leetcode: "https://leetcode.com/u/Yamuna_bsvy/"
   }
 };
 
@@ -98,10 +147,7 @@ const experience = [
     role: "Presenter",
     duration: "Feb 2024",
     desc: "Presented research on carbon footprint awareness and mitigation at NITTE, Karnataka.",
-    publication: {
-      url: "https://ieeexplore.ieee.org/document/10986878",
-      label: "View Publication"
-    }
+    link: { text: "View Publication", url: "#" }
   },
   {
     logo: "/Reccsarlogo.jpg",
@@ -151,7 +197,6 @@ const platformBadges = [
   { src: "/badge3.png", title: "AWS Certified" },
   { src: "/badge4.png", title: "Holopin Badges" },
   { src: "/badge5.png", title: "GitHub Achievements" },
-  { src: "/badge6.png", title: "HackerRank Stars" },
   { src: "/badge7.png", title: "LeetCode Knight" },
   { src: "/badge8.png", title: "CodeChef Star" },
   { src: "/badge9.png", title: "Azure Certified" },
@@ -223,405 +268,519 @@ const projects = {
       links: { github: "#" }
     }
   ],
-  fullstack: {
-    frontend: [
+  fullstack: [
+    {
+      id: 1,
+      title: "Petimony - Pet Shop Website",
+      images: ["/full_1.mp4"],
+      shortDesc: "Full-stack pet shop platform",
+      fullDesc: "A comprehensive pet shop website with e-commerce functionality, pet adoption services, and community features.",
+      tags: ["React", "Node.js", "MongoDB"],
+      tools: ["Express", "Redux"],
+      links: { github: "#", demo: "#" }
+    },
+    {
+      id: 2,
+      title: "Portfolio Website",
+      images: ["/fullstack1.png"],
+      shortDesc: "Personal portfolio site",
+      fullDesc: "Built my own portfolio using React and Tailwind.",
+      tags: ["React", "Tailwind"],
+      tools: ["TailwindCSS"],
+      links: { github: "#" }
+    },
+    {
+      id: 3,
+      title: "Dashboard UI",
+      images: ["/fullstack2.png"],
+      shortDesc: "Analytics dashboard",
+      fullDesc: "Interactive dashboard with charts and data visualization.",
+      tags: ["React", "Charts"],
+      tools: ["Chart.js"],
+      links: { github: "#" }
+    },
+    {
+      id: 4,
+      title: "Landing Page",
+      images: ["/fullstack3.png"],
+      shortDesc: "Modern landing page",
+      fullDesc: "Responsive landing page with animations.",
+      tags: ["HTML", "CSS"],
+      tools: ["GSAP"],
+      links: { github: "#" }
+    },
+    {
+      id: 5,
+      title: "Node.js API",
+      images: ["/fullstack1.png"],
+      shortDesc: "REST API for e-commerce",
+      fullDesc: "Node.js REST API with authentication and MongoDB.",
+      tags: ["Node.js", "MongoDB"],
+      tools: ["Express"],
+      links: { github: "#" }
+    },
+    {
+      id: 6,
+      title: "Django Blog API",
+      images: ["/fullstack1.png"],
+      shortDesc: "Blog backend with Django",
+      fullDesc: "RESTful blog backend using Django REST Framework.",
+      tags: ["Django", "REST"],
+      tools: ["DRF"],
+      links: { github: "#" }
+    },
+    {
+      id: 7,
+      title: "GraphQL API",
+      images: ["/backend1.png"],
+      shortDesc: "GraphQL server",
+      fullDesc: "Built GraphQL API with Apollo Server.",
+      tags: ["GraphQL", "Apollo"],
+      tools: ["Node.js"],
+      links: { github: "#" }
+    },
+    {
+      id: 8,
+      title: "Microservices Backend",
+      images: ["/backend2.png"],
+      shortDesc: "Distributed services",
+      fullDesc: "Microservices architecture with message queues.",
+      tags: ["Microservices", "RabbitMQ"],
+      tools: ["Docker"],
+      links: { github: "#" }
+    },
+    {
+      id: 9,
+      title: "Full Stack Social App",
+      images: ["/fullstack1.png", "/fullstack1.png", "/fullstack1.png"],
+      shortDesc: "MERN stack social media app",
+      fullDesc: "A social platform built with MongoDB, Express, React, and Node.js.",
+      tags: ["MERN", "Full Stack"],
+      tools: ["React", "Node.js"],
+      links: { github: "#" }
+    },
+    {
+      id: 10,
+      title: "E-learning Platform",
+      images: ["/fullstack4.png"],
+      shortDesc: "Complete LMS system",
+      fullDesc: "Learning management system with video courses.",
+      tags: ["MERN", "LMS"],
+      tools: ["MongoDB", "React"],
+      links: { github: "#" }
+    },
+    {
+      id: 11,
+      title: "Real-time Chat App",
+      images: ["/fullstack5.png"],
+      shortDesc: "Socket.io chat application",
+      fullDesc: "Real-time messaging with Socket.io and React.",
+      tags: ["Socket.io", "Real-time"],
+      tools: ["React", "Node.js"],
+      links: { github: "#" }
+    }
+  ],
+  uiux: [
       {
         id: 1,
-        title: "E-commerce Frontend",
-        images: ["/fullstack1.png", "/fullstack1.png"],
-        shortDesc: "React.js shopping platform",
-        fullDesc: "Responsive e-commerce site using React, Redux, and Material-UI.",
-        tags: ["React", "Redux"],
-        tools: ["Material-UI"],
-        links: { github: "#" }
+        title: "Logo Design 1",
+        images: ["/ui_1.png"],
+        shortDesc: "Logo and branding design",
+        fullDesc: "Professional logo design with modern aesthetics.",
+        tags: ["Logo", "Branding"],
+        tools: ["Canva", "Adobe Illustrator"],
+        links: { View: "#" }
       },
       {
         id: 2,
-        title: "Portfolio Website",
-        images: ["/fullstack1.png"],
-        shortDesc: "Personal portfolio site",
-        fullDesc: "Built my own portfolio using React and Tailwind.",
-        tags: ["React", "Tailwind"],
-        tools: ["TailwindCSS"],
-        links: { github: "#" }
-      },
-      {
-        id: 3,
-        title: "Dashboard UI",
-        images: ["/fullstack2.png"],
-        shortDesc: "Analytics dashboard",
-        fullDesc: "Interactive dashboard with charts and data visualization.",
-        tags: ["React", "Charts"],
-        tools: ["Chart.js"],
-        links: { github: "#" }
-      },
-      {
-        id: 4,
-        title: "Landing Page",
-        images: ["/fullstack3.png"],
-        shortDesc: "Modern landing page",
-        fullDesc: "Responsive landing page with animations.",
-        tags: ["HTML", "CSS"],
-        tools: ["GSAP"],
-        links: { github: "#" }
-      }
-    ],
-    backend: [
-      {
-        id: 1,
-        title: "Node.js API",
-        images: ["/fullstack1.png"],
-        shortDesc: "REST API for e-commerce",
-        fullDesc: "Node.js REST API with authentication and MongoDB.",
-        tags: ["Node.js", "MongoDB"],
-        tools: ["Express"],
-        links: { github: "#" }
-      },
-      {
-        id: 2,
-        title: "Django Blog API",
-        images: ["/fullstack1.png"],
-        shortDesc: "Blog backend with Django",
-        fullDesc: "RESTful blog backend using Django REST Framework.",
-        tags: ["Django", "REST"],
-        tools: ["DRF"],
-        links: { github: "#" }
-      },
-      {
-        id: 3,
-        title: "GraphQL API",
-        images: ["/backend1.png"],
-        shortDesc: "GraphQL server",
-        fullDesc: "Built GraphQL API with Apollo Server.",
-        tags: ["GraphQL", "Apollo"],
-        tools: ["Node.js"],
-        links: { github: "#" }
-      },
-      {
-        id: 4,
-        title: "Microservices Backend",
-        images: ["/backend2.png"],
-        shortDesc: "Distributed services",
-        fullDesc: "Microservices architecture with message queues.",
-        tags: ["Microservices", "RabbitMQ"],
-        tools: ["Docker"],
-        links: { github: "#" }
-      }
-    ],
-    both: [
-      {
-        id: 1,
-        title: "Full Stack Social App",
-        images: ["/fullstack1.png", "/fullstack1.png", "/fullstack1.png"],
-        shortDesc: "MERN stack social media app",
-        fullDesc: "A social platform built with MongoDB, Express, React, and Node.js.",
-        tags: ["MERN", "Full Stack"],
-        tools: ["React", "Node.js"],
-        links: { github: "#" }
-      },
-      {
-        id: 2,
-        title: "E-learning Platform",
-        images: ["/fullstack4.png"],
-        shortDesc: "Complete LMS system",
-        fullDesc: "Learning management system with video courses.",
-        tags: ["MERN", "LMS"],
-        tools: ["MongoDB", "React"],
-        links: { github: "#" }
-      },
-      {
-        id: 3,
-        title: "Real-time Chat App",
-        images: ["/fullstack5.png"],
-        shortDesc: "Socket.io chat application",
-        fullDesc: "Real-time messaging with Socket.io and React.",
-        tags: ["Socket.io", "Real-time"],
-        tools: ["React", "Node.js"],
-        links: { github: "#" }
-      }
-    ]
-  },
-  uiux: {
-    logos: [
-      {
-        id: 1,
-        title: "Petimony Logo",
-        images: ["/logo1.png"],
-        shortDesc: "Logo for my Pet Shop Website \"Petimony\" ",
+        title: "Logo Design 2",
+        images: ["/ui_2.png"],
+        shortDesc: "Logo design for brand identity",
         fullDesc: "Designed brand logos for startups and hackathons.",
         tags: ["Logo", "Branding"],
         tools: ["Canva"],
-        links: { View: "https://www.canva.com/design/DAGZbrazmE8/sRe7S7TdueIYuTtv3MOoJA/edit?utm_content=DAGZbrazmE8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" }
-      },
-      {
-        id: 2,
-        title: "Petimony Logo",
-        images: ["/logo2.png"],
-        shortDesc: "Logo for my Pet Shop Website \"Petimony\" ",
-        fullDesc: "Designed brand logos for startups and hackathons.",
-        tags: ["Logo", "Branding"],
-        tools: ["Canva"],
-        links: { View: "" }
+        links: { View: "#" }
       },
       {
         id: 3,
-        title: "Pro Planet Logo",
-        images: ["/logo3.png"],
+        title: "Logo Design 3",
+        images: ["/ui_3.jpg", "/ui_4.jpg"],
         shortDesc: "Eco-friendly platform logo",
-        fullDesc: "Logo for Smart India Hackathon project.",
+        fullDesc: "Logo design with sustainability focus.",
         tags: ["Logo", "Sustainability"],
         tools: ["Figma"],
         links: { behance: "#" }
       },
       {
-        id: 4,
-        title: "Petimony Logo",
-        images: ["/logo2.png"],
-        shortDesc: "Logo for my Pet Shop Website \"Petimony\" ",
-        fullDesc: "Designed brand logos for startups and hackathons.",
-        tags: ["Logo", "Branding"],
-        tools: ["Canva"],
-        links: { View: "" }
-      },
-      {
         id: 5,
-        title: "Petimony Logo",
-        images: ["/logo3.png"],
-        shortDesc: "Logo for my Pet Shop Website \"Petimony\" ",
+        title: "Logo Design 5",
+        images: ["/ui_5.png"],
+        shortDesc: "Creative logo design",
         fullDesc: "Designed brand logos for startups and hackathons.",
         tags: ["Logo", "Branding"],
         tools: ["Canva"],
-        links: { View: "" }
+        links: { View: "#" }
       },
       {
         id: 6,
-        title: "Petimony Logo",
-        images: ["/logo1.png"],
-        shortDesc: "Logo for my Pet Shop Website \"Petimony\" ",
+        title: "Logo Design 6",
+        images: ["/ui_6.png"],
+        shortDesc: "Brand identity logo",
         fullDesc: "Designed brand logos for startups and hackathons.",
         tags: ["Logo", "Branding"],
         tools: ["Canva"],
-        links: { View: "" }
+        links: { View: "#" }
       },
       {
         id: 7,
-        title: "Petimony Logo",
-        images: ["/logo3.png"],
-        shortDesc: "Logo for my Pet Shop Website \"Petimony\" ",
+        title: "Logo Design 7",
+        images: ["/ui_7.png"],
+        shortDesc: "Professional logo design",
         fullDesc: "Designed brand logos for startups and hackathons.",
         tags: ["Logo", "Branding"],
         tools: ["Canva"],
-        links: { View: "" }
-      }
-    ],
-    posters: [
+        links: { View: "#" }
+      },
       {
-        id: 1,
-        title: "Music Festival Poster",
-        images: ["/poster2.png"],
+        id: 8,
+        title: "Poster Design 1",
+        images: ["/ui_8.png"],
         shortDesc: "Vibrant event poster",
-        fullDesc: "Poster for annual music festival.",
+        fullDesc: "Poster design for events and promotions.",
         tags: ["Poster", "Event"],
         tools: ["Photoshop"],
         links: { behance: "#" }
       },
       {
-        id: 2,
-        title: "Music Festival Poster",
-        images: ["/poster3.png"],
+        id: 9,
+        title: "Poster Design 2",
+        images: ["/ui_9.png"],
         shortDesc: "Vibrant event poster",
-        fullDesc: "Poster for annual music festival.",
+        fullDesc: "Poster design for events and promotions.",
         tags: ["Poster", "Event"],
         tools: ["Photoshop"],
         links: { behance: "#" }
       },
       {
-        id: 3,
-        title: "Music Festival Poster",
-        images: ["/poster4.png"],
+        id: 10,
+        title: "Poster Design 3",
+        images: ["/ui_10.png"],
         shortDesc: "Vibrant event poster",
-        fullDesc: "Poster for annual music festival.",
+        fullDesc: "Poster design for events and promotions.",
         tags: ["Poster", "Event"],
         tools: ["Photoshop"],
         links: { behance: "#" }
       },
       {
-        id: 4,
-        title: "Music Festival Poster",
-        images: ["/poster1.png"],
+        id: 11,
+        title: "Poster Design 4",
+        images: ["/ui_11.png"],
         shortDesc: "Vibrant event poster",
-        fullDesc: "Poster for annual music festival.",
+        fullDesc: "Poster design for events and promotions.",
         tags: ["Poster", "Event"],
         tools: ["Photoshop"],
         links: { behance: "#" }
       },
       {
-        id: 5,
-        title: "Music Festival Poster",
-        images: ["/poster5.png"],
+        id: 12,
+        title: "Poster Design 5",
+        images: ["/ui_12.png"],
         shortDesc: "Vibrant event poster",
-        fullDesc: "Poster for annual music festival.",
+        fullDesc: "Poster design for events and promotions.",
         tags: ["Poster", "Event"],
         tools: ["Photoshop"],
         links: { behance: "#" }
       },
       {
-        id: 6,
-        title: "Music Festival Poster",
-        images: ["/poster6.png"],
+        id: 13,
+        title: "Poster Design 6",
+        images: ["/ui_13.png"],
         shortDesc: "Vibrant event poster",
-        fullDesc: "Poster for annual music festival.",
+        fullDesc: "Poster design for events and promotions.",
         tags: ["Poster", "Event"],
         tools: ["Photoshop"],
         links: { behance: "#" }
-      }
-    ],
-    prototypes: [
+      },
       {
-        id: 1,
-        title: "App Prototype",
-        images: ["/poster1.png", "/poster1.png"],
+        id: 14,
+        title: "Poster Design 7",
+        images: ["/ui_14.png"],
+        shortDesc: "Vibrant event poster",
+        fullDesc: "Poster design for events and promotions.",
+        tags: ["Poster", "Event"],
+        tools: ["Photoshop"],
+        links: { behance: "#" }
+      },
+      {
+        id: 15,
+        title: "Poster Design 8",
+        images: ["/ui_15.png"],
+        shortDesc: "Vibrant event poster",
+        fullDesc: "Poster design for events and promotions.",
+        tags: ["Poster", "Event"],
+        tools: ["Photoshop"],
+        links: { behance: "#" }
+      },
+      {
+        id: 16,
+        title: "Poster Design 9",
+        images: ["/ui_16.png"],
+        shortDesc: "Vibrant event poster",
+        fullDesc: "Poster design for events and promotions.",
+        tags: ["Poster", "Event"],
+        tools: ["Photoshop"],
+        links: { behance: "#" }
+      },
+      {
+        id: 17,
+        title: "Poster Design 10",
+        images: ["/ui_17.png"],
+        shortDesc: "Vibrant event poster",
+        fullDesc: "Poster design for events and promotions.",
+        tags: ["Poster", "Event"],
+        tools: ["Photoshop"],
+        links: { behance: "#" }
+      },
+      {
+        id: 18,
+        title: "App Prototype 1",
+        images: ["/ui_18.png"],
         shortDesc: "Mobile app prototype",
-        fullDesc: "High-fidelity prototype for Pro Planet App.",
+        fullDesc: "High-fidelity prototype for mobile application.",
         tags: ["Prototype", "Mobile"],
         tools: ["Figma"],
         links: { figma: "#" }
       },
       {
-        id: 2,
-        title: "Cherry Milkshake",
-        images: ["/video1.mp4"],
+        id: 19,
+        title: "App Prototype 2",
+        images: ["/ui_19.png"],
         shortDesc: "Mobile app prototype",
-        fullDesc: "High-fidelity prototype for Pro Planet App.",
+        fullDesc: "High-fidelity prototype for mobile application.",
         tags: ["Prototype", "Mobile"],
         tools: ["Figma"],
         links: { figma: "#" }
       },
       {
-        id: 3,
-        title: "",
-        images: ["/video2.mp4"],
+        id: 20,
+        title: "App Prototype 3",
+        images: ["/ui_20.png"],
         shortDesc: "Mobile app prototype",
-        fullDesc: "High-fidelity prototype for Pro Planet App.",
+        fullDesc: "High-fidelity prototype for mobile application.",
         tags: ["Prototype", "Mobile"],
         tools: ["Figma"],
         links: { figma: "#" }
       },
       {
-        id: 4,
-        title: "",
-        images: ["/video3.mp4"],
+        id: 21,
+        title: "App Prototype 4",
+        images: ["/ui_21.png"],
         shortDesc: "Mobile app prototype",
-        fullDesc: "High-fidelity prototype for Pro Planet App.",
+        fullDesc: "High-fidelity prototype for mobile application.",
         tags: ["Prototype", "Mobile"],
         tools: ["Figma"],
         links: { figma: "#" }
       },
       {
-        id: 5,
-        title: "",
-        images: ["/video4.mp4"],
+        id: 22,
+        title: "App Prototype 5",
+        images: ["/ui_22.png"],
         shortDesc: "Mobile app prototype",
-        fullDesc: "High-fidelity prototype for Pro Planet App.",
+        fullDesc: "High-fidelity prototype for mobile application.",
         tags: ["Prototype", "Mobile"],
         tools: ["Figma"],
         links: { figma: "#" }
       },
       {
-        id: 6,
-        title: "",
-        images: ["/video5.mp4"],
+        id: 23,
+        title: "App Prototype 6",
+        images: ["/ui_23.png"],
         shortDesc: "Mobile app prototype",
-        fullDesc: "High-fidelity prototype for Pro Planet App.",
+        fullDesc: "High-fidelity prototype for mobile application.",
         tags: ["Prototype", "Mobile"],
         tools: ["Figma"],
         links: { figma: "#" }
-      }
-    ],
-    powerpoints: [
+      },
       {
-        id: 1,
-        title: "Pro Planet Demo",
-        images: ["/planner1.png","/video1.mp4"],
-        shortDesc: "Interactive PowerPoint",
-        fullDesc: "Demo presentation for Smart India Hackathon.",
-        tags: ["PowerPoint", "Demo"],
-        tools: ["PowerPoint"],
-        links: { download: "#" }
-      }
-    ],
-    planners: [
-      {
-        id: 1,
-        title: "Productivity Planner",
-        images: ["/planner1.png"],
-        shortDesc: "Custom productivity planner",
-        fullDesc: "Designed planner to boost productivity.",
-        tags: ["Planner", "Productivity"],
+        id: 24,
+        title: "App Prototype 7",
+        images: ["/ui_24.png"],
+        shortDesc: "Mobile app prototype",
+        fullDesc: "High-fidelity prototype for mobile application.",
+        tags: ["Prototype", "Mobile"],
         tools: ["Figma"],
-        links: { download: "#" }
-      }
-    ]
-  },
+        links: { figma: "#" }
+      },
+      {
+        id: 25,
+        title: "App Prototype 8",
+        images: ["/ui_25.png"],
+        shortDesc: "Mobile app prototype",
+        fullDesc: "High-fidelity prototype for mobile application.",
+        tags: ["Prototype", "Mobile"],
+        tools: ["Figma"],
+        links: { figma: "#" }
+      },
+      {
+        id: 26,
+        title: "App Prototype 9",
+        images: ["/ui_26.png"],
+        shortDesc: "Mobile app prototype",
+        fullDesc: "High-fidelity prototype for mobile application.",
+        tags: ["Prototype", "Mobile"],
+        tools: ["Figma"],
+        links: { figma: "#" }
+      },
+      {
+        id: 27,
+        title: "App Prototype 10",
+        images: ["/ui_27.png"],
+        shortDesc: "Mobile app prototype",
+        fullDesc: "High-fidelity prototype for mobile application.",
+        tags: ["Prototype", "Mobile"],
+        tools: ["Figma"],
+        links: { figma: "#" }
+      },
+      {
+        id: 28,
+        title: "App Prototype Video 1",
+        images: ["/ui_28.mp4"],
+        shortDesc: "Mobile app prototype video",
+        fullDesc: "High-fidelity prototype video demonstration.",
+        tags: ["Prototype", "Mobile", "Video"],
+        tools: ["Figma"],
+        links: { figma: "#" }
+      },
+      {
+        id: 29,
+        title: "App Prototype Video 2",
+        images: ["/ui_29.mp4"],
+        shortDesc: "Mobile app prototype video",
+        fullDesc: "High-fidelity prototype video demonstration.",
+        tags: ["Prototype", "Mobile", "Video"],
+        tools: ["Figma"],
+        links: { figma: "#" }
+      },
+      {
+        id: 30,
+        title: "App Prototype Video 3",
+        images: ["/ui_30.mp4"],
+        shortDesc: "Mobile app prototype video",
+        fullDesc: "High-fidelity prototype video demonstration.",
+        tags: ["Prototype", "Mobile", "Video"],
+        tools: ["Figma"],
+        links: { figma: "#" }
+      },
+      {
+        id: 31,
+        title: "App Prototype Video 4",
+        images: ["/ui_31.mp4"],
+        shortDesc: "Mobile app prototype video",
+        fullDesc: "High-fidelity prototype video demonstration.",
+        tags: ["Prototype", "Mobile", "Video"],
+        tools: ["Figma"],
+        links: { figma: "#" }
+      },
+      {
+        id: 32,
+        title: "App Prototype Video 5",
+        images: ["/ui_32.mp4"],
+        shortDesc: "Mobile app prototype video",
+        fullDesc: "High-fidelity prototype video demonstration.",
+        tags: ["Prototype", "Mobile", "Video"],
+        tools: ["Figma"],
+        links: { figma: "#" }
+      },
+      {
+        id: 33,
+        title: "App Prototype 11",
+        images: ["/ui_33.png"],
+        shortDesc: "Mobile app prototype",
+        fullDesc: "High-fidelity prototype for mobile application.",
+        tags: ["Prototype", "Mobile"],
+        tools: ["Figma"],
+        links: { figma: "#" }
+      },
+      {
+        id: 34,
+        title: "App Prototype 12",
+        images: ["/ui_34.png"],
+        shortDesc: "Mobile app prototype",
+        fullDesc: "High-fidelity prototype for mobile application.",
+        tags: ["Prototype", "Mobile"],
+        tools: ["Figma"],
+        links: { figma: "#" }
+      },
+      {
+        id: 35,
+        title: "App Prototype 13",
+        images: ["/ui_35.png"],
+        shortDesc: "Mobile app prototype",
+        fullDesc: "High-fidelity prototype for mobile application.",
+        tags: ["Prototype", "Mobile"],
+        tools: ["Figma"],
+        links: { figma: "#" }
+      },
+      {
+        id: 36,
+        title: "App Prototype 14",
+        images: ["/ui_36.png"],
+        shortDesc: "Mobile app prototype",
+        fullDesc: "High-fidelity prototype for mobile application.",
+        tags: ["Prototype", "Mobile"],
+        tools: ["Figma"],
+        links: { figma: "#" }
+      },
+      {
+        id: 37,
+        title: "App Prototype 15",
+        images: ["/ui_37.png"],
+        shortDesc: "Mobile app prototype",
+        fullDesc: "High-fidelity prototype for mobile application.",
+        tags: ["Prototype", "Mobile"],
+        tools: ["Figma"],
+        links: { figma: "#" }
+      },
+      {
+        id: 38,
+        title: "App Prototype 16",
+        images: ["/ui_38.png"],
+        shortDesc: "Mobile app prototype",
+        fullDesc: "High-fidelity prototype for mobile application.",
+        tags: ["Prototype", "Mobile"],
+        tools: ["Figma"],
+        links: { figma: "#" }
+      },
+  ],
   ai: [
     {
       id: 1,
-      title: "Menstrual Health AI Chatbot",
-      images: ["/video1.mp4", "/ai1.png"],
-      shortDesc: "AI chatbot for menstrual health",
-      fullDesc: "Chatbot offering resources for PCOD, PMS, PMDD.",
-      tags: ["AI", "Chatbot"],
-      tools: ["Python", "TensorFlow"],
+      title: "Exoplanet Detection System",
+      images: ["/ai_1.mp4"],
+      shortDesc: "AI for detecting exoplanets in space data",
+      fullDesc: "Machine learning model that analyzes light curve data from telescopes to identify potential exoplanets using deep learning techniques.",
+      tags: ["AI", "Astronomy", "Deep Learning"],
+      tools: ["Python", "TensorFlow", "Keras"],
       links: { github: "#" }
     },
     {
       id: 2,
-      title: "Face Recognition",
-      images: ["/ai2.png"],
-      shortDesc: "Real-time face recognition",
-      fullDesc: "Built with OpenCV and deep learning.",
-      tags: ["AI", "Vision"],
-      tools: ["OpenCV"],
+      title: "Marine Taxa Classification",
+      images: ["/ai_2.mp4"],
+      shortDesc: "AI for classifying marine species",
+      fullDesc: "Computer vision system that classifies marine organisms from underwater imagery using convolutional neural networks.",
+      tags: ["AI", "Marine Biology", "Computer Vision"],
+      tools: ["Python", "PyTorch", "OpenCV"],
       links: { github: "#" }
     },
     {
       id: 3,
-      title: "Face Recognition",
-      images: ["/ai1.png"],
-      shortDesc: "Real-time face recognition",
-      fullDesc: "Built with OpenCV and deep learning.",
-      tags: ["AI", "Vision"],
-      tools: ["OpenCV"],
-      links: { github: "#" }
-    },
-    {
-      id: 4,
-      title: "NLP Sentiment Analysis",
-      images: ["/ai3.png"],
-      shortDesc: "Text sentiment analyzer",
-      fullDesc: "ML model to analyze sentiment in customer reviews.",
-      tags: ["NLP", "ML"],
-      tools: ["Python", "NLTK"],
-      links: { github: "#" }
-    },
-    {
-      id: 5,
-      title: "Image Classification",
-      images: ["/ai4.png"],
-      shortDesc: "CNN-based classifier",
-      fullDesc: "Deep learning image classification using CNN.",
-      tags: ["CNN", "Deep Learning"],
-      tools: ["TensorFlow"],
-      links: { github: "#" }
-    },
-    {
-      id: 6,
-      title: "Recommendation System",
-      images: ["/ai5.png"],
-      shortDesc: "Product recommendation AI",
-      fullDesc: "Collaborative filtering recommendation engine.",
-      tags: ["ML", "Recommendations"],
-      tools: ["Scikit-learn"],
+      title: "Menstrual Health AI Chatbot",
+      images: ["/ai_3.mp4"],
+      shortDesc: "AI chatbot for menstrual health",
+      fullDesc: "Chatbot offering resources for PCOD, PMS, PMDD.",
+      tags: ["AI", "Chatbot", "Healthcare"],
+      tools: ["Python", "TensorFlow"],
       links: { github: "#" }
     }
   ],
@@ -685,93 +844,137 @@ function NavBar({ activeSection, setActiveSection, setExpandedCard }) {
   const navItems = [
     { key: "home", label: "HOME" },
     { key: "cloud", label: "Cloud & DevOps" },
+    { key: "ai", label: "AI/ML" },
     { key: "fullstack", label: "Full Stack" },
     { key: "uiux", label: "UI/UX" },
-    { key: "ai", label: "AI" },
     { key: "showcase", label: "Visual Highlights" }
   ];
+
+  const navShineCSS = '\n' +
+        '        .nav-shine {\n' +
+        '          position: relative;\n' +
+        '          transition: color 0.2s ease-out;\n' +
+        '          transition-delay: 0.1s;\n' +
+        '        }\n' +
+        '        .nav-shine:hover, .nav-shine:focus {\n' +
+        '          color: rgba(255, 255, 255, 0.2);\n' +
+        '          transition-delay: 0s;\n' +
+        '        }\n' +
+        '        .nav-shine::before {\n' +
+        '          content: attr(data-text);\n' +
+        '          position: absolute;\n' +
+        '          top: 50%;\n' +
+        '          left: 50%;\n' +
+        '          transform: translate(-50%, -50%);\n' +
+        '          color: #d83bff;\n' +
+        '          text-shadow: 0 0 10px #d83bff, 0 0 30px #d83bff, 0 0 80px #d83bff;\n' +
+        '          letter-spacing: 40px;\n' +
+        '          white-space: nowrap;\n' +
+        '          text-align: center;\n' +
+        '          opacity: 0;\n' +
+        '          transition: opacity 0.25s ease-out, letter-spacing 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n' +
+        '          font-size: 0.65em;\n' +
+        '          font-weight: 500;\n' +
+        '          z-index: -1;\n' +
+        '          pointer-events: none;\n' +
+        '        }\n' +
+        '        .nav-shine:hover::before {\n' +
+        '          opacity: 1;\n' +
+        '          letter-spacing: 6px;\n' +
+        '          transition-delay: 0.05s;\n' +
+        '        }\n' +
+        '        ';
+
   return (
     <>
-      <style>{`
-        .nav-shine {
-          position: relative;
-          transition: color 0.5s;
-          transition-delay: 0.5s;
-        }
-        .nav-shine:hover, .nav-shine:focus {
-          color: rgba(255, 255, 255, 0.2);
-          transition-delay: 0s;
-        }
-        .nav-shine::before {
-          content: attr(data-text);
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          color: #d83bff;
-          text-shadow: 0 0 10px #d83bff, 0 0 30px #d83bff, 0 0 80px #d83bff;
-          letter-spacing: 40px;
-          white-space: nowrap;
-          text-align: center;
-          opacity: 0;
-          transition: 0.5s;
-          font-size: 0.65em;
-          font-weight: 500;
-          z-index: -1;
-          pointer-events: none;
-        }
-        .nav-shine:hover::before {
-          opacity: 1;
-          letter-spacing: 6px;
-          transition-delay: 0.5s;
-        }
-      `}</style>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#13131c]/95 backdrop-blur border-b border-gray-800 flex items-center justify-between px-8 py-3">
-        <div className="flex items-center gap-2">
+      <style dangerouslySetInnerHTML={{ __html: navShineCSS }}></style>
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#13131c]/95 backdrop-blur border-b border-gray-800 flex flex-col sm:flex-row items-center justify-between px-4 sm:px-8 py-2 sm:py-3">
+        <div className="flex items-center gap-2 order-1 sm:order-1">
           <img
             src="/logo.jpg"
             alt="Logo"
-            className="w-14 h-14 rounded-full object-cover border-2 border-blue-400 shadow"
+            className="w-10 h-10 sm:w-14 sm:h-14 rounded-full object-cover border-2 border-blue-400 shadow"
             style={{ background: "#23233a" }}
           />
-          <span className="font-bold text-xl text-white">Yamuna</span>
+          <span className="font-bold text-lg sm:text-xl text-white hidden sm:block">Yamuna</span>
         </div>
-        <div className="flex-1 flex justify-center">
-          <div className="flex items-center gap-x-12">
-            {navItems.map(({ key, label }) => (
-              <button
-                key={key}
-                data-text={label}
-                onClick={() => {
-                  setExpandedCard(null);
-                  setActiveSection(key);
-                }}
-                className={`nav-shine text-lg font-bold ${activeSection === key ? (key === "showcase" ? "text-yellow-300 underline" : "text-blue-300") : "text-white"}`}
-                style={key === "home" || key === "showcase" ? { marginLeft: 32, marginRight: 32 } : {}}
-              >
-                {label}
-              </button>
-            ))}
+        
+        {/* Mobile menu button */}
+        <div className="sm:hidden order-2 flex items-center gap-2">
+          <span className="font-bold text-lg text-white">Yamuna</span>
+        </div>
+        
+        <div className="flex-1 flex justify-center order-3 sm:order-2 mt-2 sm:mt-0">
+          <div className="flex items-center gap-x-4 sm:gap-x-8 md:gap-x-12 flex-wrap justify-center">
+            {navItems.map(({ key, label }) => {
+              const isActive = activeSection === key;
+              const activeClass = key === "showcase" ? "text-yellow-300 underline" : "text-blue-300";
+              const className = `nav-shine text-sm sm:text-lg font-bold ${isActive ? activeClass : "text-white"}`;
+              const style = {}; // Remove fixed margins for responsive design
+              
+              return (
+                <button
+                  key={key}
+                  data-text={label}
+                  onClick={() => {
+                    setExpandedCard(null);
+                    setActiveSection(key);
+                  }}
+                  className={className}
+                  style={style}
+                >
+                  {label}
+                </button>
+              );
+            })}
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer" title="LinkedIn">
-            <Linkedin className="w-6 h-6 text-blue-400 hover:scale-110 transition" />
+        
+        <div className="flex items-center gap-2 sm:gap-3 order-4 sm:order-3 mt-2 sm:mt-0">
+          <a
+            href={personalInfo.social.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="LinkedIn"
+            className="hidden sm:block"
+          >
+            <Linkedin className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400 hover:scale-110 transition" />
           </a>
-          <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer" title="GitHub">
-            <Github className="w-6 h-6 text-gray-200 hover:scale-110 transition" />
+          <a
+            href={personalInfo.social.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="GitHub"
+            className="hidden sm:block"
+          >
+            <Github className="w-5 h-5 sm:w-6 sm:h-6 text-gray-200 hover:scale-110 transition" />
           </a>
-          <a href={personalInfo.social.instagram} target="_blank" rel="noopener noreferrer" title="Instagram">
-            <Instagram className="w-6 h-6 text-pink-400 hover:scale-110 transition" />
+          <a
+            href={personalInfo.social.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Instagram"
+            className="hidden sm:block"
+          >
+            <Instagram className="w-5 h-5 sm:w-6 sm:h-6 text-pink-400 hover:scale-110 transition" />
           </a>
-          <a href={personalInfo.social.telegram} target="_blank" rel="noopener noreferrer" title="Telegram">
-            <FaTelegramPlane className="w-6 h-6 text-blue-400 hover:scale-110 transition" />
+          <a
+            href={personalInfo.social.telegram}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Telegram"
+            className="hidden md:block"
+          >
+            <FaTelegramPlane className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400 hover:scale-110 transition" />
           </a>
-          <a href={personalInfo.social.leetcode} target="_blank" rel="noopener noreferrer" title="LeetCode">
-            <SiLeetcode className="w-6 h-6 text-yellow-300 hover:scale-110 transition" />
-          </a>
-          <a href={personalInfo.social.hackerrank} target="_blank" rel="noopener noreferrer" title="HackerRank">
-            <SiHackerrank className="w-6 h-6 text-green-400 hover:scale-110 transition" />
+          <a
+            href={personalInfo.social.leetcode}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="LeetCode"
+            className="hidden lg:block"
+          >
+            <SiLeetcode className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-300 hover:scale-110 transition" />
           </a>
         </div>
       </nav>
@@ -786,13 +989,12 @@ const BackArrow = ({ activeSection, setActiveSection, show, setExpandedCard }) =
         setExpandedCard(null);
         setActiveSection("home");
       }}
-      className="fixed top-20 left-8 z-[120] p-1.5 bg-[#222230]/90 backdrop-blur rounded-full shadow-lg border border-gray-700"
-      style={{ width: 36, height: 36 }}
+      className="fixed top-20 sm:top-24 left-4 sm:left-8 z-[120] flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-blue-900/90 to-purple-900/90 backdrop-blur-md rounded-full shadow-xl border border-blue-500/30 hover:border-blue-400/50 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 group"
     >
-      <ArrowLeft className="w-4 h-4 text-white" />
+      <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:-translate-x-1 transition-transform duration-300" />
+      <span className="text-xs sm:text-sm font-semibold text-white group-hover:text-blue-200 transition-colors duration-300">Back</span>
     </button>
   );
-
 
 // --- Profile Avatar with animated stars and your photo ---
 function ProfileAvatar() {
@@ -807,7 +1009,7 @@ function ProfileAvatar() {
       initial={{ scale: 0.8, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="relative w-60 h-60 mx-auto flex items-center justify-center select-none"
+      className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-60 md:h-60 mx-auto flex items-center justify-center select-none"
     >
       {/* Rotating gradient ring */}
       <motion.div 
@@ -851,7 +1053,7 @@ function ProfileAvatar() {
       ))}
       
       <motion.div 
-        className="w-44 h-44 bg-gradient-to-br from-[#23233a] via-[#181829] to-[#23233a] rounded-full flex items-center justify-center border-4 border-blue-300 shadow-xl z-10 overflow-hidden"
+        className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 bg-gradient-to-br from-[#23233a] via-[#181829] to-[#23233a] rounded-full flex items-center justify-center border-4 border-blue-300 shadow-xl z-10 overflow-hidden"
         whileHover={{ scale: 1.05 }}
         transition={{ type: "spring", stiffness: 300 }}
       >
@@ -894,7 +1096,7 @@ const ContactSection = () => (
 // --- Home Page Layout ---
 function HomePage() {
   return (
-    <section className="min-h-screen pt-32 pb-16 bg-gradient-to-br from-[#101018] via-[#181829] to-[#23233a]">
+    <section className="min-h-screen pt-20 sm:pt-32 pb-16 bg-gradient-to-br from-[#101018] via-[#181829] to-[#23233a]">
       <div className="max-w-6xl mx-auto px-4">
         <ProfileAvatar />
         <motion.div 
@@ -921,7 +1123,7 @@ function HomePage() {
             <h2 className="text-xl font-bold text-blue-300 mb-4">About Me</h2>
             <p className="text-sm text-blue-100 mb-4 leading-relaxed">{personalInfo.bio}</p>
             <p className="text-sm text-blue-100 mb-4 leading-relaxed">{personalInfo.bio2}</p>
-            <h3 className="text-base font-semibold text-blue-200 mt-4 mb-2">Skills</h3>
+            <h3 className="text-base font-semibold text-blue-200 mt-4 mb-2">Technical Skills</h3>
             <div className="flex flex-wrap gap-2">
               {personalInfo.techStacks.map((skill, idx) => (
                 <motion.span 
@@ -945,16 +1147,42 @@ function HomePage() {
             <h2 className="text-xl font-bold text-blue-300 mb-4">Get In Touch</h2>
             <ContactSection />
             <div className="flex gap-3 mt-4">
-              <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer"><Linkedin className="w-7 h-7 text-blue-400 hover:scale-110 transition" /></a>
-              <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer"><Github className="w-7 h-7 text-gray-200 hover:scale-110 transition" /></a>
-              <a href={personalInfo.social.instagram} target="_blank" rel="noopener noreferrer"><Instagram className="w-7 h-7 text-pink-400 hover:scale-110 transition" /></a>
-              <a href={personalInfo.social.telegram} target="_blank" rel="noopener noreferrer"><FaTelegramPlane className="w-7 h-7 text-blue-400 hover:scale-110 transition" /></a>
-              <a href={personalInfo.social.leetcode} target="_blank" rel="noopener noreferrer"><SiLeetcode className="w-7 h-7 text-yellow-300 hover:scale-110 transition" /></a>
-              <a href={personalInfo.social.hackerrank} target="_blank" rel="noopener noreferrer"><SiHackerrank className="w-7 h-7 text-green-400 hover:scale-110 transition" /></a>
+              <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer"><Linkedin className="w-6 h-6 text-blue-400 hover:scale-110 transition" /></a>
+              <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer"><Github className="w-6 h-6 text-gray-200 hover:scale-110 transition" /></a>
+              <a href={personalInfo.social.instagram} target="_blank" rel="noopener noreferrer"><Instagram className="w-6 h-6 text-pink-400 hover:scale-110 transition" /></a>
+              <a href={personalInfo.social.telegram} target="_blank" rel="noopener noreferrer"><FaTelegramPlane className="w-6 h-6 text-blue-400 hover:scale-110 transition" /></a>
+              <a href={personalInfo.social.leetcode} target="_blank" rel="noopener noreferrer"><SiLeetcode className="w-6 h-6 text-yellow-300 hover:scale-110 transition" /></a>
             </div>
-            <button className="w-full mt-6 px-6 py-3 bg-gradient-to-r from-blue-900 to-fuchsia-800 text-white rounded-2xl font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
-              <Download className="w-5 h-5" /> Download Resume
-            </button>
+            <a 
+              href="/resume.pdf" 
+              download="Yamuna_Resume.pdf"
+              className="w-full mt-4 px-5 py-2 bg-gradient-to-r from-blue-900 to-fuchsia-800 text-white rounded-2xl font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              <Download className="w-4 h-4" /> Download Resume
+            </a>
+
+            {/* Languages & Soft Skills */}
+            <div className="mt-6 pt-6 border-t border-blue-500/20">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <div className="text-sm font-semibold mb-3 text-white">Languages</div>
+                  {personalInfo.languages.map(lang => (
+                    <div key={lang.name} className="flex justify-between text-blue-100 text-xs py-1 rounded hover:bg-[#23233a] transition-colors mb-1">
+                      <span>{lang.name}</span>
+                      <span className="text-blue-400 font-semibold">{lang.level}</span>
+                    </div>
+                  ))}
+                </div>
+                <div>
+                  <div className="text-sm font-semibold mb-3 text-white">Soft Skills</div>
+                  <div className="flex flex-wrap gap-1">
+                    {personalInfo.softSkills.map(skill => (
+                      <span key={skill} className="px-2 py-1 bg-blue-900 text-blue-100 rounded-full text-xs hover:bg-blue-800 hover:scale-105 transition-all duration-200 cursor-default">{skill}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
         </div>
         <div className="grid md:grid-cols-3 gap-8 mt-8">
@@ -980,14 +1208,14 @@ function HomePage() {
                   <div className="text-xs text-blue-400">{exp.duration}</div>
                   <div className="text-xs text-blue-100">{exp.desc}</div>
                   {/* Publication button for ECOSAUR */}
-                  {exp.publication && (
+                  {exp.link && (
                     <a
-                      href={exp.publication.url}
+                      href={exp.link.url}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-block mt-2 px-4 py-2 bg-gradient-to-r from-blue-700 to-fuchsia-700 text-white rounded-xl font-bold text-sm shadow-lg hover:scale-105 hover:bg-blue-800 transition-all duration-200"
                     >
-                      {exp.publication.label}
+                      {exp.link.text}
                     </a>
                   )}
                 </div>
@@ -1019,41 +1247,51 @@ function HomePage() {
               </motion.div>
             ))}
           </motion.div>
-          {/* Languages & Soft Skills */}
+          {/* Leadership & Campus Roles */}
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
             className="bg-[#181829] rounded-3xl shadow-xl p-8 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
           >
-            <h2 className="text-xl font-bold text-blue-300 mb-4">Languages & Soft Skills</h2>
-            <div className="mb-4">
-              <div className="text-sm font-semibold mb-1 text-white">Languages</div>
-              {personalInfo.languages.map(lang => (
-                <div key={lang.name} className="flex justify-between text-blue-100 text-sm py-1 px-2 rounded hover:bg-[#23233a] transition-colors">
-                  <span>{lang.name}</span>
-                  <span className="text-blue-400 font-semibold">{lang.level}</span>
+            <h2 className="text-xl font-bold text-blue-300 mb-4">Leadership & Campus Roles</h2>
+            <div className="space-y-3">
+              <div className="flex items-start gap-2 p-3 rounded-xl hover:bg-[#23233a] transition-colors duration-200">
+                <img src="/Vcetlogo.jpg" className="w-8 h-8 rounded-full object-cover border-2 border-blue-400" alt="VCET Logo" />
+                <div>
+                  <div className="text-sm font-semibold text-white">Class Representative</div>
+                  <div className="text-xs text-blue-400">B.E. CSE Dept (2024–Present)</div>
+                  <div className="text-xs text-blue-100">Velammal College of Engineering and Technology</div>
                 </div>
-              ))}
-            </div>
-            <div>
-              <div className="text-sm font-semibold mb-1 text-white">Soft Skills</div>
-              <div className="flex flex-wrap gap-2">
-                {personalInfo.softSkills.map(skill => (
-                  <span key={skill} className="px-3 py-1 bg-blue-900 text-blue-100 rounded-full text-xs hover:bg-blue-800 hover:scale-105 transition-all duration-200 cursor-default">{skill}</span>
-                ))}
+              </div>
+              <div className="flex items-start gap-2 p-3 rounded-xl hover:bg-[#23233a] transition-colors duration-200">
+                <img src="/Vcetlogo.jpg" className="w-8 h-8 rounded-full object-cover border-2 border-blue-400" alt="VCET Logo" />
+                <div>
+                  <div className="text-sm font-semibold text-white">Placement Batch Head</div>
+                  <div className="text-xs text-blue-400">B.E. CSE (2025–Present)</div>
+                  <div className="text-xs text-blue-100">Velammal College of Engineering and Technology</div>
+                </div>
+              </div>
+              <div className="flex items-start gap-2 p-3 rounded-xl hover:bg-[#23233a] transition-colors duration-200">
+                <img src="/Vcetlogo.jpg" className="w-8 h-8 rounded-full object-cover border-2 border-blue-400" alt="VCET Logo" />
+                <div>
+                  <div className="text-sm font-semibold text-white">Committee Head</div>
+                  <div className="text-xs text-blue-400">Academic Cell (2024–Present)</div>
+                  <div className="text-xs text-blue-100">Velammal College of Engineering and Technology</div>
+                </div>
+              </div>
+              <div className="flex items-start gap-2 p-3 rounded-xl hover:bg-[#23233a] transition-colors duration-200">
+                <img src="/Vcetlogo.jpg" className="w-8 h-8 rounded-full object-cover border-2 border-blue-400" alt="VCET Logo" />
+                <div>
+                  <div className="text-sm font-semibold text-white">Eco Club Member</div>
+                  <div className="text-xs text-blue-400">VCET (2024–Present)</div>
+                  <div className="text-xs text-blue-100">Velammal College of Engineering and Technology</div>
+                </div>
               </div>
             </div>
           </motion.div>
         </div>
-        
-        {/* Badges Section */}
-        <div className="mt-12">
-          <Badges />
-        </div>
-
-        {/* Coding Stats Section */}
-        <div className="mt-12">
+        <div className="mt-12 max-w-5xl mx-auto">
           <Stats />
         </div>
       </div>
@@ -1062,11 +1300,19 @@ function HomePage() {
 }
 
 // --- Project Card Grid, Tabs, Modal, and App Component ---
-function ProjectGrid({ cards, expandedCard, setExpandedCard }) {
+function ProjectGrid({ cards, expandedCard, setExpandedCard, columnsLg = 2, invisible = false }) {
   const [hoveredCard, setHoveredCard] = useState(null);
 
+  const gridClass = columnsLg === 4 
+    ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 auto-rows-auto"
+    : "grid grid-cols-1 md:grid-cols-2 gap-7 auto-rows-auto";
+
+  const cardClass = invisible
+    ? "relative group rounded-2xl cursor-pointer overflow-hidden hover:scale-105 transition-all duration-300 flex items-center justify-center min-h-[220px] bg-transparent"
+    : "relative group rounded-2xl shadow-lg border border-gray-800 cursor-pointer overflow-hidden hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 flex items-center justify-center min-h-[220px] bg-[#0d0d15]";
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 auto-rows-auto">
+    <div className={gridClass}>
       {cards.map((project, idx) => {
         const images = (project.images && project.images.length > 0) ? project.images : [project.src];
         const onlyVideos = images.every(isVideo);
@@ -1078,7 +1324,7 @@ function ProjectGrid({ cards, expandedCard, setExpandedCard }) {
         return (
           <div
             key={project.id || project.title}
-            className="relative group rounded-2xl shadow-lg border border-gray-800 cursor-pointer overflow-hidden hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 flex items-center justify-center min-h-[220px] bg-[#0d0d15]"
+            className={cardClass}
             onMouseEnter={() => setHoveredCard(idx)}
             onMouseLeave={() => setHoveredCard(null)}
             onClick={() => setExpandedCard(idx)}
@@ -1108,9 +1354,8 @@ function ProjectGrid({ cards, expandedCard, setExpandedCard }) {
             {/* Multiple Images (Swiper) */}
             {multipleImages && (
               <Swiper
-                modules={[Pagination, Autoplay]}
+                modules={[Autoplay]}
                 slidesPerView={1}
-                pagination={{ clickable: true }}
                 autoplay={{ delay: 2500, disableOnInteraction: false }}
                 loop
                 className="w-full h-full"
@@ -1126,8 +1371,6 @@ function ProjectGrid({ cards, expandedCard, setExpandedCard }) {
                 ))}
               </Swiper>
             )}
-
-            {/* If you have mixed images/videos or multiple videos, you can expand logic here if needed */}
 
             {/* Hover overlay: only on hover, pretty effect */}
             <AnimatePresence>
@@ -1196,7 +1439,10 @@ function ProjectGrid({ cards, expandedCard, setExpandedCard }) {
                         <span key={tool} className="px-3 py-1 bg-fuchsia-900 text-fuchsia-100 text-xs rounded-full">{tool}</span>
                       ))}
                     </div>
-                    {project.links && Object.entries(project.links).map(([key, url]) => (
+                    {project.links && Object.entries(project.links).filter(([key]) => {
+                    // Remove demo, view, behance, figma links
+                    return !['demo', 'view', 'behance', 'figma'].includes(key.toLowerCase());
+                  }).map(([key, url]) => (
                       <a
                         key={key}
                         href={url}
@@ -1220,189 +1466,112 @@ function ProjectGrid({ cards, expandedCard, setExpandedCard }) {
 }
 
 function TabbedSection({ title, tabs, cardsByTab, expandedCard, setExpandedCard }) {
-  const [activeTab, setActiveTab] = useState(tabs[0].key);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeTab, setActiveTab] = useState(tabs[0].value);
+
+  // Get current tab's cards and filter based on search query
+  const currentCards = React.useMemo(() => {
+    const tabCards = cardsByTab[activeTab] || [];
+    if (!searchQuery) return tabCards;
+    const query = searchQuery.toLowerCase();
+    return tabCards.filter(card => 
+      (card.title && card.title.toLowerCase().includes(query)) ||
+      (card.desc && card.desc.toLowerCase().includes(query)) ||
+      (card.tags && card.tags.some(tag => tag.toLowerCase().includes(query)))
+    );
+  }, [activeTab, cardsByTab, searchQuery]);
+
+  // Update active tab when search query changes to show results in the current tab
+  React.useEffect(() => {
+    if (searchQuery) {
+      // If no results in current tab, try to find a tab with matching results
+      if (currentCards.length === 0) {
+        const tabWithResults = tabs.find(tab => {
+          const tabCards = cardsByTab[tab.value] || [];
+          const query = searchQuery.toLowerCase();
+          return tabCards.some(card => 
+            (card.title && card.title.toLowerCase().includes(query)) ||
+            (card.desc && card.desc.toLowerCase().includes(query)) ||
+            (card.tags && card.tags.some(tag => tag.toLowerCase().includes(query)))
+          );
+        });
+        if (tabWithResults) {
+          setActiveTab(tabWithResults.value);
+        }
+      }
+    }
+  }, [searchQuery, tabs, cardsByTab, currentCards.length]);
 
   return (
-    <section className="min-h-screen pt-32 pb-16 bg-gradient-to-br from-[#101018] via-[#181829] to-[#23233a]">
+    <div className="min-h-screen pt-20 sm:pt-32 pb-16">
       <div className="max-w-7xl mx-auto px-6">
-        <h1 className="text-4xl font-bold text-white mb-8">{title}</h1>
-        <div className="flex gap-4 mb-8">
-          {tabs.map(tab => (
-            <button
-              key={tab.key}
-              onClick={() => setActiveTab(tab.key)}
-              className={`px-6 py-3 rounded-2xl font-medium transition-all duration-300 ${
-                activeTab === tab.key
-                  ? "bg-blue-900 text-blue-100 shadow"
-                  : "bg-[#181829] text-blue-200 hover:bg-blue-800"
-              }`}
-            >{tab.label}</button>
-          ))}
-        </div>
-        <ProjectGrid
-          cards={cardsByTab[activeTab] || []}
-          expandedCard={expandedCard}
-          setExpandedCard={setExpandedCard}
-        />
-      </div>
-    </section>
-  );
-}
-
-// Visual Highlights + Certifications Carousel + Badges
-function ShowcaseSection() {
-  return (
-    <div className="space-y-16 py-4">
-      <Stats />
-      <section className="min-h-screen pt-32 pb-16 bg-gradient-to-br from-[#101018] via-[#181829] to-[#23233a]">
-        <div className="max-w-5xl mx-auto px-4">
-          <h1 className="text-3xl font-bold text-white mb-8 text-center">Visual Highlights</h1>
-          <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
-            slidesPerView={1}
-            navigation
-            loop
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 3500, disableOnInteraction: false }}
-            className="rounded-2xl"
-          >
-            {projects.showcase.map(item => (
-              <SwiperSlide key={item.id}>
-                <div className="bg-[#181829] rounded-2xl shadow-xl p-6 flex flex-col items-center">
-                  {item.images && item.images.length > 1 ? (
-                    <Swiper
-                      modules={[Pagination, Autoplay]}
-                      slidesPerView={1}
-                      pagination={{ clickable: true }}
-                      autoplay={{ delay: 2500, disableOnInteraction: false }}
-                      loop
-                      className="rounded-xl w-full mb-4"
-                    >
-                      {item.images.map((img, i) => (
-                        <SwiperSlide key={i}>
-                          <img src={img} alt={item.title} className="object-contain h-72 w-auto max-w-full rounded-xl mx-auto" />
-                        </SwiperSlide>
-                      ))}
-                    </Swiper>
-                  ) : item.images && item.images.length === 1 ? (
-                    <img src={item.images[0]} alt={item.title} className="object-contain h-72 w-auto max-w-full rounded-xl mx-auto mb-4" />
-                  ) : (
-                    <div className="w-full h-72 bg-blue-900 rounded-xl flex items-center justify-center text-blue-300 text-lg">Coming Soon</div>
-                  )}
-                  <div className="text-white text-xl font-bold mb-2">{item.title}</div>
-                  <div className="text-sm text-blue-100">{item.desc}</div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          
-          {/* Certifications Carousel */}
-          <h2 className="text-xl font-bold text-blue-300 mt-12 mb-4 text-center">Certifications</h2>
-          <Swiper
-            modules={[Navigation, Autoplay]}
-            slidesPerView={3}
-            spaceBetween={24}
-            navigation
-            loop
-            autoplay={{ delay: 2000, disableOnInteraction: false }}
-            className="rounded-2xl"
-          >
-            {certifications.map((img, idx) => (
-              <SwiperSlide key={idx}>
-                {img.src
-                  ? <img src={img.src} alt={img.title} className="object-contain h-48 w-auto max-w-full rounded-xl mx-auto" />
-                  : <div className="w-full h-48 bg-blue-900 rounded-xl flex items-center justify-center text-blue-300 text-lg">Coming Soon</div>
-                }
-                <div className="text-blue-100 text-center text-xs mt-2">{img.title}</div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          
-          {/* Platform Badges Carousel */}
-          <h2 className="text-xl font-bold text-blue-300 mt-12 mb-4 text-center">Platform Badges</h2>
-          <Swiper
-            modules={[Navigation, Autoplay]}
-            slidesPerView={3}
-            spaceBetween={24}
-            navigation
-            loop
-            autoplay={{ delay: 2000, disableOnInteraction: false }}
-            className="rounded-2xl"
-          >
-            {platformBadges.map((badge, idx) => (
-              <SwiperSlide key={idx}>
-                {badge.src
-                  ? <img src={badge.src} alt={badge.title} className="object-contain h-48 w-auto max-w-full rounded-xl mx-auto" />
-                  : <div className="w-full h-48 bg-blue-900 rounded-xl flex items-center justify-center text-blue-300 text-lg">Coming Soon</div>
-                }
-                <div className="text-blue-100 text-center text-xs mt-2">{badge.title}</div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      </section>
-      <Badges />
-      
-      {/* Project Showcase */}
-      <section className="py-16 bg-gradient-to-br from-[#101018] via-[#181829] to-[#23233a]">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-white mb-12 text-center">Project Showcase</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.cloud.slice(0, 3).map((item) => (
-              <div key={item.id} className="bg-[#1a1a2e] p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-                {item.images && item.images.length > 1 ? (
-                  <Swiper
-                    modules={[Pagination, Autoplay]}
-                    slidesPerView={1}
-                    pagination={{ clickable: true }}
-                    autoplay={{ delay: 2500, disableOnInteraction: false }}
-                    className="w-full h-48 mb-4"
-                  >
-                    {item.images.map((img, i) => (
-                      <SwiperSlide key={i}>
-                        <img 
-                          src={img} 
-                          alt={item.title} 
-                          className="object-cover w-full h-full rounded-lg" 
-                        />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                ) : item.images && item.images.length === 1 ? (
-                  <div className="h-48 mb-4 overflow-hidden rounded-lg">
-                    <img 
-                      src={item.images[0]} 
-                      alt={item.title} 
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                ) : (
-                  <div className="h-48 bg-blue-900 rounded-lg flex items-center justify-center text-blue-300 text-lg mb-4">
-                    Coming Soon
-                  </div>
-                )}
-                <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                <p className="text-blue-100 text-sm">
-                  {item.desc || 'No description available.'}
-                </p>
-              </div>
+        <h1 className="text-4xl font-bold text-white mb-4 mt-8">{title}</h1>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+          <div className="flex flex-wrap gap-2">
+            {tabs.map((tab) => (
+              <button
+                key={tab.value}
+                onClick={() => {
+                  setActiveTab(tab.value);
+                  setSearchQuery('');
+                }}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                  activeTab === tab.value
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                }`}
+              >
+                {tab.label}
+              </button>
             ))}
           </div>
+          <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         </div>
-      </section>
+        {currentCards.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-gray-400 text-lg">
+              {searchQuery 
+                ? `No projects found matching "${searchQuery}" in ${tabs.find(t => t.value === activeTab)?.label || 'this tab'}` 
+                : `No projects available in ${tabs.find(t => t.value === activeTab)?.label || 'this tab'}`}
+            </p>
+          </div>
+        ) : (
+          <ProjectGrid cards={currentCards} expandedCard={expandedCard} setExpandedCard={setExpandedCard} />
+        )}
+      </div>
     </div>
   );
 }
 
 // Section for Cloud, AI, etc.
-function Section({ title, cards, expandedCard, setExpandedCard }) {
+function Section({ title, cards, expandedCard, setExpandedCard, columnsLg = 2, invisible = false }) {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Filter cards based on search query
+  const filteredCards = React.useMemo(() => {
+    if (!searchQuery) return cards;
+    const query = searchQuery.toLowerCase();
+    return cards.filter(card => 
+      (card.title && card.title.toLowerCase().includes(query)) ||
+      (card.desc && card.desc.toLowerCase().includes(query)) ||
+      (card.tags && card.tags.some(tag => tag.toLowerCase().includes(query)))
+    );
+  }, [cards, searchQuery]);
+
   return (
-    <section className="min-h-screen pt-32 pb-16 bg-gradient-to-br from-[#101018] via-[#181829] to-[#23233a]">
+    <div className="min-h-screen pt-20 sm:pt-32 pb-16">
       <div className="max-w-7xl mx-auto px-6">
-        <h1 className="text-4xl font-bold text-white mb-8">{title}</h1>
-        <ProjectGrid cards={cards} expandedCard={expandedCard} setExpandedCard={setExpandedCard} />
+        <h1 className="text-4xl font-bold text-white mb-4 mt-8">{title}</h1>
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        {filteredCards.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-gray-400 text-lg">No projects found matching "{searchQuery}"</p>
+          </div>
+        ) : (
+          <ProjectGrid cards={filteredCards} expandedCard={expandedCard} setExpandedCard={setExpandedCard} columnsLg={columnsLg} invisible={invisible} />
+        )}
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -1422,23 +1591,144 @@ function AlwaysLoopingVideo({ src }) {
   return <video ref={ref} src={src} controls loop autoPlay muted />;
 }
 
+// --- Auto-Moving Carousel Component ---
+function AutoCarousel({ images, title }) {
+  return (
+    <div className="mb-16">
+      <h2 className="text-3xl font-bold text-blue-300 mb-8 text-center">{title}</h2>
+      <div className="relative overflow-hidden px-4">
+        <Swiper
+          modules={[Autoplay, Navigation]}
+          slidesPerView={3}
+          spaceBetween={24}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          loop={true}
+          navigation={true}
+          className="!pb-8"
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 16,
+            },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 24,
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 24,
+            },
+          }}
+        >
+          {images.map((img, idx) => {
+            const isVideo = typeof img === "string" && img.match(/\.(mp4|webm|ogg)$/i);
+            
+            return (
+              <SwiperSlide key={idx}>
+                <div className="relative aspect-square w-full flex items-center justify-center">
+                  {isVideo ? (
+                    <video
+                      src={img}
+                      alt={`${title} ${idx + 1}`}
+                      className="w-full h-full object-cover rounded-xl"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                    />
+                  ) : (
+                    <img
+                      src={img}
+                      alt={`${title} ${idx + 1}`}
+                      className="w-full h-full object-contain rounded-xl"
+                    />
+                  )}
+                </div>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </div>
+    </div>
+  );
+}
+
+// --- Showcase Section Component ---
+function ShowcaseSection() {
+  // Generate certification images (cert1.jpg to cert18)
+  const certifications = [
+    '/cert1.jpg', '/cert2.jpg', '/cert3.jpg', '/cert4.jpg', '/cert5.jpg', '/cert6.jpg',
+    '/cert7.jpg', '/cert8.jpg', '/cert9.jpg', '/cert10.jpg', '/cert11.jpg', '/cert12.jpg',
+    '/cert13.png', '/cert14.jpg', '/cert15.jpg', '/cert16.png', '/cert17.png', '/cert18.jpeg'
+  ];
+  
+  // Platform badges
+  const platformBadges = ['/badge_1.png', '/badge_2.png', '/badge_3.jpg', '/badge_4.png'];
+  
+  // Open source contribution
+  const openSource = ['/open_1.png', '/open_2.png', '/open_3.png'];
+
+  return (
+    <div className="min-h-screen pt-20 sm:pt-32 pb-16">
+      <div className="max-w-7xl mx-auto px-6">
+        <h1 className="text-4xl font-bold text-white mb-8 mt-8 text-center">Visual Highlights</h1>
+        
+        {/* Combined Showcase Card with Image and Victory Quote */}
+        <div className="mb-16 flex justify-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="relative w-full max-w-5xl rounded-2xl overflow-hidden"
+          >
+            {/* Image Section */}
+            <div className="relative h-[28rem] sm:h-[32rem] md:h-[36rem]">
+              <img
+                src="/showcase1.jpg"
+                alt="Showcase"
+                className="w-full h-full object-contain p-4"
+              />
+            </div>
+            
+            {/* Victory Quote Section */}
+            <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 backdrop-blur-md p-6 border-t border-blue-500/20">
+              <div className="text-center">
+                <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent">
+                  "First Taste of Victory"
+                </h2>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Certifications Carousel */}
+        <AutoCarousel images={certifications} title="Certifications" />
+
+        {/* Platform Badges Carousel */}
+        <div className="mb-12 max-w-3xl mx-auto">
+          <AutoCarousel images={platformBadges} title="Platform Badges" />
+        </div>
+
+        {/* Open Source Contribution Carousel */}
+        <div className="mb-16 max-w-6xl mx-auto">
+          <AutoCarousel images={openSource} title="Open Source Contributions" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // Main App
 export default function App() {
   const [activeSection, setActiveSection] = useState("home");
   const [expandedCard, setExpandedCard] = useState(null);
-
-  const fullStackTabs = [
-    { key: "frontend", label: "Frontend" },
-    { key: "backend", label: "Backend" },
-    { key: "both", label: "Both" }
-  ];
-  const uiuxTabs = [
-    { key: "logos", label: "Logo Designs" },
-    { key: "posters", label: "Posters & Brochures" },
-    { key: "prototypes", label: "Prototypes & Videos" },
-    { key: "powerpoints", label: "Interactive PowerPoints" },
-    { key: "planners", label: "Planners & Productivity" }
-  ];
 
   return (
     <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
@@ -1460,30 +1750,30 @@ export default function App() {
             setExpandedCard={setExpandedCard}
           />
         )}
+        {activeSection === "ai" && (
+          <Section
+            title="AI/ML Projects"
+            cards={projects.ai}
+            expandedCard={expandedCard}
+            setExpandedCard={setExpandedCard}
+          />
+        )}
         {activeSection === "fullstack" && (
-          <TabbedSection
+          <Section
             title="Full Stack Development"
-            tabs={fullStackTabs}
-            cardsByTab={projects.fullstack}
+            cards={projects.fullstack}
             expandedCard={expandedCard}
             setExpandedCard={setExpandedCard}
           />
         )}
         {activeSection === "uiux" && (
-          <TabbedSection
-            title="UI/UX Design"
-            tabs={uiuxTabs}
-            cardsByTab={projects.uiux}
-            expandedCard={expandedCard}
-            setExpandedCard={setExpandedCard}
-          />
-        )}
-        {activeSection === "ai" && (
           <Section
-            title="AI Projects"
-            cards={projects.ai}
+            title="UI/UX Design"
+            cards={projects.uiux}
             expandedCard={expandedCard}
             setExpandedCard={setExpandedCard}
+            columnsLg={4}
+            invisible={true}
           />
         )}
         {activeSection === "showcase" && <ShowcaseSection />}
