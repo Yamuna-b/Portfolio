@@ -1327,7 +1327,8 @@ function ProjectGrid({ cards, expandedCard, setExpandedCard, columnsLg = 2, invi
             className={cardClass}
             onMouseEnter={() => setHoveredCard(idx)}
             onMouseLeave={() => setHoveredCard(null)}
-            onClick={() => setExpandedCard(idx)}
+            onClick={() => !invisible && setExpandedCard(idx)}
+            style={{ cursor: invisible ? 'default' : 'pointer' }}
           >
             {/* Single Video */}
             {singleVideo && (
@@ -1374,7 +1375,7 @@ function ProjectGrid({ cards, expandedCard, setExpandedCard, columnsLg = 2, invi
 
             {/* Hover overlay: only on hover, pretty effect */}
             <AnimatePresence>
-              {hoveredCard === idx && expandedCard === null && (
+              {hoveredCard === idx && expandedCard === null && !invisible && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -1403,53 +1404,46 @@ function ProjectGrid({ cards, expandedCard, setExpandedCard, columnsLg = 2, invi
             <AnimatePresence>
               {expandedCard === idx && (
                 <motion.div
-                  className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60"
+                  className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
+                  onClick={() => setExpandedCard(null)}
                 >
                   <motion.div
-                    className="relative bg-[#23233a] rounded-2xl shadow-xl w-[95vw] max-w-6xl h-[90vh] p-8 flex flex-col overflow-hidden items-center"
+                    className="relative w-[98vw] h-[95vh] rounded-2xl overflow-hidden"
                     initial={{ scale: 0.95, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0.95, opacity: 0 }}
                     onClick={e => e.stopPropagation()}
                   >
-                    {/* X button */}
+                    {/* Full screen media */}
+                    <div className="w-full h-full flex items-center justify-center bg-black">
+                      <MediaSwiper
+                        mediaList={project.images || [project.src]}
+                        className="w-full h-full"
+                      />
+                    </div>
+
+                    {/* Close button - X */}
                     <button
                       onClick={() => setExpandedCard(null)}
-                      className="absolute top-4 right-4 z-[110] text-white bg-blue-900 hover:bg-red-600 rounded-full w-10 h-10 flex items-center justify-center text-2xl font-bold shadow"
+                      className="absolute top-4 right-4 z-[110] text-white bg-blue-900 hover:bg-red-600 rounded-full w-12 h-12 flex items-center justify-center text-3xl font-bold shadow-lg"
                       aria-label="Close"
                     >
                       ×
                     </button>
-                    <MediaSwiper
-                      mediaList={project.images || [project.src]}
-                      className="w-full h-full mb-4 rounded-xl"
-                    />
-                    <h2 className="text-xl font-bold mb-2 text-white">{project.title}</h2>
-                    <p className="mb-2 text-sm text-blue-100 text-center">{project.fullDesc || project.desc}</p>
-                    <div className="flex flex-wrap gap-2 mb-2 justify-center">
-                      {(project.tags || []).map(tag => (
-                        <span key={tag} className="px-3 py-1 bg-blue-900 text-blue-100 text-xs rounded-full">{tag}</span>
-                      ))}
-                    </div>
-                    <div className="flex flex-wrap gap-2 mb-6 justify-center">
-                      {(project.tools || []).map(tool => (
-                        <span key={tool} className="px-3 py-1 bg-fuchsia-900 text-fuchsia-100 text-xs rounded-full">{tool}</span>
-                      ))}
-                    </div>
+
+                    {/* GitHub button - bottom center */}
                     {project.links && Object.entries(project.links).filter(([key]) => {
-                    // Remove demo, view, behance, figma links
-                    return !['demo', 'view', 'behance', 'figma'].includes(key.toLowerCase());
-                  }).map(([key, url]) => (
+                      return !['demo', 'behance', 'figma'].includes(key.toLowerCase());
+                    }).map(([key, url]) => (
                       <a
                         key={key}
                         href={url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-6 py-2 bg-gradient-to-r from-blue-700 to-fuchsia-700 text-white rounded-xl font-bold text-sm shadow-lg hover:scale-105 hover:bg-blue-800 transition-all duration-200 mb-2"
-                        style={{ minWidth: 180, textAlign: "center", letterSpacing: 1 }}
+                        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-[110] px-8 py-3 bg-gradient-to-r from-blue-700 to-fuchsia-700 text-white rounded-xl font-bold text-sm shadow-lg hover:scale-110 hover:bg-blue-800 transition-all duration-200"
                       >
                         {key.charAt(0).toUpperCase() + key.slice(1)}
                       </a>
