@@ -1,171 +1,74 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { SiLeetcode, SiGithub } from 'react-icons/si';
 
 export default function Stats() {
-  const [stats, setStats] = useState({
-    leetcode: { 
-      username: 'Yamuna_bsvy',
-      profileUrl: 'https://leetcode.com/u/Yamuna_bsvy/',
-      totalSolved: 96, 
-      easy: 96, 
-      medium: 103, 
-      hard: 20, 
-      acceptanceRate: '100%',
-      isLoading: false,
-      error: null
-    },
-    github: { 
-      username: 'Yamuna-b',
-      profileUrl: 'https://github.com/Yamuna-b',
-      stars: 0,
-      commits: 110,
-      pullRequests: 10,
-      issues: 7,
-      contributedTo: 5,
-      isLoading: false,
-      error: null
-    }
-  });
-
-  // Set initial stats (frontend only)
-  useEffect(() => {
-    // Set loading to false immediately since we're using static data
-    setStats(prev => ({
-      ...prev,
-      github: {
-        ...prev.github,
-        isLoading: false
-      },
-      leetcode: {
-        ...prev.leetcode,
-        isLoading: false,
-        // Update these with your actual stats
-        totalSolved: 5,  // Update with your total solved
-        easy: 1,         // Update with your easy count
-        medium: 4,       // Update with your medium count
-        hard: 0,         // Update with your hard count
-        acceptanceRate: '99.9%'  // Update with your acceptance rate
-      }
-    }));
-  }, []);
-  
-  // TODO: Add LeetCode and HackerRank API integration here
+  const ghUser = 'Yamuna-b';
+  const lcUrl = 'https://leetcode.com/u/Yamuna_bsvy/';
+  const ghUrl = 'https://github.com/Yamuna-b';
 
   return (
-    <div className="py-12 bg-gradient-to-br from-gray-900 to-gray-800">
-      <div className="w-full px-4 sm:px-6 lg:px-8 space-y-8">
-        <div className="text-center">
-          <motion.h2 
-            initial={{ opacity: 0, y: -20 }}
+    <div className="py-12 bg-[#12141b] border border-slate-800 rounded-2xl">
+      <div className="w-full px-4 sm:px-8 space-y-8">
+        <div className="text-center max-w-xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl font-bold text-white mb-2"
+            className="text-2xl sm:text-3xl font-bold text-slate-100 mb-2"
           >
-            Coding Activity
+            Coding activity
           </motion.h2>
-          <p className="text-blue-200 text-lg">My coding journey across platforms</p>
+          <p className="text-slate-400 text-sm leading-relaxed">
+            Actively solving DSA problems on LeetCode and maintaining backend project repositories on GitHub.
+          </p>
         </div>
 
-        {/* GitHub and LeetCode Stats Side by Side */}
-        <div className="grid md:grid-cols-4 gap-6">
-          {/* GitHub Stats - Takes 3/4 space */}
-          <motion.div 
-            whileHover={{ y: -5 }}
-            className="md:col-span-3 bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700"
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <motion.div
+            whileHover={{ y: -2 }}
+            className="bg-[#0f1117] rounded-xl p-6 border border-slate-800"
           >
-            <div className="flex items-center mb-4">
-              <SiGithub className="text-gray-300 text-3xl mr-3" />
-              <h3 className="text-2xl font-semibold text-white">GitHub Activity</h3>
+            <div className="flex items-center gap-2 mb-4">
+              <SiGithub className="text-slate-300 text-2xl" />
+              <h3 className="text-lg font-semibold text-slate-100">GitHub</h3>
             </div>
-            <div className="mt-4">
-              <img 
-                src={`https://ghchart.rshah.org/2B2D42/${stats.github.username}`}
-                alt={`${stats.github.username}'s GitHub Contributions`}
-                className="w-full h-auto rounded-lg"
-              />
-              <div className="mt-4 space-y-3 text-left">
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Total Stars Earned:</span>
-                  <span className="text-white font-medium">{stats.github.stars}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Total Commits (last year):</span>
-                  <span className="text-white font-medium">{stats.github.commits}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Total PRs:</span>
-                  <span className="text-white font-medium">{stats.github.pullRequests}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Total Issues:</span>
-                  <span className="text-white font-medium">{stats.github.issues}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Contributed to (last year):</span>
-                  <span className="text-white font-medium">{stats.github.contributedTo}</span>
-                </div>
-              </div>
-              <div className="text-blue-300 text-center text-lg mt-3">
-                @{stats.github.username}'s contribution activity
-              </div>
-            </div>
+            <img
+              src={`https://ghchart.rshah.org/0e7490/${ghUser}`}
+              alt={`${ghUser} contribution graph`}
+              className="w-full h-auto rounded-lg border border-slate-800"
+            />
+            <a
+              href={ghUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-4 text-sm font-semibold text-sky-400 hover:text-sky-300"
+            >
+              View profile →
+            </a>
           </motion.div>
 
-          {/* LeetCode Stats - Takes 1/4 space */}
-          <motion.div 
-            whileHover={{ y: -5 }}
-            className="md:col-span-1 bg-gray-800 rounded-xl p-4 shadow-lg border border-gray-700"
+          <motion.div
+            whileHover={{ y: -2 }}
+            className="bg-[#0f1117] rounded-xl p-6 border border-slate-800 flex flex-col justify-center"
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center">
-                <SiLeetcode className="text-orange-500 text-2xl mr-2" />
-                <h3 className="text-lg font-semibold text-white">LeetCode</h3>
-              </div>
-              {stats.leetcode.isLoading && (
-                <div className="text-yellow-400 text-xs">Loading...</div>
-              )}
+            <div className="flex items-center gap-2 mb-3">
+              <SiLeetcode className="text-orange-500 text-2xl" />
+              <h3 className="text-lg font-semibold text-slate-100">LeetCode</h3>
             </div>
-            
-            {stats.leetcode.isLoading ? (
-              <div className="h-32 flex items-center justify-center">
-                <div className="animate-pulse text-gray-400 text-sm">Loading...</div>
-              </div>
-            ) : (
-              <div className="space-y-4">
-                <div className="w-full text-center">
-                  <div className="text-white text-sm mb-3">
-                    {stats.leetcode.username}
-                  </div>
-                  <div className="flex flex-col space-y-2 text-sm">
-                    <span className="text-green-400">Easy: {stats.leetcode.easy}</span>
-                    <span className="text-yellow-400">Medium: {stats.leetcode.medium}</span>
-                    <span className="text-red-400">Hard: {stats.leetcode.hard}</span>
-                  </div>
-                  <div className="text-center mt-4">
-                    <a 
-                      href={stats.leetcode.profileUrl}
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-orange-400 hover:text-orange-300 text-sm font-medium"
-                    >
-                      View Profile →
-                    </a>
-                  </div>
-                </div>
-              </div>
-            )}
+            <p className="text-sm text-slate-400 mb-6 leading-relaxed">
+              Focusing on structured practice and contest-style problems alongside coursework and internship delivery.
+            </p>
+            <a
+              href={lcUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-semibold text-orange-400 hover:text-orange-300 w-fit"
+            >
+              View profile →
+            </a>
           </motion.div>
         </div>
-
       </div>
-    </div>
-  );
-}
-function StatItem({ label, value, color = "text-white" }) {
-  return (
-    <div>
-      <div className="text-sm text-gray-400">{label}</div>
-      <div className={`text-lg font-semibold ${color}`}>{value}</div>
     </div>
   );
 }

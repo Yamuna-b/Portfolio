@@ -1,19 +1,16 @@
-import React, { useRef, useState, useEffect, useMemo } from "react";
-import { AnimatePresence } from "framer-motion";
-import { motion } from "framer-motion";
+import React, { useRef, useState, useEffect, useCallback } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { Worker, Viewer } from '@react-pdf-viewer/core';
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import {
-  ArrowLeft, Linkedin, Github, Instagram, Download, Mail, Phone
+  ArrowLeft, Linkedin, Github, Download, Mail, Phone
 } from "lucide-react";
-import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
 import Footer from "./components/Footer";
-import Badges from "./components/Badges";
 import Stats from "./components/Stats";
 
 // Search Bar Component
@@ -70,25 +67,25 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => {
 function Bubbles() {
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-      {Array.from({ length: 40 }).map((_, i) => {
+      {Array.from({ length: 22 }).map((_, i) => {
         const top = Math.random() * 100;
         const left = Math.random() * 100;
-        const size = Math.random() * 14 + 6;
-        const driftX = (Math.random() - 0.5) * 50;
-        const driftY = (Math.random() - 0.5) * 50;
-        const colors = ['bg-blue-300', 'bg-purple-300', 'bg-pink-300', 'bg-cyan-300'];
+        const size = Math.random() * 12 + 4;
+        const driftX = (Math.random() - 0.5) * 40;
+        const driftY = (Math.random() - 0.5) * 40;
+        const colors = ['bg-slate-500', 'bg-sky-700', 'bg-slate-600'];
         const color = colors[Math.floor(Math.random() * colors.length)];
         return (
           <motion.div
             key={i}
-            className={"absolute rounded-full " + color + " opacity-20 blur-xl"}
+            className={"absolute rounded-full " + color + " opacity-[0.08] blur-xl"}
             style={{ width: size, height: size }}
             initial={{ top: top + '%', left: left + '%' }}
             animate={{
               top: [top + '%', (top + driftY) + '%', top + '%'],
               left: [left + '%', (left + driftX) + '%', left + '%'],
-              opacity: [0.4, 0.8, 0.4],
-              scale: [1, 1.2, 1]
+              opacity: [0.06, 0.12, 0.06],
+              scale: [1, 1.1, 1]
             }}
             transition={{
               duration: 15 + Math.random() * 12,
@@ -106,15 +103,19 @@ function Bubbles() {
 // --- Personal Data ---
 const personalInfo = {
   name: "Yamuna",
-  tagline1: "Aspiring DevOps & Cloud Engineer",
-  tagline2: "Full Stack Enthusiast | Open Source Contributor",
+  tagline1: "Backend-focused Software Engineer | Building scalable systems and digital twins.",
+  tagline2: "CS undergrad (2027) focused on backend, cloud, and data-intensive applications using Python, JavaScript, and modern DevOps.",
   email: "yamuna.bsvy@gmail.com",
   phone: "+91-9629163099",
   whatsapp: "919629163099",
-  bio: "Flexible and quick-adapting Computer Science undergraduate passionate about DevOps and Cloud. Eager to learn and experiment with new technologies; thrive in innovative environments and open source communities. Recognized for adaptability, creative problem-solving.",
-  bio2: "Computer Science Student | Aspiring DevOps & Cloud Engineer | Full Stack Enthusiast & Open Source Contributor",
-  techStacks: [
-    "Python", "JavaScript", "Java", "C", "React.js", "Node.js", "Express.js", "Next.js", "HTML5", "CSS3", "Tailwind CSS", "MongoDB", "PostgreSQL", "MySQL", "AWS", "Google Cloud", "Docker", "Kubernetes", "Git", "GitHub Actions", "Heroku CI/CD", "WebSockets", "Redis", "LaTeX", "Postman"
+  bio: "I'm a 3rd-year Computer Science student (graduating 2027) targeting backend and full-stack engineering roles. I enjoy designing maintainable APIs, modeling data thoughtfully, and shipping services with Docker and CI/CD. Recent work spans a personal-finance digital twin backend (Money Mirror) and DevDesk—an incident-tracking platform—both with an emphasis on clear architecture and reliability.",
+  skillGroups: [
+    { title: "Programming", items: ["Python", "JavaScript", "Java", "C"] },
+    { title: "Backend & APIs", items: ["FastAPI", "Node.js", "Express.js", "REST APIs", "WebSockets"] },
+    { title: "Databases", items: ["PostgreSQL", "SQLite", "MongoDB", "SQL (queries, indexing basics)"] },
+    { title: "Cloud & DevOps", items: ["Docker", "GitHub Actions", "Git", "Basic AWS (EC2/S3)", "CI/CD pipelines"] },
+    { title: "Frontend", items: ["React.js", "Next.js", "HTML", "CSS", "Tailwind CSS"] },
+    { title: "Familiar & tooling", items: ["Kubernetes", "Redis", "Postman"] },
   ],
   languages: [
     { name: "English", level: "Very Well" },
@@ -139,7 +140,12 @@ const experience = [
     company: "Kevell Corp",
     role: "Web Development Intern",
     duration: "Dec 2024",
-    desc: "Worked on modern web applications using React and Node.js."
+    desc: "Built internal tools with React and Node.js for a fast-moving product squad.",
+    bullets: [
+      "Implemented React screens and reusable components that reduced duplicate UI code across internal tools.",
+      "Shipped and documented REST endpoints in Node.js/Express consumed by teammates during feature work.",
+      "Collaborated through code review and iterative delivery to stabilize pages used by stakeholders."
+    ]
   },
   {
     logo: "/Nittelogo.jpg",
@@ -147,15 +153,75 @@ const experience = [
     role: "Presenter",
     duration: "Feb 2024",
     desc: "Presented research on carbon footprint awareness and mitigation at NITTE, Karnataka.",
-    link: { text: "View Publication", url: "#" }
+    link: { text: "View Publication", url: "#" },
+    bullets: [
+      "Delivered an oral presentation on carbon footprint awareness and mitigation approaches at NITTE, Karnataka.",
+      "Distilled methodology and findings for an academic audience and conference reviewers."
+    ]
   },
   {
     logo: "/Reccsarlogo.jpg",
     company: "Reccsar Private Limited",
     role: "Cloud Computing Intern",
     duration: "June 2025",
-    desc: "Developed dashboards for non-profit initiatives."
+    desc: "Cloud-hosted dashboards integrating data sources for nonprofit delivery teams.",
+    bullets: [
+      "Developed dashboards for nonprofit initiatives hosted on AWS, combining multiple data feeds into actionable views.",
+      "Automated parts of deployment and repeatable environment setup using GitHub Actions where applicable.",
+      "Partnered across roles to tighten delivery cycles for quick iterations on stakeholder feedback."
+    ]
   }
+];
+
+const featuredProjects = [
+  {
+    title: "Money Mirror",
+    tagline: "Personal finance digital twin—model spending and forecasts with a clean backend abstraction.",
+    stack: ["Python", "PostgreSQL", "REST", "Docker"],
+    bullets: [
+      "Separated domain logic from transport so core finance rules stayed testable and easy to extend.",
+      "Designed persistence around predictable migrations and sane indexing for analytic-style queries.",
+      "Packaged repeatable local and deploy flows with Docker to keep environments consistent.",
+    ],
+    links: { github: "https://github.com/Yamuna-b", live: null },
+    image: "/fullstack1.png",
+  },
+  {
+    title: "DevDesk",
+    tagline: "Incident-tracking platform emphasizing reliability and clear escalation paths.",
+    stack: ["Node.js", "Express.js", "MongoDB", "WebSockets"],
+    bullets: [
+      "Structured incident lifecycle endpoints for create/update/resolve flows with authorization in mind.",
+      "Used WebSockets selectively for realtime status without overloading clients with chatter.",
+      "Focused on observable errors and sane defaults so on-call workflows stayed understandable.",
+    ],
+    links: { github: "https://github.com/Yamuna-b", live: null },
+    image: "/backend1.png",
+  },
+  {
+    title: "Petimony — Pet Shop Platform",
+    tagline: "Full-stack storefront and adoption workflows with ecommerce-style flows.",
+    stack: ["React", "Node.js", "MongoDB", "REST"],
+    bullets: [
+      "Balanced SSR-friendly React UX with transactional backend routes for carts and bookings.",
+      "Normalized core entities to avoid duplication while keeping onboarding queries fast.",
+      "Hardened auth-adjacent paths with pragmatic validation and clearer client error messaging.",
+    ],
+    links: { github: "https://github.com/Yamuna-b", live: null },
+    image: "/full_1.mp4",
+  },
+  {
+    title: "Portfolio & developer presence",
+    tagline: "This site — fast Vite SPA with motion and disciplined content hierarchy.",
+    stack: ["React", "Tailwind CSS", "Vercel"],
+    bullets: [
+      "Shipped a recruiter-first layout with anchored sections and restrained visual noise.",
+      "Kept bundles lean by leaning on primitives over heavy UI kits.",
+      "Continuous deployment from Git with predictable preview and production parity.",
+    ],
+    links: { github: "https://github.com/Yamuna-b", live: null },
+    image: "/fullstack1.png",
+  },
 ];
 
 const education = [
@@ -179,93 +245,37 @@ const education = [
   }
 ];
 
-const certifications = [
-  { src: "/cert1.jpg", title: "Designthon Euphoria'24" },
-  { src: "/cert2.jpg", title: "Project Expo Techathon'24" },
-  { src: "/cert3.jpg", title: "Robotics MOBIUS 2k24" },
-  { src: "/cert4.jpg", title: "Designthon Euphoria'24" },
-  { src: "/cert5.jpg", title: "Project Expo Techathon'24" },
-  { src: "/cert6.jpg", title: "Robotics MOBIUS 2k24" },
-  { src: "/cert7.jpg", title: "Robotics MOBIUS 2k24" },
-  { src: "/cert8.jpg", title: "Designthon Euphoria'24" },
-  { src: "/cert9.jpg", title: "Project Expo Techathon'24" },
-];
-
-const platformBadges = [
-  { src: "/badge1.png", title: "Open Source Contributor" },
-  { src: "/badge2.png", title: "Social Media Marketing" },
-  { src: "/badge3.png", title: "AWS Certified" },
-  { src: "/badge4.png", title: "Holopin Badges" },
-  { src: "/badge5.png", title: "GitHub Achievements" },
-  { src: "/badge7.png", title: "LeetCode Knight" },
-  { src: "/badge8.png", title: "CodeChef Star" },
-  { src: "/badge9.png", title: "Azure Certified" },
-  { src: "/badge10.png", title: "Docker Certified" },
-  { src: "/badge11.png", title: "Kubernetes Badge" },
-  { src: "/badge12.png", title: "Google Cloud" },
-];
-
 const projects = {
   cloud: [
     {
       id: 1,
-      title: "AWS Microservices",
-      images: ["/cloud1.png", "/cloud1.png"],
-      shortDesc: "Scalable microservices architecture",
-      fullDesc: "Designed cloud-native microservices using AWS ECS, Docker, and CI/CD pipelines.",
-      tags: ["AWS", "Docker"],
-      tools: ["Terraform", "ECS"],
-      links: { github: "#" }
+      title: "CI/CD with GitHub Actions",
+      images: ["/cloud1.png"],
+      shortDesc: "Automated pipelines for Node services",
+      fullDesc: "GitHub Actions workflows for build, lint, test, and container image publish to tighten release loops.",
+      tags: ["GitHub Actions", "Docker"],
+      tools: ["Node.js"],
+      links: { github: "https://github.com/Yamuna-b" }
     },
     {
       id: 2,
-      title: "CI/CD Pipeline",
+      title: "Containerized deployments",
       images: ["/cloud1.png"],
-      shortDesc: "Automated deployment pipeline",
-      fullDesc: "Set up an automated CI/CD pipeline using GitHub Actions and Docker.",
-      tags: ["CI/CD", "GitHub Actions"],
-      tools: ["Docker"],
-      links: { github: "#" }
+      shortDesc: "Docker-backed environments from dev to staging",
+      fullDesc: "Docker Compose and Dockerfile patterns for repeatable API + database setups during development.",
+      tags: ["Docker", "DevOps"],
+      tools: ["Compose"],
+      links: { github: "https://github.com/Yamuna-b" }
     },
     {
       id: 3,
-      title: "Cloud Monitoring",
-      images: ["/cloud1.png"],
-      shortDesc: "Cloud monitoring dashboard",
-      fullDesc: "Built a real-time dashboard for AWS resource monitoring.",
-      tags: ["AWS", "Monitoring"],
-      tools: ["CloudWatch"],
-      links: { github: "#" }
-    },
-    {
-      id: 4,
-      title: "Kubernetes Cluster",
-      images: ["/cloud2.png"],
-      shortDesc: "Container orchestration",
-      fullDesc: "Set up Kubernetes cluster for microservices deployment.",
-      tags: ["Kubernetes", "Docker"],
-      tools: ["K8s"],
-      links: { github: "#" }
-    },
-    {
-      id: 5,
-      title: "Terraform Infrastructure",
-      images: ["/cloud3.png"],
-      shortDesc: "Infrastructure as Code",
-      fullDesc: "Automated AWS infrastructure using Terraform.",
-      tags: ["Terraform", "IaC"],
-      tools: ["AWS"],
-      links: { github: "#" }
-    },
-    {
-      id: 6,
-      title: "Serverless API",
+      title: "AWS basics — EC2 & S3",
       images: ["/cloud4.png"],
-      shortDesc: "AWS Lambda functions",
-      fullDesc: "Built serverless REST API using AWS Lambda and API Gateway.",
-      tags: ["Serverless", "Lambda"],
-      tools: ["AWS"],
-      links: { github: "#" }
+      shortDesc: "Prototype hosting with object storage offloads",
+      fullDesc: "Explored deploying APIs on EC2 and using S3 for static assets—keeping networking and IAM scoped to course-level projects.",
+      tags: ["AWS", "EC2", "S3"],
+      tools: ["AWS CLI"],
+      links: { github: "https://github.com/Yamuna-b" }
     }
   ],
   fullstack: [
@@ -839,146 +849,98 @@ const projects = {
 // Helper to check if the file is a video
 const isVideo = file => typeof file === "string" && file.match(/\.(mp4|webm|ogg)$/i);
 
-// --- Navbar with shine, spacing, and big text ---
-function NavBar({ activeSection, setActiveSection, setExpandedCard }) {
+// --- Navbar: minimal recruiter-friendly links + domains ---
+function NavBar({ activeSection, setActiveSection, setExpandedCard, scrollHomeTo }) {
   const navItems = [
     { key: "home", label: "HOME" },
-    { key: "cloud", label: "Cloud & DevOps" },
+    { key: "projects_jump", label: "PROJECTS", isJump: true },
+    { key: "fullstack", label: "Backend" },
     { key: "ai", label: "AI/ML" },
-    { key: "fullstack", label: "Full Stack" },
-    { key: "uiux", label: "UI/UX" },
-    { key: "showcase", label: "Visual Highlights" }
+    { key: "cloud", label: "DevOps" },
+    { key: "showcase", label: "Highlights" },
   ];
 
-  const navShineCSS = '\n' +
-        '        .nav-shine {\n' +
-        '          position: relative;\n' +
-        '          transition: color 0.2s ease-out;\n' +
-        '          transition-delay: 0.1s;\n' +
-        '        }\n' +
-        '        .nav-shine:hover, .nav-shine:focus {\n' +
-        '          color: rgba(255, 255, 255, 0.2);\n' +
-        '          transition-delay: 0s;\n' +
-        '        }\n' +
-        '        .nav-shine::before {\n' +
-        '          content: attr(data-text);\n' +
-        '          position: absolute;\n' +
-        '          top: 50%;\n' +
-        '          left: 50%;\n' +
-        '          transform: translate(-50%, -50%);\n' +
-        '          color: #d83bff;\n' +
-        '          text-shadow: 0 0 10px #d83bff, 0 0 30px #d83bff, 0 0 80px #d83bff;\n' +
-        '          letter-spacing: 40px;\n' +
-        '          white-space: nowrap;\n' +
-        '          text-align: center;\n' +
-        '          opacity: 0;\n' +
-        '          transition: opacity 0.25s ease-out, letter-spacing 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n' +
-        '          font-size: 0.65em;\n' +
-        '          font-weight: 500;\n' +
-        '          z-index: -1;\n' +
-        '          pointer-events: none;\n' +
-        '        }\n' +
-        '        .nav-shine:hover::before {\n' +
-        '          opacity: 1;\n' +
-        '          letter-spacing: 6px;\n' +
-        '          transition-delay: 0.05s;\n' +
-        '        }\n' +
-        '        ';
+  const runNavClick = item => {
+    setExpandedCard(null);
+    if (item.key === "home") {
+      setActiveSection("home");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    if (item.isJump) {
+      scrollHomeTo("projects");
+      return;
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setActiveSection(item.key);
+  };
 
   return (
-    <>
-      <style dangerouslySetInnerHTML={{ __html: navShineCSS }}></style>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#13131c]/95 backdrop-blur border-b border-gray-800 flex flex-col sm:flex-row items-center justify-between px-4 sm:px-8 py-2 sm:py-3">
-        <div className="flex items-center gap-2 order-1 sm:order-1">
-          <img
-            src="/logo.jpg"
-            alt="Logo"
-            className="w-10 h-10 sm:w-14 sm:h-14 rounded-full object-cover border-2 border-blue-400 shadow"
-            style={{ background: "#23233a" }}
-          />
-          <span className="font-bold text-lg sm:text-xl text-white hidden sm:block">Yamuna</span>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0f1117]/92 backdrop-blur-md border-b border-slate-800 flex flex-col sm:flex-row items-center justify-between px-4 sm:px-8 py-2 sm:py-3 gap-2 sm:gap-0">
+      <div className="flex items-center gap-2 order-1 sm:order-1">
+        <img
+          src="/logo.jpg"
+          alt="Logo"
+          className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover ring-2 ring-sky-600/70"
+          style={{ background: "#151520" }}
+        />
+        <span className="font-semibold text-base sm:text-lg text-slate-100 hidden sm:block tracking-tight">Yamuna</span>
+      </div>
+
+      <div className="sm:hidden flex items-center gap-2 order-2">
+        <span className="font-semibold text-base text-slate-100">Yamuna</span>
+      </div>
+
+      <div className="flex-1 flex justify-center order-3 sm:order-2 mt-2 sm:mt-0">
+        <div className="flex items-center gap-x-3 sm:gap-x-5 md:gap-x-6 flex-wrap justify-center">
+          {navItems.map(item => {
+            const isActive =
+              item.isJump
+                ? false
+                : activeSection === item.key;
+            const base =
+              "text-xs sm:text-sm font-semibold tracking-wide transition-colors duration-150 " +
+              (isActive ? "text-sky-400" : "text-slate-200 hover:text-sky-300");
+            return (
+              <button
+                key={item.key}
+                type="button"
+                onClick={() => runNavClick(item)}
+                className={base}
+              >
+                {item.label}
+              </button>
+            );
+          })}
+          <button
+            type="button"
+            className="text-xs sm:text-sm font-semibold tracking-wide text-slate-200 hover:text-sky-300"
+            onClick={() => scrollHomeTo("contact")}
+          >
+            CONTACT
+          </button>
         </div>
-        
-        {/* Mobile menu button */}
-        <div className="sm:hidden order-2 flex items-center gap-2">
-          <span className="font-bold text-lg text-white">Yamuna</span>
-        </div>
-        
-        <div className="flex-1 flex justify-center order-3 sm:order-2 mt-2 sm:mt-0">
-          <div className="flex items-center gap-x-4 sm:gap-x-8 md:gap-x-12 flex-wrap justify-center">
-            {navItems.map(({ key, label }) => {
-              const isActive = activeSection === key;
-              const activeClass = key === "showcase" ? "text-yellow-300 underline" : "text-blue-300";
-              const className = `nav-shine text-sm sm:text-lg font-bold ${isActive ? activeClass : "text-white"}`;
-              const style = {}; // Remove fixed margins for responsive design
-              
-              return (
-                <button
-                  key={key}
-                  data-text={label}
-                  onClick={() => {
-                    setExpandedCard(null);
-                    setActiveSection(key);
-                  }}
-                  className={className}
-                  style={style}
-                >
-                  {label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-        
-        <div className="flex items-center gap-2 sm:gap-3 order-4 sm:order-3 mt-2 sm:mt-0">
-          <a
-            href={personalInfo.social.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="LinkedIn"
-            className="hidden sm:block"
-          >
-            <Linkedin className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400 hover:scale-110 transition" />
-          </a>
-          <a
-            href={personalInfo.social.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="GitHub"
-            className="hidden sm:block"
-          >
-            <Github className="w-5 h-5 sm:w-6 sm:h-6 text-gray-200 hover:scale-110 transition" />
-          </a>
-          <a
-            href={personalInfo.social.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Instagram"
-            className="hidden sm:block"
-          >
-            <Instagram className="w-5 h-5 sm:w-6 sm:h-6 text-pink-400 hover:scale-110 transition" />
-          </a>
-          <a
-            href={personalInfo.social.telegram}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Telegram"
-            className="hidden md:block"
-          >
-            <FaTelegramPlane className="w-5 h-5 sm:w-6 sm:h-6 text-blue-400 hover:scale-110 transition" />
-          </a>
-          <a
-            href={personalInfo.social.leetcode}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="LeetCode"
-            className="hidden lg:block"
-          >
-            <SiLeetcode className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-300 hover:scale-110 transition" />
-          </a>
-        </div>
-      </nav>
-    </>
+      </div>
+
+      <div className="flex items-center gap-2 sm:gap-2.5 order-4 sm:order-3 mt-2 sm:mt-0">
+        <a
+          href="/resume.pdf"
+          download="Yamuna_Resume.pdf"
+          className="hidden sm:inline-flex items-center px-3 py-1.5 rounded-md text-xs font-semibold bg-sky-700 hover:bg-sky-600 text-white transition-colors mr-1"
+        >
+          Resume
+        </a>
+        <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer" title="LinkedIn" className="hidden sm:block">
+          <Linkedin className="w-5 h-5 text-sky-400 hover:text-sky-300 transition-colors" />
+        </a>
+        <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer" title="GitHub" className="hidden sm:block">
+          <Github className="w-5 h-5 text-slate-300 hover:text-white transition-colors" />
+        </a>
+        <a href={personalInfo.social.leetcode} target="_blank" rel="noopener noreferrer" title="LeetCode" className="hidden lg:block">
+          <SiLeetcode className="w-5 h-5 text-amber-500/90 hover:text-amber-400 transition-colors" />
+        </a>
+      </div>
+    </nav>
   );
 }
 
@@ -989,10 +951,10 @@ const BackArrow = ({ activeSection, setActiveSection, show, setExpandedCard }) =
         setExpandedCard(null);
         setActiveSection("home");
       }}
-      className="fixed top-20 sm:top-24 left-4 sm:left-8 z-[120] flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-blue-900/90 to-purple-900/90 backdrop-blur-md rounded-full shadow-xl border border-blue-500/30 hover:border-blue-400/50 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300 group"
+      className="fixed top-20 sm:top-24 left-4 sm:left-8 z-[120] flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-slate-900/95 backdrop-blur-md rounded-full shadow-lg border border-slate-700 hover:border-sky-700/70 transition-all duration-300 group"
     >
       <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:-translate-x-1 transition-transform duration-300" />
-      <span className="text-xs sm:text-sm font-semibold text-white group-hover:text-blue-200 transition-colors duration-300">Back</span>
+      <span className="text-xs sm:text-sm font-semibold text-slate-100 group-hover:text-sky-300 transition-colors duration-300">Back</span>
     </button>
   );
 
@@ -1015,15 +977,16 @@ function ProfileAvatar() {
       <motion.div 
         className="absolute inset-0 rounded-full"
         style={{
-          background: "conic-gradient(from 0deg, #38bdf8, #a21caf, #38bdf8)",
-          filter: "blur(8px)"
+          background: "conic-gradient(from 0deg, #334155, #0369a1, #334155)",
+          filter: "blur(6px)",
+          opacity: 0.45,
         }}
         animate={{ rotate: 360 }}
-        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
       />
       
-      <div className="absolute inset-0 rounded-full border-4 border-blue-400 shadow-2xl backdrop-blur" style={{
-        boxShadow: "0 0 40px 10px rgba(80,180,255,0.6), 0 0 0 8px rgba(80,180,255,0.15)"
+      <div className="absolute inset-0 rounded-full border-[3px] border-sky-500/70 shadow-2xl backdrop-blur" style={{
+        boxShadow: "0 0 28px 6px rgba(14,165,233,0.35), 0 0 0 6px rgba(15,23,42,0.4)"
       }} />
       
       {stars.map((star, i) => (
@@ -1035,7 +998,7 @@ function ProfileAvatar() {
             left: star.left,
             width: star.size,
             height: star.size,
-            background: "radial-gradient(ellipse at center, #fff 50%, #38bdf8 100%)",
+            background: "radial-gradient(ellipse at center, rgba(226,232,240,0.9) 50%, rgba(56,189,248,0.55) 100%)",
             opacity: 0.7,
             filter: "blur(1px)",
           }}
@@ -1053,7 +1016,7 @@ function ProfileAvatar() {
       ))}
       
       <motion.div 
-        className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 bg-gradient-to-br from-[#23233a] via-[#181829] to-[#23233a] rounded-full flex items-center justify-center border-4 border-blue-300 shadow-xl z-10 overflow-hidden"
+        className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 bg-gradient-to-br from-[#151520] via-[#0f172a] to-[#151520] rounded-full flex items-center justify-center border-[3px] border-sky-500/80 shadow-xl z-10 overflow-hidden"
         whileHover={{ scale: 1.05 }}
         transition={{ type: "spring", stiffness: 300 }}
       >
@@ -1067,25 +1030,41 @@ function ProfileAvatar() {
   );
 }
 
+function FeaturedThumb({ media, title }) {
+  if (typeof media === "string" && media.match(/\.(mp4|webm|ogg)$/i)) {
+    return (
+      <video
+        src={media}
+        muted
+        loop
+        playsInline
+        autoPlay
+        className="absolute inset-0 w-full h-full object-cover opacity-[0.88]"
+      />
+    );
+  }
+  return <img src={media} alt={title || ""} className="absolute inset-0 w-full h-full object-cover" />;
+}
+
 // --- Contact Section ---
 const ContactSection = () => (
   <div className="space-y-4">
     <div className="flex items-center gap-3">
-      <Phone className="text-green-400" />
+      <Phone className="text-emerald-500/90 shrink-0 w-5 h-5" />
       <a
         href={`https://wa.me/${personalInfo.whatsapp}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-2 text-green-400 hover:text-green-200"
+        className="flex items-center gap-2 text-slate-300 hover:text-emerald-400 text-sm break-all"
       >
-        <FaWhatsapp className="inline-block" /> {personalInfo.phone}
+        <FaWhatsapp className="inline-block shrink-0" /> {personalInfo.phone}
       </a>
     </div>
     <div className="flex items-center gap-3">
-      <Mail className="text-blue-400" />
+      <Mail className="text-sky-500 shrink-0 w-5 h-5" />
       <a
         href={`mailto:${personalInfo.email}`}
-        className="flex items-center gap-2 text-blue-400 hover:text-blue-200"
+        className="text-sky-400 hover:text-sky-300 text-sm break-all"
       >
         {personalInfo.email}
       </a>
@@ -1096,202 +1075,294 @@ const ContactSection = () => (
 // --- Home Page Layout ---
 function HomePage() {
   return (
-    <section className="min-h-screen pt-20 sm:pt-32 pb-16 bg-gradient-to-br from-[#101018] via-[#181829] to-[#23233a]">
-      <div className="max-w-6xl mx-auto px-4">
-        <ProfileAvatar />
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="text-center mb-2"
-        >
-          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-            {personalInfo.name}
-          </h1>
-          <div className="text-xl font-semibold bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent">
-            {personalInfo.tagline1}
-          </div>
-          <div className="text-base text-blue-300 mt-1">{personalInfo.tagline2}</div>
-        </motion.div>
-        <div className="flex flex-col md:flex-row gap-8 mt-8">
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="flex-1 bg-[#181829] rounded-3xl shadow-xl p-8 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
+    <section className="min-h-screen pt-20 sm:pt-28 pb-20 bg-gradient-to-b from-[#0b0c10] via-[#0f1419] to-[#0b0c10]">
+      <div className="max-w-6xl mx-auto px-4 space-y-14">
+        <div className="text-center">
+          <ProfileAvatar />
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mt-6"
           >
-            <h2 className="text-xl font-bold text-blue-300 mb-4">About Me</h2>
-            <p className="text-sm text-blue-100 mb-4 leading-relaxed">{personalInfo.bio}</p>
-            <p className="text-sm text-blue-100 mb-4 leading-relaxed">{personalInfo.bio2}</p>
-            <h3 className="text-base font-semibold text-blue-200 mt-4 mb-2">Technical Skills</h3>
-            <div className="flex flex-wrap gap-2">
-              {personalInfo.techStacks.map((skill, idx) => (
-                <motion.span 
-                  key={skill} 
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.3 + idx * 0.05 }}
-                  className="px-3 py-1 bg-blue-900 text-blue-100 rounded-full text-xs hover:bg-blue-800 hover:scale-110 transition-all duration-200 cursor-default"
-                >
-                  {skill}
-                </motion.span>
-              ))}
-            </div>
-          </motion.div>
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="flex-1 bg-[#181829] rounded-3xl shadow-xl p-8 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
-          >
-            <h2 className="text-xl font-bold text-blue-300 mb-4">Get In Touch</h2>
-            <ContactSection />
-            <div className="flex gap-3 mt-4">
-              <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer"><Linkedin className="w-6 h-6 text-blue-400 hover:scale-110 transition" /></a>
-              <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer"><Github className="w-6 h-6 text-gray-200 hover:scale-110 transition" /></a>
-              <a href={personalInfo.social.instagram} target="_blank" rel="noopener noreferrer"><Instagram className="w-6 h-6 text-pink-400 hover:scale-110 transition" /></a>
-              <a href={personalInfo.social.telegram} target="_blank" rel="noopener noreferrer"><FaTelegramPlane className="w-6 h-6 text-blue-400 hover:scale-110 transition" /></a>
-              <a href={personalInfo.social.leetcode} target="_blank" rel="noopener noreferrer"><SiLeetcode className="w-6 h-6 text-yellow-300 hover:scale-110 transition" /></a>
-            </div>
-            <a 
-              href="/resume.pdf" 
-              download="Yamuna_Resume.pdf"
-              className="w-full mt-4 px-5 py-2 bg-gradient-to-r from-blue-900 to-fuchsia-800 text-white rounded-2xl font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
-            >
-              <Download className="w-4 h-4" /> Download Resume
-            </a>
-
-            {/* Languages & Soft Skills */}
-            <div className="mt-6 pt-6 border-t border-blue-500/20">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <div className="text-sm font-semibold mb-3 text-white">Languages</div>
-                  {personalInfo.languages.map(lang => (
-                    <div key={lang.name} className="flex justify-between text-blue-100 text-xs py-1 rounded hover:bg-[#23233a] transition-colors mb-1">
-                      <span>{lang.name}</span>
-                      <span className="text-blue-400 font-semibold">{lang.level}</span>
-                    </div>
-                  ))}
-                </div>
-                <div>
-                  <div className="text-sm font-semibold mb-3 text-white">Soft Skills</div>
-                  <div className="flex flex-wrap gap-1">
-                    {personalInfo.softSkills.map(skill => (
-                      <span key={skill} className="px-2 py-1 bg-blue-900 text-blue-100 rounded-full text-xs hover:bg-blue-800 hover:scale-105 transition-all duration-200 cursor-default">{skill}</span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <h1 className="text-4xl sm:text-5xl font-bold mb-3 text-slate-50 tracking-tight">
+              {personalInfo.name}
+            </h1>
+            <p className="text-lg sm:text-xl font-semibold text-sky-400/95 max-w-3xl mx-auto leading-snug">
+              {personalInfo.tagline1}
+            </p>
+            <p className="text-sm sm:text-base text-slate-400 mt-3 max-w-2xl mx-auto leading-relaxed">
+              {personalInfo.tagline2}
+            </p>
           </motion.div>
         </div>
-        <div className="grid md:grid-cols-3 gap-8 mt-8">
-          {/* Experience */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="bg-[#181829] rounded-3xl shadow-xl p-8 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
-          >
-            <h2 className="text-xl font-bold text-blue-300 mb-4">Experience</h2>
-            {experience.map((exp, idx) => (
-              <motion.div 
-                key={exp.company} 
-                initial={{ opacity: 0, y: 10 }}
+
+        <motion.div
+          id="about"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="scroll-mt-28 bg-[#12141b] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg"
+        >
+          <h2 className="text-lg font-bold text-sky-400 mb-3">About</h2>
+          <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-3xl">{personalInfo.bio}</p>
+        </motion.div>
+
+        <div id="projects" className="scroll-mt-28">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-100 mb-4">Featured projects</h2>
+          <p className="text-sm text-slate-400 mb-6 max-w-2xl">
+            Systems-focused work spanning APIs, persistence, and delivery—each distilled to outcomes you can ask about in an interview.
+          </p>
+          <div className="grid md:grid-cols-2 gap-6">
+            {featuredProjects.map((project, idx) => (
+              <motion.article
+                key={project.title}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + idx * 0.1 }}
-                className="mb-4 flex items-start gap-2 p-3 rounded-xl hover:bg-[#23233a] transition-colors duration-200"
+                transition={{ delay: 0.05 * idx }}
+                className="bg-[#12141b] border border-slate-800 rounded-2xl overflow-hidden shadow-lg flex flex-col"
               >
-                <img src={exp.logo} className="w-10 h-10 rounded-full mt-1 object-cover border-2 border-blue-400" alt="Logo" />
-                <div>
-                  <div className="text-sm font-semibold text-white">{exp.role} @ {exp.company}</div>
-                  <div className="text-xs text-blue-400">{exp.duration}</div>
-                  <div className="text-xs text-blue-100">{exp.desc}</div>
-                  {/* Publication button for ECOSAUR */}
-                  {exp.link && (
+                <div className="relative h-40 bg-slate-900 border-b border-slate-800">
+                  <FeaturedThumb media={project.image} title={project.title} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#12141b] via-transparent to-transparent pointer-events-none" />
+                </div>
+                <div className="p-5 flex-1 flex flex-col gap-3">
+                  <div>
+                    <h3 className="text-lg font-semibold text-slate-50">{project.title}</h3>
+                    <p className="text-sm text-slate-400 mt-1 leading-snug">{project.tagline}</p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {project.stack.map(s => (
+                      <span key={s} className="px-2.5 py-0.5 bg-sky-950/70 text-sky-200 rounded-md text-xs font-medium border border-sky-900/80">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                  <ul className="text-sm text-slate-300 space-y-1.5 list-disc ml-5 flex-1">
+                    {project.bullets.map((b, bi) => (
+                      <li key={`${project.title}-${bi}`}>{b}</li>
+                    ))}
+                  </ul>
+                  <div className="flex flex-wrap gap-3 pt-1">
+                    {project.links?.github && project.links.github !== "#" ? (
+                      <a
+                        href={project.links.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-semibold text-sky-400 hover:text-sky-300"
+                      >
+                        GitHub →
+                      </a>
+                    ) : null}
+                    {project.links?.live && project.links.live !== "#" ? (
+                      <a
+                        href={project.links.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm font-semibold text-sky-400 hover:text-sky-300"
+                      >
+                        Live demo →
+                      </a>
+                    ) : null}
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+
+        <motion.div
+          id="skills"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="scroll-mt-28 bg-[#12141b] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg"
+        >
+          <h2 className="text-lg font-bold text-sky-400 mb-5">Technical skills</h2>
+          <div className="space-y-5">
+            {personalInfo.skillGroups.map(group => (
+              <div key={group.title}>
+                <div className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">{group.title}</div>
+                <div className="flex flex-wrap gap-2">
+                  {group.items.map(item => (
+                    <span
+                      key={item}
+                      className="px-2.5 py-1 bg-slate-800/90 text-slate-200 rounded-md text-xs border border-slate-700"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          id="contact"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="scroll-mt-28 max-w-lg mx-auto bg-[#12141b] border border-slate-800 rounded-2xl p-8 shadow-lg"
+        >
+          <h2 className="text-lg font-bold text-sky-400 mb-4 text-center">Get in touch</h2>
+          <ContactSection />
+          <div className="flex justify-center gap-4 mt-5">
+            <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <Linkedin className="w-6 h-6 text-sky-400 hover:text-sky-300 transition-colors" />
+            </a>
+            <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <Github className="w-6 h-6 text-slate-300 hover:text-white transition-colors" />
+            </a>
+            <a href={personalInfo.social.leetcode} target="_blank" rel="noopener noreferrer" aria-label="LeetCode">
+              <SiLeetcode className="w-6 h-6 text-amber-500/90 hover:text-amber-400 transition-colors" />
+            </a>
+          </div>
+          <a
+            href="/resume.pdf"
+            download="Yamuna_Resume.pdf"
+            className="w-full mt-5 px-5 py-2.5 bg-sky-700 hover:bg-sky-600 text-white rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-colors"
+          >
+            <Download className="w-4 h-4" /> Download resume
+          </a>
+        </motion.div>
+
+        <motion.div
+          id="experience"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="scroll-mt-28 bg-[#12141b] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg"
+        >
+          <h2 className="text-lg font-bold text-sky-400 mb-5">Experience</h2>
+          <div className="space-y-6">
+            {experience.map((exp, idx) => (
+              <div key={`${exp.company}-${idx}`} className="flex gap-4 pb-6 border-b border-slate-800 last:border-0 last:pb-0">
+                <img src={exp.logo} className="w-12 h-12 rounded-full object-cover ring-2 ring-sky-800 shrink-0" alt="" />
+                <div className="min-w-0">
+                  <div className="font-semibold text-slate-100">
+                    {exp.role} · {exp.company}
+                  </div>
+                  <div className="text-xs text-sky-500 mt-0.5">{exp.duration}</div>
+                  <p className="text-sm text-slate-400 mt-2">{exp.desc}</p>
+                  {exp.bullets?.length ? (
+                    <ul className="mt-3 text-sm text-slate-300 space-y-1.5 list-disc ml-5">
+                      {exp.bullets.map(bullet => (
+                        <li key={bullet.slice(0, 52)}>{bullet}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+                  {exp.link ? (
                     <a
                       href={exp.link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block mt-2 px-4 py-2 bg-gradient-to-r from-blue-700 to-fuchsia-700 text-white rounded-xl font-bold text-sm shadow-lg hover:scale-105 hover:bg-blue-800 transition-all duration-200"
+                      className="inline-block mt-3 px-3 py-1.5 bg-sky-800 hover:bg-sky-700 text-white rounded-lg text-xs font-semibold transition-colors"
                     >
                       {exp.link.text}
                     </a>
-                  )}
+                  ) : null}
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
-          {/* Education */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+          </div>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          <motion.div
+            id="education"
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="bg-[#181829] rounded-3xl shadow-xl p-8 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
+            className="scroll-mt-28 bg-[#12141b] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg"
           >
-            <h2 className="text-xl font-bold text-blue-300 mb-4">Education</h2>
-            {education.map((edu, idx) => (
-              <motion.div 
-                key={edu.degree} 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 + idx * 0.1 }}
-                className="mb-3 flex items-center gap-2 p-3 rounded-xl hover:bg-[#23233a] transition-colors duration-200"
-              >
-                <img src={edu.logo} className="w-10 h-10 rounded-full object-cover border-2 border-blue-400" alt="Logo" />
+            <h2 className="text-lg font-bold text-sky-400 mb-4">Education</h2>
+            {education.map(edu => (
+              <div key={edu.degree} className="mb-5 flex gap-3 last:mb-0">
+                <img src={edu.logo} className="w-11 h-11 rounded-full object-cover ring-2 ring-sky-800 shrink-0" alt="" />
                 <div>
-                  <div className="text-sm font-semibold text-white">{edu.degree}</div>
-                  <div className="text-xs text-blue-400">{edu.year}</div>
-                  <div className="text-xs text-blue-100">{edu.org}</div>
+                  <div className="text-sm font-semibold text-slate-100">{edu.degree}</div>
+                  <div className="text-xs text-sky-500">{edu.year}</div>
+                  <div className="text-xs text-slate-400 mt-1">{edu.org}</div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </motion.div>
-          {/* Leadership & Campus Roles */}
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4 }}
-            className="bg-[#181829] rounded-3xl shadow-xl p-8 hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300"
+
+          <motion.div
+            id="leadership"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="scroll-mt-28 bg-[#12141b] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg"
           >
-            <h2 className="text-xl font-bold text-blue-300 mb-4">Leadership & Campus Roles</h2>
-            <div className="space-y-3">
-              <div className="flex items-start gap-2 p-3 rounded-xl hover:bg-[#23233a] transition-colors duration-200">
-                <img src="/Vcetlogo.jpg" className="w-8 h-8 rounded-full object-cover border-2 border-blue-400" alt="VCET Logo" />
+            <h2 className="text-lg font-bold text-sky-400 mb-4">Leadership & campus roles</h2>
+            <div className="space-y-5 text-sm">
+              <div className="flex gap-3">
+                <img src="/Vcetlogo.jpg" className="w-9 h-9 rounded-full object-cover ring-2 ring-sky-800 shrink-0" alt="" />
                 <div>
-                  <div className="text-sm font-semibold text-white">Class Representative</div>
-                  <div className="text-xs text-blue-400">B.E. CSE Dept (2024–Present)</div>
-                  <div className="text-xs text-blue-100">Velammal College of Engineering and Technology</div>
+                  <div className="font-semibold text-slate-100">Class Representative</div>
+                  <div className="text-xs text-sky-500 mt-0.5">B.E. CSE Dept (2024–Present)</div>
+                  <div className="text-xs text-slate-400 mt-1">Velammal College of Engineering and Technology</div>
+                  <p className="text-slate-300 mt-2 text-xs leading-relaxed">
+                    Relayed coursework and departmental updates between faculty and classmates; coordinated schedules and surfaced blockers early so deadlines stayed workable.
+                  </p>
                 </div>
               </div>
-              <div className="flex items-start gap-2 p-3 rounded-xl hover:bg-[#23233a] transition-colors duration-200">
-                <img src="/Vcetlogo.jpg" className="w-8 h-8 rounded-full object-cover border-2 border-blue-400" alt="VCET Logo" />
+              <div className="flex gap-3">
+                <img src="/Vcetlogo.jpg" className="w-9 h-9 rounded-full object-cover ring-2 ring-sky-800 shrink-0" alt="" />
                 <div>
-                  <div className="text-sm font-semibold text-white">Placement Batch Head</div>
-                  <div className="text-xs text-blue-400">B.E. CSE (2025–Present)</div>
-                  <div className="text-xs text-blue-100">Velammal College of Engineering and Technology</div>
+                  <div className="font-semibold text-slate-100">Placement Batch Head</div>
+                  <div className="text-xs text-sky-500 mt-0.5">B.E. CSE (2025–Present)</div>
+                  <div className="text-xs text-slate-400 mt-1">Velammal College of Engineering and Technology</div>
+                  <p className="text-slate-300 mt-2 text-xs leading-relaxed">
+                    Helped synchronize placement cohort communication—announcements, deadlines, and escalation paths—keeping the batch aligned with training and recruiter timelines.
+                  </p>
                 </div>
               </div>
-              <div className="flex items-start gap-2 p-3 rounded-xl hover:bg-[#23233a] transition-colors duration-200">
-                <img src="/Vcetlogo.jpg" className="w-8 h-8 rounded-full object-cover border-2 border-blue-400" alt="VCET Logo" />
+              <div className="flex gap-3">
+                <img src="/Vcetlogo.jpg" className="w-9 h-9 rounded-full object-cover ring-2 ring-sky-800 shrink-0" alt="" />
                 <div>
-                  <div className="text-sm font-semibold text-white">Committee Head</div>
-                  <div className="text-xs text-blue-400">Academic Cell (2024–Present)</div>
-                  <div className="text-xs text-blue-100">Velammal College of Engineering and Technology</div>
+                  <div className="font-semibold text-slate-100">Committee Head · Academic Cell</div>
+                  <div className="text-xs text-sky-500 mt-0.5">2024–Present · VCET</div>
+                  <div className="text-xs text-slate-400 mt-1">Academic coordination and initiatives</div>
                 </div>
               </div>
-              <div className="flex items-start gap-2 p-3 rounded-xl hover:bg-[#23233a] transition-colors duration-200">
-                <img src="/Vcetlogo.jpg" className="w-8 h-8 rounded-full object-cover border-2 border-blue-400" alt="VCET Logo" />
+              <div className="flex gap-3">
+                <img src="/Vcetlogo.jpg" className="w-9 h-9 rounded-full object-cover ring-2 ring-sky-800 shrink-0" alt="" />
                 <div>
-                  <div className="text-sm font-semibold text-white">Eco Club Member</div>
-                  <div className="text-xs text-blue-400">VCET (2024–Present)</div>
-                  <div className="text-xs text-blue-100">Velammal College of Engineering and Technology</div>
+                  <div className="font-semibold text-slate-100">Eco Club Member</div>
+                  <div className="text-xs text-sky-500 mt-0.5">VCET · 2024–Present</div>
                 </div>
               </div>
             </div>
           </motion.div>
         </div>
-        <div className="mt-12 max-w-5xl mx-auto">
+
+        <motion.div
+          id="languages-soft-skills"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="scroll-mt-28 bg-[#12141b] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg"
+        >
+          <div className="grid sm:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-3">Languages</h3>
+              {personalInfo.languages.map(lang => (
+                <div key={lang.name} className="flex justify-between text-sm text-slate-300 py-1.5 border-b border-slate-800 last:border-0">
+                  <span>{lang.name}</span>
+                  <span className="text-sky-500 font-medium">{lang.level}</span>
+                </div>
+              ))}
+            </div>
+            <div>
+              <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-3">Soft skills</h3>
+              <div className="flex flex-wrap gap-2">
+                {personalInfo.softSkills.map(skill => (
+                  <span key={skill} className="px-2.5 py-1 bg-slate-800 text-slate-200 rounded-md text-xs border border-slate-700">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        <div id="coding-activity" className="scroll-mt-28 max-w-5xl mx-auto pb-8">
           <Stats />
         </div>
       </div>
@@ -1497,7 +1568,7 @@ function TabbedSection({ title, tabs, cardsByTab, expandedCard, setExpandedCard 
   }, [searchQuery, tabs, cardsByTab, currentCards.length]);
 
   return (
-    <div className="min-h-screen pt-20 sm:pt-32 pb-16">
+    <div className="min-h-screen pt-20 sm:pt-32 pb-16 bg-[#0b0c10]">
       <div className="max-w-7xl mx-auto px-6">
         <h1 className="text-4xl font-bold text-white mb-4 mt-8">{title}</h1>
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
@@ -1553,7 +1624,7 @@ function Section({ title, cards, expandedCard, setExpandedCard, columnsLg = 2, i
   }, [cards, searchQuery]);
 
   return (
-    <div className="min-h-screen pt-20 sm:pt-32 pb-16">
+    <div className="min-h-screen pt-20 sm:pt-32 pb-16 bg-[#0b0c10]">
       <div className="max-w-7xl mx-auto px-6">
         <h1 className="text-4xl font-bold text-white mb-4 mt-8">{title}</h1>
         <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
@@ -1670,7 +1741,7 @@ function ShowcaseSection() {
   const openSource = ['/open_1.png', '/open_2.png', '/open_3.png'];
 
   return (
-    <div className="min-h-screen pt-20 sm:pt-32 pb-16">
+    <div className="min-h-screen pt-20 sm:pt-32 pb-16 bg-[#0b0c10]">
       <div className="max-w-7xl mx-auto px-6">
         <h1 className="text-4xl font-bold text-white mb-8 mt-8 text-center">Visual Highlights</h1>
         
@@ -1724,11 +1795,24 @@ export default function App() {
   const [activeSection, setActiveSection] = useState("home");
   const [expandedCard, setExpandedCard] = useState(null);
 
+  const scrollHomeTo = useCallback(sectionId => {
+    setExpandedCard(null);
+    setActiveSection("home");
+    queueMicrotask(() => {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, []);
+
   return (
     <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
-      <div className="min-h-screen bg-[#101018] font-sans">
+      <div className="min-h-screen bg-[#0b0c10] font-sans text-slate-200 antialiased">
         <Bubbles />
-        <NavBar activeSection={activeSection} setActiveSection={setActiveSection} setExpandedCard={setExpandedCard} />
+        <NavBar
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+          setExpandedCard={setExpandedCard}
+          scrollHomeTo={scrollHomeTo}
+        />
         <BackArrow
           activeSection={activeSection}
           setActiveSection={setActiveSection}
@@ -1738,7 +1822,7 @@ export default function App() {
         {activeSection === "home" && <HomePage />}
         {activeSection === "cloud" && (
           <Section
-            title="Cloud & DevOps"
+            title="DevOps & Cloud"
             cards={projects.cloud}
             expandedCard={expandedCard}
             setExpandedCard={setExpandedCard}
@@ -1754,20 +1838,10 @@ export default function App() {
         )}
         {activeSection === "fullstack" && (
           <Section
-            title="Full Stack Development"
+            title="Backend & APIs"
             cards={projects.fullstack}
             expandedCard={expandedCard}
             setExpandedCard={setExpandedCard}
-          />
-        )}
-        {activeSection === "uiux" && (
-          <Section
-            title="UI/UX Design"
-            cards={projects.uiux}
-            expandedCard={expandedCard}
-            setExpandedCard={setExpandedCard}
-            columnsLg={4}
-            invisible={true}
           />
         )}
         {activeSection === "showcase" && <ShowcaseSection />}
@@ -1781,7 +1855,7 @@ export default function App() {
         )}
         
         {/* Footer */}
-        <Footer personalInfo={personalInfo} />
+        <Footer personalInfo={personalInfo} scrollHomeTo={scrollHomeTo} />
       </div>
     </motion.div>
   );

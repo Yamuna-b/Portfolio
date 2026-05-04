@@ -1,87 +1,125 @@
 import React from "react";
-import { Linkedin, Github, Instagram, Mail, Phone } from "lucide-react";
-import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
+import { Linkedin, Github, Instagram, Mail } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
 
-export default function Footer({ personalInfo }) {
+function FooterLink({ href, children, onClick, download }) {
+  if (onClick) {
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        className="block w-full text-left text-slate-400 hover:text-sky-400 text-sm transition-colors"
+      >
+        {children}
+      </button>
+    );
+  }
   return (
-    <footer className="bg-[#13131c] border-t border-gray-800 mt-16">
-      <div className="max-w-7xl mx-auto px-8 py-12">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
-          {/* About Section */}
-          <div className="col-span-2">
-            <div className="flex items-center gap-2 mb-4">
+    <a href={href} download={download} className="text-slate-400 hover:text-sky-400 text-sm transition-colors">
+      {children}
+    </a>
+  );
+}
+
+export default function Footer({ personalInfo, scrollHomeTo }) {
+  const go =
+    typeof scrollHomeTo === "function"
+      ? id => () => scrollHomeTo(id)
+      : () => () => {};
+
+  return (
+    <footer className="bg-[#0f1117] border-t border-slate-800">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 py-12">
+        <div className="grid md:grid-cols-3 gap-10 mb-10">
+          <div className="md:col-span-2">
+            <div className="flex items-center gap-3 mb-4">
               <img
                 src="/logo.jpg"
-                alt="Logo"
-                className="w-12 h-12 rounded-full object-cover border-2 border-blue-400"
+                alt=""
+                className="w-11 h-11 rounded-full object-cover ring-2 ring-sky-700"
               />
-              <h3 className="text-2xl font-bold text-white">Yamuna</h3>
+              <h3 className="text-xl font-bold text-slate-100 tracking-tight">Yamuna</h3>
             </div>
-            <p className="text-blue-100 text-sm leading-relaxed mb-4">
-              Full-stack developer and cloud enthusiast passionate about building
-              innovative solutions. Experienced in React, Node.js, Python, AWS, and DevOps.
+            <p className="text-sm text-slate-400 leading-relaxed max-w-md">
+              Backend-focused software engineer building APIs, reliable services, and data-aware systems—with clear architecture and pragmatic DevOps habits.
             </p>
-            <div className="flex gap-3">
-              <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer" 
-                 className="w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 flex items-center justify-center transition-all duration-300 hover:scale-110">
-                <Linkedin className="w-5 h-5 text-white" />
+            <div className="flex gap-2.5 mt-5">
+              <a
+                href={personalInfo.social.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-slate-800 hover:bg-sky-900/80 flex items-center justify-center transition-colors"
+              >
+                <Linkedin className="w-4 h-4 text-sky-400" />
               </a>
-              <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer"
-                 className="w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 flex items-center justify-center transition-all duration-300 hover:scale-110">
-                <Github className="w-5 h-5 text-white" />
+              <a
+                href={personalInfo.social.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-colors"
+              >
+                <Github className="w-4 h-4 text-slate-200" />
               </a>
-              <a href={personalInfo.social.instagram} target="_blank" rel="noopener noreferrer"
-                 className="w-10 h-10 rounded-full bg-pink-600 hover:bg-pink-500 flex items-center justify-center transition-all duration-300 hover:scale-110">
-                <Instagram className="w-5 h-5 text-white" />
+              <a
+                href={personalInfo.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-colors"
+              >
+                <Instagram className="w-4 h-4 text-pink-400" />
               </a>
-              <a href={personalInfo.social.telegram} target="_blank" rel="noopener noreferrer"
-                 className="w-10 h-10 rounded-full bg-blue-500 hover:bg-blue-400 flex items-center justify-center transition-all duration-300 hover:scale-110">
-                <FaTelegramPlane className="w-5 h-5 text-white" />
-              </a>
-              <a href={personalInfo.social.leetcode} target="_blank" rel="noopener noreferrer"
-                 className="w-10 h-10 rounded-full bg-yellow-600 hover:bg-yellow-500 flex items-center justify-center transition-all duration-300 hover:scale-110">
-                <SiLeetcode className="w-5 h-5 text-white" />
+              <a
+                href={personalInfo.social.leetcode}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-colors"
+              >
+                <SiLeetcode className="w-4 h-4 text-amber-500" />
               </a>
             </div>
           </div>
 
-          {/* Quick Links */}
           <div>
-            <h4 className="text-white font-semibold mb-4 text-lg">Quick Links</h4>
+            <h4 className="text-slate-200 font-semibold mb-4 text-sm uppercase tracking-wide">Navigate</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-blue-100 hover:text-blue-300 text-sm transition-colors duration-200">About Me</a></li>
-              <li><a href="#" className="text-blue-100 hover:text-blue-300 text-sm transition-colors duration-200">Projects</a></li>
-              <li><a href="#" className="text-blue-100 hover:text-blue-300 text-sm transition-colors duration-200">Experience</a></li>
-              <li><a href="#" className="text-blue-100 hover:text-blue-300 text-sm transition-colors duration-200">Certifications</a></li>
+              <li>
+                <FooterLink onClick={go("about")}>About</FooterLink>
+              </li>
+              <li>
+                <FooterLink onClick={go("projects")}>Projects</FooterLink>
+              </li>
+              <li>
+                <FooterLink onClick={go("experience")}>Experience</FooterLink>
+              </li>
+              <li>
+                <FooterLink href="/resume.pdf" download="Yamuna_Resume.pdf">
+                  Resume
+                </FooterLink>
+              </li>
+              <li>
+                <FooterLink onClick={go("contact")}>Contact</FooterLink>
+              </li>
             </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h4 className="text-white font-semibold mb-4 text-lg">Contact</h4>
-            <div className="space-y-3">
-              <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-2 text-blue-100 hover:text-blue-300 text-sm transition-colors duration-200">
-                <Mail className="w-4 h-4" />
-                <span>{personalInfo.email}</span>
-              </a>
-              <a href={`https://wa.me/${personalInfo.whatsapp}`} target="_blank" rel="noopener noreferrer" 
-                 className="flex items-center gap-2 text-blue-100 hover:text-green-400 text-sm transition-colors duration-200">
-                <FaWhatsapp className="w-4 h-4" />
-                <span>{personalInfo.phone}</span>
-              </a>
-            </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-blue-200 text-sm mb-4 md:mb-0">
-            Copyright © 2024 <span className="text-blue-400 font-semibold">Yamuna</span>. All rights reserved.
-          </p>
-          <div className="flex gap-6">
-            <a href="#" className="text-blue-200 hover:text-blue-400 text-sm transition-colors duration-200">Privacy Policy</a>
-            <a href="#" className="text-blue-200 hover:text-blue-400 text-sm transition-colors duration-200">Terms & Conditions</a>
+        <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-500 border-t border-slate-800 pt-8 justify-between items-center">
+          <span>© {new Date().getFullYear()} Yamuna</span>
+          <div className="flex items-center gap-4">
+            <a href={`mailto:${personalInfo.email}`} className="inline-flex items-center gap-2 text-slate-400 hover:text-sky-400">
+              <Mail className="w-4 h-4 shrink-0" />
+              Email
+            </a>
+            <a
+              href={`https://wa.me/${personalInfo.whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-slate-400 hover:text-emerald-400"
+            >
+              <FaWhatsapp className="w-4 h-4 shrink-0" />
+              WhatsApp
+            </a>
           </div>
         </div>
       </div>
