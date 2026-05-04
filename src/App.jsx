@@ -2,9 +2,11 @@ import React, { useRef, useState, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Worker, Viewer } from "@react-pdf-viewer/core";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "@react-pdf-viewer/core/lib/styles/index.css";
 import {
   ArrowLeft, Linkedin, Github, Download, Mail, Phone
 } from "lucide-react";
@@ -108,7 +110,7 @@ const personalInfo = {
   email: "yamuna.bsvy@gmail.com",
   phone: "+91-9629163099",
   whatsapp: "919629163099",
-  bio: "I'm a 3rd-year Computer Science student (graduating 2027) targeting backend and full-stack engineering roles. I enjoy designing maintainable APIs, modeling data thoughtfully, and shipping services with Docker and CI/CD. Recent work spans a personal-finance digital twin backend (Money Mirror) and DevDesk—an incident-tracking platform—both with an emphasis on clear architecture and reliability.",
+  bio: "I'm a 3rd-year Computer Science student (graduating 2027) targeting backend and full-stack engineering roles. I enjoy designing maintainable APIs, modeling data thoughtfully, and shipping services with Docker and CI/CD. Recent work spans a personal-finance digital twin backend (Money Mirror) and Log Beacon—an incident-tracking and observability platform—both with an emphasis on clear architecture and reliability.",
   skillGroups: [
     { title: "Programming", items: ["Python", "JavaScript", "Java", "C"] },
     { title: "Backend & APIs", items: ["FastAPI", "Node.js", "Express.js", "REST APIs", "WebSockets"] },
@@ -183,44 +185,53 @@ const featuredProjects = [
       "Designed persistence around predictable migrations and sane indexing for analytic-style queries.",
       "Packaged repeatable local and deploy flows with Docker to keep environments consistent.",
     ],
-    links: { github: "https://github.com/Yamuna-b", live: null },
+    links: {
+      github: "https://github.com/Yamuna-b/Money_Mirror",
+      live: "https://drive.google.com/file/d/1H01AjMrU8kZ_mYTkO4IgUO7lQl5zsw2s/view?usp=sharing",
+    },
     image: "/fullstack1.png",
   },
   {
-    title: "DevDesk",
-    tagline: "Incident-tracking platform emphasizing reliability and clear escalation paths.",
+    title: "Log Beacon",
+    tagline: "Incident-tracking and observability platform emphasizing reliable triage and clear escalation paths.",
     stack: ["Node.js", "Express.js", "MongoDB", "WebSockets"],
     bullets: [
       "Structured incident lifecycle endpoints for create/update/resolve flows with authorization in mind.",
       "Used WebSockets selectively for realtime status without overloading clients with chatter.",
       "Focused on observable errors and sane defaults so on-call workflows stayed understandable.",
     ],
-    links: { github: "https://github.com/Yamuna-b", live: null },
+    links: {
+      github: "https://github.com/Yamuna-b/LogBeacon",
+      live: "https://drive.google.com/file/d/1VIW1KpCmgK-CLCpHbwdMd8BppwnZfHd-/view?usp=sharing",
+    },
     image: "/backend1.png",
   },
   {
-    title: "Petimony — Pet Shop Platform",
-    tagline: "Full-stack storefront and adoption workflows with ecommerce-style flows.",
-    stack: ["React", "Node.js", "MongoDB", "REST"],
+    title: "MarineTaxa AI",
+    tagline: "Marine species classification pipeline with model-centric evaluation and deployment-ready outputs.",
+    stack: ["Python", "PyTorch", "OpenCV", "Computer Vision"],
     bullets: [
-      "Balanced SSR-friendly React UX with transactional backend routes for carts and bookings.",
-      "Normalized core entities to avoid duplication while keeping onboarding queries fast.",
-      "Hardened auth-adjacent paths with pragmatic validation and clearer client error messaging.",
+      "Built image classification workflows for marine taxa prediction with consistent preprocessing.",
+      "Benchmarked model behavior across class groups and improved label quality for better generalization.",
+      "Packaged inference flow so predictions can be exposed through an API or demo interface.",
     ],
-    links: { github: "https://github.com/Yamuna-b", live: null },
-    image: "/full_1.mp4",
+    links: {
+      github: "https://github.com/Yamuna-b/MarineTaxaAi",
+      live: "https://drive.google.com/file/d/1aZN2iFA1QZwSP_ftBbqv21tr_xtpykPB/view?usp=sharing",
+    },
+    image: "/ai_2.mp4",
   },
   {
-    title: "Portfolio & developer presence",
-    tagline: "This site — fast Vite SPA with motion and disciplined content hierarchy.",
-    stack: ["React", "Tailwind CSS", "Vercel"],
+    title: "Namma Oor Fix",
+    tagline: "Civic issue reporting workflow with clean backend CRUD, status transitions, and accountability views.",
+    stack: ["React", "Node.js", "MongoDB", "REST APIs"],
     bullets: [
-      "Shipped a recruiter-first layout with anchored sections and restrained visual noise.",
-      "Kept bundles lean by leaning on primitives over heavy UI kits.",
-      "Continuous deployment from Git with predictable preview and production parity.",
+      "Modeled issue lifecycle states from report to resolution for predictable civic workflows.",
+      "Implemented role-oriented APIs for citizens and admins with structured validation.",
+      "Focused on simple, auditable status updates to improve reporting transparency.",
     ],
-    links: { github: "https://github.com/Yamuna-b", live: null },
-    image: "/fullstack1.png",
+    links: { github: "https://github.com/Yamuna-b/Namma-Oor-Fix", live: null },
+    image: "/fullstack2.png",
   },
 ];
 
@@ -245,7 +256,7 @@ const education = [
   }
 ];
 
-const projects = {
+const PROJECTS = {
   cloud: [
     {
       id: 1,
@@ -287,7 +298,7 @@ const projects = {
       fullDesc: "A comprehensive pet shop website with e-commerce functionality, pet adoption services, and community features.",
       tags: ["React", "Node.js", "MongoDB"],
       tools: ["Express", "Redux"],
-      links: { github: "#", demo: "#" }
+      links: { github: "https://github.com/Yamuna-b/Petimony" }
     },
     {
       id: 2,
@@ -297,7 +308,7 @@ const projects = {
       fullDesc: "Built my own portfolio using React and Tailwind.",
       tags: ["React", "Tailwind"],
       tools: ["TailwindCSS"],
-      links: { github: "#" }
+      links: { github: "https://github.com/Yamuna-b/RepoDocs" }
     },
     {
       id: 3,
@@ -307,7 +318,7 @@ const projects = {
       fullDesc: "Interactive dashboard with charts and data visualization.",
       tags: ["React", "Charts"],
       tools: ["Chart.js"],
-      links: { github: "#" }
+      links: { github: "https://github.com/Yamuna-b/PorterSeva" }
     },
     {
       id: 4,
@@ -317,7 +328,7 @@ const projects = {
       fullDesc: "Responsive landing page with animations.",
       tags: ["HTML", "CSS"],
       tools: ["GSAP"],
-      links: { github: "#" }
+      links: { github: "https://github.com/Yamuna-b/client-support-realtime-chat" }
     },
     {
       id: 5,
@@ -771,17 +782,17 @@ const projects = {
       fullDesc: "Machine learning model that analyzes light curve data from telescopes to identify potential exoplanets using deep learning techniques.",
       tags: ["AI", "Astronomy", "Deep Learning"],
       tools: ["Python", "TensorFlow", "Keras"],
-      links: { github: "#" }
+      links: { github: "https://github.com/Yamuna-b/nasa-spaceapps-exoplanet" }
     },
     {
       id: 2,
-      title: "Marine Taxa Classification",
+      title: "MarineTaxa AI",
       images: ["/ai_2.mp4"],
       shortDesc: "AI for classifying marine species",
       fullDesc: "Computer vision system that classifies marine organisms from underwater imagery using convolutional neural networks.",
       tags: ["AI", "Marine Biology", "Computer Vision"],
       tools: ["Python", "PyTorch", "OpenCV"],
-      links: { github: "#" }
+      links: { github: "https://github.com/Yamuna-b/MarineTaxaAi" }
     },
     {
       id: 3,
@@ -791,7 +802,7 @@ const projects = {
       fullDesc: "Chatbot offering resources for PCOD, PMS, PMDD.",
       tags: ["AI", "Chatbot", "Healthcare"],
       tools: ["Python", "TensorFlow"],
-      links: { github: "#" }
+      links: { github: "https://github.com/Yamuna-b/FitFinder" }
     }
   ],
   showcase: [
@@ -846,14 +857,186 @@ const projects = {
   ]
 };
 
+const projectCatalog = {
+  backend: [
+    {
+      id: 1,
+      title: "Money Mirror",
+      images: ["/fullstack1.png"],
+      shortDesc: "Digital twin backend for personal finance simulation",
+      fullDesc: "API-first backend to simulate multi-month cash-flow scenarios with structured data modeling and forecasting flows.",
+      tags: ["Backend", "FinTech", "REST"],
+      tools: ["Python", "PostgreSQL", "Docker"],
+      links: {
+        github: "https://github.com/Yamuna-b/Money_Mirror",
+        demo: "https://drive.google.com/file/d/1H01AjMrU8kZ_mYTkO4IgUO7lQl5zsw2s/view?usp=sharing",
+      },
+    },
+    {
+      id: 2,
+      title: "Namma Oor Fix",
+      images: ["/fullstack2.png"],
+      shortDesc: "Civic issue reporting with status workflows",
+      fullDesc: "Backend + full-stack issue lifecycle platform from report to resolution for local civic workflows.",
+      tags: ["Backend", "Civic Tech"],
+      tools: ["Node.js", "MongoDB", "REST APIs"],
+      links: { github: "https://github.com/Yamuna-b/Namma-Oor-Fix" },
+    },
+    {
+      id: 3,
+      title: "Petimony",
+      images: ["/full_1.mp4"],
+      shortDesc: "Pet adoption and care platform",
+      fullDesc: "Full-stack project with backend flows for listings, requests, approvals, and authenticated user actions.",
+      tags: ["Full Stack", "Backend-heavy"],
+      tools: ["React", "Node.js", "Express", "MongoDB"],
+      links: { github: "https://github.com/Yamuna-b/Petimony" },
+    },
+    {
+      id: 4,
+      title: "Chat Support Pro",
+      images: ["/fullstack5.png"],
+      shortDesc: "Realtime customer support console",
+      fullDesc: "Conversation and assignment workflows with API endpoints and realtime updates for support operations.",
+      tags: ["Realtime", "Backend APIs"],
+      tools: ["Node.js", "Socket.io", "React"],
+      links: { github: "https://github.com/Yamuna-b/client-support-realtime-chat" },
+    },
+    {
+      id: 5,
+      title: "Porter Seva",
+      images: ["/fullstack4.png"],
+      shortDesc: "Service booking and assignment workflows",
+      fullDesc: "Booking platform modeling job lifecycle, slot handling, and user-facing status tracking.",
+      tags: ["Service Platform", "CRUD Workflows"],
+      tools: ["Node.js", "Express", "MongoDB"],
+      links: { github: "https://github.com/Yamuna-b/PorterSeva" },
+    },
+  ],
+  ai: [
+    {
+      id: 1,
+      title: "MarineTaxa AI",
+      images: ["/ai_2.mp4"],
+      shortDesc: "Marine species classification",
+      fullDesc: "Computer vision pipeline for marine organism classification with preprocessing and model evaluation loops.",
+      tags: ["AI/ML", "Computer Vision"],
+      tools: ["Python", "PyTorch", "OpenCV"],
+      links: {
+        github: "https://github.com/Yamuna-b/MarineTaxaAi",
+        demo: "https://drive.google.com/file/d/1aZN2iFA1QZwSP_ftBbqv21tr_xtpykPB/view?usp=sharing",
+      },
+    },
+    {
+      id: 2,
+      title: "Exoplanet Detection System",
+      images: ["/ai_1.mp4"],
+      shortDesc: "ML detection from astronomy signals",
+      fullDesc: "Model-driven detection pipeline for exoplanet identification from telescope-style data inputs.",
+      tags: ["AI/ML", "Astronomy"],
+      tools: ["Python", "TensorFlow", "Keras"],
+      links: { github: "https://github.com/Yamuna-b/nasa-spaceapps-exoplanet" },
+    },
+    {
+      id: 3,
+      title: "Menstrual Health AI Chatbot",
+      images: ["/ai_3.mp4"],
+      shortDesc: "AI-assisted health guidance chatbot",
+      fullDesc: "Conversational assistant focused on menstrual health guidance with intent-aware response flows.",
+      tags: ["AI/ML", "NLP"],
+      tools: ["Python", "TensorFlow"],
+      links: { github: "https://github.com/Yamuna-b/FitFinder" },
+    },
+    {
+      id: 4,
+      title: "SRA – Self Realizing Agent",
+      images: ["/backend2.png"],
+      shortDesc: "Agentic reasoning and execution prototype",
+      fullDesc: "Experimental plan-act-reflect style architecture for autonomous task execution.",
+      tags: ["AI/ML", "Agents"],
+      tools: ["Python", "Agent loops"],
+      links: { github: "https://github.com/Yamuna-b/RepoDocs" },
+    },
+    {
+      id: 5,
+      title: "Ecosaur",
+      images: ["/showcase6.jpg"],
+      shortDesc: "Carbon footprint awareness and analysis",
+      fullDesc: "Research-oriented analytics project exploring footprint awareness, mitigation strategies, and reporting.",
+      tags: ["AI/ML", "Sustainability"],
+      tools: ["Python", "Data Analytics"],
+      links: { github: "https://github.com/Yamuna-b/RepoDocs" },
+    },
+  ],
+  devops: [
+    {
+      id: 1,
+      title: "Log Beacon",
+      images: ["/backend1.png"],
+      shortDesc: "Observability and incident workflow platform",
+      fullDesc: "Structured log and incident tracking flows to improve engineering visibility, triage, and escalation.",
+      tags: ["DevOps", "Observability"],
+      tools: ["Node.js", "Express", "MongoDB"],
+      links: {
+        github: "https://github.com/Yamuna-b/LogBeacon",
+        demo: "https://drive.google.com/file/d/1VIW1KpCmgK-CLCpHbwdMd8BppwnZfHd-/view?usp=sharing",
+      },
+    },
+    {
+      id: 2,
+      title: "CI/CD with GitHub Actions",
+      images: ["/cloud1.png"],
+      shortDesc: "Automated build and deploy workflows",
+      fullDesc: "Reusable CI/CD pipelines for lint/build/test and deployment automation.",
+      tags: ["CI/CD", "GitHub Actions"],
+      tools: ["Docker", "Node.js"],
+      links: { github: "https://github.com/Yamuna-b/RepoDocs" },
+    },
+  ],
+  frontend: [
+    {
+      id: 1,
+      title: "ErgoCart",
+      images: ["/fullstack3.png"],
+      shortDesc: "Ergonomic e-commerce frontend",
+      fullDesc: "Frontend-focused shopping experience with responsive layouts and ergonomic interaction patterns.",
+      tags: ["Frontend", "UI/UX"],
+      tools: ["React", "Tailwind CSS"],
+      links: { github: "https://github.com/Yamuna-b/ErgoCart" },
+    },
+  ],
+  highlights: [
+    {
+      id: 1,
+      title: "Ecosaur Research Publication",
+      images: ["/showcase6.jpg"],
+      shortDesc: "Conference-level sustainability research",
+      fullDesc: "Presented carbon footprint awareness and mitigation research in an academic setting.",
+      tags: ["Research", "Publication"],
+      tools: ["Data Analysis", "Presentation"],
+      links: { github: "https://github.com/Yamuna-b/RepoDocs" },
+    },
+    {
+      id: 2,
+      title: "Designthon Euphoria’24",
+      images: ["/showcase1.jpg"],
+      shortDesc: "Design competition recognition",
+      fullDesc: "Awarded for innovation and presentation quality in a university designthon.",
+      tags: ["Highlight", "Award"],
+      tools: ["Design Thinking"],
+      links: { github: "https://github.com/Yamuna-b/RepoDocs" },
+    },
+  ],
+};
+
 // Helper to check if the file is a video
 const isVideo = file => typeof file === "string" && file.match(/\.(mp4|webm|ogg)$/i);
 
 // --- Navbar: minimal recruiter-friendly links + domains ---
-function NavBar({ activeSection, setActiveSection, setExpandedCard, scrollHomeTo }) {
+function NavBar({ activeSection, setActiveSection, setExpandedCard, scrollHomeTo, openResumePreview }) {
   const navItems = [
     { key: "home", label: "HOME" },
-    { key: "projects_jump", label: "PROJECTS", isJump: true },
+    { key: "projects", label: "PROJECTS" },
     { key: "fullstack", label: "Backend" },
     { key: "ai", label: "AI/ML" },
     { key: "cloud", label: "DevOps" },
@@ -865,10 +1048,6 @@ function NavBar({ activeSection, setActiveSection, setExpandedCard, scrollHomeTo
     if (item.key === "home") {
       setActiveSection("home");
       window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-    if (item.isJump) {
-      scrollHomeTo("projects");
       return;
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -923,12 +1102,19 @@ function NavBar({ activeSection, setActiveSection, setExpandedCard, scrollHomeTo
       </div>
 
       <div className="flex items-center gap-2 sm:gap-2.5 order-4 sm:order-3 mt-2 sm:mt-0">
+        <button
+          type="button"
+          onClick={openResumePreview}
+          className="hidden sm:inline-flex items-center px-3 py-1.5 rounded-md text-xs font-semibold bg-slate-700 hover:bg-slate-600 text-white transition-colors"
+        >
+          Preview
+        </button>
         <a
           href="/resume.pdf"
           download="Yamuna_Resume.pdf"
           className="hidden sm:inline-flex items-center px-3 py-1.5 rounded-md text-xs font-semibold bg-sky-700 hover:bg-sky-600 text-white transition-colors mr-1"
         >
-          Resume
+          Download
         </a>
         <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer" title="LinkedIn" className="hidden sm:block">
           <Linkedin className="w-5 h-5 text-sky-400 hover:text-sky-300 transition-colors" />
@@ -1073,7 +1259,7 @@ const ContactSection = () => (
 );
 
 // --- Home Page Layout ---
-function HomePage() {
+function HomePage({ openResumePreview }) {
   return (
     <section className="min-h-screen pt-20 sm:pt-28 pb-20 bg-gradient-to-b from-[#0b0c10] via-[#0f1419] to-[#0b0c10]">
       <div className="max-w-6xl mx-auto px-4 space-y-14">
@@ -1150,7 +1336,7 @@ function HomePage() {
                         rel="noopener noreferrer"
                         className="text-sm font-semibold text-sky-400 hover:text-sky-300"
                       >
-                        GitHub →
+                        View code →
                       </a>
                     ) : null}
                     {project.links?.live && project.links.live !== "#" ? (
@@ -1160,7 +1346,7 @@ function HomePage() {
                         rel="noopener noreferrer"
                         className="text-sm font-semibold text-sky-400 hover:text-sky-300"
                       >
-                        Live demo →
+                        Demo video →
                       </a>
                     ) : null}
                   </div>
@@ -1215,13 +1401,22 @@ function HomePage() {
               <SiLeetcode className="w-6 h-6 text-amber-500/90 hover:text-amber-400 transition-colors" />
             </a>
           </div>
-          <a
-            href="/resume.pdf"
-            download="Yamuna_Resume.pdf"
-            className="w-full mt-5 px-5 py-2.5 bg-sky-700 hover:bg-sky-600 text-white rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-colors"
-          >
-            <Download className="w-4 h-4" /> Download resume
-          </a>
+          <div className="grid grid-cols-2 gap-3 mt-5">
+            <button
+              type="button"
+              onClick={openResumePreview}
+              className="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-semibold text-sm transition-colors"
+            >
+              Preview
+            </button>
+            <a
+              href="/resume.pdf"
+              download="Yamuna_Resume.pdf"
+              className="px-5 py-2.5 bg-sky-700 hover:bg-sky-600 text-white rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-colors"
+            >
+              <Download className="w-4 h-4" /> Download
+            </a>
+          </div>
         </motion.div>
 
         <motion.div
@@ -1640,6 +1835,75 @@ function Section({ title, cards, expandedCard, setExpandedCard, columnsLg = 2, i
   );
 }
 
+function ProjectsOverview({ expandedCard, setExpandedCard }) {
+  const grouped = [
+    { title: "Backend + Full Stack", cards: projectCatalog.backend },
+    { title: "AI/ML", cards: projectCatalog.ai },
+    { title: "DevOps", cards: projectCatalog.devops },
+    { title: "Frontend", cards: projectCatalog.frontend },
+    { title: "Highlights", cards: projectCatalog.highlights },
+  ];
+
+  return (
+    <div className="min-h-screen pt-20 sm:pt-32 pb-16 bg-[#0b0c10]">
+      <div className="max-w-7xl mx-auto px-6">
+        <h1 className="text-4xl font-bold text-white mb-4 mt-8">Projects</h1>
+        <p className="text-slate-400 mb-8">Grouped by domain so each track maps clearly to your SDE narrative.</p>
+        <div className="space-y-12">
+          {grouped.map(group => (
+            <section key={group.title}>
+              <h2 className="text-2xl font-semibold text-sky-300 mb-4">{group.title}</h2>
+              <ProjectGrid cards={group.cards} expandedCard={expandedCard} setExpandedCard={setExpandedCard} />
+            </section>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ResumePreviewModal({ open, onClose }) {
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKeyDown = event => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[200] bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-5xl h-[88vh] bg-[#0f1117] border border-slate-700 rounded-2xl overflow-hidden"
+        onClick={event => event.stopPropagation()}
+      >
+        <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800">
+          <h3 className="text-sm sm:text-base font-semibold text-slate-100">Resume preview</h3>
+          <button
+            type="button"
+            onClick={onClose}
+            className="w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-200 text-xl leading-none"
+            aria-label="Close preview"
+          >
+            ×
+          </button>
+        </div>
+        <div className="h-[calc(88vh-58px)]">
+          <Worker workerUrl="https://unpkg.com/pdfjs-dist@4.4.168/build/pdf.worker.min.js">
+            <Viewer fileUrl="/resume.pdf" />
+          </Worker>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // --- Video Swiper Component ---
 function VideoSwiper({ videos }) {
   return <MediaSwiper mediaList={videos} />;
@@ -1794,6 +2058,7 @@ function ShowcaseSection() {
 export default function App() {
   const [activeSection, setActiveSection] = useState("home");
   const [expandedCard, setExpandedCard] = useState(null);
+  const [isResumePreviewOpen, setResumePreviewOpen] = useState(false);
 
   const scrollHomeTo = useCallback(sectionId => {
     setExpandedCard(null);
@@ -1812,6 +2077,7 @@ export default function App() {
           setActiveSection={setActiveSection}
           setExpandedCard={setExpandedCard}
           scrollHomeTo={scrollHomeTo}
+          openResumePreview={() => setResumePreviewOpen(true)}
         />
         <BackArrow
           activeSection={activeSection}
@@ -1819,11 +2085,14 @@ export default function App() {
           setExpandedCard={setExpandedCard}
           show={expandedCard === null}
         />
-        {activeSection === "home" && <HomePage />}
+        {activeSection === "home" && <HomePage openResumePreview={() => setResumePreviewOpen(true)} />}
+        {activeSection === "projects" && (
+          <ProjectsOverview expandedCard={expandedCard} setExpandedCard={setExpandedCard} />
+        )}
         {activeSection === "cloud" && (
           <Section
             title="DevOps & Cloud"
-            cards={projects.cloud}
+            cards={projectCatalog.devops}
             expandedCard={expandedCard}
             setExpandedCard={setExpandedCard}
           />
@@ -1831,7 +2100,7 @@ export default function App() {
         {activeSection === "ai" && (
           <Section
             title="AI/ML Projects"
-            cards={projects.ai}
+            cards={projectCatalog.ai}
             expandedCard={expandedCard}
             setExpandedCard={setExpandedCard}
           />
@@ -1839,7 +2108,7 @@ export default function App() {
         {activeSection === "fullstack" && (
           <Section
             title="Backend & APIs"
-            cards={projects.fullstack}
+            cards={projectCatalog.backend}
             expandedCard={expandedCard}
             setExpandedCard={setExpandedCard}
           />
@@ -1856,6 +2125,10 @@ export default function App() {
         
         {/* Footer */}
         <Footer personalInfo={personalInfo} scrollHomeTo={scrollHomeTo} />
+        <ResumePreviewModal
+          open={isResumePreviewOpen}
+          onClose={() => setResumePreviewOpen(false)}
+        />
       </div>
     </motion.div>
   );
