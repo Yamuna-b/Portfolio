@@ -22,7 +22,7 @@ function FooterLink({ href, children, onClick, download }) {
   );
 }
 
-export default function Footer({ personalInfo, scrollHomeTo }) {
+export default function Footer({ personalInfo, scrollHomeTo, openResumePreview }) {
   const go =
     typeof scrollHomeTo === "function"
       ? id => () => scrollHomeTo(id)
@@ -93,8 +93,11 @@ export default function Footer({ personalInfo, scrollHomeTo }) {
                 <FooterLink onClick={go("experience")}>Experience</FooterLink>
               </li>
               <li>
+                <FooterLink onClick={openResumePreview}>Preview</FooterLink>
+              </li>
+              <li>
                 <FooterLink href="/resume.pdf" download="Yamuna_Resume.pdf">
-                  Resume
+                  Download
                 </FooterLink>
               </li>
               <li>

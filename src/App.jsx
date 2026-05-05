@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { Worker, Viewer } from "@react-pdf-viewer/core";
+import pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -1037,10 +1038,10 @@ function NavBar({ activeSection, setActiveSection, setExpandedCard, scrollHomeTo
   const navItems = [
     { key: "home", label: "HOME" },
     { key: "projects", label: "PROJECTS" },
-    { key: "fullstack", label: "Backend" },
+    { key: "fullstack", label: "Backend + Frontend" },
     { key: "ai", label: "AI/ML" },
     { key: "cloud", label: "DevOps" },
-    { key: "showcase", label: "Highlights" },
+    { key: "showcase", label: "Designs" },
   ];
 
   const runNavClick = item => {
@@ -1207,7 +1208,7 @@ function ProfileAvatar() {
         transition={{ type: "spring", stiffness: 300 }}
       >
         <img
-          src="/profile.png"
+          src="/profile.jpeg"
           alt="Yamuna"
           className="w-full h-full object-cover"
         />
@@ -1346,7 +1347,7 @@ function HomePage({ openResumePreview }) {
                         rel="noopener noreferrer"
                         className="text-sm font-semibold text-sky-400 hover:text-sky-300"
                       >
-                        Demo video →
+                        Live demo →
                       </a>
                     ) : null}
                   </div>
@@ -1837,7 +1838,7 @@ function Section({ title, cards, expandedCard, setExpandedCard, columnsLg = 2, i
 
 function ProjectsOverview({ expandedCard, setExpandedCard }) {
   const grouped = [
-    { title: "Backend + Full Stack", cards: projectCatalog.backend },
+    { title: "Backend + Frontend", cards: projectCatalog.backend },
     { title: "AI/ML", cards: projectCatalog.ai },
     { title: "DevOps", cards: projectCatalog.devops },
     { title: "Frontend", cards: projectCatalog.frontend },
@@ -1895,7 +1896,7 @@ function ResumePreviewModal({ open, onClose }) {
           </button>
         </div>
         <div className="h-[calc(88vh-58px)]">
-          <Worker workerUrl="https://unpkg.com/pdfjs-dist@4.4.168/build/pdf.worker.min.js">
+          <Worker workerUrl={pdfjsWorker}>
             <Viewer fileUrl="/resume.pdf" />
           </Worker>
         </div>
@@ -2007,7 +2008,7 @@ function ShowcaseSection() {
   return (
     <div className="min-h-screen pt-20 sm:pt-32 pb-16 bg-[#0b0c10]">
       <div className="max-w-7xl mx-auto px-6">
-        <h1 className="text-4xl font-bold text-white mb-8 mt-8 text-center">Visual Highlights</h1>
+        <h1 className="text-4xl font-bold text-white mb-8 mt-8 text-center">Designs & Visuals</h1>
         
         {/* Combined Showcase Card with Image and Victory Quote */}
         <div className="mb-16 flex justify-center">
@@ -2124,7 +2125,11 @@ export default function App() {
         )}
         
         {/* Footer */}
-        <Footer personalInfo={personalInfo} scrollHomeTo={scrollHomeTo} />
+        <Footer
+          personalInfo={personalInfo}
+          scrollHomeTo={scrollHomeTo}
+          openResumePreview={() => setResumePreviewOpen(true)}
+        />
         <ResumePreviewModal
           open={isResumePreviewOpen}
           onClose={() => setResumePreviewOpen(false)}
