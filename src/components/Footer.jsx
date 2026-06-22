@@ -2,6 +2,7 @@ import React from "react";
 import { Linkedin, Github, Instagram, Mail } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
+import { FaMedium } from "react-icons/fa";
 
 function FooterLink({ href, children, onClick, download }) {
   if (onClick) {
@@ -42,7 +43,7 @@ export default function Footer({ personalInfo, scrollHomeTo, openResumePreview }
               <h3 className="text-xl font-bold text-slate-100 tracking-tight">Yamuna</h3>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed max-w-md">
-              Backend-focused software engineer building APIs, reliable services, and data-aware systems—with clear architecture and pragmatic DevOps habits.
+              Final-year CSE student building scalable backends, developer-first products, and data-intensive systems, with a focus on clear architecture and practical Cloud &amp; DevOps habits.
             </p>
             <div className="flex gap-2.5 mt-5">
               <a
@@ -77,6 +78,14 @@ export default function Footer({ personalInfo, scrollHomeTo, openResumePreview }
               >
                 <SiLeetcode className="w-4 h-4 text-amber-500" />
               </a>
+              <a
+                href={personalInfo.social.medium}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-colors"
+              >
+                <FaMedium className="w-4 h-4 text-slate-200" />
+              </a>
             </div>
           </div>
 
@@ -93,7 +102,13 @@ export default function Footer({ personalInfo, scrollHomeTo, openResumePreview }
                 <FooterLink onClick={go("experience")}>Experience</FooterLink>
               </li>
               <li>
-                <FooterLink onClick={openResumePreview}>Preview</FooterLink>
+                <FooterLink onClick={go("coding-activity")}>Coding activity</FooterLink>
+              </li>
+              <li>
+                <FooterLink onClick={go("blog-highlights")}>Blog</FooterLink>
+              </li>
+              <li>
+                <FooterLink onClick={openResumePreview}>Resume preview</FooterLink>
               </li>
               <li>
                 <FooterLink href="/resume.pdf" download="Yamuna_Resume.pdf">
@@ -108,7 +123,7 @@ export default function Footer({ personalInfo, scrollHomeTo, openResumePreview }
         </div>
 
         <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-500 border-t border-slate-800 pt-8 justify-between items-center">
-          <span>© {new Date().getFullYear()} Yamuna</span>
+          <span>© Yamuna</span>
           <div className="flex items-center gap-4">
             <a href={`mailto:${personalInfo.email}`} className="inline-flex items-center gap-2 text-slate-400 hover:text-sky-400">
               <Mail className="w-4 h-4 shrink-0" />

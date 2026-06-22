@@ -1,4 +1,5 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import React, { useRef, useState, useEffect, useCallback, useMemo } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
@@ -9,96 +10,77 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import {
-  ArrowLeft, Linkedin, Github, Download, Mail, Phone
+  ArrowLeft, Linkedin, Github, Download, Mail, Phone, Search, X, ExternalLink
 } from "lucide-react";
+import "./App.css";
 import { FaWhatsapp } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
+import { FaMedium } from "react-icons/fa";
 import Footer from "./components/Footer";
 import Stats from "./components/Stats";
+import BlogHighlights from "./components/BlogHighlights";
 
-// Search Bar Component
-const SearchBar = ({ searchQuery, setSearchQuery }) => {
-  return (
-    <div className="w-full max-w-2xl mx-auto mb-8 px-4">
-      <div className="relative">
-        <input
-          type="text"
-          placeholder="Search projects..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full bg-gray-800 text-white px-6 py-3 rounded-full border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent pl-12"
-        />
-        <svg
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          />
-        </svg>
-        {searchQuery && (
-          <button
-            onClick={() => setSearchQuery('')}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        )}
-      </div>
+const PLACEHOLDER_VIDEO = "/petimony.mp4";
+const IEEE_PUBLICATION_URL = "https://ieeexplore.ieee.org/document/10986878";
+const DESIGNS_INTRO =
+  "I enjoy designing as a way to slow down and think carefully about how people will use something. Logos, posters, and app prototypes give me a quiet space to practice clarity of form, while still feeding my interest in building systems and products.";
+
+// ─── Search Bar ───────────────────────────────────────────────────────────────
+const SearchBar = ({ searchQuery, setSearchQuery }) => (
+  <div className="w-full max-w-2xl mx-auto mb-8 px-4">
+    <div className="relative group">
+      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-sky-500/20 to-violet-500/20 blur-sm group-focus-within:blur-md transition-all duration-300" />
+      <input
+        type="text"
+        placeholder="Search projects by title, tech, or tag…"
+        value={searchQuery}
+        onChange={e => setSearchQuery(e.target.value)}
+        className="relative w-full bg-slate-900/80 text-slate-200 px-5 py-3 rounded-2xl border border-slate-700 focus:outline-none focus:border-sky-500/60 pl-12 placeholder:text-slate-500 backdrop-blur-md transition-all duration-300 text-sm"
+      />
+      <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+      {searchQuery && (
+        <button onClick={() => setSearchQuery("")} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors">
+          <X className="w-4 h-4" />
+        </button>
+      )}
     </div>
-  );
-};
+  </div>
+);
 
-// --- Animated, drifting background stars with enhanced effects ---
+// ─── Ambient background particles ────────────────────────────────────────────
 function Bubbles() {
+  const particles = Array.from({ length: 18 }).map((_, i) => ({
+    top: Math.random() * 100,
+    left: Math.random() * 100,
+    size: Math.random() * 280 + 80,
+    driftX: (Math.random() - 0.5) * 35,
+    driftY: (Math.random() - 0.5) * 35,
+    duration: 18 + Math.random() * 14,
+    color: i % 3 === 0 ? "rgba(14,165,233,0.04)" : i % 3 === 1 ? "rgba(139,92,246,0.04)" : "rgba(30,64,100,0.05)",
+  }));
+
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-      {Array.from({ length: 22 }).map((_, i) => {
-        const top = Math.random() * 100;
-        const left = Math.random() * 100;
-        const size = Math.random() * 12 + 4;
-        const driftX = (Math.random() - 0.5) * 40;
-        const driftY = (Math.random() - 0.5) * 40;
-        const colors = ['bg-slate-500', 'bg-sky-700', 'bg-slate-600'];
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        return (
-          <motion.div
-            key={i}
-            className={"absolute rounded-full " + color + " opacity-[0.08] blur-xl"}
-            style={{ width: size, height: size }}
-            initial={{ top: top + '%', left: left + '%' }}
-            animate={{
-              top: [top + '%', (top + driftY) + '%', top + '%'],
-              left: [left + '%', (left + driftX) + '%', left + '%'],
-              opacity: [0.06, 0.12, 0.06],
-              scale: [1, 1.1, 1]
-            }}
-            transition={{
-              duration: 15 + Math.random() * 12,
-              repeat: Infinity,
-              repeatType: "mirror",
-              ease: "easeInOut"
-            }}
-          />
-        );
-      })}
+      {particles.map((p, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full"
+          style={{ width: p.size, height: p.size, background: p.color, filter: "blur(60px)" }}
+          initial={{ top: p.top + "%", left: p.left + "%" }}
+          animate={{
+            top: [p.top + "%", p.top + p.driftY + "%", p.top + "%"],
+            left: [p.left + "%", p.left + p.driftX + "%", p.left + "%"],
+          }}
+          transition={{ duration: p.duration, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
+        />
+      ))}
+      <div
+        className="absolute inset-0 opacity-[0.018]"
+        style={{
+          backgroundImage: "linear-gradient(rgba(148,163,184,1) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,1) 1px, transparent 1px)",
+          backgroundSize: "80px 80px",
+        }}
+      />
     </div>
   );
 }
@@ -106,19 +88,20 @@ function Bubbles() {
 // --- Personal Data ---
 const personalInfo = {
   name: "Yamuna",
-  tagline1: "Backend-focused Software Engineer | Building scalable systems and digital twins.",
-  tagline2: "CS undergrad (2027) focused on backend, cloud, and data-intensive applications using Python, JavaScript, and modern DevOps.",
+  tagline1: "Backend-focused Software Engineer | Building scalable systems and developer-first products",
+  tagline2: "Final-year CSE student (graduating 2027) focused on backend, cloud, and data-intensive applications using Python, JavaScript, and modern DevOps.",
   email: "yamuna.bsvy@gmail.com",
   phone: "+91-9629163099",
   whatsapp: "919629163099",
-  bio: "I'm a 3rd-year Computer Science student (graduating 2027) targeting backend and full-stack engineering roles. I enjoy designing maintainable APIs, modeling data thoughtfully, and shipping services with Docker and CI/CD. Recent work spans a personal-finance digital twin backend (Money Mirror) and Log Beacon—an incident-tracking and observability platform—both with an emphasis on clear architecture and reliability.",
+  bio: "I'm a final-year Computer Science student (graduating 2027) focused on backend and platform engineering. I like owning products end-to-end—from idea and design to deployment and iteration—with a strong foundation in DSA, system design, and DevOps. I enjoy spotting real-world gaps (finance, civic systems, data tooling) and turning them into opinionated, usable products.",
   skillGroups: [
-    { title: "Programming", items: ["Python", "JavaScript", "Java", "C"] },
-    { title: "Backend & APIs", items: ["FastAPI", "Node.js", "Express.js", "REST APIs", "WebSockets"] },
-    { title: "Databases", items: ["PostgreSQL", "SQLite", "MongoDB", "SQL (queries, indexing basics)"] },
-    { title: "Cloud & DevOps", items: ["Docker", "GitHub Actions", "Git", "Basic AWS (EC2/S3)", "CI/CD pipelines"] },
-    { title: "Frontend", items: ["React.js", "Next.js", "HTML", "CSS", "Tailwind CSS"] },
-    { title: "Familiar & tooling", items: ["Kubernetes", "Redis", "Postman"] },
+    { title: "Programming", items: ["Java", "Python", "JavaScript", "C", "SQL"] },
+    { title: "Backend & APIs", items: ["FastAPI", "Node.js", "Express.js", "REST APIs", "JWT"] },
+    { title: "Databases", items: ["PostgreSQL", "MongoDB"] },
+    { title: "Cloud & DevOps", items: ["AWS", "Docker", "Git", "CI/CD", "Linux"] },
+    { title: "AI / ML", items: ["PyTorch", "TensorFlow", "Hugging Face", "OpenCV", "LLM"] },
+    { title: "Frontend & Tools", items: ["React", "HTML", "CSS", "Tailwind CSS", "Postman", "Figma"] },
+    { title: "Competitive programming / DSA", items: ["Arrays", "Strings", "Hashing", "Trees", "Graphs", "Recursion", "Dynamic Programming", "FAANG-style patterns"] },
   ],
   languages: [
     { name: "English", level: "Very Well" },
@@ -133,7 +116,8 @@ const personalInfo = {
     instagram: "https://www.instagram.com/_._yamu_._/",
     github: "https://github.com/Yamuna-b",
     telegram: "#",
-    leetcode: "https://leetcode.com/u/Yamuna_bsvy/"
+    leetcode: "https://leetcode.com/u/Yamuna_bsvy/",
+    medium: "https://medium.com/@yamuna_b" 
   }
 };
 
@@ -152,14 +136,14 @@ const experience = [
   },
   {
     logo: "/Nittelogo.jpg",
-    company: "IEEE Conference (ECOSAUR)",
-    role: "Presenter",
-    duration: "Feb 2024",
-    desc: "Presented research on carbon footprint awareness and mitigation at NITTE, Karnataka.",
-    link: { text: "View Publication", url: "#" },
+    company: "IEEE AIDE 2025 — NMAM Institute of Technology",
+    role: "IEEE Author",
+    duration: "2025",
+    desc: "Published research on carbon footprint awareness and mitigation at an international conference.",
+    link: { text: "View Publication", url: IEEE_PUBLICATION_URL },
     bullets: [
-      "Delivered an oral presentation on carbon footprint awareness and mitigation approaches at NITTE, Karnataka.",
-      "Distilled methodology and findings for an academic audience and conference reviewers."
+      "Authored and presented sustainability research at the International Conference on AIDE 2025.",
+      "Distilled methodology and findings for an academic audience and conference reviewers.",
     ]
   },
   {
@@ -179,61 +163,70 @@ const experience = [
 const featuredProjects = [
   {
     title: "Money Mirror",
-    tagline: "Personal finance digital twin—model spending and forecasts with a clean backend abstraction.",
-    stack: ["Python", "PostgreSQL", "REST", "Docker"],
+    tagline: "Personal finance digital twin—salary, EMIs, savings, and 3–6 month cash-flow projections with low-balance warnings.",
+    stack: ["FastAPI", "PostgreSQL", "JWT", "Docker"],
     bullets: [
-      "Separated domain logic from transport so core finance rules stayed testable and easy to extend.",
-      "Designed persistence around predictable migrations and sane indexing for analytic-style queries.",
-      "Packaged repeatable local and deploy flows with Docker to keep environments consistent.",
+      "FastAPI backend with JWT-secured REST APIs for what-if finance planning.",
+      "PostgreSQL schema tuned for projections; average query latency around 120 ms.",
+      "Docker-packaged deploy flow for consistent local and cloud environments.",
+      "Designed the system as a 'personal CFO'—focused on predictable cash-flow planning for early-career professionals, with APIs structured for future mobile app integration.",
     ],
     links: {
       github: "https://github.com/Yamuna-b/Money_Mirror",
       live: "https://drive.google.com/file/d/1H01AjMrU8kZ_mYTkO4IgUO7lQl5zsw2s/view?usp=sharing",
     },
-    image: "/fullstack1.png",
+    image: "/MoneyMirror.mp4",
   },
   {
     title: "Log Beacon",
-    tagline: "Incident-tracking and observability platform emphasizing reliable triage and clear escalation paths.",
-    stack: ["Node.js", "Express.js", "MongoDB", "WebSockets"],
+    tagline: "Log analysis backend—parse structured logs, filter by time/status, and run regex queries for faster debugging.",
+    stack: ["FastAPI", "PostgreSQL", "Docker", "AWS"],
     bullets: [
-      "Structured incident lifecycle endpoints for create/update/resolve flows with authorization in mind.",
-      "Used WebSockets selectively for realtime status without overloading clients with chatter.",
-      "Focused on observable errors and sane defaults so on-call workflows stayed understandable.",
+      "FastAPI service for structured log parsing, filtering, and regex search.",
+      "PostgreSQL persistence with Docker deployment on AWS; query latency under 200 ms.",
+      "Focused API design for efficient triage during incident debugging.",
+      "Framed and built this as a developer-productivity tool, inspired by internal tooling at large-scale companies—prioritizing fast filtering and low cognitive load over flashy dashboards.",
     ],
     links: {
       github: "https://github.com/Yamuna-b/LogBeacon",
       live: "https://drive.google.com/file/d/1VIW1KpCmgK-CLCpHbwdMd8BppwnZfHd-/view?usp=sharing",
     },
-    image: "/backend1.png",
+    image: "/LogBeacon.mp4",
   },
   {
     title: "MarineTaxa AI",
-    tagline: "Marine species classification pipeline with model-centric evaluation and deployment-ready outputs.",
-    stack: ["Python", "PyTorch", "OpenCV", "Computer Vision"],
+    tagline: "AI taxonomy platform—feature extraction with UMAP + HDBSCAN and LLM-assisted classification and explanation.",
+    stack: ["FastAPI", "PyTorch", "LLM", "Docker", "AWS"],
     bullets: [
-      "Built image classification workflows for marine taxa prediction with consistent preprocessing.",
-      "Benchmarked model behavior across class groups and improved label quality for better generalization.",
-      "Packaged inference flow so predictions can be exposed through an API or demo interface.",
+      "Ingests raw marine data, extracts features, and integrates an LLM for classification.",
+      "FastAPI REST backend deployed on AWS with Docker.",
+      "Reduced manual classification time by roughly 40% in evaluation runs.",
+      "Owned the full stack from data ingestion to LLM integration, mirroring ML platform patterns used in production ML teams.",
     ],
     links: {
       github: "https://github.com/Yamuna-b/MarineTaxaAi",
       live: "https://drive.google.com/file/d/1aZN2iFA1QZwSP_ftBbqv21tr_xtpykPB/view?usp=sharing",
     },
-    image: "/ai_2.mp4",
+    image: "/MarineTaxaAi.mp4",
   },
   {
-    title: "Namma Oor Fix",
-    tagline: "Civic issue reporting workflow with clean backend CRUD, status transitions, and accountability views.",
-    stack: ["React", "Node.js", "MongoDB", "REST APIs"],
+    title: "ExoVision",
+    tagline: "Streamlit app for exoplanet classification using NASA public datasets—ML pipeline from raw light curves to ranked candidates.",
+    stack: ["Python", "TensorFlow", "Streamlit"],
     bullets: [
-      "Modeled issue lifecycle states from report to resolution for predictable civic workflows.",
-      "Implemented role-oriented APIs for citizens and admins with structured validation.",
-      "Focused on simple, auditable status updates to improve reporting transparency.",
+      "Built a solo end-to-end ML workflow on NASA Space Apps datasets for exoplanet signal detection.",
+      "Streamlit UI for interactive exploration; TensorFlow models trained on telescope-style light curve features.",
+      "Structured the repo for reproducible experiments—data prep, training, and evaluation in one deployable app.",
     ],
-    links: { github: "https://github.com/Yamuna-b/Namma-Oor-Fix", live: null },
-    image: "/fullstack2.png",
+    links: { github: "https://github.com/Yamuna-b/nasa-spaceapps-exoplanet", live: null },
+    image: "/ExoVision.mp4",
   },
+];
+
+const entrepreneurialInitiatives = [
+  "Led backend and architecture for 3+ self-initiated products (Money Mirror, Log Beacon, MarineTaxa AI), treating them as real users' workflows rather than just academic demos.",
+  "Coordinated placement batch communication as Placement Batch Head, mirroring stakeholder management in fast-paced engineering teams.",
+  "Regularly pitch project ideas and technical concepts via blogs, talks, and peer mentoring.",
 ];
 
 const education = [
@@ -294,12 +287,15 @@ const PROJECTS = {
     {
       id: 1,
       title: "Petimony - Pet Shop Website",
-      images: ["/full_1.mp4"],
+      images: ["/petimony.mp4"],
       shortDesc: "Full-stack pet shop platform",
       fullDesc: "A comprehensive pet shop website with e-commerce functionality, pet adoption services, and community features.",
-      tags: ["React", "Node.js", "MongoDB"],
-      tools: ["Express", "Redux"],
-      links: { github: "https://github.com/Yamuna-b/Petimony" }
+      tags: ["HTML", "CSS", "JavaScript"],
+      tools: ["HTML", "CSS", "JavaScript"],
+      links: {
+        github: "https://github.com/Yamuna-b/Petimony",
+        live: "https://petimony.onrender.com"
+      }
     },
     {
       id: 2,
@@ -309,7 +305,7 @@ const PROJECTS = {
       fullDesc: "Built my own portfolio using React and Tailwind.",
       tags: ["React", "Tailwind"],
       tools: ["TailwindCSS"],
-      links: { github: "https://github.com/Yamuna-b/RepoDocs" }
+      links: { github: "https://github.com/Yamuna-b/Portfolio" }
     },
     {
       id: 3,
@@ -777,18 +773,18 @@ const PROJECTS = {
   ai: [
     {
       id: 1,
-      title: "Exoplanet Detection System",
-      images: ["/ai_1.mp4"],
-      shortDesc: "AI for detecting exoplanets in space data",
-      fullDesc: "Machine learning model that analyzes light curve data from telescopes to identify potential exoplanets using deep learning techniques.",
+      title: "ExoVision",
+      images: ["/ExoVision.mp4"],
+      shortDesc: "Exoplanet classification from NASA Space Apps data",
+      fullDesc: "Streamlit app for exoplanet classification using NASA public datasets and TensorFlow ML pipelines.",
       tags: ["AI", "Astronomy", "Deep Learning"],
-      tools: ["Python", "TensorFlow", "Keras"],
+      tools: ["Python", "TensorFlow", "Streamlit"],
       links: { github: "https://github.com/Yamuna-b/nasa-spaceapps-exoplanet" }
     },
     {
       id: 2,
       title: "MarineTaxa AI",
-      images: ["/ai_2.mp4"],
+      images: ["/MarineTaxaAi.mp4"],
       shortDesc: "AI for classifying marine species",
       fullDesc: "Computer vision system that classifies marine organisms from underwater imagery using convolutional neural networks.",
       tags: ["AI", "Marine Biology", "Computer Vision"],
@@ -797,12 +793,12 @@ const PROJECTS = {
     },
     {
       id: 3,
-      title: "Menstrual Health AI Chatbot",
-      images: ["/ai_3.mp4"],
-      shortDesc: "AI chatbot for menstrual health",
-      fullDesc: "Chatbot offering resources for PCOD, PMS, PMDD.",
-      tags: ["AI", "Chatbot", "Healthcare"],
-      tools: ["Python", "TensorFlow"],
+      title: "FitFinder",
+      images: [PLACEHOLDER_VIDEO],
+      shortDesc: "AIML virtual try-on and wardrobe visualizer",
+      fullDesc: "Virtual try-on and wardrobe visualization app built with Python and a Flask-style web stack.",
+      tags: ["AI", "Computer Vision"],
+      tools: ["Python", "Flask", "HTML"],
       links: { github: "https://github.com/Yamuna-b/FitFinder" }
     }
   ],
@@ -816,7 +812,7 @@ const PROJECTS = {
     {
       id: 2,
       title: "Project Expo Techathon'24",
-      images: ["/showcase1.jpg", "/video1.mp4"],
+      images: ["/showcase1.jpg", "/MoneyMirror.mp4"],
       desc: ""
     },
     {
@@ -863,11 +859,11 @@ const projectCatalog = {
     {
       id: 1,
       title: "Money Mirror",
-      images: ["/fullstack1.png"],
-      shortDesc: "Digital twin backend for personal finance simulation",
-      fullDesc: "API-first backend to simulate multi-month cash-flow scenarios with structured data modeling and forecasting flows.",
-      tags: ["Backend", "FinTech", "REST"],
-      tools: ["Python", "PostgreSQL", "Docker"],
+      images: ["/MoneyMirror.mp4"],
+      shortDesc: "Personal finance digital twin with cash-flow projections",
+      fullDesc: "FastAPI backend for personal finance planning with JWT-secured REST APIs, PostgreSQL, and Docker.",
+      tags: ["Backend", "FinTech", "FastAPI"],
+      tools: ["FastAPI", "PostgreSQL", "JWT", "Docker"],
       links: {
         github: "https://github.com/Yamuna-b/Money_Mirror",
         demo: "https://drive.google.com/file/d/1H01AjMrU8kZ_mYTkO4IgUO7lQl5zsw2s/view?usp=sharing",
@@ -876,7 +872,7 @@ const projectCatalog = {
     {
       id: 2,
       title: "Namma Oor Fix",
-      images: ["/fullstack2.png"],
+      images: [PLACEHOLDER_VIDEO],
       shortDesc: "Civic issue reporting with status workflows",
       fullDesc: "Backend + full-stack issue lifecycle platform from report to resolution for local civic workflows.",
       tags: ["Backend", "Civic Tech"],
@@ -886,27 +882,30 @@ const projectCatalog = {
     {
       id: 3,
       title: "Petimony",
-      images: ["/full_1.mp4"],
-      shortDesc: "Pet adoption and care platform",
-      fullDesc: "Full-stack project with backend flows for listings, requests, approvals, and authenticated user actions.",
-      tags: ["Full Stack", "Backend-heavy"],
-      tools: ["React", "Node.js", "Express", "MongoDB"],
-      links: { github: "https://github.com/Yamuna-b/Petimony" },
+      images: ["/petimony.mp4"],
+      shortDesc: "Pet shop and adoption platform",
+      fullDesc: "Pet shop website with adoption flows, product highlights, and responsive UI.",
+      tags: ["Full Stack", "Frontend"],
+      tools: ["HTML", "CSS", "JavaScript"],
+      links: {
+        github: "https://github.com/Yamuna-b/Petimony",
+        live: "https://petimony.onrender.com",
+      }
     },
     {
       id: 4,
       title: "Chat Support Pro",
-      images: ["/fullstack5.png"],
-      shortDesc: "Realtime customer support console",
-      fullDesc: "Conversation and assignment workflows with API endpoints and realtime updates for support operations.",
+      images: [PLACEHOLDER_VIDEO],
+      shortDesc: "Realtime helpdesk chat widget",
+      fullDesc: "Real-time helpdesk chat with Node.js, Express, Socket.io, and Firebase-backed messaging.",
       tags: ["Realtime", "Backend APIs"],
-      tools: ["Node.js", "Socket.io", "React"],
+      tools: ["Node.js", "Express", "Socket.io", "Firebase"],
       links: { github: "https://github.com/Yamuna-b/client-support-realtime-chat" },
     },
     {
       id: 5,
       title: "Porter Seva",
-      images: ["/fullstack4.png"],
+      images: [PLACEHOLDER_VIDEO],
       shortDesc: "Service booking and assignment workflows",
       fullDesc: "Booking platform modeling job lifecycle, slot handling, and user-facing status tracking.",
       tags: ["Service Platform", "CRUD Workflows"],
@@ -918,11 +917,11 @@ const projectCatalog = {
     {
       id: 1,
       title: "MarineTaxa AI",
-      images: ["/ai_2.mp4"],
-      shortDesc: "Marine species classification",
-      fullDesc: "Computer vision pipeline for marine organism classification with preprocessing and model evaluation loops.",
-      tags: ["AI/ML", "Computer Vision"],
-      tools: ["Python", "PyTorch", "OpenCV"],
+      images: ["/MarineTaxaAi.mp4"],
+      shortDesc: "AI-powered marine taxonomy platform",
+      fullDesc: "Feature extraction with UMAP + HDBSCAN and LLM-assisted classification via FastAPI on AWS.",
+      tags: ["AI/ML", "LLM"],
+      tools: ["FastAPI", "PyTorch", "LLM", "Docker", "AWS"],
       links: {
         github: "https://github.com/Yamuna-b/MarineTaxaAi",
         demo: "https://drive.google.com/file/d/1aZN2iFA1QZwSP_ftBbqv21tr_xtpykPB/view?usp=sharing",
@@ -930,54 +929,53 @@ const projectCatalog = {
     },
     {
       id: 2,
-      title: "Exoplanet Detection System",
-      images: ["/ai_1.mp4"],
-      shortDesc: "ML detection from astronomy signals",
-      fullDesc: "Model-driven detection pipeline for exoplanet identification from telescope-style data inputs.",
+      title: "ExoVision",
+      images: ["/ExoVision.mp4"],
+      shortDesc: "Exoplanet classification from NASA Space Apps data",
+      fullDesc: "Streamlit app for exoplanet classification using NASA public datasets and TensorFlow ML pipelines.",
       tags: ["AI/ML", "Astronomy"],
-      tools: ["Python", "TensorFlow", "Keras"],
+      tools: ["Python", "TensorFlow", "Streamlit"],
       links: { github: "https://github.com/Yamuna-b/nasa-spaceapps-exoplanet" },
     },
     {
       id: 3,
-      title: "Menstrual Health AI Chatbot",
-      images: ["/ai_3.mp4"],
-      shortDesc: "AI-assisted health guidance chatbot",
-      fullDesc: "Conversational assistant focused on menstrual health guidance with intent-aware response flows.",
-      tags: ["AI/ML", "NLP"],
-      tools: ["Python", "TensorFlow"],
+      title: "FitFinder",
+      images: [PLACEHOLDER_VIDEO],
+      shortDesc: "AIML virtual try-on and wardrobe visualizer",
+      fullDesc: "Virtual try-on and wardrobe visualization app built with Python and a Flask-style web stack.",
+      tags: ["AI/ML", "Computer Vision"],
+      tools: ["Python", "Flask", "HTML", "CSS"],
       links: { github: "https://github.com/Yamuna-b/FitFinder" },
     },
     {
       id: 4,
       title: "SRA – Self Realizing Agent",
-      images: ["/backend2.png"],
+      images: ["/SRA.mp4"],
       shortDesc: "Agentic reasoning and execution prototype",
       fullDesc: "Experimental plan-act-reflect style architecture for autonomous task execution.",
       tags: ["AI/ML", "Agents"],
-      tools: ["Python", "Agent loops"],
-      links: { github: "https://github.com/Yamuna-b/RepoDocs" },
+      tools: ["Python"],
     },
     {
       id: 5,
-      title: "Ecosaur",
+      title: "Ecosaur Research",
       images: ["/showcase6.jpg"],
-      shortDesc: "Carbon footprint awareness and analysis",
-      fullDesc: "Research-oriented analytics project exploring footprint awareness, mitigation strategies, and reporting.",
-      tags: ["AI/ML", "Sustainability"],
-      tools: ["Python", "Data Analytics"],
-      links: { github: "https://github.com/Yamuna-b/RepoDocs" },
+      shortDesc: "Carbon footprint awareness and mitigation research",
+      fullDesc: "Research published at IEEE AIDE 2025 on carbon footprint awareness and mitigation.",
+      tags: ["Research", "Publication"],
+      tools: ["Data Analysis", "Presentation"],
+      links: { publication: IEEE_PUBLICATION_URL },
     },
   ],
   devops: [
     {
       id: 1,
       title: "Log Beacon",
-      images: ["/backend1.png"],
-      shortDesc: "Observability and incident workflow platform",
-      fullDesc: "Structured log and incident tracking flows to improve engineering visibility, triage, and escalation.",
-      tags: ["DevOps", "Observability"],
-      tools: ["Node.js", "Express", "MongoDB"],
+      images: ["/LogBeacon.mp4"],
+      shortDesc: "Log analysis backend on AWS",
+      fullDesc: "FastAPI log analysis service with PostgreSQL, Docker, and AWS deployment.",
+      tags: ["Cloud + DevOps", "Observability", "FastAPI"],
+      tools: ["FastAPI", "PostgreSQL", "Docker", "AWS"],
       links: {
         github: "https://github.com/Yamuna-b/LogBeacon",
         demo: "https://drive.google.com/file/d/1VIW1KpCmgK-CLCpHbwdMd8BppwnZfHd-/view?usp=sharing",
@@ -986,66 +984,86 @@ const projectCatalog = {
     {
       id: 2,
       title: "CI/CD with GitHub Actions",
-      images: ["/cloud1.png"],
+      images: [PLACEHOLDER_VIDEO],
       shortDesc: "Automated build and deploy workflows",
       fullDesc: "Reusable CI/CD pipelines for lint/build/test and deployment automation.",
       tags: ["CI/CD", "GitHub Actions"],
-      tools: ["Docker", "Node.js"],
-      links: { github: "https://github.com/Yamuna-b/RepoDocs" },
+      tools: ["Docker", "GitHub Actions", "Node.js"],
+      links: { github: "https://github.com/Yamuna-b" },
     },
   ],
   frontend: [
     {
       id: 1,
       title: "ErgoCart",
-      images: ["/fullstack3.png"],
+      images: [PLACEHOLDER_VIDEO],
       shortDesc: "Ergonomic e-commerce frontend",
-      fullDesc: "Frontend-focused shopping experience with responsive layouts and ergonomic interaction patterns.",
+      fullDesc: "Responsive ergonomic products storefront built with HTML, CSS, and JavaScript.",
       tags: ["Frontend", "UI/UX"],
-      tools: ["React", "Tailwind CSS"],
+      tools: ["HTML", "CSS", "JavaScript"],
       links: { github: "https://github.com/Yamuna-b/ErgoCart" },
+    },
+    {
+      id: 2,
+      title: "RepoDocs",
+      images: [PLACEHOLDER_VIDEO],
+      shortDesc: "Repository documentation generator",
+      fullDesc: "Tooling to scaffold and maintain README and repo documentation for faster onboarding.",
+      tags: ["Developer Tools", "Documentation"],
+      tools: ["Python", "Markdown"],
+      links: { github: "https://github.com/Yamuna-b/RepoDocs" },
     },
   ],
   highlights: [
     {
       id: 1,
-      title: "Ecosaur Research Publication",
+      title: "Ecosaur — IEEE Publication",
       images: ["/showcase6.jpg"],
-      shortDesc: "Conference-level sustainability research",
-      fullDesc: "Presented carbon footprint awareness and mitigation research in an academic setting.",
+      shortDesc: "IEEE AIDE 2025 research publication",
+      fullDesc: "Published carbon footprint awareness and mitigation research at IEEE AIDE 2025.",
       tags: ["Research", "Publication"],
       tools: ["Data Analysis", "Presentation"],
-      links: { github: "https://github.com/Yamuna-b/RepoDocs" },
+      links: { publication: IEEE_PUBLICATION_URL },
     },
     {
       id: 2,
-      title: "Designthon Euphoria’24",
+      title: "Designthon Euphoria'24",
       images: ["/showcase1.jpg"],
-      shortDesc: "Design competition recognition",
-      fullDesc: "Awarded for innovation and presentation quality in a university designthon.",
+      shortDesc: "First prize — design competition",
+      fullDesc: "Awarded first prize for innovation and presentation at Kalasalingam University.",
       tags: ["Highlight", "Award"],
-      tools: ["Design Thinking"],
-      links: { github: "https://github.com/Yamuna-b/RepoDocs" },
+      tools: ["Design Thinking", "Figma"],
     },
   ],
 };
 
+const PROJECT_DOMAIN_FILTERS = [
+  { key: "placement", label: "All projects", cards: () => [
+    ...projectCatalog.backend,
+    ...projectCatalog.ai,
+    ...projectCatalog.devops,
+    ...projectCatalog.frontend,
+  ]},
+  { key: "backend", label: "Backend + Frontend", cards: () => projectCatalog.backend },
+  { key: "ai", label: "AI / ML", cards: () => projectCatalog.ai },
+  { key: "devops", label: "Cloud + DevOps", cards: () => projectCatalog.devops },
+  { key: "frontend", label: "Frontend", cards: () => projectCatalog.frontend },
+  { key: "designs", label: "Designs", cards: () => PROJECTS.uiux },
+];
+
 // Helper to check if the file is a video
 const isVideo = file => typeof file === "string" && file.match(/\.(mp4|webm|ogg)$/i);
 
-// --- Navbar: minimal recruiter-friendly links + domains ---
-function NavBar({ activeSection, setActiveSection, setExpandedCard, scrollHomeTo, openResumePreview }) {
+// ─── Navbar ───────────────────────────────────────────────────────────────────
+function NavBar({ activeSection, setActiveSection, setExpandedProject, scrollHomeTo, openResumePreview }) {
   const navItems = [
     { key: "home", label: "HOME" },
     { key: "projects", label: "PROJECTS" },
-    { key: "fullstack", label: "Backend + Frontend" },
-    { key: "ai", label: "AI/ML" },
-    { key: "cloud", label: "DevOps" },
-    { key: "showcase", label: "Designs" },
+    { key: "highlights", label: "HIGHLIGHTS" },
   ];
 
-  const runNavClick = item => {
-    setExpandedCard(null);
+  const go = item => {
+    setExpandedProject(null);
     if (item.key === "home") {
       setActiveSection("home");
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -1056,14 +1074,14 @@ function NavBar({ activeSection, setActiveSection, setExpandedCard, scrollHomeTo
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0f1117]/92 backdrop-blur-md border-b border-slate-800 flex flex-col sm:flex-row items-center justify-between px-4 sm:px-8 py-2 sm:py-3 gap-2 sm:gap-0">
-      <div className="flex items-center gap-2 order-1 sm:order-1">
-        <img
-          src="/logo.jpg"
-          alt="Logo"
-          className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover ring-2 ring-sky-600/70"
-          style={{ background: "#151520" }}
-        />
+    <nav className="fixed top-0 inset-x-0 z-50 flex flex-col sm:flex-row items-center justify-between px-4 sm:px-8 py-2 sm:py-3 gap-2 sm:gap-0"
+      style={{ background: "rgba(8,9,14,0.88)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(148,163,184,0.08)" }}>
+
+      <div className="flex items-center gap-2.5 order-1">
+        <div className="relative">
+          <div className="absolute inset-0 rounded-full bg-sky-500/30 blur-md" />
+          <img src="/logo.jpg" alt="Logo" className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover ring-2 ring-sky-500/40" />
+        </div>
         <span className="font-semibold text-base sm:text-lg text-slate-100 hidden sm:block tracking-tight">Yamuna</span>
       </div>
 
@@ -1071,211 +1089,177 @@ function NavBar({ activeSection, setActiveSection, setExpandedCard, scrollHomeTo
         <span className="font-semibold text-base text-slate-100">Yamuna</span>
       </div>
 
-      <div className="flex-1 flex justify-center order-3 sm:order-2 mt-2 sm:mt-0">
-        <div className="flex items-center gap-x-3 sm:gap-x-5 md:gap-x-6 flex-wrap justify-center">
+      <div className="flex-1 flex justify-center order-3 sm:order-2 mt-1 sm:mt-0">
+        <div className="flex items-center gap-4 sm:gap-6 flex-wrap justify-center">
           {navItems.map(item => {
-            const isActive =
-              item.isJump
-                ? false
-                : activeSection === item.key;
-            const base =
-              "text-xs sm:text-sm font-semibold tracking-wide transition-colors duration-150 " +
-              (isActive ? "text-sky-400" : "text-slate-200 hover:text-sky-300");
+            const active = activeSection === item.key;
             return (
               <button
                 key={item.key}
-                type="button"
-                onClick={() => runNavClick(item)}
-                className={base}
+                onClick={() => go(item)}
+                className={`text-xs sm:text-sm font-semibold tracking-wide transition-colors duration-150 ${active ? "text-sky-400" : "text-slate-200 hover:text-sky-400"}`}
               >
                 {item.label}
               </button>
             );
           })}
           <button
-            type="button"
-            className="text-xs sm:text-sm font-semibold tracking-wide text-slate-200 hover:text-sky-300"
             onClick={() => scrollHomeTo("contact")}
+            className="text-xs sm:text-sm font-semibold tracking-wide text-slate-200 hover:text-sky-400 transition-colors duration-150"
           >
             CONTACT
           </button>
         </div>
       </div>
 
-      <div className="flex items-center gap-2 sm:gap-2.5 order-4 sm:order-3 mt-2 sm:mt-0">
+      <div className="flex items-center gap-2 sm:gap-3 order-4 sm:order-3 mt-1 sm:mt-0">
         <button
-          type="button"
           onClick={openResumePreview}
-          className="hidden sm:inline-flex items-center px-3 py-1.5 rounded-md text-xs font-semibold bg-slate-700 hover:bg-slate-600 text-white transition-colors"
+          className="hidden sm:inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-slate-600 transition-all duration-200"
         >
-          Preview
+          Preview Resume
         </button>
         <a
           href="/resume.pdf"
           download="Yamuna_Resume.pdf"
-          className="hidden sm:inline-flex items-center px-3 py-1.5 rounded-md text-xs font-semibold bg-sky-700 hover:bg-sky-600 text-white transition-colors mr-1"
+          className="hidden sm:inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 hover:bg-sky-500 text-white transition-all duration-200"
         >
           Download
         </a>
-        <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer" title="LinkedIn" className="hidden sm:block">
-          <Linkedin className="w-5 h-5 text-sky-400 hover:text-sky-300 transition-colors" />
+        <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer" className="hidden sm:block">
+          <Linkedin className="w-4 h-4 text-sky-400 hover:text-sky-300 transition-colors" />
         </a>
-        <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer" title="GitHub" className="hidden sm:block">
-          <Github className="w-5 h-5 text-slate-300 hover:text-white transition-colors" />
+        <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer" className="hidden sm:block">
+          <Github className="w-4 h-4 text-slate-400 hover:text-white transition-colors" />
         </a>
-        <a href={personalInfo.social.leetcode} target="_blank" rel="noopener noreferrer" title="LeetCode" className="hidden lg:block">
-          <SiLeetcode className="w-5 h-5 text-amber-500/90 hover:text-amber-400 transition-colors" />
+        <a href={personalInfo.social.leetcode} target="_blank" rel="noopener noreferrer" className="hidden lg:block">
+          <SiLeetcode className="w-4 h-4 text-amber-500 hover:text-amber-400 transition-colors" />
+        </a>
+        <a href={personalInfo.social.medium} target="_blank" rel="noopener noreferrer" className="hidden lg:block">
+          <FaMedium className="w-4 h-4 text-slate-400 hover:text-white transition-colors" />
         </a>
       </div>
     </nav>
   );
 }
 
-const BackArrow = ({ activeSection, setActiveSection, show, setExpandedCard }) =>
+const BackArrow = ({ activeSection, setActiveSection, show, setExpandedProject }) =>
   show && activeSection !== "home" && (
     <button
-      onClick={() => {
-        setExpandedCard(null);
-        setActiveSection("home");
-      }}
-      className="fixed top-20 sm:top-24 left-4 sm:left-8 z-[120] flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-slate-900/95 backdrop-blur-md rounded-full shadow-lg border border-slate-700 hover:border-sky-700/70 transition-all duration-300 group"
+      onClick={() => { setExpandedProject(null); setActiveSection("home"); }}
+      className="fixed top-20 sm:top-24 left-4 sm:left-8 z-[120] flex items-center gap-2 px-3 py-2 rounded-full border border-slate-700 hover:border-sky-600/60 text-slate-300 hover:text-sky-300 transition-all duration-200 group"
+      style={{ background: "rgba(10,12,18,0.9)", backdropFilter: "blur(12px)" }}
     >
-      <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:-translate-x-1 transition-transform duration-300" />
-      <span className="text-xs sm:text-sm font-semibold text-slate-100 group-hover:text-sky-300 transition-colors duration-300">Back</span>
+      <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform duration-200" />
+      <span className="text-xs font-semibold">Back</span>
     </button>
   );
 
-// --- Profile Avatar with animated stars and your photo ---
+// ─── Profile Avatar ───────────────────────────────────────────────────────────
 function ProfileAvatar() {
-  const stars = Array.from({ length: 20 }).map(() => ({
-    top: `${25 + Math.random() * 50}%`,
-    left: `${25 + Math.random() * 50}%`,
-    size: Math.random() * 14 + 6,
-    delay: Math.random() * 2,
-  }));
   return (
-    <motion.div 
-      initial={{ scale: 0.8, opacity: 0 }}
+    <motion.div
+      initial={{ scale: 0.85, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-60 md:h-60 mx-auto flex items-center justify-center select-none"
+      transition={{ duration: 0.7, ease: "easeOut" }}
+      className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 mx-auto flex items-center justify-center select-none"
     >
-      {/* Rotating gradient ring */}
-      <motion.div 
+      <motion.div
         className="absolute inset-0 rounded-full"
-        style={{
-          background: "conic-gradient(from 0deg, #334155, #0369a1, #334155)",
-          filter: "blur(6px)",
-          opacity: 0.45,
-        }}
+        style={{ background: "conic-gradient(from 0deg, #0ea5e9, #8b5cf6, #0ea5e9)", filter: "blur(16px)", opacity: 0.35 }}
         animate={{ rotate: 360 }}
-        transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
       />
-      
-      <div className="absolute inset-0 rounded-full border-[3px] border-sky-500/70 shadow-2xl backdrop-blur" style={{
-        boxShadow: "0 0 28px 6px rgba(14,165,233,0.35), 0 0 0 6px rgba(15,23,42,0.4)"
-      }} />
-      
-      {stars.map((star, i) => (
-        <motion.div
-          key={i}
-          className="absolute rounded-full pointer-events-none"
-          style={{
-            top: star.top,
-            left: star.left,
-            width: star.size,
-            height: star.size,
-            background: "radial-gradient(ellipse at center, rgba(226,232,240,0.9) 50%, rgba(56,189,248,0.55) 100%)",
-            opacity: 0.7,
-            filter: "blur(1px)",
-          }}
-          animate={{ 
-            opacity: [0.4, 1, 0.4],
-            scale: [1, 1.3, 1]
-          }}
-          transition={{
-            duration: 2 + Math.random() * 2,
-            delay: star.delay,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-        />
-      ))}
-      
-      <motion.div 
-        className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 bg-gradient-to-br from-[#151520] via-[#0f172a] to-[#151520] rounded-full flex items-center justify-center border-[3px] border-sky-500/80 shadow-xl z-10 overflow-hidden"
-        whileHover={{ scale: 1.05 }}
+      <div
+        className="absolute inset-1 rounded-full border border-sky-500/30"
+        style={{ boxShadow: "0 0 40px rgba(14,165,233,0.25), inset 0 0 20px rgba(14,165,233,0.06)" }}
+      />
+      <motion.div
+        className="w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full overflow-hidden border-2 border-sky-500/50 z-10 shadow-2xl"
+        whileHover={{ scale: 1.04 }}
         transition={{ type: "spring", stiffness: 300 }}
       >
-        <img
-          src="/profile.jpeg"
-          alt="Yamuna"
-          className="w-full h-full object-cover"
-        />
+        <img src="/profile.jpeg" alt="Yamuna" className="w-full h-full object-cover" />
       </motion.div>
     </motion.div>
   );
 }
 
 function FeaturedThumb({ media, title }) {
-  if (typeof media === "string" && media.match(/\.(mp4|webm|ogg)$/i)) {
-    return (
-      <video
-        src={media}
-        muted
-        loop
-        playsInline
-        autoPlay
-        className="absolute inset-0 w-full h-full object-cover opacity-[0.88]"
-      />
-    );
-  }
+  if (isVideo(media))
+    return <video src={media} muted loop playsInline autoPlay className="absolute inset-0 w-full h-full object-cover" />;
   return <img src={media} alt={title || ""} className="absolute inset-0 w-full h-full object-cover" />;
 }
 
-// --- Contact Section ---
+// ─── Contact block ────────────────────────────────────────────────────────────
 const ContactSection = () => (
   <div className="space-y-4">
     <div className="flex items-center gap-3">
-      <Phone className="text-emerald-500/90 shrink-0 w-5 h-5" />
-      <a
-        href={`https://wa.me/${personalInfo.whatsapp}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center gap-2 text-slate-300 hover:text-emerald-400 text-sm break-all"
-      >
+      <Phone className="text-emerald-400/90 shrink-0 w-5 h-5" />
+      <a href={`https://wa.me/${personalInfo.whatsapp}`} target="_blank" rel="noopener noreferrer"
+        className="flex items-center gap-2 text-slate-300 hover:text-emerald-400 text-sm break-all transition-colors">
         <FaWhatsapp className="inline-block shrink-0" /> {personalInfo.phone}
       </a>
     </div>
     <div className="flex items-center gap-3">
-      <Mail className="text-sky-500 shrink-0 w-5 h-5" />
-      <a
-        href={`mailto:${personalInfo.email}`}
-        className="text-sky-400 hover:text-sky-300 text-sm break-all"
-      >
+      <Mail className="text-sky-400 shrink-0 w-5 h-5" />
+      <a href={`mailto:${personalInfo.email}`} className="text-sky-400 hover:text-sky-300 text-sm break-all transition-colors">
         {personalInfo.email}
+      </a>
+    </div>
+    <div className="flex items-center gap-3">
+      <FaMedium className="text-slate-400 shrink-0 w-5 h-5" />
+      <a href={personalInfo.social.medium} target="_blank" rel="noopener noreferrer"
+        className="text-slate-400 hover:text-slate-300 text-sm break-all transition-colors">
+        Medium Blog
       </a>
     </div>
   </div>
 );
 
-// --- Home Page Layout ---
+// ─── Skill pill ───────────────────────────────────────────────────────────────
+function SkillPill({ label }) {
+  return (
+    <span className="px-2.5 py-1 rounded-md text-xs font-medium border transition-colors duration-200 hover:border-sky-500/50 hover:text-sky-300 hover:bg-sky-950/30"
+      style={{ background: "rgba(30,40,60,0.6)", borderColor: "rgba(100,116,139,0.3)", color: "#cbd5e1" }}>
+      {label}
+    </span>
+  );
+}
+
+// ─── Section card ─────────────────────────────────────────────────────────────
+function Card({ id, children, className = "" }) {
+  return (
+    <motion.div
+      id={id}
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      className={`scroll-mt-28 rounded-2xl border p-6 sm:p-8 shadow-lg ${className}`}
+      style={{ background: "rgba(14,18,26,0.7)", borderColor: "rgba(51,65,85,0.5)", backdropFilter: "blur(8px)" }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function SectionLabel({ children }) {
+  return (
+    <h2 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: "#38bdf8" }}>
+      {children}
+    </h2>
+  );
+}
+
+// ─── HomePage ─────────────────────────────────────────────────────────────────
 function HomePage({ openResumePreview }) {
   return (
-    <section className="min-h-screen pt-20 sm:pt-28 pb-20 bg-gradient-to-b from-[#0b0c10] via-[#0f1419] to-[#0b0c10]">
-      <div className="max-w-6xl mx-auto px-4 space-y-14">
-        <div className="text-center">
+    <section className="min-h-screen pt-20 sm:pt-28 pb-20" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 40%, #08090e 100%)" }}>
+      <div className="max-w-5xl mx-auto px-4 space-y-12">
+        <div className="text-center pt-4">
           <ProfileAvatar />
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="mt-6"
-          >
-            <h1 className="text-4xl sm:text-5xl font-bold mb-3 text-slate-50 tracking-tight">
-              {personalInfo.name}
-            </h1>
-            <p className="text-lg sm:text-xl font-semibold text-sky-400/95 max-w-3xl mx-auto leading-snug">
+          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }} className="mt-7">
+            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-50 mb-3">{personalInfo.name}</h1>
+            <p className="text-base sm:text-lg font-semibold max-w-3xl mx-auto leading-snug" style={{ color: "#38bdf8" }}>
               {personalInfo.tagline1}
             </p>
             <p className="text-sm sm:text-base text-slate-400 mt-3 max-w-2xl mx-auto leading-relaxed">
@@ -1284,72 +1268,61 @@ function HomePage({ openResumePreview }) {
           </motion.div>
         </div>
 
-        <motion.div
-          id="about"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="scroll-mt-28 bg-[#12141b] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg"
-        >
-          <h2 className="text-lg font-bold text-sky-400 mb-3">About</h2>
+        <Card id="about">
+          <SectionLabel>About</SectionLabel>
           <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-3xl">{personalInfo.bio}</p>
-        </motion.div>
+        </Card>
 
         <div id="projects" className="scroll-mt-28">
-          <h2 className="text-xl sm:text-2xl font-bold text-slate-100 mb-4">Featured projects</h2>
-          <p className="text-sm text-slate-400 mb-6 max-w-2xl">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-100 mb-2">Featured projects</h2>
+          <p className="text-sm text-slate-500 mb-6 max-w-2xl">
             Systems-focused work spanning APIs, persistence, and delivery—each distilled to outcomes you can ask about in an interview.
           </p>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-5">
             {featuredProjects.map((project, idx) => (
               <motion.article
                 key={project.title}
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.05 * idx }}
-                className="bg-[#12141b] border border-slate-800 rounded-2xl overflow-hidden shadow-lg flex flex-col"
+                transition={{ delay: 0.06 * idx }}
+                className="group rounded-2xl overflow-hidden flex flex-col border transition-all duration-300 hover:border-sky-500/30"
+                style={{ background: "rgba(14,18,26,0.7)", borderColor: "rgba(51,65,85,0.5)", backdropFilter: "blur(8px)", boxShadow: "0 4px 24px rgba(0,0,0,0.25)" }}
               >
-                <div className="relative h-40 bg-slate-900 border-b border-slate-800">
+                <div className="relative h-44 bg-slate-900 border-b border-slate-800/60 overflow-hidden">
                   <FeaturedThumb media={project.image} title={project.title} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#12141b] via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e1219] via-transparent to-transparent" />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.06) 0%, transparent 60%)" }} />
                 </div>
                 <div className="p-5 flex-1 flex flex-col gap-3">
                   <div>
-                    <h3 className="text-lg font-semibold text-slate-50">{project.title}</h3>
+                    <h3 className="text-base font-semibold text-slate-50">{project.title}</h3>
                     <p className="text-sm text-slate-400 mt-1 leading-snug">{project.tagline}</p>
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5">
                     {project.stack.map(s => (
-                      <span key={s} className="px-2.5 py-0.5 bg-sky-950/70 text-sky-200 rounded-md text-xs font-medium border border-sky-900/80">
+                      <span key={s} className="px-2 py-0.5 rounded text-xs font-medium"
+                        style={{ background: "rgba(14,165,233,0.1)", color: "#7dd3fc", border: "1px solid rgba(14,165,233,0.2)" }}>
                         {s}
                       </span>
                     ))}
                   </div>
-                  <ul className="text-sm text-slate-300 space-y-1.5 list-disc ml-5 flex-1">
-                    {project.bullets.map((b, bi) => (
-                      <li key={`${project.title}-${bi}`}>{b}</li>
-                    ))}
+                  <ul className="text-sm text-slate-300 space-y-1.5 list-disc ml-5 flex-1 leading-relaxed">
+                    {project.bullets.map((b, bi) => <li key={bi}>{b}</li>)}
                   </ul>
-                  <div className="flex flex-wrap gap-3 pt-1">
-                    {project.links?.github && project.links.github !== "#" ? (
-                      <a
-                        href={project.links.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm font-semibold text-sky-400 hover:text-sky-300"
-                      >
-                        View code →
+                  <div className="flex flex-wrap gap-4 pt-1">
+                    {project.links?.github && project.links.github !== "#" && (
+                      <a href={project.links.github} target="_blank" rel="noopener noreferrer"
+                        className="text-xs font-semibold text-sky-400 hover:text-sky-300 transition-colors flex items-center gap-1">
+                        <Github className="w-3.5 h-3.5" /> View code
                       </a>
-                    ) : null}
-                    {project.links?.live && project.links.live !== "#" ? (
-                      <a
-                        href={project.links.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm font-semibold text-sky-400 hover:text-sky-300"
-                      >
-                        Live demo →
+                    )}
+                    {project.links?.live && project.links.live !== "#" && (
+                      <a href={project.links.live} target="_blank" rel="noopener noreferrer"
+                        className="text-xs font-semibold text-sky-400 hover:text-sky-300 transition-colors flex items-center gap-1">
+                        <ExternalLink className="w-3.5 h-3.5" /> Live demo
                       </a>
-                    ) : null}
+                    )}
                   </div>
                 </div>
               </motion.article>
@@ -1357,365 +1330,391 @@ function HomePage({ openResumePreview }) {
           </div>
         </div>
 
-        <motion.div
-          id="skills"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="scroll-mt-28 bg-[#12141b] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg"
-        >
-          <h2 className="text-lg font-bold text-sky-400 mb-5">Technical skills</h2>
+        <Card id="skills">
+          <SectionLabel>Technical skills</SectionLabel>
+          <p className="text-sm text-slate-400 mb-5 max-w-3xl leading-relaxed">
+            Data structures &amp; algorithms: arrays, strings, hashing, trees, graphs, recursion, dynamic programming; familiar with typical FAANG-style problem patterns.
+          </p>
           <div className="space-y-5">
             {personalInfo.skillGroups.map(group => (
               <div key={group.title}>
-                <div className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">{group.title}</div>
-                <div className="flex flex-wrap gap-2">
-                  {group.items.map(item => (
-                    <span
-                      key={item}
-                      className="px-2.5 py-1 bg-slate-800/90 text-slate-200 rounded-md text-xs border border-slate-700"
-                    >
-                      {item}
-                    </span>
-                  ))}
+                <div className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2">{group.title}</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {group.items.map(item => <SkillPill key={item} label={item} />)}
                 </div>
               </div>
             ))}
           </div>
-        </motion.div>
+        </Card>
 
-        <motion.div
-          id="contact"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="scroll-mt-28 max-w-lg mx-auto bg-[#12141b] border border-slate-800 rounded-2xl p-8 shadow-lg"
-        >
-          <h2 className="text-lg font-bold text-sky-400 mb-4 text-center">Get in touch</h2>
-          <ContactSection />
-          <div className="flex justify-center gap-4 mt-5">
-            <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <Linkedin className="w-6 h-6 text-sky-400 hover:text-sky-300 transition-colors" />
-            </a>
-            <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <Github className="w-6 h-6 text-slate-300 hover:text-white transition-colors" />
-            </a>
-            <a href={personalInfo.social.leetcode} target="_blank" rel="noopener noreferrer" aria-label="LeetCode">
-              <SiLeetcode className="w-6 h-6 text-amber-500/90 hover:text-amber-400 transition-colors" />
-            </a>
-          </div>
-          <div className="grid grid-cols-2 gap-3 mt-5">
-            <button
-              type="button"
-              onClick={openResumePreview}
-              className="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-semibold text-sm transition-colors"
-            >
-              Preview
-            </button>
-            <a
-              href="/resume.pdf"
-              download="Yamuna_Resume.pdf"
-              className="px-5 py-2.5 bg-sky-700 hover:bg-sky-600 text-white rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-colors"
-            >
-              <Download className="w-4 h-4" /> Download
-            </a>
-          </div>
-        </motion.div>
-
-        <motion.div
-          id="experience"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="scroll-mt-28 bg-[#12141b] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg"
-        >
-          <h2 className="text-lg font-bold text-sky-400 mb-5">Experience</h2>
-          <div className="space-y-6">
+        <Card id="experience">
+          <SectionLabel>Experience</SectionLabel>
+          <div className="space-y-7">
             {experience.map((exp, idx) => (
-              <div key={`${exp.company}-${idx}`} className="flex gap-4 pb-6 border-b border-slate-800 last:border-0 last:pb-0">
-                <img src={exp.logo} className="w-12 h-12 rounded-full object-cover ring-2 ring-sky-800 shrink-0" alt="" />
+              <div key={idx} className="flex gap-4 pb-7 border-b last:border-0 last:pb-0" style={{ borderColor: "rgba(51,65,85,0.4)" }}>
+                <img src={exp.logo} className="w-12 h-12 rounded-xl object-cover ring-1 ring-slate-700 shrink-0" alt="" />
                 <div className="min-w-0">
-                  <div className="font-semibold text-slate-100">
-                    {exp.role} · {exp.company}
-                  </div>
-                  <div className="text-xs text-sky-500 mt-0.5">{exp.duration}</div>
-                  <p className="text-sm text-slate-400 mt-2">{exp.desc}</p>
+                  <div className="font-semibold text-slate-100 text-sm">{exp.role} · {exp.company}</div>
+                  <div className="text-xs text-sky-500 mt-0.5 font-medium">{exp.duration}</div>
+                  <p className="text-sm text-slate-400 mt-2 leading-relaxed">{exp.desc}</p>
                   {exp.bullets?.length ? (
-                    <ul className="mt-3 text-sm text-slate-300 space-y-1.5 list-disc ml-5">
-                      {exp.bullets.map(bullet => (
-                        <li key={bullet.slice(0, 52)}>{bullet}</li>
-                      ))}
+                    <ul className="mt-3 text-sm text-slate-300 space-y-1.5 list-disc ml-5 leading-relaxed">
+                      {exp.bullets.map(b => <li key={b.slice(0, 40)}>{b}</li>)}
                     </ul>
                   ) : null}
                   {exp.link ? (
-                    <a
-                      href={exp.link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block mt-3 px-3 py-1.5 bg-sky-800 hover:bg-sky-700 text-white rounded-lg text-xs font-semibold transition-colors"
-                    >
-                      {exp.link.text}
+                    <a href={exp.link.url} target="_blank" rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 mt-3 px-3 py-1.5 bg-sky-900/50 hover:bg-sky-800/60 text-sky-300 rounded-lg text-xs font-semibold border border-sky-800/50 transition-all">
+                      <ExternalLink className="w-3 h-3" /> {exp.link.text}
                     </a>
                   ) : null}
                 </div>
               </div>
             ))}
           </div>
-        </motion.div>
+        </Card>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          <motion.div
-            id="education"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="scroll-mt-28 bg-[#12141b] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg"
-          >
-            <h2 className="text-lg font-bold text-sky-400 mb-4">Education</h2>
+        <div id="coding-activity" className="scroll-mt-28 max-w-5xl mx-auto">
+          <Stats />
+        </div>
+
+        <Card id="blog-highlights">
+          <SectionLabel>Blog highlights</SectionLabel>
+          <BlogHighlights />
+        </Card>
+
+        <div className="grid md:grid-cols-2 gap-5">
+          <Card id="leadership">
+            <SectionLabel>Leadership &amp; campus roles</SectionLabel>
+            <div className="space-y-5 text-sm">
+              {[
+                { title: "Class Representative", sub: "B.E. CSE Dept (2024–Present)", desc: "Relayed coursework and departmental updates between faculty and classmates; coordinated schedules and surfaced blockers early so deadlines stayed workable." },
+                { title: "Placement Batch Head", sub: "B.E. CSE (2025–Present)", desc: "Helped synchronize placement cohort communication—announcements, deadlines, and escalation paths—keeping the batch aligned with training and recruiter timelines." },
+                { title: "Committee Head · Academic Cell", sub: "2024–Present · VCET", desc: "Academic coordination and initiatives." },
+                { title: "Eco Club Member", sub: "VCET · 2024–Present", desc: "Volunteered at eco-awareness and campus sustainability events throughout 2025." },
+              ].map((r, i) => (
+                <div key={i} className="flex gap-3">
+                  <img src="/Vcetlogo.jpg" className="w-9 h-9 rounded-lg object-cover ring-1 ring-slate-700 shrink-0" alt="" />
+                  <div>
+                    <div className="font-semibold text-slate-100 text-sm">{r.title}</div>
+                    <div className="text-xs text-sky-500 mt-0.5">{r.sub}</div>
+                    {r.desc && <p className="text-slate-400 mt-1 text-xs leading-relaxed">{r.desc}</p>}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-8 pt-6 border-t" style={{ borderColor: "rgba(51,65,85,0.4)" }}>
+              <div className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">Entrepreneurial &amp; leadership initiatives</div>
+              <ul className="text-sm text-slate-300 space-y-2.5 list-disc ml-5 leading-relaxed">
+                {entrepreneurialInitiatives.map(item => <li key={item.slice(0, 48)}>{item}</li>)}
+              </ul>
+            </div>
+          </Card>
+
+          <Card id="education">
+            <SectionLabel>Education</SectionLabel>
             {education.map(edu => (
               <div key={edu.degree} className="mb-5 flex gap-3 last:mb-0">
-                <img src={edu.logo} className="w-11 h-11 rounded-full object-cover ring-2 ring-sky-800 shrink-0" alt="" />
+                <img src={edu.logo} className="w-11 h-11 rounded-xl object-cover ring-1 ring-slate-700 shrink-0" alt="" />
                 <div>
                   <div className="text-sm font-semibold text-slate-100">{edu.degree}</div>
-                  <div className="text-xs text-sky-500">{edu.year}</div>
+                  <div className="text-xs text-sky-500 font-medium mt-0.5">{edu.year}</div>
                   <div className="text-xs text-slate-400 mt-1">{edu.org}</div>
                 </div>
               </div>
             ))}
-          </motion.div>
-
-          <motion.div
-            id="leadership"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="scroll-mt-28 bg-[#12141b] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg"
-          >
-            <h2 className="text-lg font-bold text-sky-400 mb-4">Leadership & campus roles</h2>
-            <div className="space-y-5 text-sm">
-              <div className="flex gap-3">
-                <img src="/Vcetlogo.jpg" className="w-9 h-9 rounded-full object-cover ring-2 ring-sky-800 shrink-0" alt="" />
-                <div>
-                  <div className="font-semibold text-slate-100">Class Representative</div>
-                  <div className="text-xs text-sky-500 mt-0.5">B.E. CSE Dept (2024–Present)</div>
-                  <div className="text-xs text-slate-400 mt-1">Velammal College of Engineering and Technology</div>
-                  <p className="text-slate-300 mt-2 text-xs leading-relaxed">
-                    Relayed coursework and departmental updates between faculty and classmates; coordinated schedules and surfaced blockers early so deadlines stayed workable.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <img src="/Vcetlogo.jpg" className="w-9 h-9 rounded-full object-cover ring-2 ring-sky-800 shrink-0" alt="" />
-                <div>
-                  <div className="font-semibold text-slate-100">Placement Batch Head</div>
-                  <div className="text-xs text-sky-500 mt-0.5">B.E. CSE (2025–Present)</div>
-                  <div className="text-xs text-slate-400 mt-1">Velammal College of Engineering and Technology</div>
-                  <p className="text-slate-300 mt-2 text-xs leading-relaxed">
-                    Helped synchronize placement cohort communication—announcements, deadlines, and escalation paths—keeping the batch aligned with training and recruiter timelines.
-                  </p>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <img src="/Vcetlogo.jpg" className="w-9 h-9 rounded-full object-cover ring-2 ring-sky-800 shrink-0" alt="" />
-                <div>
-                  <div className="font-semibold text-slate-100">Committee Head · Academic Cell</div>
-                  <div className="text-xs text-sky-500 mt-0.5">2024–Present · VCET</div>
-                  <div className="text-xs text-slate-400 mt-1">Academic coordination and initiatives</div>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <img src="/Vcetlogo.jpg" className="w-9 h-9 rounded-full object-cover ring-2 ring-sky-800 shrink-0" alt="" />
-                <div>
-                  <div className="font-semibold text-slate-100">Eco Club Member</div>
-                  <div className="text-xs text-sky-500 mt-0.5">VCET · 2024–Present</div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        <motion.div
-          id="languages-soft-skills"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="scroll-mt-28 bg-[#12141b] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg"
-        >
-          <div className="grid sm:grid-cols-2 gap-8">
-            <div>
-              <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-3">Languages</h3>
-              {personalInfo.languages.map(lang => (
-                <div key={lang.name} className="flex justify-between text-sm text-slate-300 py-1.5 border-b border-slate-800 last:border-0">
-                  <span>{lang.name}</span>
-                  <span className="text-sky-500 font-medium">{lang.level}</span>
-                </div>
-              ))}
-            </div>
-            <div>
-              <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-3">Soft skills</h3>
-              <div className="flex flex-wrap gap-2">
-                {personalInfo.softSkills.map(skill => (
-                  <span key={skill} className="px-2.5 py-1 bg-slate-800 text-slate-200 rounded-md text-xs border border-slate-700">
-                    {skill}
-                  </span>
+            <div className="mt-8 pt-6 border-t" style={{ borderColor: "rgba(51,65,85,0.4)" }}>
+              <div className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">Languages &amp; soft skills</div>
+              <div className="space-y-2 mb-4">
+                {personalInfo.languages.map(lang => (
+                  <div key={lang.name} className="flex justify-between text-sm text-slate-300">
+                    <span>{lang.name}</span>
+                    <span className="text-sky-400 font-medium text-xs">{lang.level}</span>
+                  </div>
                 ))}
               </div>
+              <div className="flex flex-wrap gap-1.5">
+                {personalInfo.softSkills.map(skill => <SkillPill key={skill} label={skill} />)}
+              </div>
             </div>
-          </div>
-        </motion.div>
-
-        <div id="coding-activity" className="scroll-mt-28 max-w-5xl mx-auto pb-8">
-          <Stats />
+          </Card>
         </div>
+
+        <Card id="contact" className="max-w-2xl mx-auto">
+          <SectionLabel>Get in touch</SectionLabel>
+          <p className="text-sm text-slate-300 mb-2 leading-relaxed">
+            Open to backend/SDE roles, internships, and collaborations on data-intensive or AI-powered products.
+          </p>
+          <p className="text-xs text-slate-500 mb-5">
+            For faster responses: email first, then WhatsApp for coordination.
+          </p>
+          <ContactSection />
+          <div className="flex flex-wrap justify-center gap-4 mt-5">
+            <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <Linkedin className="w-5 h-5 text-sky-400 hover:text-sky-300 transition-colors" />
+            </a>
+            <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <Github className="w-5 h-5 text-slate-400 hover:text-white transition-colors" />
+            </a>
+            <a href={personalInfo.social.leetcode} target="_blank" rel="noopener noreferrer" aria-label="LeetCode">
+              <SiLeetcode className="w-5 h-5 text-amber-500 hover:text-amber-400 transition-colors" />
+            </a>
+            <a href={personalInfo.social.medium} target="_blank" rel="noopener noreferrer" aria-label="Medium">
+              <FaMedium className="w-5 h-5 text-slate-400 hover:text-white transition-colors" />
+            </a>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
+            <button onClick={openResumePreview}
+              className="px-5 py-2.5 rounded-xl font-semibold text-sm border border-slate-700 hover:border-slate-600 text-slate-200 hover:text-white transition-all duration-200"
+              style={{ background: "rgba(30,40,55,0.7)" }}>
+              Preview Resume
+            </button>
+            <a href="/resume.pdf" download="Yamuna_Resume.pdf"
+              className="px-5 py-2.5 bg-sky-600 hover:bg-sky-500 text-white rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all duration-200">
+              <Download className="w-4 h-4" /> Download Resume
+            </a>
+          </div>
+        </Card>
       </div>
     </section>
   );
 }
 
-// --- Project Card Grid, Tabs, Modal, and App Component ---
-function ProjectGrid({ cards, expandedCard, setExpandedCard, columnsLg = 2, invisible = false }) {
-  const [hoveredCard, setHoveredCard] = useState(null);
+// ─── Media Swiper ─────────────────────────────────────────────────────────────
+function SingleMedia({ media, className = "", showControls = false }) {
+  if (isVideo(media)) {
+    return (
+      <video
+        src={media}
+        className={`w-full h-full object-contain ${className}`}
+        autoPlay
+        loop
+        muted
+        playsInline
+        controls={showControls}
+      />
+    );
+  }
+  return <img src={media} alt="" className={`w-full h-full object-contain ${className}`} draggable={false} />;
+}
 
-  const gridClass = columnsLg === 4 
-    ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 auto-rows-auto"
-    : "grid grid-cols-1 md:grid-cols-2 gap-7 auto-rows-auto";
+function MultiMediaSwiper({ mediaList, className = "", showControls = false }) {
+  const swiperRef = useRef(null);
+  const videoRefs = useRef({});
+  const timerRef = useRef(null);
 
-  const cardClass = invisible
-    ? "relative group rounded-2xl cursor-pointer overflow-hidden hover:scale-105 transition-all duration-300 flex items-center justify-center min-h-[220px] bg-transparent"
-    : "relative group rounded-2xl shadow-lg border border-gray-800 cursor-pointer overflow-hidden hover:shadow-2xl hover:shadow-blue-500/30 transition-all duration-300 flex items-center justify-center min-h-[220px] bg-[#0d0d15]";
+  const handleSlide = () => {
+    const swiper = swiperRef.current;
+    if (!swiper) return;
+    const idx = swiper.realIndex;
+    const video = videoRefs.current[idx];
+
+    Object.values(videoRefs.current).forEach(v => {
+      if (v) { v.pause(); v.onended = null; }
+    });
+    if (timerRef.current) { clearTimeout(timerRef.current); timerRef.current = null; }
+
+    if (video) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+      video.onended = () => { if (mediaList.length > 1) swiper.slideNext(); };
+    } else if (mediaList.length > 1) {
+      timerRef.current = setTimeout(() => swiper.slideNext(), 2500);
+    }
+  };
+
+  useEffect(() => () => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    Object.values(videoRefs.current).forEach(v => { if (v) v.onended = null; });
+  }, []);
+
+  return (
+    <Swiper
+      modules={[Pagination, Navigation]}
+      slidesPerView={1}
+      loop={mediaList.length > 1}
+      pagination={{ clickable: true }}
+      navigation={mediaList.length > 1}
+      onSwiper={s => { swiperRef.current = s; requestAnimationFrame(handleSlide); }}
+      onSlideChange={handleSlide}
+      className={className}
+    >
+      {mediaList.map((media, idx) => (
+        <SwiperSlide key={idx} className="flex items-center justify-center">
+          {isVideo(media) ? (
+            <video ref={el => (videoRefs.current[idx] = el)} src={media} muted playsInline controls={showControls}
+              className="w-full h-full object-contain" style={{ pointerEvents: showControls ? "auto" : "none" }} />
+          ) : (
+            <img src={media} alt="" className="w-full h-full object-contain" draggable={false} style={{ pointerEvents: "none" }} />
+          )}
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  );
+}
+
+function MediaSwiper({ mediaList, className = "", showControls = false }) {
+  if (mediaList.length === 1) {
+    return <SingleMedia media={mediaList[0]} className={className} showControls={showControls} />;
+  }
+  return <MultiMediaSwiper mediaList={mediaList} className={className} showControls={showControls} />;
+}
+
+function ProjectExpandModal({ project, onClose }) {
+  useEffect(() => {
+    if (!project) return undefined;
+    const onKeyDown = e => { if (e.key === "Escape") onClose(); };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [project, onClose]);
+
+  if (!project) return null;
+
+  const mediaList = (project.images?.length ? project.images : [project.src]).filter(Boolean);
+
+  return createPortal(
+    <AnimatePresence>
+      <motion.div
+        key={project.title}
+        className="fixed inset-0 z-[200] flex items-center justify-center"
+        style={{ background: "rgba(0,0,0,0.88)", backdropFilter: "blur(8px)" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+      >
+        <motion.div
+          className="relative w-full max-w-[98vw] sm:max-w-6xl h-[min(92dvh,95vh)] rounded-2xl overflow-hidden bg-black mx-2 sm:mx-0"
+          initial={{ scale: 0.97, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.97, opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          onClick={e => e.stopPropagation()}
+        >
+          <div className="w-full h-full flex items-center justify-center">
+            <MediaSwiper mediaList={mediaList} className="w-full h-full" showControls />
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute top-4 right-4 z-[210] w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-xl transition-colors"
+            style={{ background: "rgba(14,165,233,0.85)" }}
+            aria-label="Close"
+          >
+            ×
+          </button>
+          {project.links && Object.entries(project.links).filter(([k, url]) => url && url !== "#" && !["demo", "behance", "figma"].includes(k)).map(([k, url]) => (
+            <a key={k} href={url} target="_blank" rel="noopener noreferrer"
+              className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[210] px-7 py-2.5 rounded-xl font-bold text-sm text-white transition-all hover:scale-105"
+              style={{ background: "linear-gradient(135deg, #0284c7, #7c3aed)" }}>
+              {k.charAt(0).toUpperCase() + k.slice(1)}
+            </a>
+          ))}
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>,
+    document.body
+  );
+}
+
+// ─── Project Grid ─────────────────────────────────────────────────────────────
+function ProjectGrid({ cards, expandedProject, setExpandedProject, columnsLg = 2, invisible = false }) {
+  const [hovered, setHovered] = useState(null);
+
+  const gridClass = columnsLg === 4
+    ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 auto-rows-auto"
+    : columnsLg === 3
+      ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 auto-rows-auto"
+    : "grid grid-cols-1 md:grid-cols-2 gap-5 auto-rows-auto";
+
+  const isExpanded = project =>
+    expandedProject && (expandedProject.id === project.id || expandedProject.title === project.title);
 
   return (
     <div className={gridClass}>
-      {cards.map((project, idx) => {
-        const images = (project.images && project.images.length > 0) ? project.images : [project.src];
+      {cards.map((project) => {
+        const images = project.images?.length ? project.images : [project.src];
         const onlyVideos = images.every(isVideo);
         const onlyImages = images.every(img => !isVideo(img));
         const singleVideo = onlyVideos && images.length === 1;
         const singleImage = onlyImages && images.length === 1;
         const multipleImages = onlyImages && images.length > 1;
+        const expanded = isExpanded(project);
+
+        const cardStyle = invisible
+          ? "relative group rounded-2xl cursor-default overflow-hidden flex items-center justify-center min-h-[200px] bg-transparent"
+          : "relative group rounded-2xl overflow-hidden cursor-pointer flex items-center justify-center min-h-[200px] transition-all duration-300 hover:scale-[1.01]";
+
+        const cardBg = invisible ? {} : {
+          background: "rgba(12,16,24,0.85)",
+          border: "1px solid rgba(51,65,85,0.5)",
+          boxShadow: "0 4px 24px rgba(0,0,0,0.3)",
+        };
 
         return (
           <div
-            key={project.id || project.title}
-            className={cardClass}
-            onMouseEnter={() => setHoveredCard(idx)}
-            onMouseLeave={() => setHoveredCard(null)}
-            onClick={() => !invisible && setExpandedCard(idx)}
-            style={{ cursor: invisible ? 'default' : 'pointer' }}
+            key={`${project.id ?? ""}-${project.title}`}
+            className={cardStyle}
+            style={cardBg}
+            onMouseEnter={() => setHovered(project.title)}
+            onMouseLeave={() => setHovered(null)}
+            onClick={() => !invisible && setExpandedProject(project)}
           >
-            {/* Single Video */}
-            {singleVideo && (
-              <video
-                src={images[0]}
-                autoPlay
-                loop
-                muted
-                playsInline
-                controls={false}
-                className="w-full h-full object-contain"
-              />
+            {singleVideo && !expanded && (
+              <video src={images[0]} autoPlay loop muted playsInline controls={false}
+                className="w-full h-full object-contain" />
             )}
-
-            {/* Single Image */}
+            {singleVideo && expanded && (
+              <div className="w-full h-full min-h-[200px] bg-slate-900/80 flex items-center justify-center">
+                <span className="text-xs text-slate-500">Expanded</span>
+              </div>
+            )}
             {singleImage && (
-              <img
-                src={images[0]}
-                alt={project.title}
-                className="w-full h-full object-contain"
-              />
+              <img src={images[0]} alt={project.title} className="w-full h-full object-contain" />
             )}
-
-            {/* Multiple Images (Swiper) */}
             {multipleImages && (
-              <Swiper
-                modules={[Autoplay]}
-                slidesPerView={1}
-                autoplay={{ delay: 2500, disableOnInteraction: false }}
-                loop
-                className="w-full h-full"
-              >
+              <Swiper modules={[Autoplay]} slidesPerView={1} autoplay={{ delay: 2500, disableOnInteraction: false }} loop className="w-full h-full">
                 {images.map((img, i) => (
                   <SwiperSlide key={i} className="!h-full flex items-center justify-center">
-                    <img
-                      src={img}
-                      alt={project.title}
-                      className="w-full h-full object-contain"
-                    />
+                    <img src={img} alt={project.title} className="w-full h-full object-contain" />
                   </SwiperSlide>
                 ))}
               </Swiper>
             )}
 
-            {/* Hover overlay: only on hover, pretty effect */}
             <AnimatePresence>
-              {hoveredCard === idx && expandedCard === null && !invisible && (
+              {hovered === project.title && !expandedProject && !invisible && (
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/70 backdrop-blur rounded-2xl p-6"
-                >
-                  <h2 className="text-lg font-bold text-white mb-2 text-center">{project.title}</h2>
-                  <p className="text-sm text-blue-100 mb-2 text-center">{project.shortDesc || project.desc}</p>
-                  <div className="flex flex-wrap gap-2 mb-2 justify-center">
-                    {(project.tags || []).map(tag => (
-                      <span key={tag} className="px-3 py-1 bg-blue-900 text-blue-100 text-xs rounded-full">{tag}</span>
-                    ))}
-                  </div>
-                  <div className="flex flex-wrap gap-2 mb-2 justify-center">
-                    {(project.tools || []).map(tool => (
-                      <span key={tool} className="px-3 py-1 bg-fuchsia-900 text-fuchsia-100 text-xs rounded-full">{tool}</span>
-                    ))}
-                  </div>
-                  <span className="text-xs text-blue-200 mt-2">(Click to expand)</span>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Modal expand on click (unchanged, still uses MediaSwiper for expanded view) */}
-            <AnimatePresence>
-              {expandedCard === idx && (
-                <motion.div
-                  className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  onClick={() => setExpandedCard(null)}
+                  transition={{ duration: 0.18 }}
+                  className="absolute inset-0 z-10 flex flex-col items-center justify-center p-6 rounded-2xl"
+                  style={{ background: "rgba(8,10,18,0.88)", backdropFilter: "blur(6px)" }}
                 >
-                  <motion.div
-                    className="relative w-[98vw] h-[95vh] rounded-2xl overflow-hidden"
-                    initial={{ scale: 0.95, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.95, opacity: 0 }}
-                    onClick={e => e.stopPropagation()}
-                  >
-                    {/* Full screen media */}
-                    <div className="w-full h-full flex items-center justify-center bg-black">
-                      <MediaSwiper
-                        mediaList={project.images || [project.src]}
-                        className="w-full h-full"
-                      />
-                    </div>
-
-                    {/* Close button - X */}
-                    <button
-                      onClick={() => setExpandedCard(null)}
-                      className="absolute top-4 right-4 z-[110] text-white bg-blue-900 hover:bg-red-600 rounded-full w-12 h-12 flex items-center justify-center text-3xl font-bold shadow-lg"
-                      aria-label="Close"
-                    >
-                      ×
-                    </button>
-
-                    {/* GitHub button - bottom center */}
-                    {project.links && Object.entries(project.links).filter(([key]) => {
-                      return !['demo', 'behance', 'figma'].includes(key.toLowerCase());
-                    }).map(([key, url]) => (
-                      <a
-                        key={key}
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-[110] px-8 py-3 bg-gradient-to-r from-blue-700 to-fuchsia-700 text-white rounded-xl font-bold text-sm shadow-lg hover:scale-110 hover:bg-blue-800 transition-all duration-200"
-                      >
-                        {key.charAt(0).toUpperCase() + key.slice(1)}
-                      </a>
+                  <h2 className="text-base font-bold text-white mb-2 text-center">{project.title}</h2>
+                  <p className="text-sm text-slate-300 mb-3 text-center leading-relaxed">{project.shortDesc || project.desc}</p>
+                  <div className="flex flex-wrap gap-1.5 mb-2 justify-center">
+                    {(project.tags || []).map(tag => (
+                      <span key={tag} className="px-2.5 py-0.5 rounded-full text-xs font-medium"
+                        style={{ background: "rgba(14,165,233,0.15)", color: "#7dd3fc", border: "1px solid rgba(14,165,233,0.25)" }}>
+                        {tag}
+                      </span>
                     ))}
-                  </motion.div>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5 justify-center">
+                    {(project.tools || []).map(tool => (
+                      <span key={tool} className="px-2.5 py-0.5 rounded-full text-xs font-medium"
+                        style={{ background: "rgba(139,92,246,0.15)", color: "#c4b5fd", border: "1px solid rgba(139,92,246,0.25)" }}>
+                        {tool}
+                      </span>
+                    ))}
+                  </div>
+                  <span className="text-xs text-slate-500 mt-3">Click to expand</span>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -1726,7 +1725,7 @@ function ProjectGrid({ cards, expandedCard, setExpandedCard, columnsLg = 2, invi
   );
 }
 
-function TabbedSection({ title, tabs, cardsByTab, expandedCard, setExpandedCard }) {
+function TabbedSection({ title, tabs, cardsByTab, expandedProject, setExpandedProject }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState(tabs[0].value);
 
@@ -1797,7 +1796,7 @@ function TabbedSection({ title, tabs, cardsByTab, expandedCard, setExpandedCard 
             </p>
           </div>
         ) : (
-          <ProjectGrid cards={currentCards} expandedCard={expandedCard} setExpandedCard={setExpandedCard} />
+          <ProjectGrid cards={currentCards} expandedProject={expandedProject} setExpandedProject={setExpandedProject} />
         )}
       </div>
     </div>
@@ -1805,7 +1804,7 @@ function TabbedSection({ title, tabs, cardsByTab, expandedCard, setExpandedCard 
 }
 
 // Section for Cloud, AI, etc.
-function Section({ title, cards, expandedCard, setExpandedCard, columnsLg = 2, invisible = false }) {
+function Section({ title, cards, expandedProject, setExpandedProject, columnsLg = 2, invisible = false }) {
   const [searchQuery, setSearchQuery] = useState('');
 
   // Filter cards based on search query
@@ -1820,44 +1819,84 @@ function Section({ title, cards, expandedCard, setExpandedCard, columnsLg = 2, i
   }, [cards, searchQuery]);
 
   return (
-    <div className="min-h-screen pt-20 sm:pt-32 pb-16 bg-[#0b0c10]">
+    <div className="min-h-screen pt-20 sm:pt-32 pb-16" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 40%, #08090e 100%)" }}>
       <div className="max-w-7xl mx-auto px-6">
-        <h1 className="text-4xl font-bold text-white mb-4 mt-8">{title}</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4 mt-8 tracking-tight">{title}</h1>
         <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         {filteredCards.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gray-400 text-lg">No projects found matching "{searchQuery}"</p>
-          </div>
+          <div className="text-center py-16"><p className="text-slate-500">No results for "{searchQuery}"</p></div>
         ) : (
-          <ProjectGrid cards={filteredCards} expandedCard={expandedCard} setExpandedCard={setExpandedCard} columnsLg={columnsLg} invisible={invisible} />
+          <ProjectGrid cards={filteredCards} expandedProject={expandedProject} setExpandedProject={setExpandedProject} columnsLg={columnsLg} invisible={invisible} />
         )}
       </div>
     </div>
   );
 }
 
-function ProjectsOverview({ expandedCard, setExpandedCard }) {
-  const grouped = [
-    { title: "Backend + Frontend", cards: projectCatalog.backend },
-    { title: "AI/ML", cards: projectCatalog.ai },
-    { title: "DevOps", cards: projectCatalog.devops },
-    { title: "Frontend", cards: projectCatalog.frontend },
-    { title: "Highlights", cards: projectCatalog.highlights },
-  ];
+function ProjectsOverview({ expandedProject, setExpandedProject }) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeDomain, setActiveDomain] = useState("placement");
+
+  const domainCards = useMemo(() => {
+    const filter = PROJECT_DOMAIN_FILTERS.find(f => f.key === activeDomain);
+    return filter ? filter.cards() : PROJECT_DOMAIN_FILTERS[0].cards();
+  }, [activeDomain]);
+
+  const filteredCards = useMemo(() => {
+    if (!searchQuery) return domainCards;
+    const q = searchQuery.toLowerCase();
+    return domainCards.filter(card =>
+      card.title?.toLowerCase().includes(q) ||
+      card.shortDesc?.toLowerCase().includes(q) ||
+      card.desc?.toLowerCase().includes(q) ||
+      card.fullDesc?.toLowerCase().includes(q) ||
+      card.tags?.some(t => t.toLowerCase().includes(q))
+    );
+  }, [domainCards, searchQuery]);
 
   return (
-    <div className="min-h-screen pt-20 sm:pt-32 pb-16 bg-[#0b0c10]">
+    <div className="min-h-screen pt-20 sm:pt-32 pb-16" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 40%, #08090e 100%)" }}>
       <div className="max-w-7xl mx-auto px-6">
-        <h1 className="text-4xl font-bold text-white mb-4 mt-8">Projects</h1>
-        <p className="text-slate-400 mb-8">Grouped by domain so each track maps clearly to your SDE narrative.</p>
-        <div className="space-y-12">
-          {grouped.map(group => (
-            <section key={group.title}>
-              <h2 className="text-2xl font-semibold text-sky-300 mb-4">{group.title}</h2>
-              <ProjectGrid cards={group.cards} expandedCard={expandedCard} setExpandedCard={setExpandedCard} />
-            </section>
+        <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2 mt-8 tracking-tight">Projects</h1>
+        <p className="text-slate-500 mb-6 text-sm">Browse all work, or filter by domain.</p>
+
+        <div className="flex flex-wrap gap-2 mb-6">
+          {PROJECT_DOMAIN_FILTERS.map(f => (
+            <button
+              key={f.key}
+              type="button"
+              onClick={() => setActiveDomain(f.key)}
+              className={`px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 border ${
+                activeDomain === f.key
+                  ? "bg-sky-600/90 text-white border-sky-500/60 shadow-md shadow-sky-900/30"
+                  : "bg-slate-900/60 text-slate-300 border-slate-700 hover:border-sky-600/40 hover:text-sky-300"
+              }`}
+            >
+              {f.label}
+            </button>
           ))}
         </div>
+
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+
+        {activeDomain === "designs" && (
+          <p className="text-sm text-slate-400 max-w-3xl mb-6 leading-relaxed border-l-2 border-sky-500/30 pl-4">
+            {DESIGNS_INTRO}
+          </p>
+        )}
+
+        {filteredCards.length === 0 ? (
+          <div className="text-center py-16">
+            <p className="text-slate-500">No projects match your search in this domain.</p>
+          </div>
+        ) : (
+          <ProjectGrid
+            cards={filteredCards}
+            expandedProject={expandedProject}
+            setExpandedProject={setExpandedProject}
+            columnsLg={activeDomain === "designs" ? 3 : 2}
+          />
+        )}
       </div>
     </div>
   );
@@ -1881,7 +1920,7 @@ function ResumePreviewModal({ open, onClose }) {
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-5xl h-[88vh] bg-[#0f1117] border border-slate-700 rounded-2xl overflow-hidden"
+        className="relative w-full max-w-5xl h-[min(88dvh,88vh)] bg-[#0f1117] border border-slate-700 rounded-2xl overflow-hidden mx-2 sm:mx-0"
         onClick={event => event.stopPropagation()}
       >
         <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800">
@@ -1921,65 +1960,32 @@ function AlwaysLoopingVideo({ src }) {
   return <video ref={ref} src={src} controls loop autoPlay muted />;
 }
 
-// --- Auto-Moving Carousel Component ---
 function AutoCarousel({ images, title }) {
   return (
     <div className="mb-16">
-      <h2 className="text-3xl font-bold text-blue-300 mb-8 text-center">{title}</h2>
+      {title && (
+        <h2 className="text-2xl font-bold mb-7 text-center" style={{ color: "#7dd3fc" }}>{title}</h2>
+      )}
       <div className="relative overflow-hidden px-4">
         <Swiper
           modules={[Autoplay, Navigation]}
           slidesPerView={3}
-          spaceBetween={24}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }}
-          loop={true}
-          navigation={true}
+          spaceBetween={20}
+          autoplay={{ delay: 1800, disableOnInteraction: false }}
+          loop
+          navigation
           className="!pb-8"
-          breakpoints={{
-            320: {
-              slidesPerView: 1,
-              spaceBetween: 16,
-            },
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 3,
-              spaceBetween: 24,
-            },
-            1024: {
-              slidesPerView: 4,
-              spaceBetween: 24,
-            },
-          }}
+          breakpoints={{ 320: { slidesPerView: 1, spaceBetween: 16 }, 640: { slidesPerView: 2, spaceBetween: 20 }, 768: { slidesPerView: 3, spaceBetween: 20 }, 1024: { slidesPerView: 4, spaceBetween: 20 } }}
         >
           {images.map((img, idx) => {
-            const isVideo = typeof img === "string" && img.match(/\.(mp4|webm|ogg)$/i);
-            
+            const vid = typeof img === "string" && /\.(mp4|webm|ogg)$/i.test(img);
             return (
               <SwiperSlide key={idx}>
-                <div className="relative aspect-square w-full flex items-center justify-center">
-                  {isVideo ? (
-                    <video
-                      src={img}
-                      alt={`${title} ${idx + 1}`}
-                      className="w-full h-full object-cover rounded-xl"
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                    />
-                  ) : (
-                    <img
-                      src={img}
-                      alt={`${title} ${idx + 1}`}
-                      className="w-full h-full object-contain rounded-xl"
-                    />
-                  )}
+                <div className="relative aspect-square w-full flex items-center justify-center rounded-xl overflow-hidden border border-slate-800">
+                  {vid
+                    ? <video src={img} className="w-full h-full object-cover" autoPlay muted loop playsInline />
+                    : <img src={img} className="w-full h-full object-contain" alt={`${title} ${idx + 1}`} />
+                  }
                 </div>
               </SwiperSlide>
             );
@@ -1990,63 +1996,64 @@ function AutoCarousel({ images, title }) {
   );
 }
 
-// --- Showcase Section Component ---
-function ShowcaseSection() {
-  // Generate certification images (cert1.jpg to cert18)
+function ShowcaseSection({ expandedProject, setExpandedProject }) {
+  return (
+    <div className="min-h-screen pt-20 sm:pt-32 pb-16" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 40%, #08090e 100%)" }}>
+      <div className="max-w-7xl mx-auto px-6">
+        <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4 mt-8 tracking-tight">UI/UX Designs & Creative Work</h1>
+        <p className="text-slate-500 mb-8 max-w-3xl text-sm">
+          Explore my collection of logo designs, posters, app prototypes, and creative visual work. Each piece showcases different aspects of design thinking and visual communication.
+        </p>
+        <Section title="" cards={PROJECTS.uiux} expandedProject={expandedProject} setExpandedProject={setExpandedProject} columnsLg={3} />
+      </div>
+    </div>
+  );
+}
+
+function HighlightsSection() {
   const certifications = [
-    '/cert1.jpg', '/cert2.jpg', '/cert3.jpg', '/cert4.jpg', '/cert5.jpg', '/cert6.jpg',
-    '/cert7.jpg', '/cert8.jpg', '/cert9.jpg', '/cert10.jpg', '/cert11.jpg', '/cert12.jpg',
-    '/cert13.png', '/cert14.jpg', '/cert15.jpg', '/cert16.png', '/cert17.png', '/cert18.jpeg'
+    "/cert1.jpg", "/cert2.jpg", "/cert3.jpg", "/cert4.jpg", "/cert5.jpg", "/cert6.jpg",
+    "/cert7.jpg", "/cert8.jpg", "/cert9.jpg", "/cert10.jpg", "/cert11.jpg", "/cert12.jpg",
+    "/cert13.jpg", "/cert14.jpg", "/cert15.jpg", "/cert16.jpeg", "/cert17.png",
   ];
-  
-  // Platform badges
-  const platformBadges = ['/badge_1.png', '/badge_2.png', '/badge_3.jpg', '/badge_4.png'];
-  
-  // Open source contribution
-  const openSource = ['/open_1.png', '/open_2.png', '/open_3.png'];
+  const platformBadges = [
+    "/badge_1.png", "/badge_2.png", "/badge_3.jpg", "/badge_4.png",
+    "/badge_5.png", "/badge_6.png", "/badge_7.png", "/badge_8.png",
+    "/hackerrank-problem-solving.svg", "/hackerrank-python.svg",
+  ];
+  const openSource = ["/open_1.png", "/open_2.png", "/open_3.png", "/open_4.jpg", "/open_5.png", "/open_6.png"];
+  const awards = ["/Award1.jpg", "/Award2.jpg", "/Award3.jpg", "/Award4.jpg", "/Award5.jpg"];
 
   return (
-    <div className="min-h-screen pt-20 sm:pt-32 pb-16 bg-[#0b0c10]">
+    <div className="min-h-screen pt-20 sm:pt-32 pb-16" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 40%, #08090e 100%)" }}>
       <div className="max-w-7xl mx-auto px-6">
-        <h1 className="text-4xl font-bold text-white mb-8 mt-8 text-center">Designs & Visuals</h1>
-        
-        {/* Combined Showcase Card with Image and Victory Quote */}
+        <h1 className="text-3xl sm:text-4xl font-bold text-white mb-10 mt-8 text-center tracking-tight">Highlights & Achievements</h1>
+
         <div className="mb-16 flex justify-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative w-full max-w-5xl rounded-2xl overflow-hidden"
+            transition={{ duration: 0.7 }}
+            className="relative w-full max-w-5xl rounded-2xl overflow-hidden border border-slate-800/60"
           >
-            {/* Image Section */}
-            <div className="relative h-[28rem] sm:h-[32rem] md:h-[36rem]">
-              <img
-                src="/showcase1.jpg"
-                alt="Showcase"
-                className="w-full h-full object-contain p-4"
-              />
+            <div className="relative h-[26rem] sm:h-[30rem] md:h-[34rem]">
+              <img src="/showcase1.jpg" alt="Showcase" className="w-full h-full object-contain p-4" />
             </div>
-            
-            {/* Victory Quote Section */}
-            <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 backdrop-blur-md p-6 border-t border-blue-500/20">
-              <div className="text-center">
-                <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-yellow-300 via-orange-300 to-red-300 bg-clip-text text-transparent">
-                  "First Taste of Victory"
-                </h2>
-              </div>
+            <div className="p-6 border-t border-slate-800/60 text-center"
+              style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.08) 0%, rgba(139,92,246,0.08) 100%)" }}>
+              <h2 className="text-2xl sm:text-3xl font-bold"
+                style={{ background: "linear-gradient(90deg, #fde68a, #fb923c, #f43f5e)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                "First Taste of Victory"
+              </h2>
             </div>
           </motion.div>
         </div>
 
-        {/* Certifications Carousel */}
+        <AutoCarousel images={awards} title="" />
         <AutoCarousel images={certifications} title="Certifications" />
-
-        {/* Platform Badges Carousel */}
         <div className="mb-12 max-w-3xl mx-auto">
           <AutoCarousel images={platformBadges} title="Platform Badges" />
         </div>
-
-        {/* Open Source Contribution Carousel */}
         <div className="mb-16 max-w-6xl mx-auto">
           <AutoCarousel images={openSource} title="Open Source Contributions" />
         </div>
@@ -2058,11 +2065,11 @@ function ShowcaseSection() {
 // Main App
 export default function App() {
   const [activeSection, setActiveSection] = useState("home");
-  const [expandedCard, setExpandedCard] = useState(null);
+  const [expandedProject, setExpandedProject] = useState(null);
   const [isResumePreviewOpen, setResumePreviewOpen] = useState(false);
 
   const scrollHomeTo = useCallback(sectionId => {
-    setExpandedCard(null);
+    setExpandedProject(null);
     setActiveSection("home");
     queueMicrotask(() => {
       document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -2071,60 +2078,37 @@ export default function App() {
 
   return (
     <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
-      <div className="min-h-screen bg-[#0b0c10] font-sans text-slate-200 antialiased">
+      <div className="min-h-screen font-sans text-slate-200 antialiased" style={{ background: "#08090e" }}>
         <Bubbles />
         <NavBar
           activeSection={activeSection}
           setActiveSection={setActiveSection}
-          setExpandedCard={setExpandedCard}
+          setExpandedProject={setExpandedProject}
           scrollHomeTo={scrollHomeTo}
           openResumePreview={() => setResumePreviewOpen(true)}
         />
         <BackArrow
           activeSection={activeSection}
           setActiveSection={setActiveSection}
-          setExpandedCard={setExpandedCard}
-          show={expandedCard === null}
+          setExpandedProject={setExpandedProject}
+          show={expandedProject === null}
         />
         {activeSection === "home" && <HomePage openResumePreview={() => setResumePreviewOpen(true)} />}
         {activeSection === "projects" && (
-          <ProjectsOverview expandedCard={expandedCard} setExpandedCard={setExpandedCard} />
+          <ProjectsOverview expandedProject={expandedProject} setExpandedProject={setExpandedProject} />
         )}
-        {activeSection === "cloud" && (
-          <Section
-            title="DevOps & Cloud"
-            cards={projectCatalog.devops}
-            expandedCard={expandedCard}
-            setExpandedCard={setExpandedCard}
-          />
-        )}
-        {activeSection === "ai" && (
-          <Section
-            title="AI/ML Projects"
-            cards={projectCatalog.ai}
-            expandedCard={expandedCard}
-            setExpandedCard={setExpandedCard}
-          />
-        )}
-        {activeSection === "fullstack" && (
-          <Section
-            title="Backend & APIs"
-            cards={projectCatalog.backend}
-            expandedCard={expandedCard}
-            setExpandedCard={setExpandedCard}
-          />
-        )}
-        {activeSection === "showcase" && <ShowcaseSection />}
+        {activeSection === "highlights" && <HighlightsSection />}
         {activeSection === "video" && (
-          <section className="min-h-screen pt-32 pb-16 bg-gradient-to-br from-[#101018] via-[#181829] to-[#23233a]">
+          <section className="min-h-screen pt-32 pb-16" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 100%)" }}>
             <div className="max-w-6xl mx-auto px-4">
               <h1 className="text-4xl font-bold text-white mb-8 text-center">Video Showcase</h1>
-              <VideoSwiper videos={["/video1.mp4", "/video2.mp4", "/video3.mp4"]} />
+              <VideoSwiper videos={["/MoneyMirror.mp4", "/LogBeacon.mp4", "/ExoVision.mp4"]} />
             </div>
           </section>
         )}
-        
-        {/* Footer */}
+
+        <ProjectExpandModal project={expandedProject} onClose={() => setExpandedProject(null)} />
+
         <Footer
           personalInfo={personalInfo}
           scrollHomeTo={scrollHomeTo}
@@ -2136,100 +2120,5 @@ export default function App() {
         />
       </div>
     </motion.div>
-  );
-}
-
-// Universal Swiper for images/videos with autoplay loop and no controls
-function MediaSwiper({ mediaList, className = "", swiperProps = {} }) {
-  const swiperRef = useRef(null);
-  const videoRefs = useRef({});
-
-  // Helper: Advance slide after image timer or video end
-  const handleSlide = () => {
-    const swiper = swiperRef.current;
-    if (!swiper) return;
-    const idx = swiper.realIndex;
-    const video = videoRefs.current[idx];
-
-    // Pause/reset all videos
-    Object.values(videoRefs.current).forEach(v => {
-      if (v) {
-        v.pause();
-        v.currentTime = 0;
-      }
-    });
-
-    // Clear any existing timers
-    if (swiper._customTimer) {
-      clearTimeout(swiper._customTimer);
-      swiper._customTimer = null;
-    }
-
-    if (video) {
-      video.currentTime = 0;
-      video.play();
-      video.onended = () => {
-        if (mediaList.length > 1) swiper.slideNext();
-      };
-    } else {
-      // Image: advance after 2.5s
-      if (mediaList.length > 1) {
-        swiper._customTimer = setTimeout(() => swiper.slideNext(), 2500);
-      }
-    }
-  };
-
-  useEffect(() => {
-    setTimeout(() => handleSlide(), 0);
-    return () => {
-      if (swiperRef.current && swiperRef.current._customTimer) {
-        clearTimeout(swiperRef.current._customTimer);
-      }
-    };
-    // eslint-disable-next-line
-  }, []);
-
-  return (
-    <Swiper
-      modules={[Pagination, Navigation]}
-      slidesPerView={1}
-      loop={mediaList.length > 1}
-      autoplay={false}
-      pagination={{ clickable: true }}
-      navigation={mediaList.length > 1}
-      onSwiper={swiper => {
-        swiperRef.current = swiper;
-        handleSlide();
-      }}
-      onSlideChange={handleSlide}
-      className={className}
-      {...swiperProps}
-    >
-      {mediaList.map((media, idx) => (
-        <SwiperSlide key={idx} className="flex items-center justify-center">
-          {isVideo(media) ? (
-            <video
-              ref={el => (videoRefs.current[idx] = el)}
-              src={media}
-              muted
-              autoPlay={mediaList.length === 1}
-              playsInline
-              loop={mediaList.length === 1}
-              controls={false}
-              className="w-full h-full object-contain"
-              style={{ pointerEvents: "none" }}
-            />
-          ) : (
-            <img
-              src={media}
-              alt=""
-              className="w-full h-full object-contain"
-              draggable={false}
-              style={{ pointerEvents: "none" }}
-            />
-          )}
-        </SwiperSlide>
-      ))}
-    </Swiper>
   );
 }

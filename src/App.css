@@ -6,154 +6,77 @@
   overflow-x: hidden;
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #13131c;
-}
-
+/* Refined scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #08090e; }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #38bdf8, #a21caf);
-  border-radius: 5px;
+  background: linear-gradient(to bottom, #0ea5e9 0%, #7c3aed 100%);
+  border-radius: 9999px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #60c9ff, #c04dd9);
+  background: linear-gradient(to bottom, #38bdf8 0%, #a855f7 100%);
 }
 
-/* Gradient text animation */
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+/* Swiper overrides for dark theme */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #38bdf8 !important;
+  width: 32px !important;
+  height: 32px !important;
+  background: rgba(8,9,14,0.8) !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(56,189,248,0.3) !important;
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+.swiper-pagination-bullet {
+  background: #38bdf8 !important;
+  opacity: 0.4 !important;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1 !important;
 }
 
-.gradient-text {
-  background: linear-gradient(
-    90deg,
-    #38bdf8,
-    #a21caf,
-    #38bdf8
-  );
-  background-size: 200% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient-shift 3s ease infinite;
+/* PDF viewer dark mode fix */
+.rpv-core__viewer {
+  background: #0f1117 !important;
 }
 
-/* Glow effect */
-@keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(162, 28, 175, 0.8);
-  }
+/* Responsive layout helpers */
+img, video {
+  max-width: 100%;
+  height: auto;
 }
 
-.glow-effect {
-  animation: glow 2s ease-in-out infinite;
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-/* Floating animation */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
+@media (max-width: 640px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none !important;
   }
 }
 
-.float-animation {
-  animation: float 3s ease-in-out infinite;
-}
-
-/* Pulse animation */
-@keyframes pulse-scale {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
+@media (orientation: landscape) and (max-height: 500px) {
+  .scroll-mt-28 {
+    scroll-margin-top: 5rem;
   }
 }
 
-.pulse-scale {
-  animation: pulse-scale 2s ease-in-out infinite;
-}
-
-/* Card hover glow */
-.card-glow {
-  position: relative;
-  transition: all 0.3s ease;
-}
-
-.card-glow::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  padding: 2px;
-  background: linear-gradient(45deg, #38bdf8, #a21caf, #38bdf8);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.card-glow:hover::before {
-  opacity: 1;
-}
-
-/* Shimmer effect */
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
+@supports (min-height: 100dvh) {
+  .min-h-screen {
+    min-height: 100dvh;
   }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
-.shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.1),
-    transparent
-  );
-  background-size: 1000px 100%;
-  animation: shimmer 3s infinite;
-}
-
-/* Loading animation */
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.spin {
-  animation: spin 2s linear infinite;
 }
