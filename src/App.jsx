@@ -18,7 +18,6 @@ import { SiLeetcode } from "react-icons/si";
 import { FaMedium } from "react-icons/fa";
 import Footer from "./components/Footer";
 import Stats from "./components/Stats";
-import BlogHighlights from "./components/BlogHighlights";
 
 const PLACEHOLDER_VIDEO = "/petimony.mp4";
 const IEEE_PUBLICATION_URL = "https://ieeexplore.ieee.org/document/10986878";
@@ -101,7 +100,7 @@ const personalInfo = {
     { title: "Cloud & DevOps", items: ["AWS", "Docker", "Git", "CI/CD", "Linux"] },
     { title: "AI / ML", items: ["PyTorch", "TensorFlow", "Hugging Face", "OpenCV", "LLM"] },
     { title: "Frontend & Tools", items: ["React", "HTML", "CSS", "Tailwind CSS", "Postman", "Figma"] },
-    { title: "Competitive programming / DSA", items: ["Arrays", "Strings", "Hashing", "Trees", "Graphs", "Recursion", "Dynamic Programming", "FAANG-style patterns"] },
+    { title: "Competitive programming / DSA", items: ["Arrays", "Strings", "Hashing", "Trees", "Graphs", "Recursion", "Dynamic Programming"] },
   ],
   languages: [
     { name: "English", level: "Very Well" },
@@ -127,10 +126,10 @@ const experience = [
     company: "Kevell Corp",
     role: "Web Development Intern",
     duration: "Dec 2024",
-    desc: "Built internal tools with React and Node.js for a fast-moving product squad.",
+    desc: "Built Petimony and ErgoCart web apps, reusable frontend components, form handling, and integrated UIs with existing APIs.",
     bullets: [
-      "Implemented React screens and reusable components that reduced duplicate UI code across internal tools.",
-      "Shipped and documented REST endpoints in Node.js/Express consumed by teammates during feature work.",
+      "Implemented React screens and reusable components that reduced duplicate UI code across internal tools and web apps like Petimony and ErgoCart.",
+      "Shipped and documented REST endpoints consumed by teammates during feature work.",
       "Collaborated through code review and iterative delivery to stabilize pages used by stakeholders."
     ]
   },
@@ -144,17 +143,18 @@ const experience = [
     bullets: [
       "Authored and presented sustainability research at the International Conference on AIDE 2025.",
       "Distilled methodology and findings for an academic audience and conference reviewers.",
-    ]
+    ],
+    rightImage: "/ieee.png"
   },
   {
     logo: "/Reccsarlogo.jpg",
     company: "Reccsar Private Limited",
     role: "Cloud Computing Intern",
     duration: "June 2025",
-    desc: "Cloud-hosted dashboards integrating data sources for nonprofit delivery teams.",
+    desc: "Cloud-hosted dashboards and apps like RailwayPorterSeva and client-support-realtime-chat for nonprofit delivery teams.",
     bullets: [
-      "Developed dashboards for nonprofit initiatives hosted on AWS, combining multiple data feeds into actionable views.",
-      "Automated parts of deployment and repeatable environment setup using GitHub Actions where applicable.",
+      "Developed client-support-realtime-chat and RailwayPorterSeva hosted on AWS, combining multiple data feeds into actionable views.",
+      "Automated parts of deployment and repeatable environment setup using CI/CD and GitHub Actions where applicable.",
       "Partnered across roles to tighten delivery cycles for quick iterations on stakeholder feedback."
     ]
   }
@@ -175,51 +175,37 @@ const featuredProjects = [
       github: "https://github.com/Yamuna-b/Money_Mirror",
       live: "https://drive.google.com/file/d/1H01AjMrU8kZ_mYTkO4IgUO7lQl5zsw2s/view?usp=sharing",
     },
-    image: "/MoneyMirror.mp4",
+    image: "/MoneyMirrorCover.jpg",
   },
   {
     title: "Log Beacon",
-    tagline: "Log analysis backend—parse structured logs, filter by time/status, and run regex queries for faster debugging.",
-    stack: ["FastAPI", "PostgreSQL", "Docker", "AWS"],
+    tagline: "Log analysis backend—parse structured logs, filter by time/status, and run regex queries for faster debugging with optional OpenAI summarization.",
+    stack: ["TypeScript", "Express", "PostgreSQL", "Docker", "AWS"],
     bullets: [
-      "FastAPI service for structured log parsing, filtering, and regex search.",
+      "TypeScript/Express service for structured log parsing, filtering, and regex search.",
       "PostgreSQL persistence with Docker deployment on AWS; query latency under 200 ms.",
-      "Focused API design for efficient triage during incident debugging.",
-      "Framed and built this as a developer-productivity tool, inspired by internal tooling at large-scale companies—prioritizing fast filtering and low cognitive load over flashy dashboards.",
+      "Features: structured log ingestion, filters (time, level, service), regex search/incident linking, optional OpenAI summarization endpoint.",
     ],
     links: {
       github: "https://github.com/Yamuna-b/LogBeacon",
       live: "https://drive.google.com/file/d/1VIW1KpCmgK-CLCpHbwdMd8BppwnZfHd-/view?usp=sharing",
     },
-    image: "/LogBeacon.mp4",
+    image: "/LogBeaconCover.jpg",
   },
   {
     title: "MarineTaxa AI",
-    tagline: "AI taxonomy platform—feature extraction with UMAP + HDBSCAN and LLM-assisted classification and explanation.",
-    stack: ["FastAPI", "PyTorch", "LLM", "Docker", "AWS"],
+    tagline: "ML taxonomy platform—Streamlit dashboard and sequence/ML classifier for eDNA.",
+    stack: ["Python", "Streamlit", "PyTorch", "ML Classifier"],
     bullets: [
-      "Ingests raw marine data, extracts features, and integrates an LLM for classification.",
-      "FastAPI REST backend deployed on AWS with Docker.",
+      "Streamlit dashboard and ML classifier for classifying marine organisms.",
       "Reduced manual classification time by roughly 40% in evaluation runs.",
-      "Owned the full stack from data ingestion to LLM integration, mirroring ML platform patterns used in production ML teams.",
+      "Owned the full stack from data ingestion to ML integration, mirroring ML platform patterns used in production ML teams.",
     ],
     links: {
       github: "https://github.com/Yamuna-b/MarineTaxaAi",
       live: "https://drive.google.com/file/d/1aZN2iFA1QZwSP_ftBbqv21tr_xtpykPB/view?usp=sharing",
     },
-    image: "/MarineTaxaAi.mp4",
-  },
-  {
-    title: "ExoVision",
-    tagline: "Streamlit app for exoplanet classification using NASA public datasets—ML pipeline from raw light curves to ranked candidates.",
-    stack: ["Python", "TensorFlow", "Streamlit"],
-    bullets: [
-      "Built a solo end-to-end ML workflow on NASA Space Apps datasets for exoplanet signal detection.",
-      "Streamlit UI for interactive exploration; TensorFlow models trained on telescope-style light curve features.",
-      "Structured the repo for reproducible experiments—data prep, training, and evaluation in one deployable app.",
-    ],
-    links: { github: "https://github.com/Yamuna-b/nasa-spaceapps-exoplanet", live: null },
-    image: "/ExoVision.mp4",
+    image: "/MarineTaxaAiCover.jpg",
   },
 ];
 
@@ -292,10 +278,7 @@ const PROJECTS = {
       fullDesc: "A comprehensive pet shop website with e-commerce functionality, pet adoption services, and community features.",
       tags: ["HTML", "CSS", "JavaScript"],
       tools: ["HTML", "CSS", "JavaScript"],
-      links: {
-        github: "https://github.com/Yamuna-b/Petimony",
-        live: "https://petimony.onrender.com"
-      }
+      links: { github: "https://github.com/Yamuna-b/Petimony" }
     },
     {
       id: 2,
@@ -889,7 +872,6 @@ const projectCatalog = {
       tools: ["HTML", "CSS", "JavaScript"],
       links: {
         github: "https://github.com/Yamuna-b/Petimony",
-        live: "https://petimony.onrender.com",
       }
     },
     {
@@ -918,10 +900,10 @@ const projectCatalog = {
       id: 1,
       title: "MarineTaxa AI",
       images: ["/MarineTaxaAi.mp4"],
-      shortDesc: "AI-powered marine taxonomy platform",
-      fullDesc: "Feature extraction with UMAP + HDBSCAN and LLM-assisted classification via FastAPI on AWS.",
-      tags: ["AI/ML", "LLM"],
-      tools: ["FastAPI", "PyTorch", "LLM", "Docker", "AWS"],
+      shortDesc: "ML-powered marine taxonomy platform",
+      fullDesc: "Streamlit dashboard and sequence/ML classifier for marine taxonomy classification.",
+      tags: ["AI/ML", "ML Classifier"],
+      tools: ["Python", "Streamlit", "PyTorch", "Scikit-Learn"],
       links: {
         github: "https://github.com/Yamuna-b/MarineTaxaAi",
         demo: "https://drive.google.com/file/d/1aZN2iFA1QZwSP_ftBbqv21tr_xtpykPB/view?usp=sharing",
@@ -959,7 +941,7 @@ const projectCatalog = {
     {
       id: 5,
       title: "Ecosaur Research",
-      images: ["/showcase6.jpg"],
+      images: ["/ieee.png"],
       shortDesc: "Carbon footprint awareness and mitigation research",
       fullDesc: "Research published at IEEE AIDE 2025 on carbon footprint awareness and mitigation.",
       tags: ["Research", "Publication"],
@@ -973,9 +955,9 @@ const projectCatalog = {
       title: "Log Beacon",
       images: ["/LogBeacon.mp4"],
       shortDesc: "Log analysis backend on AWS",
-      fullDesc: "FastAPI log analysis service with PostgreSQL, Docker, and AWS deployment.",
-      tags: ["Cloud + DevOps", "Observability", "FastAPI"],
-      tools: ["FastAPI", "PostgreSQL", "Docker", "AWS"],
+      fullDesc: "TypeScript/Express log analysis service with PostgreSQL, Docker, and AWS deployment.",
+      tags: ["Cloud + DevOps", "Observability", "Express"],
+      tools: ["TypeScript", "Express", "PostgreSQL", "Docker", "AWS"],
       links: {
         github: "https://github.com/Yamuna-b/LogBeacon",
         demo: "https://drive.google.com/file/d/1VIW1KpCmgK-CLCpHbwdMd8BppwnZfHd-/view?usp=sharing",
@@ -1018,7 +1000,7 @@ const projectCatalog = {
     {
       id: 1,
       title: "Ecosaur — IEEE Publication",
-      images: ["/showcase6.jpg"],
+      images: ["/ieee.png"],
       shortDesc: "IEEE AIDE 2025 research publication",
       fullDesc: "Published carbon footprint awareness and mitigation research at IEEE AIDE 2025.",
       tags: ["Research", "Publication"],
@@ -1333,7 +1315,6 @@ function HomePage({ openResumePreview }) {
         <Card id="skills">
           <SectionLabel>Technical skills</SectionLabel>
           <p className="text-sm text-slate-400 mb-5 max-w-3xl leading-relaxed">
-            Data structures &amp; algorithms: arrays, strings, hashing, trees, graphs, recursion, dynamic programming; familiar with typical FAANG-style problem patterns.
           </p>
           <div className="space-y-5">
             {personalInfo.skillGroups.map(group => (
@@ -1351,24 +1332,31 @@ function HomePage({ openResumePreview }) {
           <SectionLabel>Experience</SectionLabel>
           <div className="space-y-7">
             {experience.map((exp, idx) => (
-              <div key={idx} className="flex gap-4 pb-7 border-b last:border-0 last:pb-0" style={{ borderColor: "rgba(51,65,85,0.4)" }}>
-                <img src={exp.logo} className="w-12 h-12 rounded-xl object-cover ring-1 ring-slate-700 shrink-0" alt="" />
-                <div className="min-w-0">
-                  <div className="font-semibold text-slate-100 text-sm">{exp.role} · {exp.company}</div>
-                  <div className="text-xs text-sky-500 mt-0.5 font-medium">{exp.duration}</div>
-                  <p className="text-sm text-slate-400 mt-2 leading-relaxed">{exp.desc}</p>
-                  {exp.bullets?.length ? (
-                    <ul className="mt-3 text-sm text-slate-300 space-y-1.5 list-disc ml-5 leading-relaxed">
-                      {exp.bullets.map(b => <li key={b.slice(0, 40)}>{b}</li>)}
-                    </ul>
-                  ) : null}
-                  {exp.link ? (
-                    <a href={exp.link.url} target="_blank" rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 mt-3 px-3 py-1.5 bg-sky-900/50 hover:bg-sky-800/60 text-sky-300 rounded-lg text-xs font-semibold border border-sky-800/50 transition-all">
-                      <ExternalLink className="w-3 h-3" /> {exp.link.text}
-                    </a>
-                  ) : null}
+              <div key={idx} className="flex gap-4 pb-7 border-b last:border-0 last:pb-0 justify-between items-start" style={{ borderColor: "rgba(51,65,85,0.4)" }}>
+                <div className="flex gap-4 flex-1 min-w-0">
+                  <img src={exp.logo} className="w-12 h-12 rounded-xl object-cover ring-1 ring-slate-700 shrink-0" alt="" />
+                  <div className="min-w-0 flex-1">
+                    <div className="font-semibold text-slate-100 text-sm">{exp.role} · {exp.company}</div>
+                    <div className="text-xs text-sky-500 mt-0.5 font-medium">{exp.duration}</div>
+                    <p className="text-sm text-slate-400 mt-2 leading-relaxed">{exp.desc}</p>
+                    {exp.bullets?.length ? (
+                      <ul className="mt-3 text-sm text-slate-300 space-y-1.5 list-disc ml-5 leading-relaxed">
+                        {exp.bullets.map(b => <li key={b.slice(0, 40)}>{b}</li>)}
+                      </ul>
+                    ) : null}
+                    {exp.link ? (
+                      <a href={exp.link.url} target="_blank" rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 mt-3 px-3 py-1.5 bg-sky-900/50 hover:bg-sky-800/60 text-sky-300 rounded-lg text-xs font-semibold border border-sky-800/50 transition-all">
+                        <ExternalLink className="w-3 h-3" /> {exp.link.text}
+                      </a>
+                    ) : null}
+                  </div>
                 </div>
+                {exp.rightImage && (
+                  <div className="hidden sm:block shrink-0 ml-4 mt-1">
+                    <img src={exp.rightImage} className="w-40 h-auto rounded-md object-contain ring-1 ring-slate-700/50" alt="" />
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -1377,11 +1365,6 @@ function HomePage({ openResumePreview }) {
         <div id="coding-activity" className="scroll-mt-28 max-w-5xl mx-auto">
           <Stats />
         </div>
-
-        <Card id="blog-highlights">
-          <SectionLabel>Blog highlights</SectionLabel>
-          <BlogHighlights />
-        </Card>
 
         <div className="grid md:grid-cols-2 gap-5">
           <Card id="leadership">
@@ -1665,8 +1648,7 @@ function ProjectGrid({ cards, expandedProject, setExpandedProject, columnsLg = 2
             onClick={() => !invisible && setExpandedProject(project)}
           >
             {singleVideo && !expanded && (
-              <video src={images[0]} autoPlay loop muted playsInline controls={false}
-                className="w-full h-full object-contain" />
+              <img src={images[0].replace(/\.(mp4|webm|ogg)$/i, "Cover.jpg")} alt={project.title} className="w-full h-full object-contain" />
             )}
             {singleVideo && expanded && (
               <div className="w-full h-full min-h-[200px] bg-slate-900/80 flex items-center justify-center">
@@ -1714,7 +1696,7 @@ function ProjectGrid({ cards, expandedProject, setExpandedProject, columnsLg = 2
                       </span>
                     ))}
                   </div>
-                  <span className="text-xs text-slate-500 mt-3">Click to expand</span>
+                  <span className="text-xs text-slate-500 mt-3">Click to watch</span>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -2014,11 +1996,11 @@ function HighlightsSection() {
   const certifications = [
     "/cert1.jpg", "/cert2.jpg", "/cert3.jpg", "/cert4.jpg", "/cert5.jpg", "/cert6.jpg",
     "/cert7.jpg", "/cert8.jpg", "/cert9.jpg", "/cert10.jpg", "/cert11.jpg", "/cert12.jpg",
-    "/cert13.jpg", "/cert14.jpg", "/cert15.jpg", "/cert16.jpeg", "/cert17.png",
+    "/cert13.jpg", "/cert14.jpg", "/cert15.jpg", "/cert16.jpeg", "/cert17.png", "/cert20.jpg"
   ];
   const platformBadges = [
     "/badge_1.png", "/badge_2.png", "/badge_3.jpg", "/badge_4.png",
-    "/badge_5.png", "/badge_6.png", "/badge_7.png", "/badge_8.png",
+    "/badge_5.png", "/badge_6.png", "/badge_7.png", "/badge_8.png", "/badge_9.png",
     "/hackerrank-problem-solving.svg", "/hackerrank-python.svg",
   ];
   const openSource = ["/open_1.png", "/open_2.png", "/open_3.png", "/open_4.jpg", "/open_5.png", "/open_6.png"];

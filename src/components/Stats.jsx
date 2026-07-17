@@ -8,22 +8,22 @@ export default function Stats() {
   const ghUrl = 'https://github.com/Yamuna-b';
 
   const leetcodeStats = [
-    { label: 'Total solved', value: '321' },
-    { label: 'Easy', value: '124' },
-    { label: 'Medium', value: '156' },
+    { label: 'Total solved', value: '324' },
+    { label: 'Easy', value: '126' },
+    { label: 'Medium', value: '157' },
     { label: 'Hard', value: '41' },
   ];
 
   const contestStats = [
-    { label: 'Contest rating', value: '1,416' },
-    { label: 'Contests attended', value: '1' },
-    { label: 'Active days (1 yr)', value: '139' },
+    { label: 'Contest rating', value: '1,396' },
+    { label: 'Contests attended', value: '2' },
+    { label: 'Active days (1 yr)', value: '116' },
     { label: 'Max streak', value: '36 days' },
   ];
 
   const gfgStats = [
     { label: 'Python', value: '176' },
-    { label: 'Java', value: '85' },
+    { label: 'Java', value: '89' },
     { label: 'MySQL', value: '50' },
   ];
 
@@ -78,7 +78,7 @@ export default function Stats() {
               <SiLeetcode className="text-orange-500 text-2xl shrink-0" />
               <div>
                 <h3 className="text-lg font-semibold text-slate-100">LeetCode</h3>
-                <p className="text-xs text-slate-500">84% acceptance · 315 submissions past year</p>
+                <p className="text-xs text-slate-500">324 problems solved</p>
               </div>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
@@ -98,7 +98,7 @@ export default function Stats() {
               ))}
             </div>
             <div className="border-t border-slate-800 pt-4">
-              <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2">GeeksforGeeks</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2">Languages</p>
               <div className="flex flex-wrap gap-2">
                 {gfgStats.map(stat => (
                   <span key={stat.label} className="px-2.5 py-1 rounded-md text-xs font-medium bg-emerald-950/40 text-emerald-300 border border-emerald-900/50">

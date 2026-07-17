@@ -78,14 +78,6 @@ export default function Footer({ personalInfo, scrollHomeTo, openResumePreview }
               >
                 <SiLeetcode className="w-4 h-4 text-amber-500" />
               </a>
-              <a
-                href={personalInfo.social.medium}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-colors"
-              >
-                <FaMedium className="w-4 h-4 text-slate-200" />
-              </a>
             </div>
           </div>
 
@@ -103,9 +95,6 @@ export default function Footer({ personalInfo, scrollHomeTo, openResumePreview }
               </li>
               <li>
                 <FooterLink onClick={go("coding-activity")}>Coding activity</FooterLink>
-              </li>
-              <li>
-                <FooterLink onClick={go("blog-highlights")}>Blog</FooterLink>
               </li>
               <li>
                 <FooterLink onClick={openResumePreview}>Resume preview</FooterLink>
