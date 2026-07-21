@@ -36,6 +36,18 @@ html {
   font-size: 12px !important;
   font-weight: 700 !important;
 }
+
+@media (max-width: 640px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 10px !important;
+  }
+}
 .swiper-pagination-bullet {
   background: #38bdf8 !important;
   opacity: 0.4 !important;
@@ -62,12 +74,7 @@ img, video {
   overflow: hidden;
 }
 
-@media (max-width: 640px) {
-  .swiper-button-next,
-  .swiper-button-prev {
-    display: none !important;
-  }
-}
+
 
 @media (orientation: landscape) and (max-height: 500px) {
   .scroll-mt-28 {

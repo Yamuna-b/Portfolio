@@ -970,7 +970,7 @@ function SectionLabel({ children }) {
 // ─── HomePage ──────────────────────────────────────────────────────────────
 function HomePage({ openResumePreview }) {
   return (
-    <section className="min-h-screen pt-20 sm:pt-28 pb-20" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 40%, #08090e 100%)" }}>
+    <section className="min-h-screen pt-24 sm:pt-32 pb-20" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 40%, #08090e 100%)" }}>
       <div className="max-w-5xl mx-auto px-4 space-y-12">
         <div className="text-center pt-4">
           <ProfileAvatar />
@@ -1120,12 +1120,6 @@ function HomePage({ openResumePreview }) {
                   </div>
                 </div>
               ))}
-            </div>
-            <div className="mt-8 pt-6 border-t" style={{ borderColor: "rgba(51,65,85,0.4)" }}>
-              <div className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">Entrepreneurial & leadership initiatives</div>
-              <ul className="text-sm text-slate-300 space-y-2.5 list-disc ml-5 leading-relaxed">
-                {entrepreneurialInitiatives.map(item => <li key={item.slice(0, 48)}>{item}</li>)}
-              </ul>
             </div>
           </Card>
 
@@ -1563,7 +1557,7 @@ function ProjectsOverview({ expandedProject, setExpandedProject }) {
   }, [domainCards, searchQuery]);
 
   return (
-    <div className="min-h-screen pt-20 sm:pt-32 pb-16" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 40%, #08090e 100%)" }}>
+    <div className="min-h-screen pt-24 sm:pt-32 pb-16" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 40%, #08090e 100%)" }}>
       <div className="max-w-7xl mx-auto px-6">
         <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2 mt-8 tracking-tight">Projects</h1>
         <p className="text-slate-500 mb-6 text-sm">Browse all work, or filter by domain.</p>
@@ -1731,7 +1725,7 @@ function HighlightsSection() {
   const awards = ["/Award1.jpg", "/Award2.jpg", "/Award3.jpg", "/Award4.jpg", "/Award5.jpg"];
 
   return (
-    <div className="min-h-screen pt-20 sm:pt-32 pb-16" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 40%, #08090e 100%)" }}>
+    <div className="min-h-screen pt-24 sm:pt-32 pb-16" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 40%, #08090e 100%)" }}>
       <div className="max-w-7xl mx-auto px-6">
         <h1 className="text-3xl sm:text-4xl font-bold text-white mb-10 mt-8 text-center tracking-tight">Highlights & Achievements</h1>
 
@@ -1805,7 +1799,7 @@ export default function App() {
         )}
         {activeSection === "highlights" && <HighlightsSection />}
         {activeSection === "video" && (
-          <section className="min-h-screen pt-32 pb-16" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 40%, #08090e 100%)" }}>
+          <section className="min-h-screen pt-32 sm:pt-36 pb-16" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 40%, #08090e 100%)" }}>
             <div className="max-w-6xl mx-auto px-4">
               <h1 className="text-4xl font-bold text-white mb-8 text-center">Video Showcase</h1>
               <VideoSwiper videos={["/MoneyMirror.mp4", "/LogBeacon.mp4", "/ExoVision.mp4"]} />
