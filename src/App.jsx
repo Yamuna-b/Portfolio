@@ -126,9 +126,9 @@ const experience = [
     company: "Kevell Corp",
     role: "Web Development Intern",
     duration: "Dec 2024",
-    desc: "Built Petimony and ErgoCart web apps, reusable frontend components, form handling, and integrated UIs with existing APIs.",
+    desc: "Built Petimony and other web apps, reusable frontend components, form handling, and integrated UIs with existing APIs.",
     bullets: [
-      "Implemented React screens and reusable components that reduced duplicate UI code across internal tools and web apps like Petimony and ErgoCart.",
+      "Implemented React screens and reusable components that reduced duplicate UI code across internal tools and web apps like Petimony.",
       "Shipped and documented REST endpoints consumed by teammates during feature work.",
       "Collaborated through code review and iterative delivery to stabilize pages used by stakeholders."
     ]
@@ -162,7 +162,7 @@ const experience = [
 
 const featuredProjects = [
   {
-    title: "Money Mirror",
+    title: "MoneyMirror",
     tagline: "Personal finance digital twin—salary, EMIs, savings, and 3–6 month cash-flow projections with low-balance warnings.",
     stack: ["FastAPI", "PostgreSQL", "JWT", "Docker"],
     bullets: [
@@ -178,7 +178,7 @@ const featuredProjects = [
     image: "/MoneyMirrorCover.jpg",
   },
   {
-    title: "Log Beacon",
+    title: "LogBeacon",
     tagline: "Log analysis backend—parse structured logs, filter by time/status, and run regex queries for faster debugging with optional OpenAI summarization.",
     stack: ["TypeScript", "Express", "PostgreSQL", "Docker", "AWS"],
     bullets: [
@@ -193,7 +193,7 @@ const featuredProjects = [
     image: "/LogBeaconCover.jpg",
   },
   {
-    title: "MarineTaxa AI",
+    title: "MarineTaxaAi",
     tagline: "ML taxonomy platform—Streamlit dashboard and sequence/ML classifier for eDNA.",
     stack: ["Python", "Streamlit", "PyTorch", "ML Classifier"],
     bullets: [
@@ -210,7 +210,7 @@ const featuredProjects = [
 ];
 
 const entrepreneurialInitiatives = [
-  "Led backend and architecture for 3+ self-initiated products (Money Mirror, Log Beacon, MarineTaxa AI), treating them as real users' workflows rather than just academic demos.",
+  "Led backend and architecture for 3+ self-initiated products (MoneyMirror, LogBeacon, MarineTaxaAi), treating them as real users' workflows rather than just academic demos.",
   "Coordinated placement batch communication as Placement Batch Head, mirroring stakeholder management in fast-paced engineering teams.",
   "Regularly pitch project ideas and technical concepts via blogs, talks, and peer mentoring.",
 ];
@@ -237,150 +237,8 @@ const education = [
 ];
 
 const PROJECTS = {
-  cloud: [
-    {
-      id: 1,
-      title: "CI/CD with GitHub Actions",
-      images: ["/cloud1.png"],
-      shortDesc: "Automated pipelines for Node services",
-      fullDesc: "GitHub Actions workflows for build, lint, test, and container image publish to tighten release loops.",
-      tags: ["GitHub Actions", "Docker"],
-      tools: ["Node.js"],
-      links: { github: "https://github.com/Yamuna-b" }
-    },
-    {
-      id: 2,
-      title: "Containerized deployments",
-      images: ["/cloud1.png"],
-      shortDesc: "Docker-backed environments from dev to staging",
-      fullDesc: "Docker Compose and Dockerfile patterns for repeatable API + database setups during development.",
-      tags: ["Docker", "DevOps"],
-      tools: ["Compose"],
-      links: { github: "https://github.com/Yamuna-b" }
-    },
-    {
-      id: 3,
-      title: "AWS basics — EC2 & S3",
-      images: ["/cloud4.png"],
-      shortDesc: "Prototype hosting with object storage offloads",
-      fullDesc: "Explored deploying APIs on EC2 and using S3 for static assets—keeping networking and IAM scoped to course-level projects.",
-      tags: ["AWS", "EC2", "S3"],
-      tools: ["AWS CLI"],
-      links: { github: "https://github.com/Yamuna-b" }
-    }
-  ],
-  fullstack: [
-    {
-      id: 1,
-      title: "Petimony - Pet Shop Website",
-      images: ["/petimony.mp4"],
-      shortDesc: "Full-stack pet shop platform",
-      fullDesc: "A comprehensive pet shop website with e-commerce functionality, pet adoption services, and community features.",
-      tags: ["HTML", "CSS", "JavaScript"],
-      tools: ["HTML", "CSS", "JavaScript"],
-      links: { github: "https://github.com/Yamuna-b/Petimony" }
-    },
-    {
-      id: 2,
-      title: "Portfolio Website",
-      images: ["/fullstack1.png"],
-      shortDesc: "Personal portfolio site",
-      fullDesc: "Built my own portfolio using React and Tailwind.",
-      tags: ["React", "Tailwind"],
-      tools: ["TailwindCSS"],
-      links: { github: "https://github.com/Yamuna-b/Portfolio" }
-    },
-    {
-      id: 3,
-      title: "Dashboard UI",
-      images: ["/fullstack2.png"],
-      shortDesc: "Analytics dashboard",
-      fullDesc: "Interactive dashboard with charts and data visualization.",
-      tags: ["React", "Charts"],
-      tools: ["Chart.js"],
-      links: { github: "https://github.com/Yamuna-b/PorterSeva" }
-    },
-    {
-      id: 4,
-      title: "Landing Page",
-      images: ["/fullstack3.png"],
-      shortDesc: "Modern landing page",
-      fullDesc: "Responsive landing page with animations.",
-      tags: ["HTML", "CSS"],
-      tools: ["GSAP"],
-      links: { github: "https://github.com/Yamuna-b/client-support-realtime-chat" }
-    },
-    {
-      id: 5,
-      title: "Node.js API",
-      images: ["/fullstack1.png"],
-      shortDesc: "REST API for e-commerce",
-      fullDesc: "Node.js REST API with authentication and MongoDB.",
-      tags: ["Node.js", "MongoDB"],
-      tools: ["Express"],
-      links: { github: "#" }
-    },
-    {
-      id: 6,
-      title: "Django Blog API",
-      images: ["/fullstack1.png"],
-      shortDesc: "Blog backend with Django",
-      fullDesc: "RESTful blog backend using Django REST Framework.",
-      tags: ["Django", "REST"],
-      tools: ["DRF"],
-      links: { github: "#" }
-    },
-    {
-      id: 7,
-      title: "GraphQL API",
-      images: ["/backend1.png"],
-      shortDesc: "GraphQL server",
-      fullDesc: "Built GraphQL API with Apollo Server.",
-      tags: ["GraphQL", "Apollo"],
-      tools: ["Node.js"],
-      links: { github: "#" }
-    },
-    {
-      id: 8,
-      title: "Microservices Backend",
-      images: ["/backend2.png"],
-      shortDesc: "Distributed services",
-      fullDesc: "Microservices architecture with message queues.",
-      tags: ["Microservices", "RabbitMQ"],
-      tools: ["Docker"],
-      links: { github: "#" }
-    },
-    {
-      id: 9,
-      title: "Full Stack Social App",
-      images: ["/fullstack1.png", "/fullstack1.png", "/fullstack1.png"],
-      shortDesc: "MERN stack social media app",
-      fullDesc: "A social platform built with MongoDB, Express, React, and Node.js.",
-      tags: ["MERN", "Full Stack"],
-      tools: ["React", "Node.js"],
-      links: { github: "#" }
-    },
-    {
-      id: 10,
-      title: "E-learning Platform",
-      images: ["/fullstack4.png"],
-      shortDesc: "Complete LMS system",
-      fullDesc: "Learning management system with video courses.",
-      tags: ["MERN", "LMS"],
-      tools: ["MongoDB", "React"],
-      links: { github: "#" }
-    },
-    {
-      id: 11,
-      title: "Real-time Chat App",
-      images: ["/fullstack5.png"],
-      shortDesc: "Socket.io chat application",
-      fullDesc: "Real-time messaging with Socket.io and React.",
-      tags: ["Socket.io", "Real-time"],
-      tools: ["React", "Node.js"],
-      links: { github: "#" }
-    }
-  ],
+  cloud: [],
+  fullstack: [],
   uiux: [
       {
         id: 1,
@@ -753,88 +611,8 @@ const PROJECTS = {
         links: { figma: "#" }
       },
   ],
-  ai: [
-    {
-      id: 1,
-      title: "ExoVision",
-      images: ["/ExoVision.mp4"],
-      shortDesc: "Exoplanet classification from NASA Space Apps data",
-      fullDesc: "Streamlit app for exoplanet classification using NASA public datasets and TensorFlow ML pipelines.",
-      tags: ["AI", "Astronomy", "Deep Learning"],
-      tools: ["Python", "TensorFlow", "Streamlit"],
-      links: { github: "https://github.com/Yamuna-b/nasa-spaceapps-exoplanet" }
-    },
-    {
-      id: 2,
-      title: "MarineTaxa AI",
-      images: ["/MarineTaxaAi.mp4"],
-      shortDesc: "AI for classifying marine species",
-      fullDesc: "Computer vision system that classifies marine organisms from underwater imagery using convolutional neural networks.",
-      tags: ["AI", "Marine Biology", "Computer Vision"],
-      tools: ["Python", "PyTorch", "OpenCV"],
-      links: { github: "https://github.com/Yamuna-b/MarineTaxaAi" }
-    },
-    {
-      id: 3,
-      title: "FitFinder",
-      images: [PLACEHOLDER_VIDEO],
-      shortDesc: "AIML virtual try-on and wardrobe visualizer",
-      fullDesc: "Virtual try-on and wardrobe visualization app built with Python and a Flask-style web stack.",
-      tags: ["AI", "Computer Vision"],
-      tools: ["Python", "Flask", "HTML"],
-      links: { github: "https://github.com/Yamuna-b/FitFinder" }
-    }
-  ],
-  showcase: [
-    {
-      id: 1,
-      title: "Designthon Euphoria’24",
-      images: ["/showcase1.jpg"],
-      desc: "Awarded for innovative UI/UX design at Kalasalingam University."
-    },
-    {
-      id: 2,
-      title: "Project Expo Techathon'24",
-      images: ["/showcase1.jpg", "/MoneyMirror.mp4"],
-      desc: ""
-    },
-    {
-      id: 3,
-      title: "Robotics Workshop",
-      images: ["/showcase1.jpg"],
-      desc: "Hands-on training and automation at Thiagarajar College."
-    },
-    {
-      id: 4,
-      title: "Hackathon Winner",
-      images: ["/showcase2.jpg"],
-      desc: "First prize at Smart India Hackathon 2024."
-    },
-    {
-      id: 5,
-      title: "UI/UX Competition",
-      images: ["/showcase3.jpg"],
-      desc: "Best design award at regional competition."
-    },
-    {
-      id: 6,
-      title: "Tech Talk Speaker",
-      images: ["/showcase4.jpg"],
-      desc: "Delivered keynote on cloud architecture."
-    },
-    {
-      id: 7,
-      title: "Open Source Contribution",
-      images: ["/showcase5.jpg"],
-      desc: "Major contributor to popular React libraries."
-    },
-    {
-      id: 8,
-      title: "Research Publication",
-      images: ["/showcase6.jpg"],
-      desc: "Published paper on sustainable technology."
-    }
-  ]
+  ai: [],
+  showcase: []
 };
 
 const projectCatalog = {
@@ -952,157 +730,7 @@ const projectCatalog = {
       }
     }
   ],
-  frontend: []
-};
-  backend: [
-    {
-      id: 1,
-      title: "MoneyMirror",
-      images: ["/MoneyMirror.mp4"],
-      shortDesc: "Personal finance digital twin with cash-flow projections",
-      fullDesc: "FastAPI backend for personal finance planning with JWT-secured REST APIs, PostgreSQL, and Docker.",
-      tags: ["Backend", "FinTech", "FastAPI"],
-      tools: ["FastAPI", "PostgreSQL", "JWT", "Docker"],
-      links: {
-        github: "https://github.com/Yamuna-b/Money_Mirror",
-        demo: "https://drive.google.com/file/d/1H01AjMrU8kZ_mYTkO4IgUO7lQl5zsw2s/view?usp=sharing",
-      },
-    },
-    {
-      id: 2,
-      title: "NammaOorFix",
-      images: [PLACEHOLDER_VIDEO],
-      shortDesc: "Civic issue reporting with status workflows",
-      fullDesc: "Backend + full-stack issue lifecycle platform from report to resolution for local civic workflows.",
-      tags: ["Backend", "Civic Tech"],
-      tools: ["Node.js", "MongoDB", "REST APIs"],
-      links: { github: "https://github.com/Yamuna-b/Namma-Oor-Fix" },
-    },
-    {
-      id: 3,
-      title: "Petimony",
-      images: ["/petimony.mp4"],
-      shortDesc: "Pet shop and adoption platform",
-      fullDesc: "Pet shop website with adoption flows, product highlights, and responsive UI.",
-      tags: ["Full Stack", "Frontend"],
-      tools: ["HTML", "CSS", "JavaScript"],
-      links: {
-        github: "https://github.com/Yamuna-b/Petimony",
-      }
-    },
-    {
-      id: 4,
-      title: "client-support-realtime-chat",
-      images: [PLACEHOLDER_VIDEO],
-      shortDesc: "Realtime helpdesk chat widget",
-      fullDesc: "Real-time helpdesk chat with Node.js, Express, Socket.io, and Firebase-backed messaging.",
-      tags: ["Realtime", "Backend APIs"],
-      tools: ["Node.js", "Express", "Socket.io", "Firebase"],
-      links: { github: "https://github.com/Yamuna-b/client-support-realtime-chat" },
-    },
-    {
-      id: 5,
-      title: "RailwayPorterSeva",
-      images: [PLACEHOLDER_VIDEO],
-      shortDesc: "Service booking and assignment workflows",
-      fullDesc: "Booking platform modeling job lifecycle, slot handling, and user-facing status tracking.",
-      tags: ["Service Platform", "CRUD Workflows"],
-      tools: ["Node.js", "Express", "MongoDB"],
-      links: { github: "https://github.com/Yamuna-b/PorterSeva" },
-    },
-  ],
-  ai: [
-    {
-      id: 1,
-      title: "MarineTaxaAi",
-      images: ["/MarineTaxaAi.mp4"],
-      shortDesc: "ML-powered marine taxonomy platform",
-      fullDesc: "Streamlit dashboard and sequence/ML classifier for marine taxonomy classification.",
-      tags: ["AI/ML", "ML Classifier"],
-      tools: ["Python", "Streamlit", "PyTorch", "Scikit-Learn"],
-      links: {
-        github: "https://github.com/Yamuna-b/MarineTaxaAi",
-        demo: "https://drive.google.com/file/d/1aZN2iFA1QZwSP_ftBbqv21tr_xtpykPB/view?usp=sharing",
-      },
-    },
-    {
-      id: 2,
-      title: "ExoVision-SpaceApp",
-      images: ["/ExoVision.mp4"],
-      shortDesc: "Exoplanet classification from NASA Space Apps data",
-      fullDesc: "Streamlit app for exoplanet classification using NASA public datasets and TensorFlow ML pipelines.",
-      tags: ["AI/ML", "Astronomy"],
-      tools: ["Python", "TensorFlow", "Streamlit"],
-      links: { github: "https://github.com/Yamuna-b/nasa-spaceapps-exoplanet" },
-    },
-    ,
-    {
-      id: 4,
-      title: "Self-Realizing Reflex Thermostat Agent for Smart Rooms",
-      images: ["/SRA.mp4"],
-      shortDesc: "Agentic reasoning and execution prototype",
-      fullDesc: "Experimental plan-act-reflect style architecture for autonomous task execution.",
-      tags: ["AI/ML", "Agents"],
-      tools: ["Python"],
-    },
-    {
-      id: 5,
-      title: "Ecosaur",
-      images: ["/ieee.png"],
-      shortDesc: "Carbon footprint awareness and mitigation research",
-      fullDesc: "Research published at IEEE AIDE 2025 on carbon footprint awareness and mitigation.",
-      tags: ["Research", "Publication"],
-      tools: ["Data Analysis", "Presentation"],
-      links: { publication: IEEE_PUBLICATION_URL },
-    },
-  ],
-  devops: [
-    {
-      id: 1,
-      title: "LogBeacon",
-      images: ["/LogBeacon.mp4"],
-      shortDesc: "Log analysis backend on AWS",
-      fullDesc: "TypeScript/Express log analysis service with PostgreSQL, Docker, and AWS deployment.",
-      tags: ["Cloud + DevOps", "Observability", "Express"],
-      tools: ["TypeScript", "Express", "PostgreSQL", "Docker", "AWS"],
-      links: {
-        github: "https://github.com/Yamuna-b/LogBeacon",
-        demo: "https://drive.google.com/file/d/1VIW1KpCmgK-CLCpHbwdMd8BppwnZfHd-/view?usp=sharing",
-      },
-    },
-    {
-      id: 2,
-      title: "CI/CD with GitHub Actions",
-      images: [PLACEHOLDER_VIDEO],
-      shortDesc: "Automated build and deploy workflows",
-      fullDesc: "Reusable CI/CD pipelines for lint/build/test and deployment automation.",
-      tags: ["CI/CD", "GitHub Actions"],
-      tools: ["Docker", "GitHub Actions", "Node.js"],
-      links: { github: "https://github.com/Yamuna-b" },
-    },
-  ],
-  frontend: [
-    {
-      id: 1,
-      title: "ErgoCart",
-      images: [PLACEHOLDER_VIDEO],
-      shortDesc: "Ergonomic e-commerce frontend",
-      fullDesc: "Responsive ergonomic products storefront built with HTML, CSS, and JavaScript.",
-      tags: ["Frontend", "UI/UX"],
-      tools: ["HTML", "CSS", "JavaScript"],
-      links: { github: "https://github.com/Yamuna-b/ErgoCart" },
-    },
-    {
-      id: 2,
-      title: "RepoDocs",
-      images: [PLACEHOLDER_VIDEO],
-      shortDesc: "Repository documentation generator",
-      fullDesc: "Tooling to scaffold and maintain README and repo documentation for faster onboarding.",
-      tags: ["Developer Tools", "Documentation"],
-      tools: ["Python", "Markdown"],
-      links: { github: "https://github.com/Yamuna-b/RepoDocs" },
-    },
-  ],
+  frontend: [],
   highlights: [
     {
       id: 1,
@@ -1116,7 +744,7 @@ const projectCatalog = {
     },
     {
       id: 2,
-      title: "Designthon Euphoria'24",
+      title: "Designathon Euphoria'24",
       images: ["/showcase1.jpg"],
       shortDesc: "First prize — design competition",
       fullDesc: "Awarded first prize for innovation and presentation at Kalasalingam University.",
@@ -1143,7 +771,7 @@ const PROJECT_DOMAIN_FILTERS = [
 // Helper to check if the file is a video
 const isVideo = file => typeof file === "string" && file.match(/\.(mp4|webm|ogg)$/i);
 
-// ─── Navbar ───────────────────────────────────────────────────────────────────
+// ─── Navbar ───────────────────────────────────────────────────────────────
 function NavBar({ activeSection, setActiveSection, setExpandedProject, scrollHomeTo, openResumePreview }) {
   const navItems = [
     { key: "home", label: "HOME" },
@@ -1236,7 +864,7 @@ const BackArrow = ({ activeSection, setActiveSection, show, setExpandedProject }
   show && activeSection !== "home" && (
     <button
       onClick={() => { setExpandedProject(null); setActiveSection("home"); }}
-      className="fixed top-20 sm:top-24 left-4 sm:left-8 z-[120] flex items-center gap-2 px-3 py-2 rounded-full border border-slate-700 hover:border-sky-600/60 text-slate-300 hover:text-sky-300 transition-all duration-200 group"
+      className="fixed top-20 sm:top-24 left-4 sm:left-8 z-[120] flex items-center gap-2 px-3 py-2 rounded-full border border-slate-700 hover:border-sky-600/40 text-slate-300 hover:text-sky-300 transition-all duration-200 group"
       style={{ background: "rgba(10,12,18,0.9)", backdropFilter: "blur(12px)" }}
     >
       <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform duration-200" />
@@ -1244,7 +872,7 @@ const BackArrow = ({ activeSection, setActiveSection, show, setExpandedProject }
     </button>
   );
 
-// ─── Profile Avatar ───────────────────────────────────────────────────────────
+// ─── Profile Avatar ────────────────────────────────────────────────────────
 function ProfileAvatar() {
   return (
     <motion.div
@@ -1280,7 +908,7 @@ function FeaturedThumb({ media, title }) {
   return <img src={media} alt={title || ""} className="absolute inset-0 w-full h-full object-cover" />;
 }
 
-// ─── Contact block ────────────────────────────────────────────────────────────
+// ─── Contact block ─────────────────────────────────────────────────────────
 const ContactSection = () => (
   <div className="space-y-4">
     <div className="flex items-center gap-3">
@@ -1306,7 +934,7 @@ const ContactSection = () => (
   </div>
 );
 
-// ─── Skill pill ───────────────────────────────────────────────────────────────
+// ─── Skill pill ────────────────────────────────────────────────────────────
 function SkillPill({ label }) {
   return (
     <span className="px-2.5 py-1 rounded-md text-xs font-medium border transition-colors duration-200 hover:border-sky-500/50 hover:text-sky-300 hover:bg-sky-950/30"
@@ -1316,7 +944,7 @@ function SkillPill({ label }) {
   );
 }
 
-// ─── Section card ─────────────────────────────────────────────────────────────
+// ─── Section card ──────────────────────────────────────────────────────────
 function Card({ id, children, className = "" }) {
   return (
     <motion.div
@@ -1339,7 +967,7 @@ function SectionLabel({ children }) {
   );
 }
 
-// ─── HomePage ─────────────────────────────────────────────────────────────────
+// ─── HomePage ──────────────────────────────────────────────────────────────
 function HomePage({ openResumePreview }) {
   return (
     <section className="min-h-screen pt-20 sm:pt-28 pb-20" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 40%, #08090e 100%)" }}>
@@ -1381,7 +1009,7 @@ function HomePage({ openResumePreview }) {
                   <FeaturedThumb media={project.image} title={project.title} />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0e1219] via-transparent to-transparent" />
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.06) 0%, transparent 60%)" }} />
+                    style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.08) 0%, transparent 60%)" }} />
                 </div>
                 <div className="p-5 flex-1 flex flex-col gap-3">
                   <div>
@@ -1475,11 +1103,11 @@ function HomePage({ openResumePreview }) {
 
         <div className="grid md:grid-cols-2 gap-5">
           <Card id="leadership">
-            <SectionLabel>Leadership &amp; campus roles</SectionLabel>
+            <SectionLabel>Leadership & campus roles</SectionLabel>
             <div className="space-y-5 text-sm">
               {[
-                { title: "Class Representative", sub: "B.E. CSE Dept (2024–Present)", desc: "Relayed coursework and departmental updates between faculty and classmates; coordinated schedules and surfaced blockers early so deadlines stayed workable." },
-                { title: "Placement Batch Head", sub: "B.E. CSE (2025–Present)", desc: "Helped synchronize placement cohort communication—announcements, deadlines, and escalation paths—keeping the batch aligned with training and recruiter timelines." },
+                { title: "Class Representative", sub: "B.E CSE Dept (2024–Present)", desc: "Relayed coursework and departmental updates between faculty and classmates; coordinated schedules and surfaced blockers early so deadlines stayed workable." },
+                { title: "Placement Batch Head", sub: "B.E CSE (2025–Present)", desc: "Helped synchronize placement cohort communication—announcements, deadlines, and escalation paths—keeping the batch aligned with training and recruiter timelines." },
                 { title: "Committee Head · Academic Cell", sub: "2024–Present · VCET", desc: "Academic coordination and initiatives." },
                 { title: "Eco Club Member", sub: "VCET · 2024–Present", desc: "Volunteered at eco-awareness and campus sustainability events throughout 2025." },
               ].map((r, i) => (
@@ -1494,7 +1122,7 @@ function HomePage({ openResumePreview }) {
               ))}
             </div>
             <div className="mt-8 pt-6 border-t" style={{ borderColor: "rgba(51,65,85,0.4)" }}>
-              <div className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">Entrepreneurial &amp; leadership initiatives</div>
+              <div className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">Entrepreneurial & leadership initiatives</div>
               <ul className="text-sm text-slate-300 space-y-2.5 list-disc ml-5 leading-relaxed">
                 {entrepreneurialInitiatives.map(item => <li key={item.slice(0, 48)}>{item}</li>)}
               </ul>
@@ -1514,7 +1142,7 @@ function HomePage({ openResumePreview }) {
               </div>
             ))}
             <div className="mt-8 pt-6 border-t" style={{ borderColor: "rgba(51,65,85,0.4)" }}>
-              <div className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">Languages &amp; soft skills</div>
+              <div className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">Languages & soft skills</div>
               <div className="space-y-2 mb-4">
                 {personalInfo.languages.map(lang => (
                   <div key={lang.name} className="flex justify-between text-sm text-slate-300">
@@ -1544,7 +1172,7 @@ function HomePage({ openResumePreview }) {
               <Linkedin className="w-5 h-5 text-sky-400 hover:text-sky-300 transition-colors" />
             </a>
             <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <Github className="w-5 h-5 text-slate-400 hover:text-white transition-colors" />
+              <Github className="w-5 h-4 text-slate-400 hover:text-white transition-colors" />
             </a>
             <a href={personalInfo.social.leetcode} target="_blank" rel="noopener noreferrer" aria-label="LeetCode">
               <SiLeetcode className="w-5 h-5 text-amber-500 hover:text-amber-400 transition-colors" />
@@ -1570,7 +1198,7 @@ function HomePage({ openResumePreview }) {
   );
 }
 
-// ─── Media Swiper ─────────────────────────────────────────────────────────────
+// ─── Media Swiper ───────────────────────────────────────────────────────────
 function SingleMedia({ media, className = "", showControls = false }) {
   if (isVideo(media)) {
     return (
@@ -1602,7 +1230,6 @@ function MultiMediaSwiper({ mediaList, className = "", showControls = false }) {
     Object.values(videoRefs.current).forEach(v => {
       if (v) { v.pause(); v.currentTime = 0; }
     });
-    }
   };
 
   useEffect(() => () => {
@@ -1703,7 +1330,7 @@ function ProjectExpandModal({ project, onClose }) {
   );
 }
 
-// ─── Project Grid ─────────────────────────────────────────────────────────────
+// ─── Project Grid ───────────────────────────────────────────────────────────
 function ProjectGrid({ cards, expandedProject, setExpandedProject, columnsLg = 2, invisible = false }) {
   const [hovered, setHovered] = useState(null);
 
@@ -1711,7 +1338,7 @@ function ProjectGrid({ cards, expandedProject, setExpandedProject, columnsLg = 2
     ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 auto-rows-auto"
     : columnsLg === 3
       ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 auto-rows-auto"
-    : "grid grid-cols-1 md:grid-cols-2 gap-5 auto-rows-auto";
+      : "grid grid-cols-1 md:grid-cols-2 gap-5 auto-rows-auto";
 
   const isExpanded = project =>
     expandedProject && (expandedProject.id === project.id || expandedProject.title === project.title);
@@ -1986,9 +1613,7 @@ function ProjectsOverview({ expandedProject, setExpandedProject }) {
 function ResumePreviewModal({ open, onClose }) {
   useEffect(() => {
     if (!open) return undefined;
-    const onKeyDown = event => {
-      if (event.key === "Escape") onClose();
-    };
+    const onKeyDown = event => { if (event.key === "Escape") onClose(); };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open, onClose]);
@@ -2180,7 +1805,7 @@ export default function App() {
         )}
         {activeSection === "highlights" && <HighlightsSection />}
         {activeSection === "video" && (
-          <section className="min-h-screen pt-32 pb-16" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 100%)" }}>
+          <section className="min-h-screen pt-32 pb-16" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 40%, #08090e 100%)" }}>
             <div className="max-w-6xl mx-auto px-4">
               <h1 className="text-4xl font-bold text-white mb-8 text-center">Video Showcase</h1>
               <VideoSwiper videos={["/MoneyMirror.mp4", "/LogBeacon.mp4", "/ExoVision.mp4"]} />
