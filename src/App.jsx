@@ -841,7 +841,123 @@ const projectCatalog = {
   backend: [
     {
       id: 1,
-      title: "Money Mirror",
+      title: "MoneyMirror",
+      images: ["/MoneyMirror.mp4"],
+      shortDesc: "Personal finance digital twin with cash-flow projections",
+      fullDesc: "FastAPI backend for personal finance planning with JWT-secured REST APIs, PostgreSQL, and Docker.",
+      tags: ["Backend", "FinTech", "FastAPI"],
+      tools: ["FastAPI", "PostgreSQL", "JWT", "Docker"],
+      links: {
+        github: "https://github.com/Yamuna-b/Money_Mirror",
+        demo: "https://drive.google.com/file/d/1H01AjMrU8kZ_mYTkO4IgUO7lQl5zsw2s/view?usp=sharing"
+      }
+    },
+    {
+      id: 2,
+      title: "NammaOorFix",
+      images: [PLACEHOLDER_VIDEO],
+      shortDesc: "Civic issue reporting with status workflows",
+      fullDesc: "Backend + full-stack issue lifecycle platform from report to resolution for local civic workflows.",
+      tags: ["Backend", "Civic Tech"],
+      tools: ["Node.js", "MongoDB", "REST APIs"],
+      links: { github: "https://github.com/Yamuna-b/Namma-Oor-Fix" }
+    },
+    {
+      id: 3,
+      title: "Petimony",
+      images: ["/petimony.mp4"],
+      shortDesc: "Pet shop and adoption platform",
+      fullDesc: "Pet shop website with adoption flows, product highlights, and responsive UI.",
+      tags: ["Full Stack", "Frontend"],
+      tools: ["HTML", "CSS", "JavaScript"],
+      links: { github: "https://github.com/Yamuna-b/Petimony" }
+    },
+    {
+      id: 4,
+      title: "client-support-realtime-chat",
+      images: [PLACEHOLDER_VIDEO],
+      shortDesc: "Realtime helpdesk chat widget",
+      fullDesc: "Real-time helpdesk chat with Node.js, Express, Socket.io, and Firebase-backed messaging.",
+      tags: ["Realtime", "Backend APIs"],
+      tools: ["Node.js", "Express", "Socket.io", "Firebase"],
+      links: { github: "https://github.com/Yamuna-b/client-support-realtime-chat" }
+    },
+    {
+      id: 5,
+      title: "RailwayPorterSeva",
+      images: [PLACEHOLDER_VIDEO],
+      shortDesc: "Service booking and assignment workflows",
+      fullDesc: "Booking platform modeling job lifecycle, slot handling, and user-facing status tracking.",
+      tags: ["Service Platform", "CRUD Workflows"],
+      tools: ["Node.js", "Express", "MongoDB"],
+      links: { github: "https://github.com/Yamuna-b/PorterSeva" }
+    }
+  ],
+  ai: [
+    {
+      id: 1,
+      title: "MarineTaxaAi",
+      images: ["/MarineTaxaAi.mp4"],
+      shortDesc: "ML-powered marine taxonomy platform",
+      fullDesc: "Streamlit dashboard and sequence/ML classifier for marine taxonomy classification.",
+      tags: ["AI/ML", "ML Classifier"],
+      tools: ["Python", "Streamlit", "PyTorch", "Scikit-Learn"],
+      links: {
+        github: "https://github.com/Yamuna-b/MarineTaxaAi",
+        demo: "https://drive.google.com/file/d/1aZN2iFA1QZwSP_ftBbqv21tr_xtpykPB/view?usp=sharing"
+      }
+    },
+    {
+      id: 2,
+      title: "ExoVision-SpaceApp",
+      images: ["/ExoVision.mp4"],
+      shortDesc: "Exoplanet classification from NASA Space Apps data",
+      fullDesc: "Streamlit app for exoplanet classification using NASA public datasets and TensorFlow ML pipelines.",
+      tags: ["AI/ML", "Astronomy"],
+      tools: ["Python", "TensorFlow", "Streamlit"],
+      links: { github: "https://github.com/Yamuna-b/nasa-spaceapps-exoplanet" }
+    },
+    {
+      id: 3,
+      title: "Self-Realizing Reflex Thermostat Agent for Smart Rooms",
+      images: ["/SRA.mp4"],
+      shortDesc: "Agentic reasoning and execution prototype",
+      fullDesc: "Experimental plan-act-reflect style architecture for autonomous task execution.",
+      tags: ["AI/ML", "Agents"],
+      tools: ["Python"]
+    },
+    {
+      id: 4,
+      title: "Ecosaur",
+      images: ["/ieee.png"],
+      shortDesc: "Carbon footprint awareness and mitigation research",
+      fullDesc: "Research published at IEEE AIDE 2025 on carbon footprint awareness and mitigation.",
+      tags: ["Research", "Publication"],
+      tools: ["Data Analysis", "Presentation"],
+      links: { publication: IEEE_PUBLICATION_URL }
+    }
+  ],
+  devops: [
+    {
+      id: 1,
+      title: "LogBeacon",
+      images: ["/LogBeacon.mp4"],
+      shortDesc: "Log analysis backend on AWS",
+      fullDesc: "TypeScript/Express log analysis service with PostgreSQL, Docker, and AWS deployment.",
+      tags: ["Cloud + DevOps", "Observability", "Express"],
+      tools: ["TypeScript", "Express", "PostgreSQL", "Docker", "AWS"],
+      links: {
+        github: "https://github.com/Yamuna-b/LogBeacon",
+        demo: "https://drive.google.com/file/d/1VIW1KpCmgK-CLCpHbwdMd8BppwnZfHd-/view?usp=sharing"
+      }
+    }
+  ],
+  frontend: []
+};
+  backend: [
+    {
+      id: 1,
+      title: "MoneyMirror",
       images: ["/MoneyMirror.mp4"],
       shortDesc: "Personal finance digital twin with cash-flow projections",
       fullDesc: "FastAPI backend for personal finance planning with JWT-secured REST APIs, PostgreSQL, and Docker.",
@@ -854,7 +970,7 @@ const projectCatalog = {
     },
     {
       id: 2,
-      title: "Namma Oor Fix",
+      title: "NammaOorFix",
       images: [PLACEHOLDER_VIDEO],
       shortDesc: "Civic issue reporting with status workflows",
       fullDesc: "Backend + full-stack issue lifecycle platform from report to resolution for local civic workflows.",
@@ -876,7 +992,7 @@ const projectCatalog = {
     },
     {
       id: 4,
-      title: "Chat Support Pro",
+      title: "client-support-realtime-chat",
       images: [PLACEHOLDER_VIDEO],
       shortDesc: "Realtime helpdesk chat widget",
       fullDesc: "Real-time helpdesk chat with Node.js, Express, Socket.io, and Firebase-backed messaging.",
@@ -886,7 +1002,7 @@ const projectCatalog = {
     },
     {
       id: 5,
-      title: "Porter Seva",
+      title: "RailwayPorterSeva",
       images: [PLACEHOLDER_VIDEO],
       shortDesc: "Service booking and assignment workflows",
       fullDesc: "Booking platform modeling job lifecycle, slot handling, and user-facing status tracking.",
@@ -898,7 +1014,7 @@ const projectCatalog = {
   ai: [
     {
       id: 1,
-      title: "MarineTaxa AI",
+      title: "MarineTaxaAi",
       images: ["/MarineTaxaAi.mp4"],
       shortDesc: "ML-powered marine taxonomy platform",
       fullDesc: "Streamlit dashboard and sequence/ML classifier for marine taxonomy classification.",
@@ -911,7 +1027,7 @@ const projectCatalog = {
     },
     {
       id: 2,
-      title: "ExoVision",
+      title: "ExoVision-SpaceApp",
       images: ["/ExoVision.mp4"],
       shortDesc: "Exoplanet classification from NASA Space Apps data",
       fullDesc: "Streamlit app for exoplanet classification using NASA public datasets and TensorFlow ML pipelines.",
@@ -919,19 +1035,10 @@ const projectCatalog = {
       tools: ["Python", "TensorFlow", "Streamlit"],
       links: { github: "https://github.com/Yamuna-b/nasa-spaceapps-exoplanet" },
     },
-    {
-      id: 3,
-      title: "FitFinder",
-      images: [PLACEHOLDER_VIDEO],
-      shortDesc: "AIML virtual try-on and wardrobe visualizer",
-      fullDesc: "Virtual try-on and wardrobe visualization app built with Python and a Flask-style web stack.",
-      tags: ["AI/ML", "Computer Vision"],
-      tools: ["Python", "Flask", "HTML", "CSS"],
-      links: { github: "https://github.com/Yamuna-b/FitFinder" },
-    },
+    ,
     {
       id: 4,
-      title: "SRA – Self Realizing Agent",
+      title: "Self-Realizing Reflex Thermostat Agent for Smart Rooms",
       images: ["/SRA.mp4"],
       shortDesc: "Agentic reasoning and execution prototype",
       fullDesc: "Experimental plan-act-reflect style architecture for autonomous task execution.",
@@ -940,7 +1047,7 @@ const projectCatalog = {
     },
     {
       id: 5,
-      title: "Ecosaur Research",
+      title: "Ecosaur",
       images: ["/ieee.png"],
       shortDesc: "Carbon footprint awareness and mitigation research",
       fullDesc: "Research published at IEEE AIDE 2025 on carbon footprint awareness and mitigation.",
@@ -952,7 +1059,7 @@ const projectCatalog = {
   devops: [
     {
       id: 1,
-      title: "Log Beacon",
+      title: "LogBeacon",
       images: ["/LogBeacon.mp4"],
       shortDesc: "Log analysis backend on AWS",
       fullDesc: "TypeScript/Express log analysis service with PostgreSQL, Docker, and AWS deployment.",
@@ -1493,16 +1600,8 @@ function MultiMediaSwiper({ mediaList, className = "", showControls = false }) {
     const video = videoRefs.current[idx];
 
     Object.values(videoRefs.current).forEach(v => {
-      if (v) { v.pause(); v.onended = null; }
+      if (v) { v.pause(); v.currentTime = 0; }
     });
-    if (timerRef.current) { clearTimeout(timerRef.current); timerRef.current = null; }
-
-    if (video) {
-      video.currentTime = 0;
-      video.play().catch(() => {});
-      video.onended = () => { if (mediaList.length > 1) swiper.slideNext(); };
-    } else if (mediaList.length > 1) {
-      timerRef.current = setTimeout(() => swiper.slideNext(), 2500);
     }
   };
 
