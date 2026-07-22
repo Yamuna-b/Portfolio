@@ -43,7 +43,7 @@ export default function Footer({ personalInfo, scrollHomeTo, openResumePreview }
               <h3 className="text-xl font-bold text-slate-100 tracking-tight">Yamuna</h3>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed max-w-md">
-              Final-year CSE student building scalable backends, developer-first products, and data-intensive systems, with a focus on clear architecture and practical Cloud &amp; DevOps habits.
+              Computer Science undergraduate targeting Software Developer roles, with strong experience in backend APIs, full-stack web apps, relational/noSQL databases, and cloud deployment.
             </p>
             <div className="flex gap-2.5 mt-5">
               <a

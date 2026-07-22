@@ -3,19 +3,15 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { Worker, Viewer } from "@react-pdf-viewer/core";
-import pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import "@react-pdf-viewer/core/lib/styles/index.css";
 import {
   ArrowLeft, Linkedin, Github, Download, Mail, Phone, Search, X, ExternalLink
 } from "lucide-react";
 import "./App.css";
 import { FaWhatsapp } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
-import { FaMedium } from "react-icons/fa";
 import Footer from "./components/Footer";
 import Stats from "./components/Stats";
 
@@ -88,7 +84,7 @@ function Bubbles() {
 const personalInfo = {
   name: "Yamuna",
   tagline1: "Backend-focused Software Engineer | Building scalable systems and developer-first products",
-  tagline2: "Final-year CSE student (graduating 2027) focused on backend, cloud, and data-intensive applications using Python, JavaScript, and modern DevOps.",
+  tagline2: "Computer Science undergraduate targeting Software Developer roles, with strong experience in backend APIs, full-stack web apps, relational/noSQL databases, and cloud deployment.",
   email: "yamuna.bsvy@gmail.com",
   phone: "+91-9629163099",
   whatsapp: "919629163099",
@@ -173,7 +169,8 @@ const featuredProjects = [
     ],
     links: {
       github: "https://github.com/Yamuna-b/Money_Mirror",
-      live: "https://drive.google.com/file/d/1H01AjMrU8kZ_mYTkO4IgUO7lQl5zsw2s/view?usp=sharing",
+      demo: "https://drive.google.com/file/d/1H01AjMrU8kZ_mYTkO4IgUO7lQl5zsw2s/view?usp=sharing",
+      live: "#", // TODO: replace with actual live website link if available
     },
     image: "/MoneyMirrorCover.jpg",
   },
@@ -188,7 +185,8 @@ const featuredProjects = [
     ],
     links: {
       github: "https://github.com/Yamuna-b/LogBeacon",
-      live: "https://drive.google.com/file/d/1VIW1KpCmgK-CLCpHbwdMd8BppwnZfHd-/view?usp=sharing",
+      demo: "https://drive.google.com/file/d/1VIW1KpCmgK-CLCpHbwdMd8BppwnZfHd-/view?usp=sharing",
+      live: "#", // TODO: replace with actual live website link if available
     },
     image: "/LogBeaconCover.jpg",
   },
@@ -203,17 +201,14 @@ const featuredProjects = [
     ],
     links: {
       github: "https://github.com/Yamuna-b/MarineTaxaAi",
-      live: "https://drive.google.com/file/d/1aZN2iFA1QZwSP_ftBbqv21tr_xtpykPB/view?usp=sharing",
+      demo: "https://drive.google.com/file/d/1aZN2iFA1QZwSP_ftBbqv21tr_xtpykPB/view?usp=sharing",
+      live: "#", // TODO: replace with actual live website link if available
     },
     image: "/MarineTaxaAiCover.jpg",
   },
 ];
 
-const entrepreneurialInitiatives = [
-  "Led backend and architecture for 3+ self-initiated products (MoneyMirror, LogBeacon, MarineTaxaAi), treating them as real users' workflows rather than just academic demos.",
-  "Coordinated placement batch communication as Placement Batch Head, mirroring stakeholder management in fast-paced engineering teams.",
-  "Regularly pitch project ideas and technical concepts via blogs, talks, and peer mentoring.",
-];
+
 
 const education = [
   {
@@ -301,16 +296,6 @@ const PROJECTS = {
         links: { View: "#" }
       },
       {
-        id: 8,
-        title: "Poster Design 1",
-        images: ["/ui_8.png"],
-        shortDesc: "Vibrant event poster",
-        fullDesc: "Poster design for events and promotions.",
-        tags: ["Poster", "Event"],
-        tools: ["Photoshop"],
-        links: { behance: "#" }
-      },
-      {
         id: 9,
         title: "Poster Design 2",
         images: ["/ui_9.png"],
@@ -331,26 +316,6 @@ const PROJECTS = {
         links: { behance: "#" }
       },
       {
-        id: 11,
-        title: "Poster Design 4",
-        images: ["/ui_11.png"],
-        shortDesc: "Vibrant event poster",
-        fullDesc: "Poster design for events and promotions.",
-        tags: ["Poster", "Event"],
-        tools: ["Photoshop"],
-        links: { behance: "#" }
-      },
-      {
-        id: 12,
-        title: "Poster Design 5",
-        images: ["/ui_12.png"],
-        shortDesc: "Vibrant event poster",
-        fullDesc: "Poster design for events and promotions.",
-        tags: ["Poster", "Event"],
-        tools: ["Photoshop"],
-        links: { behance: "#" }
-      },
-      {
         id: 13,
         title: "Poster Design 6",
         images: ["/ui_13.png"],
@@ -361,29 +326,9 @@ const PROJECTS = {
         links: { behance: "#" }
       },
       {
-        id: 14,
-        title: "Poster Design 7",
-        images: ["/ui_14.png"],
-        shortDesc: "Vibrant event poster",
-        fullDesc: "Poster design for events and promotions.",
-        tags: ["Poster", "Event"],
-        tools: ["Photoshop"],
-        links: { behance: "#" }
-      },
-      {
         id: 15,
         title: "Poster Design 8",
         images: ["/ui_15.png"],
-        shortDesc: "Vibrant event poster",
-        fullDesc: "Poster design for events and promotions.",
-        tags: ["Poster", "Event"],
-        tools: ["Photoshop"],
-        links: { behance: "#" }
-      },
-      {
-        id: 16,
-        title: "Poster Design 9",
-        images: ["/ui_16.png"],
         shortDesc: "Vibrant event poster",
         fullDesc: "Poster design for events and promotions.",
         tags: ["Poster", "Event"],
@@ -561,29 +506,9 @@ const PROJECTS = {
         links: { figma: "#" }
       },
       {
-        id: 34,
-        title: "App Prototype 12",
-        images: ["/ui_34.png"],
-        shortDesc: "Mobile app prototype",
-        fullDesc: "High-fidelity prototype for mobile application.",
-        tags: ["Prototype", "Mobile"],
-        tools: ["Figma"],
-        links: { figma: "#" }
-      },
-      {
         id: 35,
         title: "App Prototype 13",
         images: ["/ui_35.png"],
-        shortDesc: "Mobile app prototype",
-        fullDesc: "High-fidelity prototype for mobile application.",
-        tags: ["Prototype", "Mobile"],
-        tools: ["Figma"],
-        links: { figma: "#" }
-      },
-      {
-        id: 36,
-        title: "App Prototype 14",
-        images: ["/ui_36.png"],
         shortDesc: "Mobile app prototype",
         fullDesc: "High-fidelity prototype for mobile application.",
         tags: ["Prototype", "Mobile"],
@@ -627,7 +552,8 @@ const projectCatalog = {
       tools: ["FastAPI", "PostgreSQL", "JWT", "Docker"],
       links: {
         github: "https://github.com/Yamuna-b/Money_Mirror",
-        demo: "https://drive.google.com/file/d/1H01AjMrU8kZ_mYTkO4IgUO7lQl5zsw2s/view?usp=sharing"
+        demo: "https://drive.google.com/file/d/1H01AjMrU8kZ_mYTkO4IgUO7lQl5zsw2s/view?usp=sharing",
+        live: "#"
       }
     },
     {
@@ -682,7 +608,8 @@ const projectCatalog = {
       tools: ["Python", "Streamlit", "PyTorch", "Scikit-Learn"],
       links: {
         github: "https://github.com/Yamuna-b/MarineTaxaAi",
-        demo: "https://drive.google.com/file/d/1aZN2iFA1QZwSP_ftBbqv21tr_xtpykPB/view?usp=sharing"
+        demo: "https://drive.google.com/file/d/1aZN2iFA1QZwSP_ftBbqv21tr_xtpykPB/view?usp=sharing",
+        live: "#"
       }
     },
     {
@@ -726,7 +653,8 @@ const projectCatalog = {
       tools: ["TypeScript", "Express", "PostgreSQL", "Docker", "AWS"],
       links: {
         github: "https://github.com/Yamuna-b/LogBeacon",
-        demo: "https://drive.google.com/file/d/1VIW1KpCmgK-CLCpHbwdMd8BppwnZfHd-/view?usp=sharing"
+        demo: "https://drive.google.com/file/d/1VIW1KpCmgK-CLCpHbwdMd8BppwnZfHd-/view?usp=sharing",
+        live: "#"
       }
     }
   ],
@@ -759,12 +687,10 @@ const PROJECT_DOMAIN_FILTERS = [
     ...projectCatalog.backend,
     ...projectCatalog.ai,
     ...projectCatalog.devops,
-    ...projectCatalog.frontend,
   ]},
   { key: "backend", label: "Backend + Frontend", cards: () => projectCatalog.backend },
   { key: "ai", label: "AI / ML", cards: () => projectCatalog.ai },
   { key: "devops", label: "Cloud + DevOps", cards: () => projectCatalog.devops },
-  { key: "frontend", label: "Frontend", cards: () => projectCatalog.frontend },
   { key: "designs", label: "Designs", cards: () => PROJECTS.uiux },
 ];
 
@@ -852,9 +778,6 @@ function NavBar({ activeSection, setActiveSection, setExpandedProject, scrollHom
         <a href={personalInfo.social.leetcode} target="_blank" rel="noopener noreferrer" className="hidden lg:block">
           <SiLeetcode className="w-4 h-4 text-amber-500 hover:text-amber-400 transition-colors" />
         </a>
-        <a href={personalInfo.social.medium} target="_blank" rel="noopener noreferrer" className="hidden lg:block">
-          <FaMedium className="w-4 h-4 text-slate-400 hover:text-white transition-colors" />
-        </a>
       </div>
     </nav>
   );
@@ -864,11 +787,11 @@ const BackArrow = ({ activeSection, setActiveSection, show, setExpandedProject }
   show && activeSection !== "home" && (
     <button
       onClick={() => { setExpandedProject(null); setActiveSection("home"); }}
-      className="fixed top-20 sm:top-24 left-4 sm:left-8 z-[120] flex items-center gap-2 px-3 py-2 rounded-full border border-slate-700 hover:border-sky-600/40 text-slate-300 hover:text-sky-300 transition-all duration-200 group"
+      className="fixed top-12 sm:top-16 right-4 sm:left-8 z-[120] flex items-center gap-2 px-3 py-2 rounded-full border border-slate-700 hover:border-sky-600/40 text-slate-300 hover:text-sky-300 transition-all duration-200 group"
       style={{ background: "rgba(10,12,18,0.9)", backdropFilter: "blur(12px)" }}
     >
       <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform duration-200" />
-      <span className="text-xs font-semibold">Back</span>
+      <span className="text-xs font-semibold hidden sm:inline">Back</span>
     </button>
   );
 
@@ -924,13 +847,7 @@ const ContactSection = () => (
         {personalInfo.email}
       </a>
     </div>
-    <div className="flex items-center gap-3">
-      <FaMedium className="text-slate-400 shrink-0 w-5 h-5" />
-      <a href={personalInfo.social.medium} target="_blank" rel="noopener noreferrer"
-        className="text-slate-400 hover:text-slate-300 text-sm break-all transition-colors">
-        Medium Blog
-      </a>
-    </div>
+
   </div>
 );
 
@@ -970,9 +887,9 @@ function SectionLabel({ children }) {
 // ─── HomePage ──────────────────────────────────────────────────────────────
 function HomePage({ openResumePreview }) {
   return (
-    <section className="min-h-screen pt-24 sm:pt-32 pb-20" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 40%, #08090e 100%)" }}>
+    <section className="min-h-screen pt-28 sm:pt-36 pb-20" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 40%, #08090e 100%)" }}>
       <div className="max-w-5xl mx-auto px-4 space-y-12">
-        <div className="text-center pt-4">
+        <div className="text-center pt-4 sm:pt-0">
           <ProfileAvatar />
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }} className="mt-7">
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-50 mb-3">{personalInfo.name}</h1>
@@ -991,10 +908,7 @@ function HomePage({ openResumePreview }) {
         </Card>
 
         <div id="projects" className="scroll-mt-28">
-          <h2 className="text-xl sm:text-2xl font-bold text-slate-100 mb-2">Featured projects</h2>
-          <p className="text-sm text-slate-500 mb-6 max-w-2xl">
-            Systems-focused work spanning APIs, persistence, and delivery—each distilled to outcomes you can ask about in an interview.
-          </p>
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-100 mb-4">Featured projects</h2>
           <div className="grid md:grid-cols-2 gap-5">
             {featuredProjects.map((project, idx) => (
               <motion.article
@@ -1027,17 +941,23 @@ function HomePage({ openResumePreview }) {
                   <ul className="text-sm text-slate-300 space-y-1.5 list-disc ml-5 flex-1 leading-relaxed">
                     {project.bullets.map((b, bi) => <li key={bi}>{b}</li>)}
                   </ul>
-                  <div className="flex flex-wrap gap-4 pt-1">
+                  <div className="flex flex-wrap gap-3 pt-1">
                     {project.links?.github && project.links.github !== "#" && (
                       <a href={project.links.github} target="_blank" rel="noopener noreferrer"
-                        className="text-xs font-semibold text-sky-400 hover:text-sky-300 transition-colors flex items-center gap-1">
-                        <Github className="w-3.5 h-3.5" /> View code
+                        className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 hover:border-sky-500/30 transition-all duration-200 flex items-center gap-1.5">
+                        <Github className="w-3.5 h-3.5" /> GitHub
+                      </a>
+                    )}
+                    {project.links?.demo && project.links.demo !== "#" && (
+                      <a href={project.links.demo} target="_blank" rel="noopener noreferrer"
+                        className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-900/70 hover:bg-sky-800 text-sky-100 border border-sky-700 hover:border-sky-500 transition-all duration-200 flex items-center gap-1.5">
+                        <ExternalLink className="w-3.5 h-3.5" /> Demo
                       </a>
                     )}
                     {project.links?.live && project.links.live !== "#" && (
                       <a href={project.links.live} target="_blank" rel="noopener noreferrer"
-                        className="text-xs font-semibold text-sky-400 hover:text-sky-300 transition-colors flex items-center gap-1">
-                        <ExternalLink className="w-3.5 h-3.5" /> Live demo
+                        className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-900/70 hover:bg-emerald-800 text-emerald-100 border border-emerald-700 hover:border-emerald-500 transition-all duration-200 flex items-center gap-1.5">
+                        <ExternalLink className="w-3.5 h-3.5" /> Live
                       </a>
                     )}
                   </div>
@@ -1171,9 +1091,6 @@ function HomePage({ openResumePreview }) {
             <a href={personalInfo.social.leetcode} target="_blank" rel="noopener noreferrer" aria-label="LeetCode">
               <SiLeetcode className="w-5 h-5 text-amber-500 hover:text-amber-400 transition-colors" />
             </a>
-            <a href={personalInfo.social.medium} target="_blank" rel="noopener noreferrer" aria-label="Medium">
-              <FaMedium className="w-5 h-5 text-slate-400 hover:text-white transition-colors" />
-            </a>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
             <button onClick={openResumePreview}
@@ -1218,8 +1135,6 @@ function MultiMediaSwiper({ mediaList, className = "", showControls = false }) {
   const handleSlide = () => {
     const swiper = swiperRef.current;
     if (!swiper) return;
-    const idx = swiper.realIndex;
-    const video = videoRefs.current[idx];
 
     Object.values(videoRefs.current).forEach(v => {
       if (v) { v.pause(); v.currentTime = 0; }
@@ -1310,13 +1225,52 @@ function ProjectExpandModal({ project, onClose }) {
           >
             ×
           </button>
-          {project.links && Object.entries(project.links).filter(([k, url]) => url && url !== "#" && !["demo", "behance", "figma"].includes(k)).map(([k, url]) => (
-            <a key={k} href={url} target="_blank" rel="noopener noreferrer"
-              className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[210] px-7 py-2.5 rounded-xl font-bold text-sm text-white transition-all hover:scale-105"
-              style={{ background: "linear-gradient(135deg, #0284c7, #7c3aed)" }}>
-              {k.charAt(0).toUpperCase() + k.slice(1)}
-            </a>
-          ))}
+          {project.links && (
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[210] flex flex-wrap gap-3 justify-center">
+              {project.links.github && project.links.github !== "#" && (
+                <a href={project.links.github} target="_blank" rel="noopener noreferrer"
+                  className="px-5 py-2.5 rounded-xl font-semibold text-sm text-slate-100 transition-all hover:scale-105 border border-slate-700"
+                  style={{ background: "rgba(30,40,55,0.9)" }}>
+                  GitHub
+                </a>
+              )}
+              {project.links.demo && project.links.demo !== "#" && (
+                <a href={project.links.demo} target="_blank" rel="noopener noreferrer"
+                  className="px-5 py-2.5 rounded-xl font-semibold text-sm text-white transition-all hover:scale-105"
+                  style={{ background: "linear-gradient(135deg, #0284c7, #0ea5e9)" }}>
+                  Demo
+                </a>
+              )}
+              {project.links.live && project.links.live !== "#" && (
+                <a href={project.links.live} target="_blank" rel="noopener noreferrer"
+                  className="px-5 py-2.5 rounded-xl font-semibold text-sm text-white transition-all hover:scale-105"
+                  style={{ background: "linear-gradient(135deg, #10b981, #34d399)" }}>
+                  Live
+                </a>
+              )}
+              {project.links.behance && project.links.behance !== "#" && (
+                <a href={project.links.behance} target="_blank" rel="noopener noreferrer"
+                  className="px-5 py-2.5 rounded-xl font-semibold text-sm text-white transition-all hover:scale-105"
+                  style={{ background: "linear-gradient(135deg, #1769ff, #408bff)" }}>
+                  Behance
+                </a>
+              )}
+              {project.links.figma && project.links.figma !== "#" && (
+                <a href={project.links.figma} target="_blank" rel="noopener noreferrer"
+                  className="px-5 py-2.5 rounded-xl font-semibold text-sm text-white transition-all hover:scale-105"
+                  style={{ background: "linear-gradient(135deg, #f24e1e, #ff7262)" }}>
+                  Figma
+                </a>
+              )}
+              {project.links.publication && project.links.publication !== "#" && (
+                <a href={project.links.publication} target="_blank" rel="noopener noreferrer"
+                  className="px-5 py-2.5 rounded-xl font-semibold text-sm text-white transition-all hover:scale-105"
+                  style={{ background: "linear-gradient(135deg, #7c3aed, #a78bfa)" }}>
+                  Publication
+                </a>
+              )}
+            </div>
+          )}
         </motion.div>
       </motion.div>
     </AnimatePresence>,
@@ -1368,12 +1322,10 @@ function ProjectGrid({ cards, expandedProject, setExpandedProject, columnsLg = 2
             onClick={() => !invisible && setExpandedProject(project)}
           >
             {singleVideo && !expanded && (
-              <img src={images[0].replace(/\.(mp4|webm|ogg)$/i, "Cover.jpg")} alt={project.title} className="w-full h-full object-contain" />
+              <video src={images[0]} muted loop playsInline autoPlay className="w-full h-full object-contain" />
             )}
             {singleVideo && expanded && (
-              <div className="w-full h-full min-h-[200px] bg-slate-900/80 flex items-center justify-center">
-                <span className="text-xs text-slate-500">Expanded</span>
-              </div>
+              <MediaSwiper mediaList={images} className="w-full h-full" showControls />
             )}
             {singleImage && (
               <img src={images[0]} alt={project.title} className="w-full h-full object-contain" />
@@ -1635,9 +1587,7 @@ function ResumePreviewModal({ open, onClose }) {
           </button>
         </div>
         <div className="h-[calc(88vh-58px)]">
-          <Worker workerUrl={pdfjsWorker}>
-            <Viewer fileUrl="/resume.pdf" />
-          </Worker>
+          <iframe src="/resume.pdf" width="100%" height="100%" frameBorder="0" title="Resume Preview" />
         </div>
       </div>
     </div>
