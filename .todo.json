@@ -1,0 +1,22 @@
+[
+  {
+    "content": "Inspect portfolio structure and configuration",
+    "active_form": "Inspecting portfolio structure and configuration",
+    "status": "completed"
+  },
+  {
+    "content": "Run quality and build checks",
+    "active_form": "Running quality and build checks",
+    "status": "completed"
+  },
+  {
+    "content": "Review content, UX, and maintenance gaps",
+    "active_form": "Reviewing content, UX, and maintenance gaps",
+    "status": "in_progress"
+  },
+  {
+    "content": "Summarize recommended updates",
+    "active_form": "Summarizing recommended updates",
+    "status": "pending"
+  }
+]
