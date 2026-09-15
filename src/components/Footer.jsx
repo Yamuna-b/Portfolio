@@ -35,11 +35,7 @@ export default function Footer({ personalInfo, scrollHomeTo, openResumePreview }
         <div className="grid md:grid-cols-3 gap-10 mb-10">
           <div className="md:col-span-2">
             <div className="flex items-center gap-3 mb-4">
-              <img
-                src="/logo.jpg"
-                alt=""
-                className="w-11 h-11 rounded-full object-cover ring-2 ring-sky-700"
-              />
+              <div className="footer-profile-placeholder" aria-label="Profile photo placeholder">?</div>
               <h3 className="text-xl font-bold text-slate-100 tracking-tight">Yamuna</h3>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed max-w-md">
@@ -94,13 +90,16 @@ export default function Footer({ personalInfo, scrollHomeTo, openResumePreview }
                 <FooterLink onClick={go("experience")}>Experience</FooterLink>
               </li>
               <li>
+                <FooterLink onClick={go("leadership")}>Leadership & volunteering</FooterLink>
+              </li>
+              <li>
                 <FooterLink onClick={go("coding-activity")}>Coding activity</FooterLink>
               </li>
               <li>
                 <FooterLink onClick={openResumePreview}>Resume preview</FooterLink>
               </li>
               <li>
-                <FooterLink href="/resume.pdf" download="Yamuna_Resume.pdf">
+                <FooterLink href="/Resume.pdf" download="Yamuna_Resume.pdf">
                   Download
                 </FooterLink>
               </li>
