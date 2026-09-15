@@ -7,11 +7,11 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import {
-  ArrowLeft, Linkedin, Github, Download, Mail, Phone, Search, X, ExternalLink
+  ArrowLeft, Linkedin, Github, Download, Mail, Phone, Search, X, ExternalLink, Cloud, Database, Server, ArrowDownRight, Terminal, GitBranch, Image as ImageIcon
 } from "lucide-react";
 import "./App.css";
 import { FaWhatsapp } from "react-icons/fa";
-import { SiLeetcode } from "react-icons/si";
+import { SiAmazon, SiDocker, SiExpress, SiFastapi, SiGit, SiLeetcode, SiMongodb, SiNodedotjs, SiPostgresql, SiPython, SiPytorch, SiReact, SiTypescript } from "react-icons/si";
 import Footer from "./components/Footer";
 import Stats from "./components/Stats";
 
@@ -42,40 +42,45 @@ const SearchBar = ({ searchQuery, setSearchQuery }) => (
   </div>
 );
 
-// ─── Ambient background particles ────────────────────────────────────────────
-function Bubbles() {
-  const particles = Array.from({ length: 18 }).map((_, i) => ({
-    top: Math.random() * 100,
-    left: Math.random() * 100,
-    size: Math.random() * 280 + 80,
-    driftX: (Math.random() - 0.5) * 35,
-    driftY: (Math.random() - 0.5) * 35,
-    duration: 18 + Math.random() * 14,
-    color: i % 3 === 0 ? "rgba(14,165,233,0.04)" : i % 3 === 1 ? "rgba(139,92,246,0.04)" : "rgba(30,64,100,0.05)",
-  }));
-
+// ─── Quiet, deterministic studio background ─────────────────────────────────
+function Bubbles({ canvasTheme = "hero" }) {
   return (
-    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-      {particles.map((p, i) => (
-        <motion.div
-          key={i}
-          className="absolute rounded-full"
-          style={{ width: p.size, height: p.size, background: p.color, filter: "blur(60px)" }}
-          initial={{ top: p.top + "%", left: p.left + "%" }}
-          animate={{
-            top: [p.top + "%", p.top + p.driftY + "%", p.top + "%"],
-            left: [p.left + "%", p.left + p.driftX + "%", p.left + "%"],
-          }}
-          transition={{ duration: p.duration, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
-        />
-      ))}
-      <div
-        className="absolute inset-0 opacity-[0.018]"
-        style={{
-          backgroundImage: "linear-gradient(rgba(148,163,184,1) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,1) 1px, transparent 1px)",
-          backgroundSize: "80px 80px",
-        }}
-      />
+    <div className={`studio-background canvas-theme-${canvasTheme}`} aria-hidden="true">
+      <div className="canvas-progress-track">
+        <div className="canvas-progress-line" />
+        <div className="canvas-progress-dot"><span /></div>
+        <small>{canvasTheme.replace("-", " ")}</small>
+      </div>
+      <div className="paint-field paint-field-blue" />
+      <div className="paint-field paint-field-lavender" />
+      <div className="paint-field paint-field-warm" />
+      <div className="paint-field paint-field-yellow" />
+      <div className="studio-grid" />
+      <svg className="data-ribbon" viewBox="0 0 1200 1800" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="ribbonGradient" x1="0" x2="1">
+            <stop offset="0" stopColor="#51B7FF" />
+            <stop offset=".48" stopColor="#A78BFA" />
+            <stop offset="1" stopColor="#FF8A7A" />
+          </linearGradient>
+        </defs>
+        <path d="M140 20 C880 160 260 310 940 480 S260 780 970 940 S300 1240 950 1430 S650 1680 1080 1780" />
+        <path className="ribbon-highlight" d="M140 20 C880 160 260 310 940 480 S260 780 970 940 S300 1240 950 1430 S650 1680 1080 1780" />
+      </svg>
+      <svg className="studio-doodles" viewBox="0 0 1200 1800" preserveAspectRatio="none">
+        <path d="M84 110 C240 90 310 210 448 178 S650 102 770 200 S954 318 1112 250" />
+        <path d="M92 520 C210 480 270 630 405 602 S600 490 730 590 S940 718 1082 628" />
+        <path d="M78 930 C210 850 322 1010 458 964 S688 866 804 980 S990 1090 1120 1008" />
+        <path d="M92 1360 C244 1298 336 1450 490 1418 S712 1324 858 1438 S1008 1510 1120 1460" />
+        <path className="sketch-arrow" d="M188 358 l38 -10 -14 34" />
+        <path className="sketch-arrow" d="M970 1158 l35 18 -29 18" />
+        <circle cx="448" cy="178" r="5" /><circle cx="730" cy="590" r="5" /><circle cx="804" cy="980" r="5" /><circle cx="858" cy="1438" r="5" />
+        <rect x="850" y="92" width="118" height="72" rx="4" /><path d="M865 112 h54 m-54 18 h72 m-72 18 h39" />
+        <ellipse cx="196" cy="1138" rx="54" ry="16" /><path d="M142 1138 v55 c0 9 24 16 54 16 s54-7 54-16 v-55 m-108 26 c0 9 24 16 54 16 s54-7 54-16" />
+      </svg>
+      <span className="doodle-label label-one">idea → interface</span>
+      <span className="doodle-label label-two">API · database · cloud</span>
+      <span className="doodle-label label-three">build → test → deploy</span>
     </div>
   );
 }
@@ -172,7 +177,7 @@ const featuredProjects = [
       demo: "https://drive.google.com/file/d/1H01AjMrU8kZ_mYTkO4IgUO7lQl5zsw2s/view?usp=sharing",
       live: "#", // TODO: replace with actual live website link if available
     },
-    image: "/MoneyMirrorCover.jpg",
+    image: "/MoneyMirror.mp4",
   },
   {
     title: "LogBeacon",
@@ -188,7 +193,7 @@ const featuredProjects = [
       demo: "https://drive.google.com/file/d/1VIW1KpCmgK-CLCpHbwdMd8BppwnZfHd-/view?usp=sharing",
       live: "#", // TODO: replace with actual live website link if available
     },
-    image: "/LogBeaconCover.jpg",
+    image: "/LogBeacon.mp4",
   },
   {
     title: "MarineTaxaAi",
@@ -204,32 +209,42 @@ const featuredProjects = [
       demo: "https://drive.google.com/file/d/1aZN2iFA1QZwSP_ftBbqv21tr_xtpykPB/view?usp=sharing",
       live: "#", // TODO: replace with actual live website link if available
     },
-    image: "/MarineTaxaAiCover.jpg",
+    image: "/MarineTaxaAi.mp4",
   },
 ];
 
-
-
-const education = [
-  {
-    logo: "/Vcetlogo.jpg",
-    degree: "B.E | Computer Science",
-    org: "Velammal College of Engineering and Technology",
-    year: "2027"
+// Replace screenshot arrays as project captures become available. The rendering stays unchanged.
+const portfolioContent = {
+  identity: {
+    label: "Backend / Cloud Engineer with AI specialization",
+    location: "Madurai, Tamil Nadu, India",
+    about: "Me - a backend focused developer who builds APIs, connects databases and AWS cloud services, handles deployment, logging and monitoring, and integrates GenAI features when needed.",
+    aws: "Growing deeper in AWS across compute, storage, networking, security, IAM, infrastructure as code, observability, and cost optimization."
   },
-  {
-    logo: "/Vbcalogo.jpg",
-    degree: "Higher Education",
-    org: "Velammal Bodhi Campus",
-    year: "2017-2023"
-  },
-  {
-    logo: "/Tvslogo.jpg",
-    degree: "School",
-    org: "TVS Matriculation Higher Secondary School",
-    year: "2011-2017"
-  }
-];
+  projects: [
+    { ...featuredProjects[0], screenshots: [], problem: "Make future cash-flow pressure visible before it becomes a surprise.", website: "#" },
+    { ...featuredProjects[1], screenshots: [], problem: "Turn noisy logs into searchable, structured incident intelligence.", website: "#" },
+    { ...featuredProjects[2], screenshots: [], problem: "Make sequence-based marine classification easier to inspect and explain.", website: "#" }
+  ],
+  internships: [
+    { ...experience[0], projects: [{ name: "Petimony", description: "Pet shop and adoption flows with reusable responsive interfaces.", image: "/open_1.png", github: "https://github.com/Yamuna-b/Petimony", stack: ["React", "APIs"] }, { name: "Reusable API screens", description: "Form handling and API-connected UI components for internal delivery.", image: "/open_2.png", github: "#", stack: ["React", "REST"] }] },
+    { ...experience[2], projects: [{ name: "RailwayPorterSeva", description: "Cloud-hosted service booking and assignment workflows.", image: "/open_2.png", github: "https://github.com/Yamuna-b/PorterSeva", stack: ["Node.js", "MongoDB", "AWS"] }, { name: "Client support realtime chat", description: "Real-time helpdesk support tool for delivery teams.", image: "/open_3.png", github: "https://github.com/Yamuna-b/client-support-realtime-chat", stack: ["Express", "Socket.io", "Firebase"] }] }
+  ],
+  awards: [
+    { title: "First Prize - DesignVerse '26", caption: "Interdepartmental Figma UI/UX Challenge, VCET", images: ["/showcase1.jpg", "/Award1.jpg"] },
+    { title: "First Prize - award proof", caption: "Replace this caption with the verified award name.", images: ["/Award2.jpg", "/Award3.jpg"] },
+    { title: "First Prize - award proof", caption: "Replace this caption with the verified award name.", images: ["/Award4.jpg"] }
+  ],
+  certificates: ["/cert1.jpg", "/cert2.jpg", "/cert3.jpg", "/cert4.jpg", "/cert5.jpg", "/cert6.jpg"],
+  badges: ["/badge_1.png", "/badge_2.png", "/badge_3.jpg", "/badge_4.png", "/hackerrank-problem-solving.svg"],
+  designs: ["/ui_1.png", "/ui_18.png", "/ui_33.png"],
+  openSource: ["/open_4.jpg", "/open_5.png", "/open_6.png"],
+  linkedinPosts: [
+    { title: "Project Expo · RAG Model · Menstrual Health", caption: "Project Expo post. Open the verified LinkedIn post to read the full caption.", image: "", url: "https://www.linkedin.com/posts/yamuna-bsvy_projectexpo-ragmodel-menstrualhealth-activity-7252692597985394690-2fyw?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEITI-gB1xhckvXVf8zOF2ITcORSU0OfRQY" },
+    { title: "Designathon Euphoria 2024 · Teamwork", caption: "Designathon Euphoria 2024 post. Open the verified LinkedIn post to read the full caption.", image: "", url: "https://www.linkedin.com/posts/yamuna-bsvy_designathon-euphoria2024-teamwork-activity-7252674792670023680-_OI7?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEITI-gB1xhckvXVf8zOF2ITcORSU0OfRQY" },
+    { title: "LinkedIn post placeholder", caption: "Add the verified post caption here.", image: "", url: "" }
+  ]
+};
 
 const PROJECTS = {
   cloud: [],
@@ -697,104 +712,6 @@ const PROJECT_DOMAIN_FILTERS = [
 // Helper to check if the file is a video
 const isVideo = file => typeof file === "string" && file.match(/\.(mp4|webm|ogg)$/i);
 
-// ─── Navbar ───────────────────────────────────────────────────────────────
-function NavBar({ activeSection, setActiveSection, setExpandedProject, scrollHomeTo, openResumePreview }) {
-  const navItems = [
-    { key: "home", label: "HOME" },
-    { key: "projects", label: "PROJECTS" },
-    { key: "highlights", label: "HIGHLIGHTS" },
-  ];
-
-  const go = item => {
-    setExpandedProject(null);
-    if (item.key === "home") {
-      setActiveSection("home");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    setActiveSection(item.key);
-  };
-
-  return (
-    <nav className="fixed top-0 inset-x-0 z-50 flex flex-col sm:flex-row items-center justify-between px-4 sm:px-8 py-2 sm:py-3 gap-2 sm:gap-0"
-      style={{ background: "rgba(8,9,14,0.88)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(148,163,184,0.08)" }}>
-
-      <div className="flex items-center gap-2.5 order-1">
-        <div className="relative">
-          <div className="absolute inset-0 rounded-full bg-sky-500/30 blur-md" />
-          <img src="/logo.jpg" alt="Logo" className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover ring-2 ring-sky-500/40" />
-        </div>
-        <span className="font-semibold text-base sm:text-lg text-slate-100 hidden sm:block tracking-tight">Yamuna</span>
-      </div>
-
-      <div className="sm:hidden flex items-center gap-2 order-2">
-        <span className="font-semibold text-base text-slate-100">Yamuna</span>
-      </div>
-
-      <div className="flex-1 flex justify-center order-3 sm:order-2 mt-1 sm:mt-0">
-        <div className="flex items-center gap-4 sm:gap-6 flex-wrap justify-center">
-          {navItems.map(item => {
-            const active = activeSection === item.key;
-            return (
-              <button
-                key={item.key}
-                onClick={() => go(item)}
-                className={`text-xs sm:text-sm font-semibold tracking-wide transition-colors duration-150 ${active ? "text-sky-400" : "text-slate-200 hover:text-sky-400"}`}
-              >
-                {item.label}
-              </button>
-            );
-          })}
-          <button
-            onClick={() => scrollHomeTo("contact")}
-            className="text-xs sm:text-sm font-semibold tracking-wide text-slate-200 hover:text-sky-400 transition-colors duration-150"
-          >
-            CONTACT
-          </button>
-        </div>
-      </div>
-
-      <div className="flex items-center gap-2 sm:gap-3 order-4 sm:order-3 mt-1 sm:mt-0">
-        <button
-          onClick={openResumePreview}
-          className="hidden sm:inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-slate-600 transition-all duration-200"
-        >
-          Preview Resume
-        </button>
-        <a
-          href="/resume.pdf"
-          download="Yamuna_Resume.pdf"
-          className="hidden sm:inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 hover:bg-sky-500 text-white transition-all duration-200"
-        >
-          Download
-        </a>
-        <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer" className="hidden sm:block">
-          <Linkedin className="w-4 h-4 text-sky-400 hover:text-sky-300 transition-colors" />
-        </a>
-        <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer" className="hidden sm:block">
-          <Github className="w-4 h-4 text-slate-400 hover:text-white transition-colors" />
-        </a>
-        <a href={personalInfo.social.leetcode} target="_blank" rel="noopener noreferrer" className="hidden lg:block">
-          <SiLeetcode className="w-4 h-4 text-amber-500 hover:text-amber-400 transition-colors" />
-        </a>
-      </div>
-    </nav>
-  );
-}
-
-const BackArrow = ({ activeSection, setActiveSection, show, setExpandedProject }) =>
-  show && activeSection !== "home" && (
-    <button
-      onClick={() => { setExpandedProject(null); setActiveSection("home"); }}
-      className="fixed top-12 sm:top-16 right-4 sm:left-8 z-[120] flex items-center gap-2 px-3 py-2 rounded-full border border-slate-700 hover:border-sky-600/40 text-slate-300 hover:text-sky-300 transition-all duration-200 group"
-      style={{ background: "rgba(10,12,18,0.9)", backdropFilter: "blur(12px)" }}
-    >
-      <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform duration-200" />
-      <span className="text-xs font-semibold hidden sm:inline">Back</span>
-    </button>
-  );
-
 // ─── Profile Avatar ────────────────────────────────────────────────────────
 function ProfileAvatar() {
   return (
@@ -885,227 +802,118 @@ function SectionLabel({ children }) {
 }
 
 // ─── HomePage ──────────────────────────────────────────────────────────────
-function HomePage({ openResumePreview }) {
+function ProofStack({ images, label, altPrefix, className = "" }) {
+  const visibleImages = images?.filter(Boolean) || [];
   return (
-    <section className="min-h-screen pt-28 sm:pt-36 pb-20" style={{ background: "linear-gradient(170deg, #08090e 0%, #0c111a 40%, #08090e 100%)" }}>
-      <div className="max-w-5xl mx-auto px-4 space-y-12">
-        <div className="text-center pt-4 sm:pt-0">
-          <ProfileAvatar />
-          <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }} className="mt-7">
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-slate-50 mb-3">{personalInfo.name}</h1>
-            <p className="text-base sm:text-lg font-semibold max-w-3xl mx-auto leading-snug" style={{ color: "#38bdf8" }}>
-              {personalInfo.tagline1}
-            </p>
-            <p className="text-sm sm:text-base text-slate-400 mt-3 max-w-2xl mx-auto leading-relaxed">
-              {personalInfo.tagline2}
-            </p>
-          </motion.div>
-        </div>
+    <div className={`proof-stack ${className}`}>
+      <div className="proof-back proof-back-two" />
+      <div className="proof-back proof-back-one" />
+      {visibleImages[0] ? <img src={visibleImages[0]} alt={`${altPrefix} primary proof`} /> : <div className="proof-placeholder"><ImageIcon size={22} /><span>{label}</span><small>Add image 01</small></div>}
+      {visibleImages.slice(1, 4).map((image, index) => <img className={`proof-peek proof-peek-${index + 1}`} key={image} src={image} alt={`${altPrefix} proof ${index + 2}`} />)}
+    </div>
+  );
+}
 
-        <Card id="about">
-          <SectionLabel>About</SectionLabel>
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-3xl">{personalInfo.bio}</p>
-        </Card>
+function TechLogos({ items }) {
+  const icons = { FastAPI: SiFastapi, PostgreSQL: SiPostgresql, Docker: SiDocker, AWS: SiAmazon, TypeScript: SiTypescript, Express: SiExpress, "Node.js": SiNodedotjs, Python: SiPython, PyTorch: SiPytorch, MongoDB: SiMongodb, React: SiReact, Git: SiGit };
+  return <div className="tech-logo-row">{items.map(item => { const Icon = icons[item]; return <span key={item} className="tech-logo-chip">{Icon ? <Icon aria-hidden="true" /> : <span className="tech-dot" />} {item}</span>; })}</div>;
+}
 
-        <div id="projects" className="scroll-mt-28">
-          <h2 className="text-xl sm:text-2xl font-bold text-slate-100 mb-4">Featured projects</h2>
-          <div className="grid md:grid-cols-2 gap-5">
-            {featuredProjects.map((project, idx) => (
-              <motion.article
-                key={project.title}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.06 * idx }}
-                className="group rounded-2xl overflow-hidden flex flex-col border transition-all duration-300 hover:border-sky-500/30"
-                style={{ background: "rgba(14,18,26,0.7)", borderColor: "rgba(51,65,85,0.5)", backdropFilter: "blur(8px)", boxShadow: "0 4px 24px rgba(0,0,0,0.25)" }}
-              >
-                <div className="relative h-44 bg-slate-900 border-b border-slate-800/60 overflow-hidden">
-                  <FeaturedThumb media={project.image} title={project.title} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0e1219] via-transparent to-transparent" />
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ background: "linear-gradient(135deg, rgba(14,165,233,0.08) 0%, transparent 60%)" }} />
-                </div>
-                <div className="p-5 flex-1 flex flex-col gap-3">
-                  <div>
-                    <h3 className="text-base font-semibold text-slate-50">{project.title}</h3>
-                    <p className="text-sm text-slate-400 mt-1 leading-snug">{project.tagline}</p>
-                  </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {project.stack.map(s => (
-                      <span key={s} className="px-2 py-0.5 rounded text-xs font-medium"
-                        style={{ background: "rgba(14,165,233,0.1)", color: "#7dd3fc", border: "1px solid rgba(14,165,233,0.2)" }}>
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                  <ul className="text-sm text-slate-300 space-y-1.5 list-disc ml-5 flex-1 leading-relaxed">
-                    {project.bullets.map((b, bi) => <li key={bi}>{b}</li>)}
-                  </ul>
-                  <div className="flex flex-wrap gap-3 pt-1">
-                    {project.links?.github && project.links.github !== "#" && (
-                      <a href={project.links.github} target="_blank" rel="noopener noreferrer"
-                        className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 hover:border-sky-500/30 transition-all duration-200 flex items-center gap-1.5">
-                        <Github className="w-3.5 h-3.5" /> GitHub
-                      </a>
-                    )}
-                    {project.links?.demo && project.links.demo !== "#" && (
-                      <a href={project.links.demo} target="_blank" rel="noopener noreferrer"
-                        className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-900/70 hover:bg-sky-800 text-sky-100 border border-sky-700 hover:border-sky-500 transition-all duration-200 flex items-center gap-1.5">
-                        <ExternalLink className="w-3.5 h-3.5" /> Demo
-                      </a>
-                    )}
-                    {project.links?.live && project.links.live !== "#" && (
-                      <a href={project.links.live} target="_blank" rel="noopener noreferrer"
-                        className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-900/70 hover:bg-emerald-800 text-emerald-100 border border-emerald-700 hover:border-emerald-500 transition-all duration-200 flex items-center gap-1.5">
-                        <ExternalLink className="w-3.5 h-3.5" /> Live
-                      </a>
-                    )}
-                  </div>
-                </div>
+function ProofBento({ items, type = "certificate" }) {
+  return <div className={`proof-bento proof-bento-${type}`}>{items.map((item, index) => <motion.figure key={typeof item === "string" ? item : item.title} className={`bento-item bento-item-${index + 1}`} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ delay: index * .06 }}><div className="bento-image"><img src={typeof item === "string" ? item : item.images?.[0] || item.image} alt={typeof item === "string" ? `${type} evidence ${index + 1}` : item.title} /></div>{typeof item !== "string" && <figcaption><strong>{item.title}</strong><span>{item.caption}</span></figcaption>}</motion.figure>)}</div>;
+}
+
+function LinkedInPostsSection() {
+  return (
+    <section id="linkedin-posts" className="linkedin-posts-section evidence-section">
+      <div className="section-intro"><p className="eyebrow">09 / LINKEDIN FIELD NOTES</p><h2>Thoughts from the build loop.</h2><p>Short reflections on backend systems, cloud learning, research, and the work around the work.</p></div>
+      <div className="linkedin-post-grid">
+        {portfolioContent.linkedinPosts.map((post, index) => (
+          <motion.article key={`${post.title}-${index}`} className="linkedin-post-card" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ delay: index * .1 }}>
+            <div className="linkedin-post-image">{post.image ? <img src={post.image} alt={`${post.title} LinkedIn post`} /> : <div className="post-placeholder"><Linkedin size={24} /><strong>Post image</strong><span>Add a verified LinkedIn image</span></div>}</div>
+            <div className="linkedin-post-copy"><span className="post-number">0{index + 1} / LINKEDIN</span><h3>{post.title}</h3><p>{post.caption}</p>{post.url ? <a href={post.url} target="_blank" rel="noopener noreferrer" className="project-links"><Linkedin size={15} /> Read post</a> : <span className="post-status">Add post URL and caption in portfolioContent</span>}</div>
+          </motion.article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function HomePage() {
+  return (
+    <main className="studio-page">
+      <div className="studio-wrap">
+        <section className="studio-hero" data-canvas-theme="hero">
+          <div className="hero-copy">
+            <p className="eyebrow">BACKEND · CLOUD · AI SYSTEMS</p>
+            <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>YAMUNA<span>.</span></motion.h1>
+            <p className="hero-label">{portfolioContent.identity.label}</p>
+            <p className="hero-statement">I build practical software - from backend APIs and databases to cloud-deployed products.</p>
+            <p className="hero-detail">{portfolioContent.identity.location} · Final-year Computer Science student · Graduating 2027</p>
+            <div className="hero-actions">
+              <a href="#projects" className="studio-button studio-button-primary">View selected work <ArrowDownRight size={16} /></a>
+              <a href="/resume.pdf" download="Yamuna_Resume.pdf" className="studio-button">Download resume <Download size={15} /></a>
+            </div>
+            <div className="social-row">
+              <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer"><Github size={16} /> GitHub</a>
+              <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer"><Linkedin size={16} /> LinkedIn</a>
+              <a href={personalInfo.social.leetcode} target="_blank" rel="noopener noreferrer"><SiLeetcode size={16} /> LeetCode</a>
+            </div>
+          </div>
+          <div className="hero-portrait-wrap">
+            <div className="portrait-cloud" />
+            <div className="hero-portrait-frame"><img src="/profile.jpeg" alt="Yamuna" /></div>
+            <span className="evidence evidence-a">FastAPI + Express</span>
+            <span className="evidence evidence-b">AWS / Docker</span>
+            <span className="evidence evidence-c">324 LeetCode problems</span>
+            <span className="evidence evidence-d">IEEE research</span>
+          </div>
+        </section>
+
+        <div className="system-rail" aria-hidden="true"><span /><span /><span /><span /></div>
+
+        <section id="about" className="now-strip scroll-mt-28"><div className="now-label">01 / ABOUT NOW</div><div><h2>I turn ideas into dependable systems.</h2><p>{portfolioContent.identity.about}</p><p>{portfolioContent.identity.aws}</p></div><div className="now-stamp">GRADUATING<br /><strong>2027</strong></div></section>
+
+        <blockquote className="canvas-quote quote-world">“The people who are crazy enough to think they can change the world are the ones who do.”</blockquote>
+
+        <section className="approach-section"><div className="section-intro"><p className="eyebrow">02 / ENGINEERING IDENTITY</p><h2>The systems I work with.</h2><p>Idea → Interface → API → Backend services → Database → Cloud deployment.</p></div><div className="approach-flow">{["Idea", "Interface", "API", "Backend services", "Database", "Cloud deployment"].map((step, index) => <div className="approach-node" key={step}><span>0{index + 1}</span><strong>{step}</strong>{index < 5 && <b>→</b>}</div>)}</div></section>
+
+        <section id="projects" className="studio-section scroll-mt-28" data-canvas-theme="projects">
+          <div className="section-art section-art-projects" aria-hidden="true"><span className="art-ledger-line" /><span className="art-ledger-line" /><span className="art-ledger-line" /><i className="art-spark">✦</i></div>
+          <div className="section-intro"><p className="eyebrow">03 / FEATURED PROJECTS</p><h2>Three systems, three kinds of useful.</h2><p>Images stay visible. Demo videos and links remain actions, not background decoration.</p></div>
+          <div className="project-stories">
+            {portfolioContent.projects.map((project, idx) => (
+              <motion.article key={project.title} className={`project-story ${idx % 2 === 1 ? "project-story-reverse" : ""}`} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }}>
+                <ProofStack images={project.screenshots} label={`${project.title} screenshots`} altPrefix={project.title} />
+                <div className="project-copy"><p className="project-index">0{idx + 1} / {idx === 0 ? "FINANCE SYSTEM" : idx === 1 ? "OBSERVABILITY" : "BIOINFORMATICS"}</p><h3>{project.title}</h3><p className="project-tagline">{project.tagline}</p><p className="project-problem">{project.problem}</p><TechLogos items={project.stack} /><div className="project-links"><a href={project.links.github} target="_blank" rel="noopener noreferrer"><Github size={15} /> GitHub</a><a href={project.links.demo} target="_blank" rel="noopener noreferrer"><ExternalLink size={15} /> Demo video</a><a href={project.website === "#" ? undefined : project.website} className={project.website === "#" ? "is-disabled" : ""} aria-disabled={project.website === "#"}>{project.website === "#" ? "Website / Coming soon" : "Website"}</a></div></div>
               </motion.article>
             ))}
           </div>
-        </div>
+        </section>
 
-        <Card id="skills">
-          <SectionLabel>Technical skills</SectionLabel>
-          <p className="text-sm text-slate-400 mb-5 max-w-3xl leading-relaxed">
-          </p>
-          <div className="space-y-5">
-            {personalInfo.skillGroups.map(group => (
-              <div key={group.title}>
-                <div className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2">{group.title}</div>
-                <div className="flex flex-wrap gap-1.5">
-                  {group.items.map(item => <SkillPill key={item} label={item} />)}
-                </div>
-              </div>
-            ))}
-          </div>
-        </Card>
+        <section id="skills" className="studio-section skill-section scroll-mt-28"><div className="section-art section-art-skills" aria-hidden="true"><span className="art-node art-node-a" /><span className="art-node art-node-b" /><span className="art-node art-node-c" /><span className="art-connector" /></div><div className="section-intro"><p className="eyebrow">03 / WORKING TOOLKIT</p><h2>A practical systems map.</h2><p>Tools are only useful when they make the next decision clearer. This is the toolkit I reach for across the stack.</p></div><div className="toolkit-map"><div className="map-node map-core"><Terminal size={20} /><strong>YAMUNA / BUILD LOOP</strong><small>idea → system → deployment → impact</small></div>{personalInfo.skillGroups.slice(0, 5).map((group, idx) => <div className={`map-node map-node-${idx}`} key={group.title}><div className="map-node-icon">{idx === 0 ? <GitBranch size={17} /> : idx === 1 ? <Server size={17} /> : idx === 2 ? <Database size={17} /> : <Cloud size={17} />}</div><strong>{group.title}</strong><div className="node-items">{group.items.slice(0, 5).map(item => <span key={item}>{item}</span>)}</div></div>)}</div></section>
 
-        <Card id="experience">
-          <SectionLabel>Experience</SectionLabel>
-          <div className="space-y-7">
-            {experience.map((exp, idx) => (
-              <div key={idx} className="flex gap-4 pb-7 border-b last:border-0 last:pb-0 justify-between items-start" style={{ borderColor: "rgba(51,65,85,0.4)" }}>
-                <div className="flex gap-4 flex-1 min-w-0">
-                  <img src={exp.logo} className="w-12 h-12 rounded-xl object-cover ring-1 ring-slate-700 shrink-0" alt="" />
-                  <div className="min-w-0 flex-1">
-                    <div className="font-semibold text-slate-100 text-sm">{exp.role} · {exp.company}</div>
-                    <div className="text-xs text-sky-500 mt-0.5 font-medium">{exp.duration}</div>
-                    <p className="text-sm text-slate-400 mt-2 leading-relaxed">{exp.desc}</p>
-                    {exp.bullets?.length ? (
-                      <ul className="mt-3 text-sm text-slate-300 space-y-1.5 list-disc ml-5 leading-relaxed">
-                        {exp.bullets.map(b => <li key={b.slice(0, 40)}>{b}</li>)}
-                      </ul>
-                    ) : null}
-                    {exp.link ? (
-                      <a href={exp.link.url} target="_blank" rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 mt-3 px-3 py-1.5 bg-sky-900/50 hover:bg-sky-800/60 text-sky-300 rounded-lg text-xs font-semibold border border-sky-800/50 transition-all">
-                        <ExternalLink className="w-3 h-3" /> {exp.link.text}
-                      </a>
-                    ) : null}
-                  </div>
-                </div>
-                {exp.rightImage && (
-                  <div className="hidden sm:block shrink-0 ml-4 mt-1">
-                    <img src={exp.rightImage} className="w-40 h-auto rounded-md object-contain ring-1 ring-slate-700/50" alt="" />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </Card>
+        <section id="experience" className="studio-section timeline-section scroll-mt-28"><div className="section-art section-art-experience" aria-hidden="true"><span className="art-tape" /><span className="art-star">✦</span><span className="art-pencil-line" /></div><div className="section-intro"><p className="eyebrow">05 / INTERNSHIP STORY</p><h2>Learning in public, shipping with care.</h2></div><div className="internship-stories">{portfolioContent.internships.map((internship, index) => <article className="internship-story" key={internship.company}><div className="internship-heading"><img src={internship.logo} alt={`${internship.company} logo`} /><div><p className="project-index">0{index + 1} / EXPERIENCE</p><h3>{internship.role} - {internship.company}</h3><p>{internship.desc}</p></div></div><div className="internship-rule" /><div className="internship-projects">{internship.projects.map(project => <div className="internship-project" key={project.name}><ProofStack images={[project.image]} label={`${project.name} image`} altPrefix={project.name} /><div><h4>{project.name}</h4><p>{project.description}</p><TechLogos items={project.stack} /><div className="project-links"><a href={project.github === "#" ? undefined : project.github} className={project.github === "#" ? "is-disabled" : ""} aria-disabled={project.github === "#"}><Github size={15} /> GitHub</a><a href="#" className="is-disabled" aria-disabled="true"><ExternalLink size={15} /> Demo video / Coming soon</a></div></div></div>)}</div></article>)}</div></section>
 
-        <div id="coding-activity" className="scroll-mt-28 max-w-5xl mx-auto">
-          <Stats />
-        </div>
+        <blockquote className="canvas-quote quote-life">“So many movies to watch, languages to learn, instruments to play, places to visit, books to read, lives to live and so little time.”</blockquote>
 
-        <div className="grid md:grid-cols-2 gap-5">
-          <Card id="leadership">
-            <SectionLabel>Leadership & campus roles</SectionLabel>
-            <div className="space-y-5 text-sm">
-              {[
-                { title: "Class Representative", sub: "B.E CSE Dept (2024–Present)", desc: "Relayed coursework and departmental updates between faculty and classmates; coordinated schedules and surfaced blockers early so deadlines stayed workable." },
-                { title: "Placement Batch Head", sub: "B.E CSE (2025–Present)", desc: "Helped synchronize placement cohort communication—announcements, deadlines, and escalation paths—keeping the batch aligned with training and recruiter timelines." },
-                { title: "Committee Head · Academic Cell", sub: "2024–Present · VCET", desc: "Academic coordination and initiatives." },
-                { title: "Eco Club Member", sub: "VCET · 2024–Present", desc: "Volunteered at eco-awareness and campus sustainability events throughout 2025." },
-              ].map((r, i) => (
-                <div key={i} className="flex gap-3">
-                  <img src="/Vcetlogo.jpg" className="w-9 h-9 rounded-lg object-cover ring-1 ring-slate-700 shrink-0" alt="" />
-                  <div>
-                    <div className="font-semibold text-slate-100 text-sm">{r.title}</div>
-                    <div className="text-xs text-sky-500 mt-0.5">{r.sub}</div>
-                    {r.desc && <p className="text-slate-400 mt-1 text-xs leading-relaxed">{r.desc}</p>}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Card>
+        <section id="publication" className="evidence-section publication-section"><div className="section-intro"><p className="eyebrow">06 / RESEARCH, DOCUMENTED</p><h2>IEEE AIDE 2025</h2><p>Carbon footprint awareness and mitigation research presented as an IEEE conference publication.</p><a className="studio-button studio-button-primary" href={IEEE_PUBLICATION_URL} target="_blank" rel="noopener noreferrer">View publication <ExternalLink size={15} /></a></div><div className="publication-collage"><img className="publication-page" src="/ieee.png" alt="IEEE publication proof" /><img className="publication-certificate" src="/cert17.png" alt="IEEE author certificate placeholder" /><span className="hand-note">author / presenter</span></div></section>
 
-          <Card id="education">
-            <SectionLabel>Education</SectionLabel>
-            {education.map(edu => (
-              <div key={edu.degree} className="mb-5 flex gap-3 last:mb-0">
-                <img src={edu.logo} className="w-11 h-11 rounded-xl object-cover ring-1 ring-slate-700 shrink-0" alt="" />
-                <div>
-                  <div className="text-sm font-semibold text-slate-100">{edu.degree}</div>
-                  <div className="text-xs text-sky-500 font-medium mt-0.5">{edu.year}</div>
-                  <div className="text-xs text-slate-400 mt-1">{edu.org}</div>
-                </div>
-              </div>
-            ))}
-            <div className="mt-8 pt-6 border-t" style={{ borderColor: "rgba(51,65,85,0.4)" }}>
-              <div className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">Languages & soft skills</div>
-              <div className="space-y-2 mb-4">
-                {personalInfo.languages.map(lang => (
-                  <div key={lang.name} className="flex justify-between text-sm text-slate-300">
-                    <span>{lang.name}</span>
-                    <span className="text-sky-400 font-medium text-xs">{lang.level}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {personalInfo.softSkills.map(skill => <SkillPill key={skill} label={skill} />)}
-              </div>
-            </div>
-          </Card>
-        </div>
+        <section id="awards" className="evidence-section"><div className="section-intro"><p className="eyebrow">07 / FIRST PRIZE</p><h2>First Prize, worth framing.</h2><p>DesignVerse and other verified first-prize achievements, presented as large editorial proof.</p></div><ProofBento items={portfolioContent.awards} type="awards" /></section>
 
-        <Card id="contact" className="max-w-2xl mx-auto">
-          <SectionLabel>Get in touch</SectionLabel>
-          <p className="text-sm text-slate-300 mb-2 leading-relaxed">
-            Open to backend/SDE roles, internships, and collaborations on data-intensive or AI-powered products.
-          </p>
-          <p className="text-xs text-slate-500 mb-5">
-            For faster responses: email first, then WhatsApp for coordination.
-          </p>
-          <ContactSection />
-          <div className="flex flex-wrap justify-center gap-4 mt-5">
-            <a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <Linkedin className="w-5 h-5 text-sky-400 hover:text-sky-300 transition-colors" />
-            </a>
-            <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <Github className="w-5 h-4 text-slate-400 hover:text-white transition-colors" />
-            </a>
-            <a href={personalInfo.social.leetcode} target="_blank" rel="noopener noreferrer" aria-label="LeetCode">
-              <SiLeetcode className="w-5 h-5 text-amber-500 hover:text-amber-400 transition-colors" />
-            </a>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5">
-            <button onClick={openResumePreview}
-              className="px-5 py-2.5 rounded-xl font-semibold text-sm border border-slate-700 hover:border-slate-600 text-slate-200 hover:text-white transition-all duration-200"
-              style={{ background: "rgba(30,40,55,0.7)" }}>
-              Preview Resume
-            </button>
-            <a href="/resume.pdf" download="Yamuna_Resume.pdf"
-              className="px-5 py-2.5 bg-sky-600 hover:bg-sky-500 text-white rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all duration-200">
-              <Download className="w-4 h-4" /> Download Resume
-            </a>
-          </div>
-        </Card>
+        <section id="certifications" className="evidence-section"><div className="section-intro"><p className="eyebrow">08 / CERTIFICATIONS</p><h2>Other certificates and courses.</h2><p>Technical courses, internship certificates, cloud learning, AI/ML study, and event certificates.</p></div><ProofBento items={portfolioContent.certificates} type="certificate" /></section>
+
+        <section id="open-source" className="evidence-section"><div className="section-intro"><p className="eyebrow">09 / OPEN SOURCE, BADGES & DESIGN</p><h2>Three proof worlds, one creative system.</h2><p>Open source contribution certificates, platform badges, and design work share one asymmetric canvas.</p></div><div className="proof-columns"><div><h3>Open source contribution certificates</h3><ProofBento items={portfolioContent.openSource} type="opensource" /></div><div><h3>Platform badges</h3><ProofBento items={portfolioContent.badges} type="badges" /></div><div><h3>Designs</h3><ProofStack images={portfolioContent.designs} label="Combined design screenshot" altPrefix="Design work" className="design-proof" /></div></div></section>
+
+        <LinkedInPostsSection />
+
+        <section id="coding-activity" className="studio-stats evidence-section"><div className="section-intro"><p className="eyebrow">10 / PROBLEM SOLVING</p><h2>Consistency matters as much as a single breakthrough.</h2></div><Stats /><blockquote className="canvas-quote quote-win">“It only takes one big win to erase all the losses. Just one!”</blockquote></section>
+
+        <section id="resume" className="resume-section evidence-section"><div className="section-intro"><p className="eyebrow">11 / THE FULL VERSION</p><h2>Read the résumé in context.</h2><p>The full PDF stays visible here, with a direct download below it.</p></div><div className="resume-frame"><iframe src="/resume.pdf" title="Yamuna Balamurugan resume preview" /></div><div className="resume-actions"><a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="studio-button studio-button-primary">Open full PDF <ExternalLink size={15} /></a><a href="/resume.pdf" download="Yamuna_Balamurugan_Resume.pdf" className="studio-button"><Download size={15} /> Download résumé</a></div></section>
+
+        <section id="education" className="education-section evidence-section"><div className="education-copy"><p className="eyebrow">12 / EDUCATION + CONTACT</p><h2>B.E. Computer Science and Engineering</h2><p>Final-year undergraduate · Velammal College of Engineering and Technology · Madurai · Graduating 2027</p><div className="language-list"><span>English</span><span>Tamil</span><span>Hindi / Basic</span></div></div><div id="contact" className="studio-contact"><div className="section-art section-art-contact" aria-hidden="true"><span className="art-horizon" /><span className="art-sun" /></div><div><p className="eyebrow">OPEN CHANNEL</p><h2>Let’s build something dependable.</h2><p>Open to backend, cloud, and software-development roles.</p></div><div className="contact-actions"><a href={`mailto:${personalInfo.email}`} className="studio-button studio-button-primary"><Mail size={16} /> {personalInfo.email}</a><div className="social-row"><a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer"><Linkedin size={16} /> LinkedIn</a><a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer"><Github size={16} /> GitHub</a><a href={`https://wa.me/${personalInfo.whatsapp}`} target="_blank" rel="noopener noreferrer"><FaWhatsapp size={16} /> WhatsApp</a></div></div></div></section>
       </div>
-    </section>
+    </main>
   );
 }
 
@@ -1715,6 +1523,7 @@ function HighlightsSection() {
 // Main App
 export default function App() {
   const [activeSection, setActiveSection] = useState("home");
+  const [canvasTheme, setCanvasTheme] = useState("hero");
   const [expandedProject, setExpandedProject] = useState(null);
   const [isResumePreviewOpen, setResumePreviewOpen] = useState(false);
 
@@ -1726,24 +1535,32 @@ export default function App() {
     });
   }, []);
 
+  useEffect(() => {
+    const themeSections = [
+      [".studio-hero", "hero"], ["#about", "about"], [".approach-section", "identity"],
+      ["#projects", "projects"], ["#skills", "skills"], ["#experience", "experience"],
+      ["#publication", "research"], ["#awards", "recognition"], ["#certifications", "certifications"], ["#open-source", "opensource"],
+      ["#linkedin-posts", "linkedin"], ["#coding-activity", "coding"], ["#resume", "resume"], ["#education", "contact"]
+    ];
+    const sections = themeSections.map(([selector, theme]) => {
+      const section = document.querySelector(selector);
+      if (section) section.dataset.canvasTheme = theme;
+      return section;
+    }).filter(Boolean);
+    if (!sections.length) return undefined;
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible?.target.dataset.canvasTheme) setCanvasTheme(visible.target.dataset.canvasTheme);
+    }, { threshold: [0.2, 0.45, 0.7], rootMargin: "-18% 0px -30%" });
+    sections.forEach(section => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <motion.div animate={{ opacity: 1 }} initial={{ opacity: 0 }}>
-      <div className="min-h-screen font-sans text-slate-200 antialiased" style={{ background: "#08090e" }}>
-        <Bubbles />
-        <NavBar
-          activeSection={activeSection}
-          setActiveSection={setActiveSection}
-          setExpandedProject={setExpandedProject}
-          scrollHomeTo={scrollHomeTo}
-          openResumePreview={() => setResumePreviewOpen(true)}
-        />
-        <BackArrow
-          activeSection={activeSection}
-          setActiveSection={setActiveSection}
-          setExpandedProject={setExpandedProject}
-          show={expandedProject === null}
-        />
-        {activeSection === "home" && <HomePage openResumePreview={() => setResumePreviewOpen(true)} />}
+      <div className={`min-h-screen font-sans text-slate-200 antialiased canvas-shell canvas-shell-${canvasTheme}`}>
+        <Bubbles canvasTheme={canvasTheme} />
+        {activeSection === "home" && <HomePage />}
         {activeSection === "projects" && (
           <ProjectsOverview expandedProject={expandedProject} setExpandedProject={setExpandedProject} />
         )}
