@@ -120,33 +120,23 @@ const experience = [
     company: "Kevell Corp",
     role: "Web Development Intern",
     duration: "Dec 2024",
-    desc: "Built Petimony and other web apps, reusable frontend components, form handling, and integrated UIs with existing APIs.",
+    desc: "Designed and implemented Petimony responsive pet products site and RailwayPorterSeva static booking UI.",
     certificate: "/Experience/Internship 1/Kevell certificate.jpg",
-    logo: "/Logos/Reccsarlogo.jpg",
-    company: "Reccsar Private Limited",
-    role: "Cloud & Full Stack Web Intern",
-    duration: "Jun 2025",
-    desc: "Built client-support-realtime-chat widget and NammaOorFix civic issue reporting portal.",
     bullets: [
-      "Built client-support-realtime-chat: real-time helpdesk widget with authentication, agent assignment, chat history, and live messaging between clients and support staff.",
-      "Built NammaOorFix: full-stack civic issue reporting portal with React/Vite frontend and Node.js/Express + MongoDB backend, including JWT auth, geospatial clustering, and officer dashboards."
+      "Petimony: Designed and implemented a responsive multi-page pet products site with clean UI, mobile-friendly layout, and interactive sliders and hover effects.",
+      "RailwayPorterSeva: Built a static booking UI for porter assistance at stations using HTML, CSS, and JavaScript, focusing on clear forms and simple flows for users."
     ]
   },
   {
     logo: "/Logos/Reccsarlogo.jpg",
     company: "Reccsar Private Limited",
-    role: "Cloud Computing Intern",
-    duration: "June 2025",
-    desc: "Cloud-hosted dashboards and apps like RailwayPorterSeva and client-support-realtime-chat for nonprofit delivery teams.",
+    role: "Cloud & Full Stack Web Intern",
+    duration: "Jun 2025",
+    desc: "Built client-support-realtime-chat widget and NammaOorFix civic issue reporting portal.",
     certificate: "/Experience/Internship 2/Reccsar certificate.jpeg",
-    logo: "/Logos/kevelllogo.jpg",
-    company: "Kevell Corp",
-    role: "Web Development Intern",
-    duration: "Dec 2024",
-    desc: "Designed and implemented Petimony responsive pet products site and RailwayPorterSeva static booking UI.",
     bullets: [
-      "Petimony: Designed and implemented a responsive multi-page pet products site with clean UI, mobile-friendly layout, and interactive sliders and hover effects.",
-      "RailwayPorterSeva: Built a static booking UI for porter assistance at stations using HTML, CSS, and JavaScript, focusing on clear forms and simple flows for users."
+      "Built client-support-realtime-chat: real-time helpdesk widget with authentication, agent assignment, chat history, and live messaging between clients and support staff.",
+      "Built NammaOorFix: full-stack civic issue reporting portal with React/Vite frontend and Node.js/Express + MongoDB backend, including JWT auth, geospatial clustering, and officer dashboards."
     ]
   }
 ];
@@ -154,8 +144,6 @@ const experience = [
 const featuredProjects = [
   {
     title: "MoneyMirror",
-    tagline: "Personal finance digital twin—salary, EMIs, savings, and 3–6 month cash-flow projections with low-balance warnings.",
-    stack: ["Python", "FastAPI", "HTML", "CSS", "JavaScript", "PostgreSQL", "SQLite", "Docker", "GitHub Actions", "Hugging Face Spaces"],
     tagline: "Personal finance digital twin—enter salary, EMIs, savings, and expenses to simulate cash flow, runway, and low-balance risk over short-term horizons.",
     stack: ["Python", "FastAPI", "PostgreSQL", "SQLite", "Docker", "GitHub Actions", "Hugging Face"],
     bullets: [
@@ -172,8 +160,6 @@ const featuredProjects = [
   },
   {
     title: "LogBeacon",
-    tagline: "Log analysis backend—parse structured logs, filter by time/status, and run regex queries for faster debugging with optional OpenAI summarization.",
-    stack: ["React", "Vite", "TypeScript", "Node.js", "Express.js", "PostgreSQL", "Prisma", "Zod", "Vercel", "Render"],
     tagline: "Log analysis backend that ingests structured logs and supports filtering by time, level, service, and search text, with incident linking and optional summarization.",
     stack: ["React", "Vite", "TypeScript", "Node.js", "Express", "PostgreSQL", "Prisma", "Zod", "Vercel", "Render"],
     bullets: [
@@ -190,7 +176,6 @@ const featuredProjects = [
   },
   {
     title: "MarineTaxaAi",
-    tagline: "ML taxonomy platform—Streamlit dashboard and sequence/ML classifier for eDNA.",
     tagline: "Python-based eDNA pipeline that encodes FASTQ/CSV sequence data into k-mer and GC-content features and predicts marine species using scikit-learn models.",
     stack: ["Python", "FastAPI", "Streamlit", "scikit-learn", "NumPy", "pandas", "Biopython", "Plotly", "DBSCAN"],
     bullets: [
@@ -221,29 +206,8 @@ const portfolioContent = {
     { ...featuredProjects[2], screenshots: ["/Projects/MarineTaxaAI_1.png", "/Projects/MarineTaxaAI_2.png", "/Projects/MarineTaxaAI_3.png"], problem: "Make sequence-based marine classification easier to inspect and explain.", website: "#" }
   ],
   internships: [
-    { ...experience[0], projects: [{ name: "Petimony", description: "Pet shop and adoption flows with reusable responsive interfaces.", image: "/Experience/Internship 1/Petimony.png", github: "https://github.com/Yamuna-b/Petimony", stack: ["React", "APIs"] }, { name: "Railway Porter Seva", description: "Static booking UI for porter assistance at stations, with clear forms and simple user flows.", image: "/Others or Leadership services and more presentations etc/SIH.jpg", github: "#", stack: ["HTML", "CSS", "JavaScript"] }] },
-    { ...experience[1], projects: [{ name: "RailwayPorterSeva", description: "Cloud-hosted service booking and assignment workflows.", image: "/Projects/MoneyMirror_1.png", github: "https://github.com/Yamuna-b/PorterSeva", stack: ["Node.js", "MongoDB", "AWS"] }, { name: "Client support realtime chat", description: "Real-time helpdesk support tool for delivery teams.", image: "/Projects/LogBeacon_1.png", github: "https://github.com/Yamuna-b/client-support-realtime-chat", stack: ["Express", "Socket.io", "Firebase"] }] }
     {
       ...experience[0],
-      projects: [
-        {
-          name: "client-support-realtime-chat",
-          description: "Real-time helpdesk widget with authentication, agent assignment, chat history, and live messaging between clients and support staff.",
-          image: "/Projects/LogBeacon_1.png",
-          github: "https://github.com/Yamuna-b/client-support-realtime-chat",
-          stack: ["HTML", "CSS", "JavaScript", "Node.js", "Express", "Socket.io", "Firebase"]
-        },
-        {
-          name: "NammaOorFix",
-          description: "Full-stack civic issue reporting portal with React/Vite frontend and Node.js/Express + MongoDB backend, including JWT auth, geospatial clustering, and officer dashboards.",
-          image: "/Projects/MoneyMirror_1.png",
-          github: "https://github.com/Yamuna-b/NammaOorFix",
-          stack: ["React", "Vite", "Tailwind CSS", "Node.js", "Express", "MongoDB", "Mongoose", "JWT", "BcryptJS", "Multer", "ml-kmeans"]
-        }
-      ]
-    },
-    {
-      ...experience[1],
       projects: [
         {
           name: "Petimony",
@@ -260,11 +224,28 @@ const portfolioContent = {
           stack: ["HTML", "CSS", "JavaScript", "Git", "GitHub Pages"]
         }
       ]
+    },
+    {
+      ...experience[1],
+      projects: [
+        {
+          name: "client-support-realtime-chat",
+          description: "Real-time helpdesk widget with authentication, agent assignment, chat history, and live messaging between clients and support staff.",
+          image: "/Projects/LogBeacon_1.png",
+          github: "https://github.com/Yamuna-b/client-support-realtime-chat",
+          stack: ["HTML", "CSS", "JavaScript", "Node.js", "Express", "Socket.io", "Firebase"]
+        },
+        {
+          name: "NammaOorFix",
+          description: "Full-stack civic issue reporting portal with React/Vite frontend and Node.js/Express + MongoDB backend, including JWT auth, geospatial clustering, and officer dashboards.",
+          image: "/Projects/MoneyMirror_1.png",
+          github: "https://github.com/Yamuna-b/NammaOorFix",
+          stack: ["React", "Vite", "Tailwind CSS", "Node.js", "Express", "MongoDB", "Mongoose", "JWT", "BcryptJS", "Multer", "ml-kmeans"]
+        }
+      ]
     }
   ],
   awards: [
-    { title: "Kalasalingam - Designthon First Place", caption: "First place at Designthon during Euphoria '24, organized by the Department of Computer Applications at Kalasalingam Academy of Research and Education on March 26-27, 2024.", images: ["/Certification/First price Awards/kalasalingam_collage/showcase1.jpg", "/Certification/First price Awards/kalasalingam_collage/Award5.jpg", "/Certification/First price Awards/kalasalingam_collage/kalasalingam.jpeg"] },
-    { title: "Sri Ramakrishna - Techathon Gold Rank", caption: "Prime Honours with a gold-rank placement in the Project Station category at Techathon '24, Sri Ramakrishna Institute of Technology, Coimbatore, on October 9, 2024.", images: ["/Certification/First price Awards/SriRamakrishna_project_collage/SriRamakrishna_project.jpg", "/Certification/Certificates/SriRamakrishna_paper.jpg"] },
     { title: "VCET - DesignVerse First Place", caption: "First place in the DesignVerse UI/UX Contest at Velammal College of Engineering and Technology on March 17, 2026, recognizing creative design, teamwork, and product styling.", images: ["/Certification/First price Awards/DesignVerse UI-UX Contest VCET_collage/Award1.jpg", "/Certification/First price Awards/DesignVerse UI-UX Contest VCET_collage/Pic.jpg", "/Certification/First price Awards/DesignVerse UI-UX Contest VCET_collage/Award2.jpg"] }
   ],
   certificates: [
@@ -273,7 +254,6 @@ const portfolioContent = {
     { title: "Getting Started as a Java Developer", caption: "LinkedIn Learning | September 7, 2024 | Certificate ID: 52de3806135e24c404775f3fe4ac1d60ecfd777677fb320bbb825f4f32d3b3d3. Completed a 19-hour 18-minute learning path. Add the modules used here later.", image: "/Certification/Certificates/LinkedIn Learning-Java.jpg" },
     { title: "Cybersecurity for Beginners", caption: "Tata STRIVE, Tata Communications, and Microsoft | November 6, 2024 | 40-hour course track | Unique ID: 235823-27180565-1240. Add the security topics and practical takeaways here later.", image: "/Certification/Certificates/CYBERSECURITY.jpg" },
     { title: "Fundamentals of Deep Learning", caption: "NVIDIA Deep Learning Institute | October 4, 2025 | Certification ID: 8n0QXcICTQyEjeleLe58sw. Add the hands-on framework and model topics here later.", image: "/Certification/Certificates/NVIDIA.png" },
-    { title: "Harness Certified Continuous Delivery & GitOps Developer", caption: "Harness University | May 7, 2026 | Final passing score: 86% | Certificate No: mzbb68t3uez9.", image: "/Certification/Open Source Contributions/Harness Certified Continuous Delivery & GitOps Developer.jpg" },
     { title: "Advance Excel", caption: "GreyLearn | June 16, 2026 | Verification ID: LBZMHW2HC9. Add the spreadsheet skills covered here later.", image: "/Certification/Certificates/AdvanceExcel_GreyLearn.jpg" },
     { title: "C++ Programming", caption: "GreyLearn | June 16, 2026 | Verification ID: HB798NB187. Add the language concepts covered here later.", image: "/Certification/Certificates/C++Programming_GreyLearn.jpg" },
     { title: "Robotics Workshop - MOBIUS 2K24", caption: "Thiagarajar College of Engineering, Madurai | March 15, 2024 | Certificate reference: TCE/MOB24/W/165. Add the workshop activities and technical takeaways here later.", images: ["/Certification/Certificates/TCE/TCE_pic.jpg", "/Certification/Certificates/TCE/TCE_Mobius.jpg", "/Certification/Certificates/TCE/TCE.jpg", "/Certification/Certificates/TCE/Photo.jpg"] },
@@ -326,6 +306,8 @@ const portfolioContent = {
   linkedinPosts: [
     { title: "Project Expo · RAG Model · Menstrual Health", caption: "Project Expo post. Open the verified LinkedIn post to read the full caption.", image: "", url: "https://www.linkedin.com/posts/yamuna-bsvy_projectexpo-ragmodel-menstrualhealth-activity-7252692597985394690-2fyw?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEITI-gB1xhckvXVf8zOF2ITcORSU0OfRQY" },
     { title: "Designathon Euphoria 2024 · Teamwork", caption: "Designathon Euphoria 2024 post. Open the verified LinkedIn post to read the full caption.", image: "", url: "https://www.linkedin.com/posts/yamuna-bsvy_designathon-euphoria2024-teamwork-activity-7252674792670023680-_OI7?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEITI-gB1xhckvXVf8zOF2ITcORSU0OfRQY" },
+    { title: "Kalasalingam - Designthon First Place", caption: "First place at Designthon during Euphoria '24, organized by the Department of Computer Applications at Kalasalingam Academy of Research and Education on March 26-27, 2024.", image: "/Certification/First price Awards/kalasalingam_collage/showcase1.jpg", url: "https://www.linkedin.com/posts/yamuna-bsvy_designathon-euphoria2024-teamwork-activity-7252674792670023680-_OI7?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEITI-gB1xhckvXVf8zOF2ITcORSU0OfRQY" },
+    { title: "Sri Ramakrishna - Techathon Gold Rank", caption: "Prime Honours with a gold-rank placement in the Project Station category at Techathon '24, Sri Ramakrishna Institute of Technology, Coimbatore, on October 9, 2024.", image: "/Certification/First price Awards/SriRamakrishna_project_collage/SriRamakrishna_project.jpg", url: "" },
   ]
 };
 
@@ -912,7 +894,7 @@ function EvidenceCollage({ item, type, index }) {
 }
 
 function ProofBento({ items, type = "certificate" }) {
-  return <div className={`proof-bento proof-bento-${type}`}>{items.map((item, index) => <motion.figure key={typeof item === "string" ? item : item.title} className={`bento-item bento-item-${index + 1}`} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ delay: index * .06 }}><EvidenceCollage item={item} type={type} index={index} />{typeof item !== "string" && <figcaption><strong>{item.title}</strong><span>{item.caption}</span></figcaption>}</motion.figure>)}</div>;
+  return <div className={`proof-bento proof-bento-${type}`}>{items.map((item, index) => <motion.figure key={typeof item === "string" ? item : item.title} className={`bento-item bento-item-${index + 1}`} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ delay: index * .06 }}><EvidenceCollage item={item} type={type} index={index} />{typeof item !== "string" && <figcaption><strong>{item.title}</strong></figcaption>}</motion.figure>)}</div>;
 }
 
 function AcademicTimeline({ items }) {
@@ -922,7 +904,7 @@ function AcademicTimeline({ items }) {
 function LinkedInPostsSection() {
   return (
     <section id="linkedin-posts" className="linkedin-posts-section evidence-section">
-      <div className="section-intro"><p className="eyebrow">09 / LINKEDIN FIELD NOTES</p><h2>Thoughts from the build loop.</h2><p>Short reflections on backend systems, cloud learning, research, and the work around the work.</p></div>
+      <div className="section-intro"><p className="eyebrow">09 / LINKEDIN FIELD NOTES</p><h2>LinkedIn posts.</h2></div>
       <div className="linkedin-post-grid">
         {portfolioContent.linkedinPosts.map((post, index) => (
           <motion.article key={`${post.title}-${index}`} className="linkedin-post-card" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ delay: index * .1 }}>
@@ -931,6 +913,7 @@ function LinkedInPostsSection() {
           </motion.article>
         ))}
       </div>
+      <div className="linkedin-achievement"><ProofBento items={portfolioContent.awards} type="awards" /></div>
     </section>
   );
 }
@@ -948,7 +931,7 @@ function HomePage() {
             <p className="hero-detail">{portfolioContent.identity.location} · Final-year Computer Science student · Graduating 2027</p>
             <div className="hero-actions">
               <a href="#projects" className="studio-button studio-button-primary">View selected work <ArrowDownRight size={16} /></a>
-              <a href="/resume.pdf" download="Yamuna_Resume.pdf" className="studio-button">Download resume <Download size={15} /></a>
+              <a href="/Resume.pdf" download="Yamuna_Resume.pdf" className="studio-button">Download resume <Download size={15} /></a>
             </div>
             <div className="social-row">
               <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer"><Github size={16} /> GitHub</a>
@@ -991,9 +974,7 @@ function HomePage() {
 
         <section id="publication" className="evidence-section publication-section"><div className="section-intro"><p className="eyebrow">06 / RESEARCH, DOCUMENTED</p><h2>IEEE AIDE 2025</h2><p>Carbon footprint awareness and mitigation research presented as an IEEE conference publication.</p><a className="studio-button studio-button-primary" href={IEEE_PUBLICATION_URL} target="_blank" rel="noopener noreferrer">View publication <ExternalLink size={15} /></a></div><div className="publication-collage"><img className="publication-page" src="/Experience/IEEE/IEEE published paper screenshot.png" alt="IEEE publication proof" /><img className="publication-certificate" src="/Experience/IEEE/IEEE certfiicate.jpg" alt="IEEE author certificate" /><img className="publication-event-photo" src="/Experience/IEEE/Photo.jpg" alt="IEEE conference presentation" /><span className="hand-note">author / presenter</span></div></section>
 
-        <section id="awards" className="evidence-section"><div className="section-intro"><p className="eyebrow">07 / FIRST PRIZE</p><h2>First Prize, worth framing.</h2><p>DesignVerse and other verified first-prize achievements, presented as large editorial proof.</p></div><ProofBento items={portfolioContent.awards} type="awards" /></section>
-
-        <section id="certifications" className="evidence-section"><div className="section-intro"><p className="eyebrow">08 / CERTIFICATIONS</p><h2>Other certificates and courses.</h2><p>Technical courses, internship certificates, cloud learning, AI/ML study, and event certificates.</p></div><ProofBento items={portfolioContent.certificates} type="certificate" /></section>
+        <section id="certifications" className="evidence-section"><div className="section-intro"><p className="eyebrow">08 / CERTIFICATIONS</p><h2>Other certificates and courses.</h2></div><ProofBento items={portfolioContent.certificates} type="certificate" /></section>
 
         <section id="open-source" className="evidence-section"><div className="section-intro"><p className="eyebrow">OPEN SOURCE CONTRIBUTIONS</p><h2>Contribution proof.</h2><p>Certificates from open-source programs, community learning, and contributor work.</p></div><ProofBento items={portfolioContent.openSource} type="opensource" /></section>
 
@@ -1011,7 +992,7 @@ function HomePage() {
 
         <section id="coding-activity" className="studio-stats evidence-section"><div className="section-intro"><p className="eyebrow">10 / PROBLEM SOLVING</p><h2>Consistency matters as much as a single breakthrough.</h2></div><Stats /><blockquote className="canvas-quote quote-win">“It only takes one big win to erase all the losses. Just one!”</blockquote></section>
 
-        <section id="resume" className="resume-section evidence-section"><div className="section-intro"><p className="eyebrow">THE FULL VERSION</p><h2>Read the resume in context.</h2><p>The full PDF stays visible here, with a direct download below it.</p></div><div className="resume-frame"><iframe src="/resume.pdf" title="Yamuna Balamurugan resume preview" /></div><div className="resume-actions"><a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="studio-button studio-button-primary">Open full PDF <ExternalLink size={15} /></a><a href="/resume.pdf" download="Yamuna_Balamurugan_Resume.pdf" className="studio-button"><Download size={15} /> Download resume</a></div></section>
+        <section id="resume" className="resume-section evidence-section"><div className="section-intro"><p className="eyebrow">THE FULL VERSION</p><h2>Read the resume in context.</h2><p>The full PDF stays visible here, with a direct download below it.</p></div><div className="resume-frame"><iframe src="/Resume.pdf" title="Yamuna Balamurugan resume preview" /></div><div className="resume-actions"><a href="/Resume.pdf" target="_blank" rel="noopener noreferrer" className="studio-button studio-button-primary">Open full PDF <ExternalLink size={15} /></a><a href="/Resume.pdf" download="Yamuna_Balamurugan_Resume.pdf" className="studio-button"><Download size={15} /> Download resume</a></div></section>
 
         <section id="education" className="education-section evidence-section"><div className="education-copy"><p className="eyebrow">12 / EDUCATION + CONTACT</p><h2>B.E. Computer Science and Engineering</h2><p>Final-year undergraduate · Velammal College of Engineering and Technology · Madurai · Graduating 2027</p><div className="language-list"><span>English</span><span>Tamil</span><span>Hindi / Basic</span></div></div><div id="contact" className="studio-contact"><div className="section-art section-art-contact" aria-hidden="true"><span className="art-horizon" /><span className="art-sun" /></div><div><p className="eyebrow">OPEN CHANNEL</p><h2>Let’s build something dependable.</h2><p>Open to backend, cloud, and software-development roles.</p></div><div className="contact-actions"><a href={`mailto:${personalInfo.email}`} className="studio-button studio-button-primary"><Mail size={16} /> {personalInfo.email}</a><div className="social-row"><a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer"><Linkedin size={16} /> LinkedIn</a><a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer"><Github size={16} /> GitHub</a><a href={`https://wa.me/${personalInfo.whatsapp}`} target="_blank" rel="noopener noreferrer"><FaWhatsapp size={16} /> WhatsApp</a></div></div></div></section>
       </div>
@@ -1497,7 +1478,7 @@ function ResumePreviewModal({ open, onClose }) {
           </button>
         </div>
         <div className="h-[calc(88vh-58px)]">
-          <iframe src="/resume.pdf" width="100%" height="100%" frameBorder="0" title="Resume Preview" />
+          <iframe src="/Resume.pdf" width="100%" height="100%" frameBorder="0" title="Resume Preview" />
         </div>
       </div>
     </div>
