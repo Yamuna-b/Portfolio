@@ -397,6 +397,77 @@ img, video {
 .hero-label { font-size: 13px; }
 .proof-placeholder small { font-size: 13px; }
 
+/* Compact, open proof layout: media remains readable without turning every item into a panel. */
+.section-intro > p:last-child { display: none !important; }
+.proof-bento { gap: 1.5rem; }
+.proof-bento .bento-item,
+.linkedin-post-card,
+.toolkit-map .map-node,
+.internship-story {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.proof-bento .bento-item { padding: 0; gap: .6rem; }
+.proof-bento .bento-image,
+.proof-bento .bento-image-3,
+.proof-bento .bento-image-4 {
+  min-height: 0 !important;
+  height: 220px;
+  aspect-ratio: auto !important;
+  padding: 0;
+  background: transparent;
+  grid-template-rows: none;
+}
+.proof-bento .bento-image img { min-height: 0; object-fit: contain; }
+.proof-bento .bento-item figcaption { padding: .15rem 0 0; }
+.proof-bento .bento-item figcaption span { display: none; }
+.linkedin-post-card { padding: 0; }
+.linkedin-post-image { background: transparent; }
+.linkedin-post-image img { object-fit: contain; }
+.linkedin-post-copy { padding: .8rem 0 0; }
+.linkedin-achievement { margin-top: 2.5rem; max-width: 360px; }
+.linkedin-achievement .proof-bento { grid-template-columns: 1fr; }
+.publication-collage img { object-fit: contain !important; background: transparent; border: 0; box-shadow: none; }
+.now-stamp { width: 118px; height: 118px; font-size: 21px; }
+.now-stamp strong { font-size: 34px; }
+@media (max-width: 760px) {
+  .proof-bento .bento-image,
+  .proof-bento .bento-image-3,
+  .proof-bento .bento-image-4 { height: 200px; }
+  .now-stamp { width: 88px; height: 88px; font-size: 16px; }
+  .now-stamp strong { font-size: 27px; }
+}
+
+/* IEEE is a reading-first composition: paper on the left, context and event proof on the right. */
+.publication-section { grid-template-columns: minmax(0, 1fr) minmax(0, .95fr); align-items: start; }
+.publication-paper { min-height: 660px; display: flex; align-items: flex-start; justify-content: center; }
+.publication-paper img { width: 100%; height: 100%; max-height: 660px; object-fit: contain; }
+.publication-details { min-width: 0; }
+.publication-details .section-intro { margin-bottom: 1.5rem; }
+.publication-details .section-intro > p:last-child { display: block !important; }
+.publication-supporting-images { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.publication-supporting-images img { width: 100%; height: 300px; object-fit: contain; }
+
+/* Keep multi-image proof complete and readable. */
+.proof-bento-current-work .bento-image,
+.linkedin-achievement .bento-image { height: 320px; }
+.proof-bento-current-work .bento-image-3,
+.linkedin-achievement .bento-image-3 { display: grid; grid-template-rows: 1fr 1fr; min-height: 320px !important; }
+.proof-bento-current-work .bento-image img,
+.linkedin-achievement .bento-image img { object-fit: contain !important; }
+.proof-bento-certificate .bento-item:last-child { grid-column: 1 / -1; }
+.proof-bento-certificate .bento-item:last-child .bento-image { height: 260px; }
+
+@media (max-width: 760px) {
+  .publication-section { grid-template-columns: 1fr; }
+  .publication-paper { min-height: 460px; }
+  .publication-paper img { max-height: 460px; }
+  .publication-supporting-images img { height: 220px; }
+  .proof-bento-current-work .bento-image,
+  .linkedin-achievement .bento-image { height: 260px; }
+}
+
 @media (max-width: 760px) { .current-work-grid { grid-template-columns: 1fr; gap: 2rem; } }
 
 @media (max-width: 760px) { .toolkit-map { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding-top: .5rem; }.toolkit-map .map-core { grid-column: 1 / 3; grid-row: 1; }.toolkit-map .map-node-0, .toolkit-map .map-node-1, .toolkit-map .map-node-2, .toolkit-map .map-node-3, .toolkit-map .map-node-4 { grid-column: auto; grid-row: auto; }.toolkit-map .map-node-4 { grid-column: 1 / 3; }.toolkit-map .node-items { grid-template-columns: 1fr; }.toolkit-map .map-node { padding: 1rem .8rem; } }

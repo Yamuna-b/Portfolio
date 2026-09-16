@@ -256,6 +256,7 @@ const portfolioContent = {
     { title: "Fundamentals of Deep Learning", caption: "NVIDIA Deep Learning Institute | October 4, 2025 | Certification ID: 8n0QXcICTQyEjeleLe58sw. Add the hands-on framework and model topics here later.", image: "/Certification/Certificates/NVIDIA.png" },
     { title: "Advance Excel", caption: "GreyLearn | June 16, 2026 | Verification ID: LBZMHW2HC9. Add the spreadsheet skills covered here later.", image: "/Certification/Certificates/AdvanceExcel_GreyLearn.jpg" },
     { title: "C++ Programming", caption: "GreyLearn | June 16, 2026 | Verification ID: HB798NB187. Add the language concepts covered here later.", image: "/Certification/Certificates/C++Programming_GreyLearn.jpg" },
+    { title: "NPTEL", caption: "NPTEL course certificates.", expectedImages: 2, images: [] },
     { title: "Robotics Workshop - MOBIUS 2K24", caption: "Thiagarajar College of Engineering, Madurai | March 15, 2024 | Certificate reference: TCE/MOB24/W/165. Add the workshop activities and technical takeaways here later.", images: ["/Certification/Certificates/TCE/TCE_pic.jpg", "/Certification/Certificates/TCE/TCE_Mobius.jpg", "/Certification/Certificates/TCE/TCE.jpg", "/Certification/Certificates/TCE/Photo.jpg"] },
   ],
   badges: [
@@ -304,8 +305,6 @@ const portfolioContent = {
     { title: "School", institution: "TVS Matriculation Higher Secondary School", period: "2011-2017", caption: "School education. Add the school logo when it is uploaded to the Logos folder.", expectedImages: 1, images: [] }
   ],
   linkedinPosts: [
-    { title: "Project Expo · RAG Model · Menstrual Health", caption: "Project Expo post. Open the verified LinkedIn post to read the full caption.", image: "", url: "https://www.linkedin.com/posts/yamuna-bsvy_projectexpo-ragmodel-menstrualhealth-activity-7252692597985394690-2fyw?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEITI-gB1xhckvXVf8zOF2ITcORSU0OfRQY" },
-    { title: "Designathon Euphoria 2024 · Teamwork", caption: "Designathon Euphoria 2024 post. Open the verified LinkedIn post to read the full caption.", image: "", url: "https://www.linkedin.com/posts/yamuna-bsvy_designathon-euphoria2024-teamwork-activity-7252674792670023680-_OI7?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEITI-gB1xhckvXVf8zOF2ITcORSU0OfRQY" },
     { title: "Kalasalingam - Designthon First Place", caption: "First place at Designthon during Euphoria '24, organized by the Department of Computer Applications at Kalasalingam Academy of Research and Education on March 26-27, 2024.", image: "/Certification/First price Awards/kalasalingam_collage/showcase1.jpg", url: "https://www.linkedin.com/posts/yamuna-bsvy_designathon-euphoria2024-teamwork-activity-7252674792670023680-_OI7?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEITI-gB1xhckvXVf8zOF2ITcORSU0OfRQY" },
     { title: "Sri Ramakrishna - Techathon Gold Rank", caption: "Prime Honours with a gold-rank placement in the Project Station category at Techathon '24, Sri Ramakrishna Institute of Technology, Coimbatore, on October 9, 2024.", image: "/Certification/First price Awards/SriRamakrishna_project_collage/SriRamakrishna_project.jpg", url: "" },
   ]
@@ -904,7 +903,7 @@ function AcademicTimeline({ items }) {
 function LinkedInPostsSection() {
   return (
     <section id="linkedin-posts" className="linkedin-posts-section evidence-section">
-      <div className="section-intro"><p className="eyebrow">09 / LINKEDIN FIELD NOTES</p><h2>LinkedIn posts.</h2></div>
+      <div className="section-intro"><p className="eyebrow">07 / ACHIEVEMENTS</p><h2>First prize & achievements.</h2></div>
       <div className="linkedin-post-grid">
         {portfolioContent.linkedinPosts.map((post, index) => (
           <motion.article key={`${post.title}-${index}`} className="linkedin-post-card" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ delay: index * .1 }}>
@@ -972,7 +971,9 @@ function HomePage() {
 
         <blockquote className="canvas-quote quote-life">“So many movies to watch, languages to learn, instruments to play, places to visit, books to read, lives to live and so little time.”</blockquote>
 
-        <section id="publication" className="evidence-section publication-section"><div className="section-intro"><p className="eyebrow">06 / RESEARCH, DOCUMENTED</p><h2>IEEE AIDE 2025</h2><p>Carbon footprint awareness and mitigation research presented as an IEEE conference publication.</p><a className="studio-button studio-button-primary" href={IEEE_PUBLICATION_URL} target="_blank" rel="noopener noreferrer">View publication <ExternalLink size={15} /></a></div><div className="publication-collage"><img className="publication-page" src="/Experience/IEEE/IEEE published paper screenshot.png" alt="IEEE publication proof" /><img className="publication-certificate" src="/Experience/IEEE/IEEE certfiicate.jpg" alt="IEEE author certificate" /><img className="publication-event-photo" src="/Experience/IEEE/Photo.jpg" alt="IEEE conference presentation" /><span className="hand-note">author / presenter</span></div></section>
+        <section id="publication" className="evidence-section publication-section"><div className="publication-paper"><img src="/Experience/IEEE/IEEE published paper screenshot.png" alt="IEEE publication proof" /></div><div className="publication-details"><div className="section-intro"><p className="eyebrow">06 / RESEARCH, DOCUMENTED</p><h2>IEEE AIDE 2025</h2><p>Carbon footprint awareness and mitigation research presented as an IEEE conference publication.</p><a className="studio-button studio-button-primary" href={IEEE_PUBLICATION_URL} target="_blank" rel="noopener noreferrer">View publication <ExternalLink size={15} /></a></div><div className="publication-supporting-images"><img src="/Experience/IEEE/IEEE certfiicate.jpg" alt="IEEE author certificate" /><img src="/Experience/IEEE/Photo.jpg" alt="IEEE conference presentation" /></div></div></section>
+
+        <LinkedInPostsSection />
 
         <section id="certifications" className="evidence-section"><div className="section-intro"><p className="eyebrow">08 / CERTIFICATIONS</p><h2>Other certificates and courses.</h2></div><ProofBento items={portfolioContent.certificates} type="certificate" /></section>
 
@@ -982,17 +983,15 @@ function HomePage() {
 
         <section id="leadership" className="evidence-section"><div className="section-intro"><p className="eyebrow">10 / LEADERSHIP & VOLUNTEERING</p><h2>Responsibility beyond the code.</h2><p>Class representation, placement coordination, and academic committee leadership.</p></div><ProofBento items={portfolioContent.leadership} type="leadership" /></section>
 
-        <section id="current-work" className="evidence-section current-work-section"><div className="section-intro"><p className="eyebrow">11 / CURRENT WORK & UPCOMING</p><h2>What I am building next.</h2><p>Current project work, conference preparation, and the next certification in progress.</p></div><div className="current-work-grid"><div><h3>Project + paper in preparation</h3><ProofBento items={portfolioContent.currentWork} type="current-work" /></div><div><h3>Upcoming certification</h3><ProofBento items={portfolioContent.upcomingCertifications} type="upcoming" /></div></div></section>
-
-        <section id="academics" className="evidence-section academic-section"><div className="section-intro"><p className="eyebrow">ACADEMICS</p><h2>Education and academic journey.</h2><p>College, higher education, and school history restored from the earlier portfolio version.</p></div><AcademicTimeline items={portfolioContent.academicHistory} /></section>
-
         <section id="others" className="evidence-section others-section"><div className="section-intro"><p className="eyebrow">OTHERS: LEADERSHIP, VOLUNTEERING & CAMPUS LIFE</p><h2>The work around the work.</h2><p>Seminars, volunteering, services, study interests, and campus activities that complete the student story.</p></div><ProofBento items={portfolioContent.others} type="others" /></section>
 
-        <LinkedInPostsSection />
+        <section id="current-work" className="evidence-section current-work-section"><div className="section-intro"><p className="eyebrow">11 / CURRENT WORK & UPCOMING</p><h2>What I am building next.</h2><p>Current project work, conference preparation, and the next certification in progress.</p></div><div className="current-work-grid"><div><h3>Project + paper in preparation</h3><ProofBento items={portfolioContent.currentWork} type="current-work" /></div><div><h3>Upcoming certification</h3><ProofBento items={portfolioContent.upcomingCertifications} type="upcoming" /></div></div></section>
 
         <section id="coding-activity" className="studio-stats evidence-section"><div className="section-intro"><p className="eyebrow">10 / PROBLEM SOLVING</p><h2>Consistency matters as much as a single breakthrough.</h2></div><Stats /><blockquote className="canvas-quote quote-win">“It only takes one big win to erase all the losses. Just one!”</blockquote></section>
 
         <section id="resume" className="resume-section evidence-section"><div className="section-intro"><p className="eyebrow">THE FULL VERSION</p><h2>Read the resume in context.</h2><p>The full PDF stays visible here, with a direct download below it.</p></div><div className="resume-frame"><iframe src="/Resume.pdf" title="Yamuna Balamurugan resume preview" /></div><div className="resume-actions"><a href="/Resume.pdf" target="_blank" rel="noopener noreferrer" className="studio-button studio-button-primary">Open full PDF <ExternalLink size={15} /></a><a href="/Resume.pdf" download="Yamuna_Balamurugan_Resume.pdf" className="studio-button"><Download size={15} /> Download resume</a></div></section>
+
+        <section id="academics" className="evidence-section academic-section"><div className="section-intro"><p className="eyebrow">ACADEMICS</p><h2>Education and academic journey.</h2></div><AcademicTimeline items={portfolioContent.academicHistory} /></section>
 
         <section id="education" className="education-section evidence-section"><div className="education-copy"><p className="eyebrow">12 / EDUCATION + CONTACT</p><h2>B.E. Computer Science and Engineering</h2><p>Final-year undergraduate · Velammal College of Engineering and Technology · Madurai · Graduating 2027</p><div className="language-list"><span>English</span><span>Tamil</span><span>Hindi / Basic</span></div></div><div id="contact" className="studio-contact"><div className="section-art section-art-contact" aria-hidden="true"><span className="art-horizon" /><span className="art-sun" /></div><div><p className="eyebrow">OPEN CHANNEL</p><h2>Let’s build something dependable.</h2><p>Open to backend, cloud, and software-development roles.</p></div><div className="contact-actions"><a href={`mailto:${personalInfo.email}`} className="studio-button studio-button-primary"><Mail size={16} /> {personalInfo.email}</a><div className="social-row"><a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer"><Linkedin size={16} /> LinkedIn</a><a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer"><Github size={16} /> GitHub</a><a href={`https://wa.me/${personalInfo.whatsapp}`} target="_blank" rel="noopener noreferrer"><FaWhatsapp size={16} /> WhatsApp</a></div></div></div></section>
       </div>
