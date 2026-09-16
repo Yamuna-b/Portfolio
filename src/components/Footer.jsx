@@ -99,7 +99,7 @@ export default function Footer({ personalInfo, scrollHomeTo, openResumePreview }
                 <FooterLink onClick={openResumePreview}>Resume preview</FooterLink>
               </li>
               <li>
-                <FooterLink href="/Resume.pdf" download="Yamuna_Resume.pdf">
+                <FooterLink href="/resume.pdf" download="Yamuna_Resume.pdf">
                   Download
                 </FooterLink>
               </li>

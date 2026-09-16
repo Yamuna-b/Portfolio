@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import "./App.css";
 import { FaWhatsapp } from "react-icons/fa";
-import { SiAmazon, SiC, SiCplusplus, SiCss3, SiDocker, SiExpress, SiFastapi, SiGit, SiGithubactions, SiHtml5, SiHuggingface, SiJavascript, SiLeetcode, SiLinux, SiMongodb, SiNodedotjs, SiOpenai, SiPostgresql, SiPython, SiPytorch, SiReact, SiSqlite, SiTailwindcss, SiTensorflow, SiTypescript } from "react-icons/si";
+import { SiAmazon, SiC, SiCplusplus, SiCss3, SiDocker, SiExpress, SiFastapi, SiFigma, SiGit, SiGithubactions, SiHtml5, SiHuggingface, SiJavascript, SiLeetcode, SiLinux, SiMongodb, SiNodedotjs, SiOpenai, SiOpenjdk, SiPostgresql, SiPostman, SiPython, SiPytorch, SiReact, SiSqlite, SiTailwindcss, SiTensorflow, SiTypescript } from "react-icons/si";
 import Footer from "./components/Footer";
 import Stats from "./components/Stats";
 
@@ -90,13 +90,11 @@ const personalInfo = {
   whatsapp: "919629163099",
   bio: "I'm a final-year Computer Science student (graduating 2027) focused on backend and platform engineering. I like owning products end-to-end—from idea and design to deployment and iteration—with a strong foundation in DSA, system design, and DevOps. I enjoy spotting real-world gaps (finance, civic systems, data tooling) and turning them into opinionated, usable products.",
   skillGroups: [
-    { title: "Programming", items: ["Java", "Python", "JavaScript", "C", "SQL"] },
-    { title: "Backend & APIs", items: ["FastAPI", "Node.js", "Express.js", "REST APIs", "JWT"] },
-    { title: "Databases", items: ["PostgreSQL", "MongoDB"] },
-    { title: "Cloud & DevOps", items: ["AWS", "Docker", "Git", "CI/CD", "Linux"] },
-    { title: "AI / ML", items: ["PyTorch", "TensorFlow", "Hugging Face", "OpenCV", "LLM"] },
-    { title: "Frontend & Tools", items: ["React", "HTML", "CSS", "Tailwind CSS", "Postman", "Figma"] },
-    { title: "Competitive programming / DSA", items: ["Arrays", "Strings", "Hashing", "Trees", "Graphs", "Recursion", "Dynamic Programming"] },
+    { title: "Programming", items: ["Java", "C++", "C", "Python"] },
+    { title: "Backend", items: ["FastAPI", "Node.js", "Express.js", "REST APIs"] },
+    { title: "Databases", items: ["PostgreSQL", "MongoDB", "SQLite"] },
+    { title: "Frontend", items: ["React", "JavaScript", "HTML", "CSS"] },
+    { title: "Cloud / DevOps", items: ["Docker", "Git", "GitHub Actions", "CI/CD"] },
   ],
   languages: [
     { name: "English", level: "Very Well" },
@@ -118,6 +116,12 @@ const personalInfo = {
 
 const experience = [
   {
+    logo: "/Logos/kevelllogo.jpg",
+    company: "Kevell Corp",
+    role: "Web Development Intern",
+    duration: "Dec 2024",
+    desc: "Built Petimony and other web apps, reusable frontend components, form handling, and integrated UIs with existing APIs.",
+    certificate: "/Experience/Internship 1/Kevell certificate.jpg",
     logo: "/Logos/Reccsarlogo.jpg",
     company: "Reccsar Private Limited",
     role: "Cloud & Full Stack Web Intern",
@@ -129,6 +133,12 @@ const experience = [
     ]
   },
   {
+    logo: "/Logos/Reccsarlogo.jpg",
+    company: "Reccsar Private Limited",
+    role: "Cloud Computing Intern",
+    duration: "June 2025",
+    desc: "Cloud-hosted dashboards and apps like RailwayPorterSeva and client-support-realtime-chat for nonprofit delivery teams.",
+    certificate: "/Experience/Internship 2/Reccsar certificate.jpeg",
     logo: "/Logos/kevelllogo.jpg",
     company: "Kevell Corp",
     role: "Web Development Intern",
@@ -144,6 +154,8 @@ const experience = [
 const featuredProjects = [
   {
     title: "MoneyMirror",
+    tagline: "Personal finance digital twin—salary, EMIs, savings, and 3–6 month cash-flow projections with low-balance warnings.",
+    stack: ["Python", "FastAPI", "HTML", "CSS", "JavaScript", "PostgreSQL", "SQLite", "Docker", "GitHub Actions", "Hugging Face Spaces"],
     tagline: "Personal finance digital twin—enter salary, EMIs, savings, and expenses to simulate cash flow, runway, and low-balance risk over short-term horizons.",
     stack: ["Python", "FastAPI", "PostgreSQL", "SQLite", "Docker", "GitHub Actions", "Hugging Face"],
     bullets: [
@@ -160,6 +172,8 @@ const featuredProjects = [
   },
   {
     title: "LogBeacon",
+    tagline: "Log analysis backend—parse structured logs, filter by time/status, and run regex queries for faster debugging with optional OpenAI summarization.",
+    stack: ["React", "Vite", "TypeScript", "Node.js", "Express.js", "PostgreSQL", "Prisma", "Zod", "Vercel", "Render"],
     tagline: "Log analysis backend that ingests structured logs and supports filtering by time, level, service, and search text, with incident linking and optional summarization.",
     stack: ["React", "Vite", "TypeScript", "Node.js", "Express", "PostgreSQL", "Prisma", "Zod", "Vercel", "Render"],
     bullets: [
@@ -176,6 +190,7 @@ const featuredProjects = [
   },
   {
     title: "MarineTaxaAi",
+    tagline: "ML taxonomy platform—Streamlit dashboard and sequence/ML classifier for eDNA.",
     tagline: "Python-based eDNA pipeline that encodes FASTQ/CSV sequence data into k-mer and GC-content features and predicts marine species using scikit-learn models.",
     stack: ["Python", "FastAPI", "Streamlit", "scikit-learn", "NumPy", "pandas", "Biopython", "Plotly", "DBSCAN"],
     bullets: [
@@ -206,6 +221,8 @@ const portfolioContent = {
     { ...featuredProjects[2], screenshots: ["/Projects/MarineTaxaAI_1.png", "/Projects/MarineTaxaAI_2.png", "/Projects/MarineTaxaAI_3.png"], problem: "Make sequence-based marine classification easier to inspect and explain.", website: "#" }
   ],
   internships: [
+    { ...experience[0], projects: [{ name: "Petimony", description: "Pet shop and adoption flows with reusable responsive interfaces.", image: "/Experience/Internship 1/Petimony.png", github: "https://github.com/Yamuna-b/Petimony", stack: ["React", "APIs"] }, { name: "Railway Porter Seva", description: "Static booking UI for porter assistance at stations, with clear forms and simple user flows.", image: "/Others or Leadership services and more presentations etc/SIH.jpg", github: "#", stack: ["HTML", "CSS", "JavaScript"] }] },
+    { ...experience[1], projects: [{ name: "RailwayPorterSeva", description: "Cloud-hosted service booking and assignment workflows.", image: "/Projects/MoneyMirror_1.png", github: "https://github.com/Yamuna-b/PorterSeva", stack: ["Node.js", "MongoDB", "AWS"] }, { name: "Client support realtime chat", description: "Real-time helpdesk support tool for delivery teams.", image: "/Projects/LogBeacon_1.png", github: "https://github.com/Yamuna-b/client-support-realtime-chat", stack: ["Express", "Socket.io", "Firebase"] }] }
     {
       ...experience[0],
       projects: [
@@ -248,49 +265,44 @@ const portfolioContent = {
   awards: [
     { title: "Kalasalingam - Designthon First Place", caption: "First place at Designthon during Euphoria '24, organized by the Department of Computer Applications at Kalasalingam Academy of Research and Education on March 26-27, 2024.", images: ["/Certification/First price Awards/kalasalingam_collage/showcase1.jpg", "/Certification/First price Awards/kalasalingam_collage/Award5.jpg", "/Certification/First price Awards/kalasalingam_collage/kalasalingam.jpeg"] },
     { title: "Sri Ramakrishna - Techathon Gold Rank", caption: "Prime Honours with a gold-rank placement in the Project Station category at Techathon '24, Sri Ramakrishna Institute of Technology, Coimbatore, on October 9, 2024.", images: ["/Certification/First price Awards/SriRamakrishna_project_collage/SriRamakrishna_project.jpg", "/Certification/Certificates/SriRamakrishna_paper.jpg"] },
-    { title: "VCET - DesignVerse First Place", caption: "First place in the DesignVerse UI/UX Contest at Velammal College of Engineering and Technology on March 17, 2026, recognizing creative design, teamwork, and product styling.", images: ["/Certification/First price Awards/DesignVerse UI-UX Contest VCET_collage/Award1.jpg", "/Certification/First price Awards/DesignVerse UI-UX Contest VCET_collage/Pic.jpg", "/Certification/First price Awards/DesignVerse UI-UX Contest VCET_collage/Award2.jpg", "/Certification/Certificates/Vcet_Idea_contest.jpg"] }
+    { title: "VCET - DesignVerse First Place", caption: "First place in the DesignVerse UI/UX Contest at Velammal College of Engineering and Technology on March 17, 2026, recognizing creative design, teamwork, and product styling.", images: ["/Certification/First price Awards/DesignVerse UI-UX Contest VCET_collage/Award1.jpg", "/Certification/First price Awards/DesignVerse UI-UX Contest VCET_collage/Pic.jpg", "/Certification/First price Awards/DesignVerse UI-UX Contest VCET_collage/Award2.jpg"] }
   ],
   certificates: [
-    { title: "Programming for Everybody", caption: "University of Michigan via Coursera | May 18, 2023 | Verification ID: KPPVFN6JLDXF. Getting Started with Python. Add the certificate description or learning outcome here later.", image: "/Certification/Certificates/Coursera Certificate 6.jpg" },
-    { title: "Python Data Structures", caption: "University of Michigan via Coursera | June 14, 2023 | Verification ID: UM4QDDN8L9TW. Add the skills demonstrated or project context here later.", image: "/Certification/Certificates/Coursera Certificate 7.jpg" },
-    { title: "Using Python to Access Web Data", caption: "University of Michigan via Coursera | July 8, 2023 | Verification ID: EXBMDC8E78MV. Add the course details here later.", image: "/Certification/Certificates/Coursera Certificate 6.jpg" },
-    { title: "Using Databases with Python", caption: "University of Michigan via Coursera | August 14, 2023 | Verification ID: C6RQ7UHB7XSH. Add the database topics or project details here later.", image: "/Certification/Certificates/Coursera Certificate 7.jpg" },
     { title: "Python for Everybody Specialization", caption: "University of Michigan via Coursera | November 19, 2023 | Verification ID: XQEGE3CRGKG8. Five-course specialization covering Python, data structures, web data, databases, and visualization. Add the capstone details here later.", image: "/Certification/Certificates/Coursera Certificate 7.jpg" },
     { title: "Python Project for Data Science", caption: "IBM via Coursera | December 21, 2023 | Verification ID: DU7USM2J6P7E. Add the project and applied data-science details here later.", image: "/Certification/Certificates/Coursera Certificate 6.jpg" },
     { title: "Getting Started as a Java Developer", caption: "LinkedIn Learning | September 7, 2024 | Certificate ID: 52de3806135e24c404775f3fe4ac1d60ecfd777677fb320bbb825f4f32d3b3d3. Completed a 19-hour 18-minute learning path. Add the modules used here later.", image: "/Certification/Certificates/LinkedIn Learning-Java.jpg" },
     { title: "Cybersecurity for Beginners", caption: "Tata STRIVE, Tata Communications, and Microsoft | November 6, 2024 | 40-hour course track | Unique ID: 235823-27180565-1240. Add the security topics and practical takeaways here later.", image: "/Certification/Certificates/CYBERSECURITY.jpg" },
-    { title: "Software Testing", caption: "NPTEL, IIT Madras, and IIIT Bangalore | July-October 2024 | Consolidated score: 53% (Assignments 18.75/25, Exam 34.5/75) | Roll No: NPTEL24CS91S258600949. Add the course topics here later." },
-    { title: "Cloud Computing - Elite", caption: "NPTEL, IIT Kharagpur | July-October 2025 | Elite badge, consolidated score: 63% (Assignments 19.69/25, Exam 43.49/75) | Roll No: NPTEL25CS107S362301980. Add the cloud concepts or exam details here later." },
     { title: "Fundamentals of Deep Learning", caption: "NVIDIA Deep Learning Institute | October 4, 2025 | Certification ID: 8n0QXcICTQyEjeleLe58sw. Add the hands-on framework and model topics here later.", image: "/Certification/Certificates/NVIDIA.png" },
-    { title: "Harness Certified Continuous Delivery & GitOps Developer", caption: "Harness University | May 7, 2026 | Final passing score: 86% | Certificate No: mzbb68t3uez9. Add the delivery pipeline and GitOps topics here later.", images: ["/Certification/Open Source Contributions/Harness Certified Continuous Delivery & GitOps Developer.jpg", "/Certification/badges/Harness Certified Continuous Delivery & GitOps Developer Badge.png"] },
+    { title: "Harness Certified Continuous Delivery & GitOps Developer", caption: "Harness University | May 7, 2026 | Final passing score: 86% | Certificate No: mzbb68t3uez9.", image: "/Certification/Open Source Contributions/Harness Certified Continuous Delivery & GitOps Developer.jpg" },
     { title: "Advance Excel", caption: "GreyLearn | June 16, 2026 | Verification ID: LBZMHW2HC9. Add the spreadsheet skills covered here later.", image: "/Certification/Certificates/AdvanceExcel_GreyLearn.jpg" },
     { title: "C++ Programming", caption: "GreyLearn | June 16, 2026 | Verification ID: HB798NB187. Add the language concepts covered here later.", image: "/Certification/Certificates/C++Programming_GreyLearn.jpg" },
     { title: "Robotics Workshop - MOBIUS 2K24", caption: "Thiagarajar College of Engineering, Madurai | March 15, 2024 | Certificate reference: TCE/MOB24/W/165. Add the workshop activities and technical takeaways here later.", images: ["/Certification/Certificates/TCE/TCE_pic.jpg", "/Certification/Certificates/TCE/TCE_Mobius.jpg", "/Certification/Certificates/TCE/TCE.jpg", "/Certification/Certificates/TCE/Photo.jpg"] },
-    { title: "Professional Career Counselling", caption: "Elewayte | October 25, 2024 | Certificate No: 24995. Add the webinar speaker and key career takeaways here later." },
-    { title: "Web Development Domain Training", caption: "Kevell Corp, Madurai | December 9-19, 2024 | Completed a 10-day domain-specific training program. Add the training modules and project details here later.", image: "/Experience/Internship 1/Kevell certificate.jpg" },
-    { title: "FullStack Web Development Internship", caption: "RECCSAR Pvt Ltd, Madurai | June 2-28, 2025 | Ref No: 2025/000375. Conduct and attitude were noted as satisfactory, hardworking, and punctual. Add the project details here later.", image: "/Experience/Internship 2/Reccsar certificate.jpeg" }
   ],
   badges: [
-    { title: "GitHub Copilot: Prompt Quest", caption: "Wilco / GitHub | November 8, 2025. Technical communication and AI prompt engineering simulation track. Add the quest details here later.", image: "/Certification/Open Source Contributions/MLH_GitHub_Copilot_Prompt_certificate.png" },
-    { title: "GitHub Copilot: Code Smarter Quest", caption: "Wilco / GitHub | November 9, 2025. Advanced backend development logic and system documentation simulation track. Add the quest details here later.", image: "/Certification/Open Source Contributions/MLH_GitHub_Copilot_Code_Smarter_Quest_certificate.png" },
-    { title: "MongoDB Basics for Students", caption: "MongoDB, Inc. | November 9, 2025 | Credly badge ID: 458266ca-b6ca-4687-a861-58f894ba3232. Add the database topics here later.", images: ["/Certification/badges/mlh-mongodb-basics-for-students.png", "/Certification/Open Source Contributions/MLH_MongoDB_Basics_for_Students_Certificate.jpg"] },
-    { title: "50 Days Consistency Badge 2025", caption: "LeetCode | 2025. Awarded for solving data structures and algorithms problems for more than 50 consecutive days. Add the problem-solving themes here later.", image: "/Certification/badges/Leetcode50.png" },
-    { title: "Fundamentals of Deep Learning Badge", caption: "NVIDIA Deep Learning Institute | October 4, 2025. Add the badge context here later.", image: "/Certification/badges/badge_8.png" },
-    { title: "Harness Certified CD & GitOps Badge", caption: "Harness University | May 7, 2026 | Badge companion to the Harness certificate. Add the delivery and GitOps details here later.", image: "/Certification/badges/Harness Certified Continuous Delivery & GitOps Developer Badge.png" },
-    { title: "Community and contributor badges", caption: "A collection of contributor recognition from open-source and developer communities. Replace this long caption with individual program details later.", images: ["/Certification/badges/badge_5.png", "/Certification/badges/badge_6.png", "/Certification/badges/badge_7.png", "/Certification/badges/Contributor's badge.jpg"] }
+    { title: "Contributor SSOC", caption: "Open-source contributor badge.", image: "/Certification/badges/Contributor SSOC.png" },
+    { title: "Contributor badge", caption: "Community contributor recognition.", image: "/Certification/badges/Contributor's badge.jpg" },
+    { title: "Harness Certified CD & GitOps Developer", caption: "Harness University badge companion.", image: "/Certification/badges/Harness Certified Continuous Delivery & GitOps Developer Badge.png" },
+    { title: "LeetCode 50 Days", caption: "LeetCode consistency badge.", image: "/Certification/badges/Leetcode50.png" },
+    { title: "MongoDB Basics for Students", caption: "MongoDB student badge.", image: "/Certification/badges/mlh-mongodb-basics-for-students.png" },
+    { title: "Developer badge 5", caption: "Developer community badge.", image: "/Certification/badges/badge_5.png" },
+    { title: "Developer badge 6", caption: "Developer community badge.", image: "/Certification/badges/badge_6.png" },
+    { title: "Developer badge 7", caption: "Developer community badge.", image: "/Certification/badges/badge_7.png" },
+    { title: "Developer badge 8", caption: "Developer community badge.", image: "/Certification/badges/badge_8.png" }
   ],
   designs: ["/Projects/MoneyMirror_1.png", "/Projects/LogBeacon_1.png", "/Projects/MarineTaxaAI_1.png"],
   openSource: [
-    { title: "Social Summer of Code Season 4", caption: "Program cohort contributor pass | 2024 | Member ID: #5734 | Verification code: 7766e62c419354d05b21041ee4064bd7yam. Add the contribution summary here later.", image: "/Certification/Open Source Contributions/SSOC24_Cert.png" },
-    { title: "GirlScript Summer of Code 2025", caption: "Tech contributor ribbon badge | 2025. Add the repository, pull request, and contribution details here later.", image: "/Certification/badges/Contributor SSOC.png" },
-    { title: "DevTown Community Growth", caption: "Certificate of appreciation | April 16, 2025 | Signed by co-founder Ashish Modi. Add the community work details here later.", image: "/Certification/Open Source Contributions/open_4.jpg" },
-    { title: "Open Source Connect India", caption: "Contributor ID for open-source development sprints | August 15-30, 2025. Add the sprint and project details here later.", image: "/Certification/Open Source Contributions/open_2.png" }
+    { title: "Harness Certified Continuous Delivery & GitOps Developer", caption: "Harness University certificate.", image: "/Certification/Open Source Contributions/Harness Certified Continuous Delivery & GitOps Developer.jpg" },
+    { title: "GitHub Copilot Prompt Quest", caption: "GitHub / MLH open-source learning certificate.", image: "/Certification/Open Source Contributions/MLH_GitHub_Copilot_Prompt_certificate.png" },
+    { title: "GitHub Copilot Code Smarter Quest", caption: "GitHub / MLH open-source learning certificate.", image: "/Certification/Open Source Contributions/MLH_GitHub_Copilot_Code_Smarter_Quest_certificate.png" },
+    { title: "MongoDB Basics for Students", caption: "MongoDB student learning certificate.", image: "/Certification/Open Source Contributions/MLH_MongoDB_Basics_for_Students_Certificate.jpg" },
+    { title: "Social Summer of Code Season 4", caption: "Program cohort contributor certificate.", image: "/Certification/Open Source Contributions/SSOC24_Cert.png" },
+    { title: "Open-source contribution certificate", caption: "Open-source community certificate.", image: "/Certification/Open Source Contributions/open_2.png" },
+    { title: "DevTown Community Growth", caption: "Certificate of appreciation.", image: "/Certification/Open Source Contributions/open_4.jpg" }
   ],
   leadership: [
     { title: "Class Representative", caption: "Class Representative at Velammal College of Engineering and Technology | 2023-present. Representing classmates, coordinating communication between students and faculty, and helping organize academic updates and class-level responsibilities. Add specific initiatives and event details here later." },
     { title: "Placement Batch Head", caption: "Placement Batch Head | 2025-present. Supporting placement communication, coordinating batch-level updates, and helping classmates stay aligned with recruitment activities, schedules, and preparation. Add the companies, drives, or measurable outcomes here later." },
     { title: "Committee Head - Academic Cell", caption: "Committee Head, Academic Cell at Velammal College of Engineering and Technology | 2023-present. Contributing to academic coordination, peer support, and the planning of student-focused academic activities. Add committee projects and responsibilities here later." },
-    { title: "Eco Club Active Volunteer", caption: "Active volunteer, VCET Eco Club | 2024-present. Participating in environmental awareness, campus sustainability, and community activities through the college Eco Club. These photos are kept together as one event and volunteering collage; add the activity names and dates here later.", images: ["/Certification/EcoClub.jpg", "/Others or Leadership services and more presentations etc/ECO club/Photo.jpg"] }
   ],
   currentWork: [
     { title: "Drive2Hire: AI-Assisted Placement FocusBar Browser Extension", caption: "Current project and upcoming conference paper. Drive2Hire is an AI-assisted browser extension designed to keep placement preparation focused inside the browser, helping students organize job-search activity, surface useful context, and reduce distraction during the placement journey. The project is being prepared for conference submission; add the paper title, authors, conference name, and submission date here later.", expectedImages: 3, images: ["/Upcoming/Drive2Hire/1.png", "/Upcoming/Drive2Hire/11.png"] }
@@ -883,7 +895,7 @@ function ProofStack({ images, label, altPrefix, className = "" }) {
 }
 
 function TechLogos({ items }) {
-  const icons = { FastAPI: SiFastapi, PostgreSQL: SiPostgresql, Docker: SiDocker, AWS: SiAmazon, TypeScript: SiTypescript, Express: SiExpress, "Node.js": SiNodedotjs, Python: SiPython, PyTorch: SiPytorch, MongoDB: SiMongodb, React: SiReact, Git: SiGit };
+  const icons = { Java: SiOpenjdk, FastAPI: SiFastapi, PostgreSQL: SiPostgresql, Docker: SiDocker, AWS: SiAmazon, TypeScript: SiTypescript, Express: SiExpress, "Node.js": SiNodedotjs, Python: SiPython, PyTorch: SiPytorch, MongoDB: SiMongodb, React: SiReact, Git: SiGit, JavaScript: SiJavascript, "C++": SiCplusplus, C: SiC, CSS: SiCss3, HTML: SiHtml5, "Tailwind CSS": SiTailwindcss, "CI/CD": SiGithubactions, "Hugging Face": SiHuggingface, Figma: SiFigma, Postman: SiPostman };
   return <div className="tech-logo-row">{items.map(item => { const Icon = icons[item]; return <span key={item} className="tech-logo-chip">{Icon ? <Icon aria-hidden="true" /> : <span className="tech-dot" />} {item}</span>; })}</div>;
 }
 
@@ -936,7 +948,7 @@ function HomePage() {
             <p className="hero-detail">{portfolioContent.identity.location} · Final-year Computer Science student · Graduating 2027</p>
             <div className="hero-actions">
               <a href="#projects" className="studio-button studio-button-primary">View selected work <ArrowDownRight size={16} /></a>
-              <a href="/Resume.pdf" download="Yamuna_Resume.pdf" className="studio-button">Download resume <Download size={15} /></a>
+              <a href="/resume.pdf" download="Yamuna_Resume.pdf" className="studio-button">Download resume <Download size={15} /></a>
             </div>
             <div className="social-row">
               <a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer"><Github size={16} /> GitHub</a>
@@ -956,7 +968,7 @@ function HomePage() {
 
         <blockquote className="canvas-quote quote-world">“The people who are crazy enough to think they can change the world are the ones who do.”</blockquote>
 
-        <section className="approach-section"><div className="section-intro"><p className="eyebrow">ENGINEERING IDENTITY</p><h2>The systems I work with.</h2><p>Idea → Interface → API → Backend services → Database → Cloud deployment.</p></div><div className="approach-flow">{["Idea", "Interface", "API", "Backend services", "Database", "Cloud deployment"].map((step, index) => <div className="approach-node" key={step}><strong>{step}</strong>{index < 5 && <b>→</b>}</div>)}</div></section>
+        <section className="approach-section"><div className="section-intro"><p className="eyebrow">ENGINEERING IDENTITY</p><h2>The systems I work with.</h2><p>From a rough idea to a reliable, deployed product.</p></div><div className="approach-flow">{["Idea", "Interface", "API", "Backend services", "Database", "Cloud deployment"].map((step, index) => <div className="approach-node" key={step}><span>{String(index + 1).padStart(2, "0")}</span><strong>{step}</strong>{index < 5 && <b>→</b>}</div>)}</div></section>
 
         <section id="projects" className="studio-section scroll-mt-28" data-canvas-theme="projects">
           <div className="section-art section-art-projects" aria-hidden="true"><span className="art-ledger-line" /><span className="art-ledger-line" /><span className="art-ledger-line" /><i className="art-spark">✦</i></div>
@@ -971,9 +983,9 @@ function HomePage() {
           </div>
         </section>
 
-        <section id="skills" className="studio-section skill-section scroll-mt-28"><div className="section-art section-art-skills" aria-hidden="true"><span className="art-node art-node-a" /><span className="art-node art-node-b" /><span className="art-node art-node-c" /><span className="art-connector" /></div><div className="section-intro"><p className="eyebrow">03 / WORKING TOOLKIT</p><h2>The tools behind the build.</h2><p>A clear view of the languages, frameworks, data systems, and delivery tools I use across the stack.</p></div><div className="toolkit-map"><div className="map-node map-core"><Terminal size={22} /><strong>BUILD LOOP</strong><small>idea → system → deployment → impact</small></div>{personalInfo.skillGroups.slice(0, 5).map((group, idx) => <div className={`map-node map-node-${idx}`} key={group.title}><div className="map-node-icon">{idx === 0 ? <GitBranch size={18} /> : idx === 1 ? <Server size={18} /> : idx === 2 ? <Database size={18} /> : idx === 3 ? <Cloud size={18} /> : <Terminal size={18} />}</div><strong>{group.title}</strong><div className="node-items">{group.items.slice(0, 6).map(item => { const icons = { Java: Terminal, "C++": SiCplusplus, C: SiC, Python: SiPython, JavaScript: SiJavascript, SQL: Database, FastAPI: SiFastapi, "Node.js": SiNodedotjs, "Express.js": SiExpress, "REST APIs": Cloud, PostgreSQL: SiPostgresql, MongoDB: SiMongodb, SQLite: SiSqlite, AWS: SiAmazon, Docker: SiDocker, Git: SiGit, "CI/CD": SiGithubactions, Linux: SiLinux, React: SiReact, "HTML": SiHtml5, CSS: SiCss3, "Tailwind CSS": SiTailwindcss, PyTorch: SiPytorch, TensorFlow: SiTensorflow, "Hugging Face": SiHuggingface, LLM: SiOpenai }; const Icon = icons[item] || Terminal; return <span key={item}><Icon aria-hidden="true" /><b>{item}</b></span>; })}</div></div>)}</div></section>
+        <section id="skills" className="studio-section skill-section scroll-mt-28"><div className="section-art section-art-skills" aria-hidden="true"><span className="art-node art-node-a" /><span className="art-node art-node-b" /><span className="art-node art-node-c" /><span className="art-connector" /></div><div className="section-intro"><p className="eyebrow">03 / WORKING TOOLKIT</p><h2>The tools behind the build.</h2><p>A clear view of the languages, frameworks, data systems, and delivery tools I use across the stack.</p></div><div className="toolkit-map">{personalInfo.skillGroups.slice(0, 5).map((group, idx) => <div className={`map-node map-node-${idx}`} key={group.title}><div className="map-node-icon">{idx === 0 ? <GitBranch size={22} /> : idx === 1 ? <Server size={22} /> : idx === 2 ? <Database size={22} /> : idx === 3 ? <Cloud size={22} /> : <Terminal size={22} />}</div><strong>{group.title}</strong><div className="node-items">{group.items.slice(0, 6).map(item => { const icons = { Java: SiOpenjdk, "C++": SiCplusplus, C: SiC, Python: SiPython, JavaScript: SiJavascript, SQL: Database, FastAPI: SiFastapi, "Node.js": SiNodedotjs, "Express.js": SiExpress, "REST APIs": Cloud, PostgreSQL: SiPostgresql, MongoDB: SiMongodb, SQLite: SiSqlite, AWS: SiAmazon, Docker: SiDocker, Git: SiGit, "CI/CD": SiGithubactions, Linux: SiLinux, React: SiReact, "HTML": SiHtml5, CSS: SiCss3, "Tailwind CSS": SiTailwindcss, PyTorch: SiPytorch, TensorFlow: SiTensorflow, "Hugging Face": SiHuggingface, LLM: SiOpenai }; const Icon = icons[item] || Terminal; return <span key={item}><Icon aria-hidden="true" /><b>{item}</b></span>; })}</div></div>)}</div></section>
 
-        <section id="experience" className="studio-section timeline-section scroll-mt-28"><div className="section-art section-art-experience" aria-hidden="true"><span className="art-tape" /><span className="art-star">✦</span><span className="art-pencil-line" /></div><div className="section-intro"><p className="eyebrow">INTERNSHIP STORY</p><h2>Learning in public, shipping with care.</h2></div><div className="internship-stories">{portfolioContent.internships.map(internship => <article className="internship-story" key={internship.company}><div className="internship-heading"><img src={internship.logo} alt={`${internship.company} logo`} /><div><p className="project-index">EXPERIENCE</p><h3>{internship.role} - {internship.company}</h3><p>{internship.desc}</p></div></div><div className="internship-rule" /><div className="internship-projects">{internship.projects.map(project => <div className="internship-project" key={project.name}><ProofStack images={project.images || [project.image]} label={`${project.name} image`} altPrefix={project.name} /><div><h4>{project.name}</h4><p>{project.description}</p><TechLogos items={project.stack} /><div className="project-links"><a href={project.github === "#" ? undefined : project.github} className={project.github === "#" ? "is-disabled" : ""} aria-disabled={project.github === "#"}><Github size={15} /> GitHub</a><a href="#" className="is-disabled" aria-disabled="true"><ExternalLink size={15} /> Demo video / Coming soon</a></div></div></div>)}</div></article>)}</div></section>
+        <section id="experience" className="studio-section timeline-section scroll-mt-28"><div className="section-art section-art-experience" aria-hidden="true"><span className="art-tape" /><span className="art-star">✦</span><span className="art-pencil-line" /></div><div className="section-intro"><p className="eyebrow">INTERNSHIP STORY</p><h2>Learning in public, shipping with care.</h2></div><div className="internship-stories">{portfolioContent.internships.map(internship => <article className="internship-story" key={internship.company}><div className="internship-heading"><img src={internship.logo} alt={`${internship.company} logo`} /><div><p className="project-index">EXPERIENCE</p><h3>{internship.role} - {internship.company}</h3><p>{internship.desc}</p></div>{internship.certificate && <img className="internship-certificate" src={internship.certificate} alt={`${internship.company} internship certificate`} />}</div><div className="internship-rule" /><div className="internship-projects">{internship.projects.map(project => <div className="internship-project" key={project.name}><ProofStack images={project.images || [project.image]} label={`${project.name} image`} altPrefix={project.name} /><div><h4>{project.name}</h4><p>{project.description}</p><TechLogos items={project.stack} /><div className="project-links"><a href={project.github === "#" ? undefined : project.github} className={project.github === "#" ? "is-disabled" : ""} aria-disabled={project.github === "#"}><Github size={15} /> GitHub</a><a href="#" className="is-disabled" aria-disabled="true"><ExternalLink size={15} /> Demo video / Coming soon</a></div></div></div>)}</div></article>)}</div></section>
 
         <blockquote className="canvas-quote quote-life">“So many movies to watch, languages to learn, instruments to play, places to visit, books to read, lives to live and so little time.”</blockquote>
 
@@ -983,9 +995,11 @@ function HomePage() {
 
         <section id="certifications" className="evidence-section"><div className="section-intro"><p className="eyebrow">08 / CERTIFICATIONS</p><h2>Other certificates and courses.</h2><p>Technical courses, internship certificates, cloud learning, AI/ML study, and event certificates.</p></div><ProofBento items={portfolioContent.certificates} type="certificate" /></section>
 
-        <section id="open-source" className="evidence-section"><div className="section-intro"><p className="eyebrow">OPEN SOURCE & BADGES</p><h2>Contribution proof.</h2></div><div className="proof-columns"><div><h3>Open source contribution certificates</h3><ProofBento items={portfolioContent.openSource} type="opensource" /></div><div><h3>Platform badges</h3><ProofBento items={portfolioContent.badges} type="badges" /></div></div></section>
+        <section id="open-source" className="evidence-section"><div className="section-intro"><p className="eyebrow">OPEN SOURCE CONTRIBUTIONS</p><h2>Contribution proof.</h2><p>Certificates from open-source programs, community learning, and contributor work.</p></div><ProofBento items={portfolioContent.openSource} type="opensource" /></section>
 
-        <section id="leadership" className="evidence-section"><div className="section-intro"><p className="eyebrow">10 / LEADERSHIP & VOLUNTEERING</p><h2>Responsibility beyond the code.</h2><p>Class representation, placement coordination, academic committee leadership, and active Eco Club volunteering, with space for the longer story behind each role.</p></div><ProofBento items={portfolioContent.leadership} type="leadership" /></section>
+        <section id="badges" className="evidence-section badges-section"><div className="section-intro"><p className="eyebrow">BADGES</p><h2>Small signals of consistency.</h2><p>Platform and community badges kept separate from certificates for a cleaner scan.</p></div><ProofBento items={portfolioContent.badges} type="badges" /></section>
+
+        <section id="leadership" className="evidence-section"><div className="section-intro"><p className="eyebrow">10 / LEADERSHIP & VOLUNTEERING</p><h2>Responsibility beyond the code.</h2><p>Class representation, placement coordination, and academic committee leadership.</p></div><ProofBento items={portfolioContent.leadership} type="leadership" /></section>
 
         <section id="current-work" className="evidence-section current-work-section"><div className="section-intro"><p className="eyebrow">11 / CURRENT WORK & UPCOMING</p><h2>What I am building next.</h2><p>Current project work, conference preparation, and the next certification in progress.</p></div><div className="current-work-grid"><div><h3>Project + paper in preparation</h3><ProofBento items={portfolioContent.currentWork} type="current-work" /></div><div><h3>Upcoming certification</h3><ProofBento items={portfolioContent.upcomingCertifications} type="upcoming" /></div></div></section>
 
@@ -997,7 +1011,7 @@ function HomePage() {
 
         <section id="coding-activity" className="studio-stats evidence-section"><div className="section-intro"><p className="eyebrow">10 / PROBLEM SOLVING</p><h2>Consistency matters as much as a single breakthrough.</h2></div><Stats /><blockquote className="canvas-quote quote-win">“It only takes one big win to erase all the losses. Just one!”</blockquote></section>
 
-        <section id="resume" className="resume-section evidence-section"><div className="section-intro"><p className="eyebrow">THE FULL VERSION</p><h2>Read the resume in context.</h2><p>The full PDF stays visible here, with a direct download below it.</p></div><div className="resume-frame"><iframe src="/Resume.pdf" title="Yamuna Balamurugan resume preview" /></div><div className="resume-actions"><a href="/Resume.pdf" target="_blank" rel="noopener noreferrer" className="studio-button studio-button-primary">Open full PDF <ExternalLink size={15} /></a><a href="/Resume.pdf" download="Yamuna_Balamurugan_Resume.pdf" className="studio-button"><Download size={15} /> Download resume</a></div></section>
+        <section id="resume" className="resume-section evidence-section"><div className="section-intro"><p className="eyebrow">THE FULL VERSION</p><h2>Read the resume in context.</h2><p>The full PDF stays visible here, with a direct download below it.</p></div><div className="resume-frame"><iframe src="/resume.pdf" title="Yamuna Balamurugan resume preview" /></div><div className="resume-actions"><a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="studio-button studio-button-primary">Open full PDF <ExternalLink size={15} /></a><a href="/resume.pdf" download="Yamuna_Balamurugan_Resume.pdf" className="studio-button"><Download size={15} /> Download resume</a></div></section>
 
         <section id="education" className="education-section evidence-section"><div className="education-copy"><p className="eyebrow">12 / EDUCATION + CONTACT</p><h2>B.E. Computer Science and Engineering</h2><p>Final-year undergraduate · Velammal College of Engineering and Technology · Madurai · Graduating 2027</p><div className="language-list"><span>English</span><span>Tamil</span><span>Hindi / Basic</span></div></div><div id="contact" className="studio-contact"><div className="section-art section-art-contact" aria-hidden="true"><span className="art-horizon" /><span className="art-sun" /></div><div><p className="eyebrow">OPEN CHANNEL</p><h2>Let’s build something dependable.</h2><p>Open to backend, cloud, and software-development roles.</p></div><div className="contact-actions"><a href={`mailto:${personalInfo.email}`} className="studio-button studio-button-primary"><Mail size={16} /> {personalInfo.email}</a><div className="social-row"><a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer"><Linkedin size={16} /> LinkedIn</a><a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer"><Github size={16} /> GitHub</a><a href={`https://wa.me/${personalInfo.whatsapp}`} target="_blank" rel="noopener noreferrer"><FaWhatsapp size={16} /> WhatsApp</a></div></div></div></section>
       </div>
@@ -1627,7 +1641,7 @@ export default function App() {
     const themeSections = [
       [".studio-hero", "hero"], ["#about", "about"], [".approach-section", "identity"],
       ["#projects", "projects"], ["#skills", "skills"], ["#experience", "experience"],
-      ["#publication", "research"], ["#awards", "recognition"], ["#certifications", "certifications"], ["#open-source", "opensource"], ["#leadership", "leadership"], ["#current-work", "current-work"], ["#campus-context", "campus"],
+      ["#publication", "research"], ["#awards", "recognition"], ["#certifications", "certifications"], ["#open-source", "opensource"], ["#badges", "badges"], ["#leadership", "leadership"], ["#current-work", "current-work"], ["#campus-context", "campus"],
       ["#academics", "academics"], ["#others", "others"], ["#linkedin-posts", "linkedin"], ["#coding-activity", "coding"], ["#resume", "resume"], ["#education", "contact"]
     ];
     const sections = themeSections.map(([selector, theme]) => {
