@@ -456,8 +456,6 @@ img, video {
 .linkedin-achievement .bento-image-3 { display: grid; grid-template-rows: 1fr 1fr; min-height: 320px !important; }
 .proof-bento-current-work .bento-image img,
 .linkedin-achievement .bento-image img { object-fit: contain !important; }
-.proof-bento-certificate .bento-item:last-child { grid-column: 1 / -1; }
-.proof-bento-certificate .bento-item:last-child .bento-image { height: 260px; }
 
 @media (max-width: 760px) {
   .publication-section { grid-template-columns: 1fr; }
@@ -466,6 +464,53 @@ img, video {
   .publication-supporting-images img { height: 220px; }
   .proof-bento-current-work .bento-image,
   .linkedin-achievement .bento-image { height: 260px; }
+}
+
+/* Portfolio media stays open on the page rather than inside visual cards. */
+.proof-bento .bento-item,
+.linkedin-post-card,
+.internship-story,
+.proof-bento .bento-image,
+.linkedin-post-image {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.proof-bento .bento-image,
+.linkedin-post-image {
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+  padding: 0 !important;
+  overflow: visible;
+}
+.proof-bento .bento-image img,
+.linkedin-post-image img,
+.proof-stack-collage img,
+.proof-stack.proof-stack-collage > img,
+.publication-paper img,
+.publication-supporting-images img {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100%;
+  object-fit: contain !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
+.linkedin-post-copy { padding: .8rem 0 0; }
+.linkedin-read-post,
+.linkedin-read-post:visited {
+  color: #0a66c2 !important;
+  opacity: 1;
+}
+.linkedin-read-post svg { color: #0a66c2; }
+.others-section .proof-bento { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.tech-logo-chip { font-size: 15px; padding: 9px 11px; }
+.tech-logo-chip svg { width: 18px; height: 18px; }
+@media (max-width: 760px) {
+  .others-section .proof-bento { grid-template-columns: 1fr; }
+  .tech-logo-chip { font-size: 14px; }
 }
 
 @media (max-width: 760px) { .current-work-grid { grid-template-columns: 1fr; gap: 2rem; } }

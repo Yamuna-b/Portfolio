@@ -201,9 +201,9 @@ const portfolioContent = {
     aws: "Growing deeper in AWS across compute, storage, networking, security, IAM, infrastructure as code, observability, and cost optimization."
   },
   projects: [
-    { ...featuredProjects[0], screenshots: ["/Projects/MoneyMirror_1.png", "/Projects/MoneyMirror_2.png", "/Projects/MoneyMirror_3.png"], problem: "Make future cash-flow pressure visible before it becomes a surprise.", website: "#" },
-    { ...featuredProjects[1], screenshots: ["/Projects/LogBeacon_1.png", "/Projects/LogBeacon_2.png", "/Projects/LogBeacon_3.png"], problem: "Turn noisy logs into searchable, structured incident intelligence.", website: "#" },
-    { ...featuredProjects[2], screenshots: ["/Projects/MarineTaxaAI_1.png", "/Projects/MarineTaxaAI_2.png", "/Projects/MarineTaxaAI_3.png"], problem: "Make sequence-based marine classification easier to inspect and explain.", website: "#" }
+    { ...featuredProjects[0], screenshots: ["/Projects/MoneyMirror.png"], problem: "Make future cash-flow pressure visible before it becomes a surprise.", website: "#" },
+    { ...featuredProjects[1], screenshots: ["/Projects/LogBeacon.png"], problem: "Turn noisy logs into searchable, structured incident intelligence.", website: "#" },
+    { ...featuredProjects[2], screenshots: ["/Projects/MarineTaxaAI.png"], problem: "Make sequence-based marine classification easier to inspect and explain.", website: "#" }
   ],
   internships: [
     {
@@ -219,7 +219,7 @@ const portfolioContent = {
         {
           name: "RailwayPorterSeva",
           description: "Built a static booking UI for porter assistance at stations using HTML, CSS, and JavaScript, focusing on clear forms and simple flows for users.",
-          image: "/Others or Leadership services and more presentations etc/SIH.jpg",
+          image: "/Experience/Internship 1/RailwayPorterSystem.png",
           github: "https://github.com/Yamuna-b/PorterSeva",
           stack: ["HTML", "CSS", "JavaScript", "Git", "GitHub Pages"]
         }
@@ -231,14 +231,14 @@ const portfolioContent = {
         {
           name: "client-support-realtime-chat",
           description: "Real-time helpdesk widget with authentication, agent assignment, chat history, and live messaging between clients and support staff.",
-          image: "/Projects/LogBeacon_1.png",
+          image: "/Experience/Internship 2/ClientSupportRealtimeChat.png",
           github: "https://github.com/Yamuna-b/client-support-realtime-chat",
           stack: ["HTML", "CSS", "JavaScript", "Node.js", "Express", "Socket.io", "Firebase"]
         },
         {
           name: "NammaOorFix",
           description: "Full-stack civic issue reporting portal with React/Vite frontend and Node.js/Express + MongoDB backend, including JWT auth, geospatial clustering, and officer dashboards.",
-          image: "/Projects/MoneyMirror_1.png",
+          image: "/Experience/Internship 2/NammaOorFix.png",
           github: "https://github.com/Yamuna-b/NammaOorFix",
           stack: ["React", "Vite", "Tailwind CSS", "Node.js", "Express", "MongoDB", "Mongoose", "JWT", "BcryptJS", "Multer", "ml-kmeans"]
         }
@@ -246,7 +246,7 @@ const portfolioContent = {
     }
   ],
   awards: [
-    { title: "VCET - DesignVerse First Place", caption: "First place in the DesignVerse UI/UX Contest at Velammal College of Engineering and Technology on March 17, 2026, recognizing creative design, teamwork, and product styling.", images: ["/Certification/First price Awards/DesignVerse UI-UX Contest VCET_collage/Award1.jpg", "/Certification/First price Awards/DesignVerse UI-UX Contest VCET_collage/Pic.jpg", "/Certification/First price Awards/DesignVerse UI-UX Contest VCET_collage/Award2.jpg"] }
+    { title: "VCET - DesignVerse First Place", caption: "First place in the DesignVerse UI/UX Contest at Velammal College of Engineering and Technology on March 17, 2026, recognizing creative design, teamwork, and product styling.", image: "/Certification/First price Awards/VCET.png" }
   ],
   certificates: [
     { title: "Python for Everybody Specialization", caption: "University of Michigan via Coursera | November 19, 2023 | Verification ID: XQEGE3CRGKG8. Five-course specialization covering Python, data structures, web data, databases, and visualization. Add the capstone details here later.", image: "/Certification/Certificates/Coursera Certificate 7.jpg" },
@@ -256,19 +256,14 @@ const portfolioContent = {
     { title: "Fundamentals of Deep Learning", caption: "NVIDIA Deep Learning Institute | October 4, 2025 | Certification ID: 8n0QXcICTQyEjeleLe58sw. Add the hands-on framework and model topics here later.", image: "/Certification/Certificates/NVIDIA.png" },
     { title: "Advance Excel", caption: "GreyLearn | June 16, 2026 | Verification ID: LBZMHW2HC9. Add the spreadsheet skills covered here later.", image: "/Certification/Certificates/AdvanceExcel_GreyLearn.jpg" },
     { title: "C++ Programming", caption: "GreyLearn | June 16, 2026 | Verification ID: HB798NB187. Add the language concepts covered here later.", image: "/Certification/Certificates/C++Programming_GreyLearn.jpg" },
-    { title: "NPTEL", caption: "NPTEL course certificates.", expectedImages: 2, images: [] },
-    { title: "Robotics Workshop - MOBIUS 2K24", caption: "Thiagarajar College of Engineering, Madurai | March 15, 2024 | Certificate reference: TCE/MOB24/W/165. Add the workshop activities and technical takeaways here later.", images: ["/Certification/Certificates/TCE/TCE_pic.jpg", "/Certification/Certificates/TCE/TCE_Mobius.jpg", "/Certification/Certificates/TCE/TCE.jpg", "/Certification/Certificates/TCE/Photo.jpg"] },
+    { title: "Robotics Workshop - MOBIUS 2K24", caption: "Thiagarajar College of Engineering, Madurai | March 15, 2024 | Certificate reference: TCE/MOB24/W/165.", image: "/Certification/Certificates/TCE_Workshop.png" },
   ],
   badges: [
     { title: "Contributor SSOC", caption: "Open-source contributor badge.", image: "/Certification/badges/Contributor SSOC.png" },
     { title: "Contributor badge", caption: "Community contributor recognition.", image: "/Certification/badges/Contributor's badge.jpg" },
     { title: "Harness Certified CD & GitOps Developer", caption: "Harness University badge companion.", image: "/Certification/badges/Harness Certified Continuous Delivery & GitOps Developer Badge.png" },
-    { title: "LeetCode 50 Days", caption: "LeetCode consistency badge.", image: "/Certification/badges/Leetcode50.png" },
+    { title: "LeetCode badges", caption: "Combined LeetCode achievement badges.", image: "/Certification/badges/Leetcode.png" },
     { title: "MongoDB Basics for Students", caption: "MongoDB student badge.", image: "/Certification/badges/mlh-mongodb-basics-for-students.png" },
-    { title: "Developer badge 5", caption: "Developer community badge.", image: "/Certification/badges/badge_5.png" },
-    { title: "Developer badge 6", caption: "Developer community badge.", image: "/Certification/badges/badge_6.png" },
-    { title: "Developer badge 7", caption: "Developer community badge.", image: "/Certification/badges/badge_7.png" },
-    { title: "Developer badge 8", caption: "Developer community badge.", image: "/Certification/badges/badge_8.png" }
   ],
   designs: ["/Projects/MoneyMirror_1.png", "/Projects/LogBeacon_1.png", "/Projects/MarineTaxaAI_1.png"],
   openSource: [
@@ -286,17 +281,17 @@ const portfolioContent = {
     { title: "Committee Head - Academic Cell", caption: "Committee Head, Academic Cell at Velammal College of Engineering and Technology | 2023-present. Contributing to academic coordination, peer support, and the planning of student-focused academic activities. Add committee projects and responsibilities here later." },
   ],
   currentWork: [
-    { title: "Drive2Hire: AI-Assisted Placement FocusBar Browser Extension", caption: "Current project and upcoming conference paper. Drive2Hire is an AI-assisted browser extension designed to keep placement preparation focused inside the browser, helping students organize job-search activity, surface useful context, and reduce distraction during the placement journey. The project is being prepared for conference submission; add the paper title, authors, conference name, and submission date here later.", expectedImages: 3, images: ["/Upcoming/Drive2Hire/1.png", "/Upcoming/Drive2Hire/11.png"] }
+    { title: "Drive2Hire: AI-Assisted Placement FocusBar Browser Extension", caption: "Current project and upcoming conference paper. Drive2Hire is an AI-assisted browser extension designed to keep placement preparation focused inside the browser, helping students organize job-search activity, surface useful context, and reduce distraction during the placement journey.", image: "/Upcoming/Drive2Hire.png" }
   ],
   upcomingCertifications: [
     { title: "Ultimate AWS Certified Generative AI Developer Professional", caption: "Udemy | Upcoming certification course. Preparing for the Ultimate AWS Certified Generative AI Developer Professional course, with a focus on building and deploying generative AI applications on AWS. Add the enrollment date, completion target, and certificate details here later.", image: "/Upcoming/AWS/logo.webp" }
   ],
   campusContext: [
-    { title: "Institution identity", caption: "Supporting campus identity assets from the portfolio collection. Keep or replace this caption with the exact context for the VCET and Velammal Bodhi Campus logos later.", images: ["/Logos/Vcetlogo.jpg", "/Logos/Vbcalogo.jpg"] }
+    { title: "Institution identity", caption: "Supporting campus identity assets from the portfolio collection.", image: "/Logos/Vcetlogo.jpg" }
   ],
   others: [
-    { title: "Eco Club Active Volunteer", caption: "Active VCET Eco Club volunteer, participating in environmental awareness workshops and campus sustainability activities. Both Eco Club images are kept together as one collage.", images: ["/Others or Leadership services and more presentations etc/ECO club/EcoClub.jpg", "/Others or Leadership services and more presentations etc/ECO club/Photo.jpg"] },
-    { title: "Library & study interests", caption: "Technical reading and study context from college, including the books and references that support the engineering journey. Both library images are kept together as one collage.", images: ["/Others or Leadership services and more presentations etc/Favourites in college/Library books_1.jpg", "/Others or Leadership services and more presentations etc/Favourites in college/Library books_2.jpg"] },
+    { title: "Eco Club Active Volunteer", caption: "Active VCET Eco Club volunteer, participating in environmental awareness workshops and campus sustainability activities.", image: "/Others or Leadership services and more presentations etc/ECO_Club.png" },
+    { title: "Library & study interests", caption: "Technical reading and study context from college, including the books and references that support the engineering journey.", image: "/Others or Leadership services and more presentations etc/Library Books Favourites in clg.png" },
     { title: "Seminars, services & campus activities", caption: "A place for seminars, student services, volunteering, and other campus activities that do not belong to one certificate category. Add the event title and date here later.", image: "/Others or Leadership services and more presentations etc/SIH.jpg" }
   ],
   academicHistory: [
@@ -305,8 +300,8 @@ const portfolioContent = {
     { title: "School", institution: "TVS Matriculation Higher Secondary School", period: "2011-2017", caption: "School education. Add the school logo when it is uploaded to the Logos folder.", expectedImages: 1, images: [] }
   ],
   linkedinPosts: [
-    { title: "Kalasalingam - Designthon First Place", caption: "First place at Designthon during Euphoria '24, organized by the Department of Computer Applications at Kalasalingam Academy of Research and Education on March 26-27, 2024.", image: "/Certification/First price Awards/kalasalingam_collage/showcase1.jpg", url: "https://www.linkedin.com/posts/yamuna-bsvy_designathon-euphoria2024-teamwork-activity-7252674792670023680-_OI7?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEITI-gB1xhckvXVf8zOF2ITcORSU0OfRQY" },
-    { title: "Sri Ramakrishna - Techathon Gold Rank", caption: "Prime Honours with a gold-rank placement in the Project Station category at Techathon '24, Sri Ramakrishna Institute of Technology, Coimbatore, on October 9, 2024.", image: "/Certification/First price Awards/SriRamakrishna_project_collage/SriRamakrishna_project.jpg", url: "" },
+    { title: "Kalasalingam - Designthon First Place", caption: "First place at Designthon during Euphoria '24, organized by the Department of Computer Applications at Kalasalingam Academy of Research and Education on March 26-27, 2024.", image: "/Certification/First price Awards/Kalasalingam.png", url: "https://www.linkedin.com/posts/yamuna-bsvy_designathon-euphoria2024-teamwork-activity-7252674792670023680-_OI7?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEITI-gB1xhckvXVf8zOF2ITcORSU0OfRQY" },
+    { title: "Sri Ramakrishna - Techathon Gold Rank", caption: "", image: "/Certification/First price Awards/SriRamakrishna_project.png", url: "https://www.linkedin.com/posts/yamuna-bsvy_projectexpo-ragmodel-menstrualhealth-activity-7252692597985394690-2fyw?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEITI-gB1xhckvXVf8zOF2ITcORSU0OfRQY" },
   ]
 };
 
@@ -337,7 +332,7 @@ const PROJECTS = {
       {
         id: 3,
         title: "Logo Design 3",
-        images: ["/ui_3.jpg", "/ui_4.jpg"],
+        images: ["/ui_3.jpg"],
         shortDesc: "Eco-friendly platform logo",
         fullDesc: "Logo design with sustainability focus.",
         tags: ["Logo", "Sustainability"],
@@ -908,11 +903,16 @@ function LinkedInPostsSection() {
         {portfolioContent.linkedinPosts.map((post, index) => (
           <motion.article key={`${post.title}-${index}`} className="linkedin-post-card" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ delay: index * .1 }}>
             <div className="linkedin-post-image">{post.image ? <img src={post.image} alt={`${post.title} LinkedIn post`} /> : <div className="post-placeholder"><Linkedin size={24} /><strong>Post image</strong><span>Add a verified LinkedIn image</span></div>}</div>
-            <div className="linkedin-post-copy"><span className="post-number">0{index + 1} / LINKEDIN</span><h3>{post.title}</h3><p>{post.caption}</p>{post.url ? <a href={post.url} target="_blank" rel="noopener noreferrer" className="project-links"><Linkedin size={15} /> Read post</a> : <span className="post-status">Add post URL and caption in portfolioContent</span>}</div>
+            <div className="linkedin-post-copy"><span className="post-number">0{index + 1} / LINKEDIN</span><h3>{post.title}</h3>{post.url && <a href={post.url} target="_blank" rel="noopener noreferrer" className="project-links linkedin-read-post"><Linkedin size={15} /> Read post</a>}</div>
+          </motion.article>
+        ))}
+        {portfolioContent.awards.map((award, index) => (
+          <motion.article key={award.title} className="linkedin-post-card achievement-card" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ delay: (index + portfolioContent.linkedinPosts.length) * .1 }}>
+            <div className="linkedin-post-image">{award.image ? <img src={award.image} alt={award.title} /> : <div className="post-placeholder"><ImageIcon size={24} /><strong>Award image</strong></div>}</div>
+            <div className="linkedin-post-copy"><h3>{award.title}</h3></div>
           </motion.article>
         ))}
       </div>
-      <div className="linkedin-achievement"><ProofBento items={portfolioContent.awards} type="awards" /></div>
     </section>
   );
 }
@@ -971,13 +971,13 @@ function HomePage() {
 
         <blockquote className="canvas-quote quote-life">“So many movies to watch, languages to learn, instruments to play, places to visit, books to read, lives to live and so little time.”</blockquote>
 
-        <section id="publication" className="evidence-section publication-section"><div className="publication-paper"><img src="/Experience/IEEE/IEEE published paper screenshot.png" alt="IEEE publication proof" /></div><div className="publication-details"><div className="section-intro"><p className="eyebrow">06 / RESEARCH, DOCUMENTED</p><h2>IEEE AIDE 2025</h2><p>Carbon footprint awareness and mitigation research presented as an IEEE conference publication.</p><a className="studio-button studio-button-primary" href={IEEE_PUBLICATION_URL} target="_blank" rel="noopener noreferrer">View publication <ExternalLink size={15} /></a></div><div className="publication-supporting-images"><img src="/Experience/IEEE/IEEE certfiicate.jpg" alt="IEEE author certificate" /><img src="/Experience/IEEE/Photo.jpg" alt="IEEE conference presentation" /></div></div></section>
+        <section id="publication" className="evidence-section publication-section"><div className="publication-paper"><img src="/Experience/IEEE.png" alt="IEEE publication collage" /></div><div className="publication-details"><div className="section-intro"><p className="eyebrow">06 / RESEARCH, DOCUMENTED</p><h2>IEEE AIDE 2025</h2><p>Carbon footprint awareness and mitigation research presented as an IEEE conference publication.</p><a className="studio-button studio-button-primary" href={IEEE_PUBLICATION_URL} target="_blank" rel="noopener noreferrer">View publication <ExternalLink size={15} /></a></div></div></section>
 
         <LinkedInPostsSection />
 
         <section id="certifications" className="evidence-section"><div className="section-intro"><p className="eyebrow">08 / CERTIFICATIONS</p><h2>Other certificates and courses.</h2></div><ProofBento items={portfolioContent.certificates} type="certificate" /></section>
 
-        <section id="open-source" className="evidence-section"><div className="section-intro"><p className="eyebrow">OPEN SOURCE CONTRIBUTIONS</p><h2>Contribution proof.</h2><p>Certificates from open-source programs, community learning, and contributor work.</p></div><ProofBento items={portfolioContent.openSource} type="opensource" /></section>
+        <section id="open-source" className="evidence-section"><div className="section-intro"><p className="eyebrow">OPEN SOURCE CONTRIBUTIONS</p><h2>Open Source Contributions</h2><p>Certificates from open-source programs, community learning, and contributor work.</p></div><ProofBento items={portfolioContent.openSource} type="opensource" /></section>
 
         <section id="badges" className="evidence-section badges-section"><div className="section-intro"><p className="eyebrow">BADGES</p><h2>Small signals of consistency.</h2><p>Platform and community badges kept separate from certificates for a cleaner scan.</p></div><ProofBento items={portfolioContent.badges} type="badges" /></section>
 
