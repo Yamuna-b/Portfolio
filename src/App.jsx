@@ -122,10 +122,14 @@ const experience = [
     duration: "Dec 2024",
     desc: "Built Petimony and other web apps, reusable frontend components, form handling, and integrated UIs with existing APIs.",
     certificate: "/Experience/Internship 1/Kevell certificate.jpg",
+    logo: "/Logos/Reccsarlogo.jpg",
+    company: "Reccsar Private Limited",
+    role: "Cloud & Full Stack Web Intern",
+    duration: "Jun 2025",
+    desc: "Built client-support-realtime-chat widget and NammaOorFix civic issue reporting portal.",
     bullets: [
-      "Implemented React screens and reusable components that reduced duplicate UI code across internal tools and web apps like Petimony.",
-      "Shipped and documented REST endpoints consumed by teammates during feature work.",
-      "Collaborated through code review and iterative delivery to stabilize pages used by stakeholders."
+      "Built client-support-realtime-chat: real-time helpdesk widget with authentication, agent assignment, chat history, and live messaging between clients and support staff.",
+      "Built NammaOorFix: full-stack civic issue reporting portal with React/Vite frontend and Node.js/Express + MongoDB backend, including JWT auth, geospatial clustering, and officer dashboards."
     ]
   },
   {
@@ -135,10 +139,14 @@ const experience = [
     duration: "June 2025",
     desc: "Cloud-hosted dashboards and apps like RailwayPorterSeva and client-support-realtime-chat for nonprofit delivery teams.",
     certificate: "/Experience/Internship 2/Reccsar certificate.jpeg",
+    logo: "/Logos/kevelllogo.jpg",
+    company: "Kevell Corp",
+    role: "Web Development Intern",
+    duration: "Dec 2024",
+    desc: "Designed and implemented Petimony responsive pet products site and RailwayPorterSeva static booking UI.",
     bullets: [
-      "Developed client-support-realtime-chat and RailwayPorterSeva hosted on AWS, combining multiple data feeds into actionable views.",
-      "Automated parts of deployment and repeatable environment setup using CI/CD and GitHub Actions where applicable.",
-      "Partnered across roles to tighten delivery cycles for quick iterations on stakeholder feedback."
+      "Petimony: Designed and implemented a responsive multi-page pet products site with clean UI, mobile-friendly layout, and interactive sliders and hover effects.",
+      "RailwayPorterSeva: Built a static booking UI for porter assistance at stations using HTML, CSS, and JavaScript, focusing on clear forms and simple flows for users."
     ]
   }
 ];
@@ -148,16 +156,17 @@ const featuredProjects = [
     title: "MoneyMirror",
     tagline: "Personal finance digital twin—salary, EMIs, savings, and 3–6 month cash-flow projections with low-balance warnings.",
     stack: ["Python", "FastAPI", "HTML", "CSS", "JavaScript", "PostgreSQL", "SQLite", "Docker", "GitHub Actions", "Hugging Face Spaces"],
+    tagline: "Personal finance digital twin—enter salary, EMIs, savings, and expenses to simulate cash flow, runway, and low-balance risk over short-term horizons.",
+    stack: ["Python", "FastAPI", "PostgreSQL", "SQLite", "Docker", "GitHub Actions", "Hugging Face"],
     bullets: [
-      "FastAPI backend with JWT-secured REST APIs for what-if finance planning.",
-      "PostgreSQL schema tuned for projections; average query latency around 120 ms.",
-      "Docker-packaged deploy flow for consistent local and cloud environments.",
-      "Designed the system as a 'personal CFO'—focused on predictable cash-flow planning for early-career professionals, with APIs structured for future mobile app integration.",
+      "FastAPI-based personal finance app that lets users enter salary, EMIs, savings, and expenses to simulate cash flow, runway, and low-balance risk over short-term horizons.",
+      "Integrated PostgreSQL and SQLite databases for reliable cash-flow modeling and historical data tracking.",
+      "Containerized with Docker and deployed to Hugging Face Spaces with automated CI/CD via GitHub Actions."
     ],
     links: {
       github: "https://github.com/Yamuna-b/Money_Mirror",
       demo: "https://drive.google.com/file/d/1H01AjMrU8kZ_mYTkO4IgUO7lQl5zsw2s/view?usp=sharing",
-      live: "#", // TODO: replace with actual live website link if available
+      live: "#"
     },
     image: "/MoneyMirror.mp4",
   },
@@ -165,31 +174,34 @@ const featuredProjects = [
     title: "LogBeacon",
     tagline: "Log analysis backend—parse structured logs, filter by time/status, and run regex queries for faster debugging with optional OpenAI summarization.",
     stack: ["React", "Vite", "TypeScript", "Node.js", "Express.js", "PostgreSQL", "Prisma", "Zod", "Vercel", "Render"],
+    tagline: "Log analysis backend that ingests structured logs and supports filtering by time, level, service, and search text, with incident linking and optional summarization.",
+    stack: ["React", "Vite", "TypeScript", "Node.js", "Express", "PostgreSQL", "Prisma", "Zod", "Vercel", "Render"],
     bullets: [
-      "TypeScript/Express service for structured log parsing, filtering, and regex search.",
-      "PostgreSQL persistence with Docker deployment on AWS; query latency under 200 ms.",
-      "Features: structured log ingestion, filters (time, level, service), regex search/incident linking, optional OpenAI summarization endpoint.",
+      "Log analysis backend that ingests structured logs and supports filtering by time, level, service, and search text, with incident linking and optional summarization.",
+      "Built with Node.js, Express.js, TypeScript, Prisma ORM, and Zod validation over PostgreSQL database.",
+      "Deployed frontend to Vercel and backend services to Render."
     ],
     links: {
       github: "https://github.com/Yamuna-b/LogBeacon",
       demo: "https://drive.google.com/file/d/1VIW1KpCmgK-CLCpHbwdMd8BppwnZfHd-/view?usp=sharing",
-      live: "#", // TODO: replace with actual live website link if available
+      live: "#"
     },
     image: "/LogBeacon.mp4",
   },
   {
     title: "MarineTaxaAi",
     tagline: "ML taxonomy platform—Streamlit dashboard and sequence/ML classifier for eDNA.",
+    tagline: "Python-based eDNA pipeline that encodes FASTQ/CSV sequence data into k-mer and GC-content features and predicts marine species using scikit-learn models.",
     stack: ["Python", "FastAPI", "Streamlit", "scikit-learn", "NumPy", "pandas", "Biopython", "Plotly", "DBSCAN"],
     bullets: [
-      "Streamlit dashboard and ML classifier for classifying marine organisms.",
-      "Reduced manual classification time by roughly 40% in evaluation runs.",
-      "Owned the full stack from data ingestion to ML integration, mirroring ML platform patterns used in production ML teams.",
+      "Python-based eDNA pipeline that encodes FASTQ/CSV sequence data into k-mer and GC-content features.",
+      "Predicts marine species using scikit-learn classification models with confidence-based novelty detection.",
+      "Features interactive Streamlit dashboard, Plotly visualizations, DBSCAN clustering, and FastAPI services."
     ],
     links: {
       github: "https://github.com/Yamuna-b/MarineTaxaAi",
       demo: "https://drive.google.com/file/d/1aZN2iFA1QZwSP_ftBbqv21tr_xtpykPB/view?usp=sharing",
-      live: "#", // TODO: replace with actual live website link if available
+      live: "#"
     },
     image: "/MarineTaxaAi.mp4",
   },
@@ -211,6 +223,44 @@ const portfolioContent = {
   internships: [
     { ...experience[0], projects: [{ name: "Petimony", description: "Pet shop and adoption flows with reusable responsive interfaces.", image: "/Experience/Internship 1/Petimony.png", github: "https://github.com/Yamuna-b/Petimony", stack: ["React", "APIs"] }, { name: "Railway Porter Seva", description: "Static booking UI for porter assistance at stations, with clear forms and simple user flows.", image: "/Others or Leadership services and more presentations etc/SIH.jpg", github: "#", stack: ["HTML", "CSS", "JavaScript"] }] },
     { ...experience[1], projects: [{ name: "RailwayPorterSeva", description: "Cloud-hosted service booking and assignment workflows.", image: "/Projects/MoneyMirror_1.png", github: "https://github.com/Yamuna-b/PorterSeva", stack: ["Node.js", "MongoDB", "AWS"] }, { name: "Client support realtime chat", description: "Real-time helpdesk support tool for delivery teams.", image: "/Projects/LogBeacon_1.png", github: "https://github.com/Yamuna-b/client-support-realtime-chat", stack: ["Express", "Socket.io", "Firebase"] }] }
+    {
+      ...experience[0],
+      projects: [
+        {
+          name: "client-support-realtime-chat",
+          description: "Real-time helpdesk widget with authentication, agent assignment, chat history, and live messaging between clients and support staff.",
+          image: "/Projects/LogBeacon_1.png",
+          github: "https://github.com/Yamuna-b/client-support-realtime-chat",
+          stack: ["HTML", "CSS", "JavaScript", "Node.js", "Express", "Socket.io", "Firebase"]
+        },
+        {
+          name: "NammaOorFix",
+          description: "Full-stack civic issue reporting portal with React/Vite frontend and Node.js/Express + MongoDB backend, including JWT auth, geospatial clustering, and officer dashboards.",
+          image: "/Projects/MoneyMirror_1.png",
+          github: "https://github.com/Yamuna-b/NammaOorFix",
+          stack: ["React", "Vite", "Tailwind CSS", "Node.js", "Express", "MongoDB", "Mongoose", "JWT", "BcryptJS", "Multer", "ml-kmeans"]
+        }
+      ]
+    },
+    {
+      ...experience[1],
+      projects: [
+        {
+          name: "Petimony",
+          description: "Designed and implemented a responsive multi-page pet products site with clean UI, mobile-friendly layout, and interactive elements like sliders and hover effects.",
+          image: "/Experience/Internship 1/Petimony.png",
+          github: "https://github.com/Yamuna-b/Petimony",
+          stack: ["HTML", "CSS", "JavaScript", "Git", "GitHub Pages"]
+        },
+        {
+          name: "RailwayPorterSeva",
+          description: "Built a static booking UI for porter assistance at stations using HTML, CSS, and JavaScript, focusing on clear forms and simple flows for users.",
+          image: "/Others or Leadership services and more presentations etc/SIH.jpg",
+          github: "https://github.com/Yamuna-b/PorterSeva",
+          stack: ["HTML", "CSS", "JavaScript", "Git", "GitHub Pages"]
+        }
+      ]
+    }
   ],
   awards: [
     { title: "Kalasalingam - Designthon First Place", caption: "First place at Designthon during Euphoria '24, organized by the Department of Computer Applications at Kalasalingam Academy of Research and Education on March 26-27, 2024.", images: ["/Certification/First price Awards/kalasalingam_collage/showcase1.jpg", "/Certification/First price Awards/kalasalingam_collage/Award5.jpg", "/Certification/First price Awards/kalasalingam_collage/kalasalingam.jpeg"] },
