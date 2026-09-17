@@ -485,6 +485,17 @@ img, video {
   padding: 0 !important;
   overflow: visible;
 }
+.proof-bento .bento-item {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: stretch !important;
+  height: auto !important;
+}
+.proof-bento .bento-item figcaption {
+  padding-top: 0.5rem !important;
+  margin-top: 0 !important;
+}
 .proof-bento .bento-image img,
 .linkedin-post-image img,
 .proof-stack-collage img,
@@ -1562,13 +1573,70 @@ body { font-size: 15px; }
   align-items: center !important;
   gap: 12px !important;
   margin-top: 0.75rem !important;
-  margin-bottom: 14px !important;
+  margin-bottom: 1.5rem !important;
   padding-bottom: 4px !important;
   max-width: 100% !important;
 }
 
 .contact-social-inline .studio-button {
   margin: 0 !important;
+}
+
+
+/* 14. Reduce Section Title Font Sizes Slightly Across Portfolio */
+.section-intro h2,
+.project-copy h3,
+.studio-contact h2,
+.now-strip h2,
+.education-copy h2,
+.proof-columns h3,
+.internship-heading h3,
+.linkedin-post-copy h3,
+.studio-section h1,
+.evidence-section h1 {
+  font-size: clamp(1.45rem, 3.2vw, 2.1rem) !important;
+  line-height: 1.15 !important;
+}
+
+.hero-copy h1 {
+  font-size: clamp(2.6rem, 5.8vw, 4.6rem) !important;
+}
+
+/* 15. Enlarge Category Titles, Tech Chips, and SVG Logos in Working Toolkit */
+.toolkit-map .map-node strong {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.05em !important;
+}
+
+.toolkit-map .map-node-icon svg {
+  width: 34px !important;
+  height: 34px !important;
+}
+
+.toolkit-map .node-items {
+  gap: 12px 14px !important;
+  margin-top: 18px !important;
+}
+
+.toolkit-map .node-items span {
+  font-size: 16px !important;
+  gap: 10px !important;
+  padding: 8px 12px !important;
+  background: rgba(255, 255, 255, 0.75) !important;
+  border: 1px solid rgba(23, 106, 166, 0.25) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 2px 8px rgba(28, 56, 103, 0.08) !important;
+}
+
+.toolkit-map .node-items svg {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.toolkit-map .node-items b {
+  font-size: 16px !important;
+  font-weight: 700 !important;
 }
 
 .section-art-contact,
@@ -1612,5 +1680,6 @@ body,
     grid-template-columns: 1fr !important;
   }
 }
+
 
 
