@@ -246,7 +246,7 @@ const portfolioContent = {
     }
   ],
   awards: [
-    { title: "VCET - DesignVerse First Place", caption: "First place in the DesignVerse UI/UX Contest at Velammal College of Engineering and Technology on March 17, 2026, recognizing creative design, teamwork, and product styling.", image: "/Certification/First price Awards/VCET.png" }
+    { title: "VCET - DesignVerse First Place", image: "/Certification/First price Awards/VCET.png" }
   ],
   certificates: [
     { title: "Python for Everybody Specialization", caption: "University of Michigan via Coursera | November 19, 2023 | Verification ID: XQEGE3CRGKG8. Five-course specialization covering Python, data structures, web data, databases, and visualization. Add the capstone details here later.", image: "/Certification/Certificates/Coursera Certificate 7.jpg" },
@@ -267,13 +267,13 @@ const portfolioContent = {
   ],
   designs: ["/Projects/MoneyMirror_1.png", "/Projects/LogBeacon_1.png", "/Projects/MarineTaxaAI_1.png"],
   openSource: [
-    { title: "Harness Certified Continuous Delivery & GitOps Developer", caption: "Harness University certificate.", image: "/Certification/Open Source Contributions/Harness Certified Continuous Delivery & GitOps Developer.jpg" },
-    { title: "GitHub Copilot Prompt Quest", caption: "GitHub / MLH open-source learning certificate.", image: "/Certification/Open Source Contributions/MLH_GitHub_Copilot_Prompt_certificate.png" },
-    { title: "GitHub Copilot Code Smarter Quest", caption: "GitHub / MLH open-source learning certificate.", image: "/Certification/Open Source Contributions/MLH_GitHub_Copilot_Code_Smarter_Quest_certificate.png" },
-    { title: "MongoDB Basics for Students", caption: "MongoDB student learning certificate.", image: "/Certification/Open Source Contributions/MLH_MongoDB_Basics_for_Students_Certificate.jpg" },
-    { title: "Social Summer of Code Season 4", caption: "Program cohort contributor certificate.", image: "/Certification/Open Source Contributions/SSOC24_Cert.png" },
-    { title: "Open-source contribution certificate", caption: "Open-source community certificate.", image: "/Certification/Open Source Contributions/open_2.png" },
-    { title: "DevTown Community Growth", caption: "Certificate of appreciation.", image: "/Certification/Open Source Contributions/open_4.jpg" }
+    { title: "Harness Certified Continuous Delivery & GitOps Developer", image: "/Certification/Open Source Contributions/Harness Certified Continuous Delivery & GitOps Developer.jpg" },
+    { title: "GitHub Copilot Prompt Quest", image: "/Certification/Open Source Contributions/MLH_GitHub_Copilot_Prompt_certificate.png" },
+    { title: "GitHub Copilot Code Smarter Quest", image: "/Certification/Open Source Contributions/MLH_GitHub_Copilot_Code_Smarter_Quest_certificate.png" },
+    { title: "MongoDB Basics for Students", image: "/Certification/Open Source Contributions/MLH_MongoDB_Basics_for_Students_Certificate.jpg" },
+    { title: "Social Summer of Code Season 4", image: "/Certification/Open Source Contributions/SSOC24_Cert.png" },
+    { title: "Open-source contribution certificate", image: "/Certification/Open Source Contributions/open_2.png" },
+    { title: "DevTown Community Growth", image: "/Certification/Open Source Contributions/open_4.jpg" }
   ],
   leadership: [
     { title: "Class Representative", caption: "Class Representative at Velammal College of Engineering and Technology | 2023-present. Representing classmates, coordinating communication between students and faculty, and helping organize academic updates and class-level responsibilities. Add specific initiatives and event details here later." },
@@ -295,13 +295,13 @@ const portfolioContent = {
     { title: "Seminars, services & campus activities", caption: "A place for seminars, student services, volunteering, and other campus activities that do not belong to one certificate category. Add the event title and date here later.", image: "/Others or Leadership services and more presentations etc/SIH.jpg" }
   ],
   academicHistory: [
-    { title: "B.E. Computer Science and Engineering", institution: "Velammal College of Engineering and Technology", period: "2023-2027", caption: "Current undergraduate study in computer science and engineering, with a focus on backend systems, cloud deployment, and applied AI.", images: ["/Logos/Vcetlogo.jpg"] },
-    { title: "Higher Education", institution: "Velammal Bodhi Campus", period: "2017-2023", caption: "Higher secondary education before beginning the engineering degree.", images: ["/Logos/Vbcalogo.jpg"] },
-    { title: "School", institution: "TVS Matriculation Higher Secondary School", period: "2011-2017", caption: "School education. Add the school logo when it is uploaded to the Logos folder.", expectedImages: 1, images: [] }
+    { title: "B.E. Computer Science and Engineering", institution: "Velammal College of Engineering and Technology", period: "2023-2027", images: ["/Logos/Vcetlogo.jpg"] },
+    { title: "Higher Education", institution: "Velammal Bodhi Campus", period: "2017-2023", images: ["/Logos/Vbcalogo.jpg"] },
+    { title: "School", institution: "TVS Matriculation Higher Secondary School", period: "2011-2017", images: ["/Logos/Tvslogo.jpg"] }
   ],
   linkedinPosts: [
-    { title: "Kalasalingam - Designthon First Place", caption: "First place at Designthon during Euphoria '24, organized by the Department of Computer Applications at Kalasalingam Academy of Research and Education on March 26-27, 2024.", image: "/Certification/First price Awards/Kalasalingam.png", url: "https://www.linkedin.com/posts/yamuna-bsvy_designathon-euphoria2024-teamwork-activity-7252674792670023680-_OI7?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEITI-gB1xhckvXVf8zOF2ITcORSU0OfRQY" },
-    { title: "Sri Ramakrishna - Techathon Gold Rank", caption: "", image: "/Certification/First price Awards/SriRamakrishna_project.png", url: "https://www.linkedin.com/posts/yamuna-bsvy_projectexpo-ragmodel-menstrualhealth-activity-7252692597985394690-2fyw?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEITI-gB1xhckvXVf8zOF2ITcORSU0OfRQY" },
+    { title: "Kalasalingam - Designthon First Place", image: "/Certification/First price Awards/Kalasalingam.png", url: "https://www.linkedin.com/posts/yamuna-bsvy_designathon-euphoria2024-teamwork-activity-7252674792670023680-_OI7?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEITI-gB1xhckvXVf8zOF2ITcORSU0OfRQY" },
+    { title: "Sri Ramakrishna - Techathon Gold Rank", image: "/Certification/First price Awards/SriRamakrishna_project.png", url: "https://www.linkedin.com/posts/yamuna-bsvy_projectexpo-ragmodel-menstrualhealth-activity-7252692597985394690-2fyw?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEITI-gB1xhckvXVf8zOF2ITcORSU0OfRQY" },
   ]
 };
 
@@ -653,8 +653,7 @@ const projectCatalog = {
     {
       id: 4,
       title: "client-support-realtime-chat",
-      images: [PLACEHOLDER_VIDEO],
-      shortDesc: "Realtime helpdesk chat widget",
+      images: ["/Experience/Internship 2/ClientSupportRealtimeChat.png"],
       fullDesc: "Real-time helpdesk chat with Node.js, Express, Socket.io, and Firebase-backed messaging.",
       tags: ["Realtime", "Backend APIs"],
       tools: ["Node.js", "Express", "Socket.io", "Firebase"],
@@ -892,7 +891,7 @@ function ProofBento({ items, type = "certificate" }) {
 }
 
 function AcademicTimeline({ items }) {
-  return <div className="academic-timeline">{items.map((item, index) => <motion.article className="academic-entry" key={item.title} initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ delay: index * .08 }}><div className="academic-logo-wrap">{item.images?.[0] ? <img src={item.images[0]} alt={`${item.institution} logo`} /> : <div className="academic-logo-placeholder"><ImageIcon size={18} /></div>}</div><div className="academic-entry-content"><div className="academic-entry-heading"><h3>{item.title}</h3><span>{item.period}</span></div><strong>{item.institution}</strong><p>{item.caption}</p></div></motion.article>)}</div>;
+  return <div className="academic-timeline">{items.map((item, index) => <motion.article className="academic-entry" key={item.title} initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ delay: index * .08 }}><div className="academic-logo-wrap">{item.images?.[0] ? <img src={item.images[0]} alt={`${item.institution} logo`} /> : <div className="academic-logo-placeholder"><ImageIcon size={18} /></div>}</div><div className="academic-entry-content"><div className="academic-entry-heading"><h3>{item.title}</h3><span>{item.period}</span></div><strong>{item.institution}</strong>{item.caption && <p>{item.caption}</p>}</div></motion.article>)}</div>;
 }
 
 function LinkedInPostsSection() {
