@@ -1181,7 +1181,7 @@ function ProjectGrid({ cards, expandedProject, setExpandedProject, columnsLg = 2
     expandedProject && (expandedProject.id === project.id || expandedProject.title === project.title);
 
   return (
-    <div className={gridClass}>
+    <div className={`${gridClass} portfolio-media-grid`}>
       {cards.map((project) => {
         const images = project.images?.length ? project.images : [project.src];
         const onlyVideos = images.every(isVideo);
