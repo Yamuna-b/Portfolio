@@ -249,18 +249,18 @@ const portfolioContent = {
     { title: "VCET - DesignVerse First Place", image: "/Certification/First price Awards/VCET.png" }
   ],
   certificates: [
-    { title: "Python for Everybody Specialization", caption: "University of Michigan via Coursera | November 19, 2023 | Verification ID: XQEGE3CRGKG8. Five-course specialization covering Python, data structures, web data, databases, and visualization. Add the capstone details here later.", image: "/Certification/Certificates/Coursera Certificate 7.jpg" },
-    { title: "Python Project for Data Science", caption: "IBM via Coursera | December 21, 2023 | Verification ID: DU7USM2J6P7E. Add the project and applied data-science details here later.", image: "/Certification/Certificates/Coursera Certificate 6.jpg" },
-    { title: "Getting Started as a Java Developer", caption: "LinkedIn Learning | September 7, 2024 | Certificate ID: 52de3806135e24c404775f3fe4ac1d60ecfd777677fb320bbb825f4f32d3b3d3. Completed a 19-hour 18-minute learning path. Add the modules used here later.", image: "/Certification/Certificates/LinkedIn Learning-Java.jpg" },
-    { title: "Cybersecurity for Beginners", caption: "Tata STRIVE, Tata Communications, and Microsoft | November 6, 2024 | 40-hour course track | Unique ID: 235823-27180565-1240. Add the security topics and practical takeaways here later.", image: "/Certification/Certificates/CYBERSECURITY.jpg" },
-    { title: "Fundamentals of Deep Learning", caption: "NVIDIA Deep Learning Institute | October 4, 2025 | Certification ID: 8n0QXcICTQyEjeleLe58sw. Add the hands-on framework and model topics here later.", image: "/Certification/Certificates/NVIDIA.png" },
-    { title: "Advance Excel", caption: "GreyLearn | June 16, 2026 | Verification ID: LBZMHW2HC9. Add the spreadsheet skills covered here later.", image: "/Certification/Certificates/AdvanceExcel_GreyLearn.jpg" },
-    { title: "C++ Programming", caption: "GreyLearn | June 16, 2026 | Verification ID: HB798NB187. Add the language concepts covered here later.", image: "/Certification/Certificates/C++Programming_GreyLearn.jpg" },
-    { title: "Robotics Workshop - MOBIUS 2K24", caption: "Thiagarajar College of Engineering, Madurai | March 15, 2024 | Certificate reference: TCE/MOB24/W/165.", image: "/Certification/Certificates/TCE_Workshop.png" },
+    { title: "University of Michigan - Python for Everybody Specialization", caption: "University of Michigan via Coursera | November 19, 2023 | Verification ID: XQEGE3CRGKG8. Five-course specialization covering Python, data structures, web data, databases, and visualization. Add the capstone details here later.", image: "/Certification/Certificates/Coursera Certificate 6.jpg" },
+    { title: "IBM - Python Project for Data Science", caption: "IBM via Coursera | December 21, 2023 | Verification ID: DU7USM2J6P7E. Add the project and applied data-science details here later.", image: "/Certification/Certificates/Coursera Certificate 7.jpg" },
+    { title: "LinkedIn Learning - Getting Started as a Java Developer", caption: "LinkedIn Learning | September 7, 2024 | Certificate ID: 52de3806135e24c404775f3fe4ac1d60ecfd777677fb320bbb825f4f32d3b3d3. Completed a 19-hour 18-minute learning path. Add the modules used here later.", image: "/Certification/Certificates/LinkedIn Learning-Java.jpg" },
+    { title: "Tata STRIVE - Cybersecurity for Beginners", caption: "Tata STRIVE, Tata Communications, and Microsoft | November 6, 2024 | 40-hour course track | Unique ID: 235823-27180565-1240. Add the security topics and practical takeaways here later.", image: "/Certification/Certificates/CYBERSECURITY.jpg" },
+    { title: "NVIDIA - Fundamentals of Deep Learning", caption: "NVIDIA Deep Learning Institute | October 4, 2025 | Certification ID: 8n0QXcICTQyEjeleLe58sw. Add the hands-on framework and model topics here later.", image: "/Certification/Certificates/NVIDIA.png" },
+    { title: "GreyLearn - Advance Excel", caption: "GreyLearn | June 16, 2026 | Verification ID: LBZMHW2HC9. Add the spreadsheet skills covered here later.", image: "/Certification/Certificates/AdvanceExcel_GreyLearn.jpg" },
+    { title: "GreyLearn - C++ Programming", caption: "GreyLearn | June 16, 2026 | Verification ID: HB798NB187. Add the language concepts covered here later.", image: "/Certification/Certificates/C++Programming_GreyLearn.jpg" },
+    { title: "Thiagarajar College of Engineering - Robotics Workshop - MOBIUS 2K24", caption: "Thiagarajar College of Engineering, Madurai | March 15, 2024 | Certificate reference: TCE/MOB24/W/165.", image: "/Certification/Certificates/TCE_Workshop.png" },
   ],
   badges: [
-    { title: "Contributor SSOC", caption: "Open-source contributor badge.", image: "/Certification/badges/Contributor SSOC.png" },
-    { title: "Contributor badge", caption: "Community contributor recognition.", image: "/Certification/badges/Contributor's badge.jpg" },
+    { title: "SSOC - Contributor", caption: "Open-source contributor badge.", image: "/Certification/badges/Contributor SSOC.png" },
+    { title: "GSSOC - Contributor", caption: "Community contributor recognition.", image: "/Certification/badges/Contributor's badge.jpg" },
     { title: "Harness Certified CD & GitOps Developer", caption: "Harness University badge companion.", image: "/Certification/badges/Harness Certified Continuous Delivery & GitOps Developer Badge.png" },
     { title: "LeetCode badges", caption: "Combined LeetCode achievement badges.", image: "/Certification/badges/Leetcode.png" },
     { title: "MongoDB Basics for Students", caption: "MongoDB student badge.", image: "/Certification/badges/mlh-mongodb-basics-for-students.png" },
@@ -269,22 +269,22 @@ const portfolioContent = {
   openSource: [
     { title: "Harness Certified Continuous Delivery & GitOps Developer", image: "/Certification/Open Source Contributions/Harness Certified Continuous Delivery & GitOps Developer.jpg" },
     { title: "GitHub Copilot Prompt Quest", image: "/Certification/Open Source Contributions/MLH_GitHub_Copilot_Prompt_certificate.png" },
-    { title: "GitHub Copilot Code Smarter Quest", image: "/Certification/Open Source Contributions/MLH_GitHub_Copilot_Code_Smarter_Quest_certificate.png" },
     { title: "MongoDB Basics for Students", image: "/Certification/Open Source Contributions/MLH_MongoDB_Basics_for_Students_Certificate.jpg" },
-    { title: "Social Summer of Code Season 4", image: "/Certification/Open Source Contributions/SSOC24_Cert.png" },
-    { title: "Open-source contribution certificate", image: "/Certification/Open Source Contributions/open_2.png" },
-    { title: "DevTown Community Growth", image: "/Certification/Open Source Contributions/open_4.jpg" }
+    { title: "GitHub Copilot Code Smarter Quest", image: "/Certification/Open Source Contributions/MLH_GitHub_Copilot_Code_Smarter_Quest_certificate.png" },
+    { title: "Social Summer of Code Season 4 Contributor", image: "/Certification/Open Source Contributions/SSOC24_Cert.png" },
+    { title: "Open Source Connect India (OSCI) Contributor", image: "/Certification/Open Source Contributions/open_2.png" },
+    { title: "Major League Hacking Contributor Swags", image: "/Certification/Open Source Contributions/open_4.jpg" }
   ],
   leadership: [
-    { title: "Class Representative", caption: "Class Representative at Velammal College of Engineering and Technology | 2023-present. Representing classmates, coordinating communication between students and faculty, and helping organize academic updates and class-level responsibilities. Add specific initiatives and event details here later." },
-    { title: "Placement Batch Head", caption: "Placement Batch Head | 2025-present. Supporting placement communication, coordinating batch-level updates, and helping classmates stay aligned with recruitment activities, schedules, and preparation. Add the companies, drives, or measurable outcomes here later." },
-    { title: "Committee Head - Academic Cell", caption: "Committee Head, Academic Cell at Velammal College of Engineering and Technology | 2023-present. Contributing to academic coordination, peer support, and the planning of student-focused academic activities. Add committee projects and responsibilities here later." },
+    { title: "Class Representative", caption: "Class Representative at Velammal College of Engineering and Technology | 2023-present. Representing classmates, coordinating communication between students and faculty, and helping organize academic updates and class-level responsibilities." },
+    { title: "Placement Batch Head", caption: "Placement Batch Head | 2025-present. Supporting placement communication, coordinating batch-level updates, and helping classmates stay aligned with recruitment activities." },
+    { title: "Committee Head - Academic Cell", caption: "Committee Head, Academic Cell at Velammal College of Engineering and Technology | 2023-present. Contributing to academic coordination, peer support, and student activities." },
   ],
   currentWork: [
     { title: "Drive2Hire: AI-Assisted Placement FocusBar Browser Extension", caption: "Current project and upcoming conference paper. Drive2Hire is an AI-assisted browser extension designed to keep placement preparation focused inside the browser, helping students organize job-search activity, surface useful context, and reduce distraction during the placement journey.", image: "/Upcoming/Drive2Hire.png" }
   ],
   upcomingCertifications: [
-    { title: "Ultimate AWS Certified Generative AI Developer Professional", caption: "Udemy | Upcoming certification course. Preparing for the Ultimate AWS Certified Generative AI Developer Professional course, with a focus on building and deploying generative AI applications on AWS. Add the enrollment date, completion target, and certificate details here later.", image: "/Upcoming/AWS/logo.webp" }
+    { title: "Ultimate AWS Certified Generative AI Developer Professional", caption: "Udemy | Upcoming certification course. Preparing for the Ultimate AWS Certified Generative AI Developer Professional course, with a focus on building and deploying generative AI applications on AWS.", image: "/Upcoming/logo.webp" }
   ],
   campusContext: [
     { title: "Institution identity", caption: "Supporting campus identity assets from the portfolio collection.", image: "/Logos/Vcetlogo.jpg" }
@@ -292,7 +292,7 @@ const portfolioContent = {
   others: [
     { title: "Eco Club Active Volunteer", caption: "Active VCET Eco Club volunteer, participating in environmental awareness workshops and campus sustainability activities.", image: "/Others or Leadership services and more presentations etc/ECO_Club.png" },
     { title: "Library & study interests", caption: "Technical reading and study context from college, including the books and references that support the engineering journey.", image: "/Others or Leadership services and more presentations etc/Library Books Favourites in clg.png" },
-    { title: "Seminars, services & campus activities", caption: "A place for seminars, student services, volunteering, and other campus activities that do not belong to one certificate category. Add the event title and date here later.", image: "/Others or Leadership services and more presentations etc/SIH.jpg" }
+    { title: "Seminars, services & campus activities", caption: "A place for seminars, student services, volunteering, and other campus activities that do not belong to one certificate category.", image: "/Others or Leadership services and more presentations etc/SIH.jpg" }
   ],
   academicHistory: [
     { title: "B.E. Computer Science and Engineering", institution: "Velammal College of Engineering and Technology", period: "2023-2027", images: ["/Logos/Vcetlogo.jpg"] },
@@ -902,7 +902,7 @@ function LinkedInPostsSection() {
         {portfolioContent.linkedinPosts.map((post, index) => (
           <motion.article key={`${post.title}-${index}`} className="linkedin-post-card" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ delay: index * .1 }}>
             <div className="linkedin-post-image">{post.image ? <img src={post.image} alt={`${post.title} LinkedIn post`} /> : <div className="post-placeholder"><Linkedin size={24} /><strong>Post image</strong><span>Add a verified LinkedIn image</span></div>}</div>
-            <div className="linkedin-post-copy"><span className="post-number">0{index + 1} / LINKEDIN</span><h3>{post.title}</h3>{post.url && <a href={post.url} target="_blank" rel="noopener noreferrer" className="project-links linkedin-read-post"><Linkedin size={15} /> Read post</a>}</div>
+            <div className="linkedin-post-copy"><span className="post-number">0{index + 1} / LINKEDIN</span><h3>{post.title}</h3>{post.url && <a href={post.url} target="_blank" rel="noopener noreferrer" className="linkedin-read-post"><Linkedin size={18} className="linkedin-icon" /> <span>Read post</span></a>}</div>
           </motion.article>
         ))}
         {portfolioContent.awards.map((award, index) => (
@@ -949,7 +949,36 @@ function HomePage() {
 
         <blockquote className="canvas-quote quote-world">“The people who are crazy enough to think they can change the world are the ones who do.”</blockquote>
 
-        <section className="approach-section"><div className="section-intro"><p className="eyebrow">ENGINEERING IDENTITY</p><h2>The systems I work with.</h2><p>From a rough idea to a reliable, deployed product.</p></div><div className="approach-flow">{["Idea", "Interface", "API", "Backend services", "Database", "Cloud deployment"].map((step, index) => <div className="approach-node" key={step}><span>{String(index + 1).padStart(2, "0")}</span><strong>{step}</strong>{index < 5 && <b>→</b>}</div>)}</div></section>
+        <section className="approach-section">
+          <div className="section-intro">
+            <p className="eyebrow">ENGINEERING IDENTITY</p>
+            <h2>The systems I work with.</h2>
+            <p>From a rough idea to a reliable, deployed product.</p>
+          </div>
+          <div className="approach-flow">
+            {[
+              { name: "Idea", icon: Terminal, desc: "Problem statement & design" },
+              { name: "Interface", icon: ImageIcon, desc: "Responsive UI & prototypes" },
+              { name: "API", icon: Cloud, desc: "REST & realtime endpoints" },
+              { name: "Backend services", icon: Server, desc: "Business logic & auth" },
+              { name: "Database", icon: Database, desc: "Relational & NoSQL schemas" },
+              { name: "Cloud deployment", icon: GitBranch, desc: "CI/CD & cloud infrastructure" }
+            ].map((step, index) => {
+              const StepIcon = step.icon;
+              return (
+                <div className="approach-node" key={step.name}>
+                  <div className="approach-node-badge">
+                    <span className="approach-step-num">0{index + 1}</span>
+                    <StepIcon className="approach-icon" size={24} />
+                  </div>
+                  <strong>{step.name}</strong>
+                  <small>{step.desc}</small>
+                  {index < 5 && <div className="approach-connector"><span>→</span></div>}
+                </div>
+              );
+            })}
+          </div>
+        </section>
 
         <section id="projects" className="studio-section scroll-mt-28" data-canvas-theme="projects">
           <div className="section-art section-art-projects" aria-hidden="true"><span className="art-ledger-line" /><span className="art-ledger-line" /><span className="art-ledger-line" /><i className="art-spark">✦</i></div>
@@ -988,11 +1017,11 @@ function HomePage() {
 
         <section id="coding-activity" className="studio-stats evidence-section"><div className="section-intro"><p className="eyebrow">10 / PROBLEM SOLVING</p><h2>Consistency matters as much as a single breakthrough.</h2></div><Stats /><blockquote className="canvas-quote quote-win">“It only takes one big win to erase all the losses. Just one!”</blockquote></section>
 
-        <section id="resume" className="resume-section evidence-section"><div className="section-intro"><p className="eyebrow">THE FULL VERSION</p><h2>Read the resume in context.</h2><p>The full PDF stays visible here, with a direct download below it.</p></div><div className="resume-frame"><iframe src="/Resume.pdf" title="Yamuna Balamurugan resume preview" /></div><div className="resume-actions"><a href="/Resume.pdf" target="_blank" rel="noopener noreferrer" className="studio-button studio-button-primary">Open full PDF <ExternalLink size={15} /></a><a href="/Resume.pdf" download="Yamuna_Balamurugan_Resume.pdf" className="studio-button"><Download size={15} /> Download resume</a></div></section>
+        <section id="resume" className="resume-section evidence-section"><div className="section-intro"><p className="eyebrow">THE FULL VERSION</p><h2>Read the resume in context.</h2><p>The full PDF stays visible here, with a direct download below it.</p></div><div className="resume-frame"><iframe src="/Resume.pdf#toolbar=0&navpanes=0&scrollbar=0" title="Yamuna Balamurugan resume preview" /></div><div className="resume-actions"><a href="/Resume.pdf" target="_blank" rel="noopener noreferrer" className="studio-button studio-button-primary">Open full PDF <ExternalLink size={15} /></a><a href="/Resume.pdf" download="Yamuna_Balamurugan_Resume.pdf" className="studio-button"><Download size={15} /> Download resume</a></div></section>
 
         <section id="academics" className="evidence-section academic-section"><div className="section-intro"><p className="eyebrow">ACADEMICS</p><h2>Education and academic journey.</h2></div><AcademicTimeline items={portfolioContent.academicHistory} /></section>
 
-        <section id="education" className="education-section evidence-section"><div className="education-copy"><p className="eyebrow">12 / EDUCATION + CONTACT</p><h2>B.E. Computer Science and Engineering</h2><p>Final-year undergraduate · Velammal College of Engineering and Technology · Madurai · Graduating 2027</p><div className="language-list"><span>English</span><span>Tamil</span><span>Hindi / Basic</span></div></div><div id="contact" className="studio-contact"><div className="section-art section-art-contact" aria-hidden="true"><span className="art-horizon" /><span className="art-sun" /></div><div><p className="eyebrow">OPEN CHANNEL</p><h2>Let’s build something dependable.</h2><p>Open to backend, cloud, and software-development roles.</p></div><div className="contact-actions"><a href={`mailto:${personalInfo.email}`} className="studio-button studio-button-primary"><Mail size={16} /> {personalInfo.email}</a><div className="social-row"><a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer"><Linkedin size={16} /> LinkedIn</a><a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer"><Github size={16} /> GitHub</a><a href={`https://wa.me/${personalInfo.whatsapp}`} target="_blank" rel="noopener noreferrer"><FaWhatsapp size={16} /> WhatsApp</a></div></div></div></section>
+        <section id="education" className="education-section evidence-section"><div className="education-copy"><p className="eyebrow">12 / EDUCATION + CONTACT</p><h2>B.E. Computer Science and Engineering</h2><p>Final-year undergraduate · Velammal College of Engineering and Technology · Madurai · Graduating 2027</p><div className="language-list"><span>English</span><span>Tamil</span><span>Hindi / Basic</span></div></div><div id="contact" className="studio-contact"><div><p className="eyebrow">OPEN CHANNEL</p><h2>Let’s build something dependable.</h2><p>Open to backend, cloud, and software-development roles.</p></div><div className="contact-actions"><a href={`mailto:${personalInfo.email}`} className="studio-button studio-button-primary mb-3"><Mail size={16} /> {personalInfo.email}</a><div className="contact-social-inline"><a href={personalInfo.social.linkedin} target="_blank" rel="noopener noreferrer" className="studio-button"><Linkedin size={16} /> LinkedIn</a><a href={personalInfo.social.github} target="_blank" rel="noopener noreferrer" className="studio-button"><Github size={16} /> GitHub</a><a href={`https://wa.me/${personalInfo.whatsapp}`} target="_blank" rel="noopener noreferrer" className="studio-button"><FaWhatsapp size={16} /> WhatsApp</a></div></div></div></section>
       </div>
     </main>
   );
@@ -1656,12 +1685,6 @@ export default function App() {
         )}
 
         <ProjectExpandModal project={expandedProject} onClose={() => setExpandedProject(null)} />
-
-        <Footer
-          personalInfo={personalInfo}
-          scrollHomeTo={scrollHomeTo}
-          openResumePreview={() => setResumePreviewOpen(true)}
-        />
         <ResumePreviewModal
           open={isResumePreviewOpen}
           onClose={() => setResumePreviewOpen(false)}

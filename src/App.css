@@ -793,3 +793,824 @@ body { font-size: 15px; }
   .proof-bento .bento-image-4 { min-height: 420px; grid-template-rows: repeat(2, minmax(200px, 1fr)); }
   .education-section { padding-bottom: 0; }
 }
+
+/* ==========================================
+   PORTFOLIO REFINEMENTS & CARD-LESS CLEAN STYLES
+   ========================================== */
+
+/* 1. Remove cards (backgrounds, borders, shadows) across portfolio */
+.bento-item,
+.linkedin-post-card,
+.achievement-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+.bento-image,
+.linkedin-post-image {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 2. Uncropped, fully visible images across screens */
+.bento-image img,
+.linkedin-post-image img,
+.proof-stack img,
+.academic-logo-wrap img,
+.portfolio-media-grid img {
+  object-fit: contain !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* 3. LinkedIn Read post button and icon - Vibrant LinkedIn Blue */
+.linkedin-read-post {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  color: #0a66c2 !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  margin-top: 0.8rem !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.linkedin-read-post:hover {
+  color: #004182 !important;
+  text-decoration: underline !important;
+}
+
+.linkedin-read-post svg,
+.linkedin-read-post .linkedin-icon {
+  color: #0a66c2 !important;
+  stroke: #0a66c2 !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+/* 4. Single row for "The work around the work." section */
+.proof-bento-others {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 28px !important;
+  width: 100% !important;
+}
+
+.proof-bento-others .bento-item {
+  grid-column: span 1 !important;
+  grid-row: auto !important;
+  width: 100% !important;
+}
+
+.proof-bento-others .bento-image {
+  min-height: 280px !important;
+  height: 320px !important;
+  width: 100% !important;
+}
+
+/* 5. Enlarge Technical Skills text and logos */
+.tech-logo-chip {
+  font-size: 13px !important;
+  padding: 8px 14px !important;
+  border-radius: 8px !important;
+  gap: 8px !important;
+  font-weight: 600 !important;
+}
+
+.tech-logo-chip svg {
+  width: 22px !important;
+  height: 22px !important;
+  color: #0284c7 !important;
+}
+
+.toolkit-map .map-node strong {
+  font-size: 16px !important;
+}
+
+.badges-section { border-top: 1px solid rgba(23,106,166,.18); }
+
+/* Keep section boundaries clear and prevent proof media from being cropped or stacked on top of each other. */
+.studio-section,
+.evidence-section { margin-bottom: 2rem; }
+.section-art { z-index: 0; }
+.section-intro,
+.approach-section > *,
+.internship-stories,
+.publication-collage,
+.proof-bento,
+.current-work-grid,
+.academic-timeline,
+.linkedin-post-grid,
+.studio-contact { position: relative; z-index: 1; }
+.internship-story { margin-bottom: 2rem; padding: 2rem; }
+.internship-heading .internship-certificate {
+  width: 300px;
+  height: 220px;
+  flex-basis: 300px;
+  object-fit: contain;
+}
+.internship-project { grid-template-columns: minmax(300px, 50%) minmax(0, 1fr); gap: 2rem; }
+.internship-project:nth-child(even) { grid-template-columns: minmax(0, 1fr) minmax(300px, 50%); }
+.internship-project .proof-stack {
+  min-height: 360px;
+}
+.proof-stack-collage {
+  min-height: 480px;
+}
+.proof-stack-collage > img {
+  object-fit: contain;
+  background: #fffaf1;
+  padding: 8px;
+}
+.proof-bento .bento-image {
+  min-height: 460px;
+  background: rgba(21,35,67,.08);
+}
+.proof-bento .bento-image img {
+  object-fit: contain;
+  background: #fffaf1;
+  padding: 10px;
+}
+.education-section { padding-bottom: 0; }
+.studio-contact { margin-bottom: 0; padding-bottom: 1.5rem; }
+.studio-page > .studio-wrap > section:last-child { margin-bottom: 0; }
+
+/* Use dark ink on the light canvas so every label remains readable. */
+.section-intro p,
+.internship-heading p,
+.internship-project p,
+.proof-bento .bento-item figcaption span,
+.proof-bento .bento-item figcaption strong,
+.education-copy p,
+.studio-contact p,
+.current-work-grid h3,
+.linkedin-post-copy p { color: #1a2e4f; }
+.studio-button,
+.project-links a,
+.social-row a { color: #0f3a64; font-weight: 700; }
+.studio-button-primary { color: #fffaf1; }
+.hero-detail, .section-intro > p:last-child, .project-tagline, .project-problem, .now-strip p, .timeline-content p, .education-copy > p:not(.eyebrow), .internship-project p, .linkedin-post-copy p { color: #1a2e4f; font-weight: 600; }
+
+@media (max-width: 760px) {
+  .approach-section { padding: 2rem 1rem; }
+  .approach-flow { display: grid; grid-template-columns: 1fr; }
+  .approach-node { min-height: 68px; }
+  .approach-node b { left: 50%; right: auto; bottom: -16px; transform: rotate(90deg); }
+  .toolkit-map { grid-template-columns: 1fr; }
+  .toolkit-map .map-node-4 { grid-column: auto; }
+  .internship-heading { display: grid; grid-template-columns: 52px minmax(0, 1fr); }
+  .internship-heading .internship-certificate { grid-column: 1 / -1; width: 100%; max-width: 400px; height: 260px; justify-self: center; }
+  .publication-collage { min-height: 560px; grid-template-columns: 1.35fr 1fr; }
+  .publication-collage img { padding: 5px; }
+  .proof-bento-opensource, .proof-bento-badges { grid-template-columns: 1fr; }
+  .proof-bento-opensource .bento-image, .proof-bento-badges .bento-image { min-height: 340px; aspect-ratio: 5 / 4; }
+  .studio-section, .evidence-section { margin-bottom: 1rem; }
+  .internship-story { padding: 1.25rem; margin-bottom: 1rem; }
+  .internship-project .proof-stack, .proof-stack-collage { min-height: 340px; }
+  .proof-bento .bento-image { min-height: 340px; }
+  .proof-bento .bento-image-3 { min-height: 520px; grid-template-rows: repeat(2, minmax(250px, 1fr)); }
+  .proof-bento .bento-image-4 { min-height: 420px; grid-template-rows: repeat(2, minmax(200px, 1fr)); }
+  .education-section { padding-bottom: 0; }
+}
+
+/* ==========================================
+   PORTFOLIO REFINEMENTS & CARD-LESS CLEAN STYLES
+   ========================================== */
+
+/* 1. Remove cards (backgrounds, borders, shadows) across portfolio */
+.bento-item,
+.linkedin-post-card,
+.achievement-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+.bento-image,
+.linkedin-post-image {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 2. Uncropped, fully visible images across screens */
+.bento-image img,
+.linkedin-post-image img,
+.proof-stack img,
+.academic-logo-wrap img,
+.portfolio-media-grid img {
+  object-fit: contain !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* 3. LinkedIn Read post button and icon - Vibrant LinkedIn Blue */
+.linkedin-read-post {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  color: #0a66c2 !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  margin-top: 0.8rem !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.linkedin-read-post:hover {
+  color: #004182 !important;
+  text-decoration: underline !important;
+}
+
+.linkedin-read-post svg,
+.linkedin-read-post .linkedin-icon {
+  color: #0a66c2 !important;
+  stroke: #0a66c2 !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+/* 4. Single row for "The work around the work." section */
+.proof-bento-others {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 28px !important;
+  width: 100% !important;
+}
+
+.proof-bento-others .bento-item {
+  grid-column: span 1 !important;
+  grid-row: auto !important;
+  width: 100% !important;
+}
+
+.proof-bento-others .bento-image {
+  min-height: 280px !important;
+  height: 320px !important;
+  width: 100% !important;
+}
+
+/* 5. Enlarge Technical Skills text and logos */
+.tech-logo-chip {
+  font-size: 13px !important;
+  padding: 8px 14px !important;
+  border-radius: 8px !important;
+  gap: 8px !important;
+  font-weight: 600 !important;
+}
+
+.tech-logo-chip svg {
+  width: 22px !important;
+  height: 22px !important;
+  color: #0284c7 !important;
+}
+
+.toolkit-map .map-node strong {
+  font-size: 16px !important;
+}
+
+.toolkit-map .node-items span {
+  font-size: 13px !important;
+  gap: 8px !important;
+}
+
+.toolkit-map .node-items svg {
+  width: 22px !important;
+  height: 22px !important;
+  color: #0284c7 !important;
+}
+
+/* 6. Enlarge Academic logos & TVS logo */
+.academic-logo-wrap {
+  width: 76px !important;
+  height: 76px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 2px solid #0284c7 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2) !important;
+}
+
+.linkedin-post-grid,
+.studio-contact { position: relative; z-index: 1; }
+.internship-story { margin-bottom: 2rem; padding: 2rem; }
+.internship-heading .internship-certificate {
+  width: 300px;
+  height: 220px;
+  flex-basis: 300px;
+  object-fit: contain;
+}
+.internship-project { grid-template-columns: minmax(300px, 50%) minmax(0, 1fr); gap: 2rem; }
+.internship-project:nth-child(even) { grid-template-columns: minmax(0, 1fr) minmax(300px, 50%); }
+.internship-project .proof-stack {
+  min-height: 360px;
+}
+.proof-stack-collage {
+  min-height: 480px;
+}
+.proof-stack-collage > img {
+  object-fit: contain;
+  background: #fffaf1;
+  padding: 8px;
+}
+.proof-bento .bento-image {
+  min-height: 460px;
+  background: rgba(21,35,67,.08);
+}
+.proof-bento .bento-image img {
+  object-fit: contain;
+  background: #fffaf1;
+  padding: 10px;
+}
+.education-section { padding-bottom: 0; }
+.studio-contact { margin-bottom: 0; padding-bottom: 1.5rem; }
+.studio-page > .studio-wrap > section:last-child { margin-bottom: 0; }
+
+/* Use dark ink on the light canvas so every label remains readable. */
+.section-intro p,
+.internship-heading p,
+.internship-project p,
+.proof-bento .bento-item figcaption span,
+.proof-bento .bento-item figcaption strong,
+.education-copy p,
+.studio-contact p,
+.current-work-grid h3,
+.linkedin-post-copy p { color: #1a2e4f; }
+.studio-button,
+.project-links a,
+.social-row a { color: #0f3a64; font-weight: 700; }
+.studio-button-primary { color: #fffaf1; }
+.hero-detail, .section-intro > p:last-child, .project-tagline, .project-problem, .now-strip p, .timeline-content p, .education-copy > p:not(.eyebrow), .internship-project p, .linkedin-post-copy p { color: #1a2e4f; font-weight: 600; }
+
+@media (max-width: 760px) {
+  .approach-section { padding: 2rem 1rem; }
+  .approach-flow { display: grid; grid-template-columns: 1fr; }
+  .approach-node { min-height: 68px; }
+  .approach-node b { left: 50%; right: auto; bottom: -16px; transform: rotate(90deg); }
+  .toolkit-map { grid-template-columns: 1fr; }
+  .toolkit-map .map-node-4 { grid-column: auto; }
+  .internship-heading { display: grid; grid-template-columns: 52px minmax(0, 1fr); }
+  .internship-heading .internship-certificate { grid-column: 1 / -1; width: 100%; max-width: 400px; height: 260px; justify-self: center; }
+  .publication-collage { min-height: 560px; grid-template-columns: 1.35fr 1fr; }
+  .publication-collage img { padding: 5px; }
+  .proof-bento-opensource, .proof-bento-badges { grid-template-columns: 1fr; }
+  .proof-bento-opensource .bento-image, .proof-bento-badges .bento-image { min-height: 340px; aspect-ratio: 5 / 4; }
+  .studio-section, .evidence-section { margin-bottom: 1rem; }
+  .internship-story { padding: 1.25rem; margin-bottom: 1rem; }
+  .internship-project .proof-stack, .proof-stack-collage { min-height: 340px; }
+  .proof-bento .bento-image { min-height: 340px; }
+  .proof-bento .bento-image-3 { min-height: 520px; grid-template-rows: repeat(2, minmax(250px, 1fr)); }
+  .proof-bento .bento-image-4 { min-height: 420px; grid-template-rows: repeat(2, minmax(200px, 1fr)); }
+  .education-section { padding-bottom: 0; }
+}
+
+/* ==========================================
+   PORTFOLIO REFINEMENTS & CARD-LESS CLEAN STYLES
+   ========================================== */
+
+/* 1. Remove cards (backgrounds, borders, shadows) across portfolio */
+.bento-item,
+.linkedin-post-card,
+.achievement-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+.bento-image,
+.linkedin-post-image {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 2. Uncropped, fully visible images across screens */
+.bento-image img,
+.linkedin-post-image img,
+.proof-stack img,
+.academic-logo-wrap img,
+.portfolio-media-grid img {
+  object-fit: contain !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* 3. LinkedIn Read post button and icon - Vibrant LinkedIn Blue */
+.linkedin-read-post {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  color: #0a66c2 !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  margin-top: 0.8rem !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.linkedin-read-post:hover {
+  color: #004182 !important;
+  text-decoration: underline !important;
+}
+
+.linkedin-read-post svg,
+.linkedin-read-post .linkedin-icon {
+  color: #0a66c2 !important;
+  stroke: #0a66c2 !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+/* 4. Single row for "The work around the work." section */
+.proof-bento-others {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 28px !important;
+  width: 100% !important;
+}
+
+.proof-bento-others .bento-item {
+  grid-column: span 1 !important;
+  grid-row: auto !important;
+  width: 100% !important;
+}
+
+.proof-bento-others .bento-image {
+  min-height: 280px !important;
+  height: 320px !important;
+  width: 100% !important;
+}
+
+/* 5. Enlarge Technical Skills text and logos */
+.tech-logo-chip {
+  font-size: 13px !important;
+  padding: 8px 14px !important;
+  border-radius: 8px !important;
+  gap: 8px !important;
+  font-weight: 600 !important;
+}
+
+.tech-logo-chip svg {
+  width: 22px !important;
+  height: 22px !important;
+  color: #0284c7 !important;
+}
+
+.toolkit-map .map-node strong {
+  font-size: 16px !important;
+}
+
+.toolkit-map .node-items span {
+  font-size: 13px !important;
+  gap: 8px !important;
+}
+
+.toolkit-map .node-items svg {
+  width: 22px !important;
+  height: 22px !important;
+  color: #0284c7 !important;
+}
+
+.academic-logo-wrap {
+  width: 76px !important;
+  height: 76px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 2px solid #0284c7 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2) !important;
+}
+
+.academic-logo-wrap img {
+  width: 58px !important;
+  height: 58px !important;
+  object-fit: contain !important;
+  border-radius: 50% !important;
+}
+
+/* 7. Interactive canvas pipeline for Engineering Identity (Idea → Cloud deployment) */
+.approach-flow {
+  display: grid !important;
+  grid-template-columns: repeat(6, 1fr) !important;
+  gap: 16px !important;
+  align-items: stretch !important;
+  padding: 2.5rem 1.5rem !important;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.85) 100%) !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(12px) !important;
+  margin: 2rem 0 4rem !important;
+}
+
+.approach-node {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  padding: 1.5rem 1rem !important;
+  background: rgba(30, 41, 59, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 16px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.approach-node:hover {
+  transform: translateY(-6px) !important;
+  background: rgba(14, 165, 233, 0.15) !important;
+  border-color: rgba(56, 189, 248, 0.6) !important;
+  box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.3) !important;
+}
+
+.approach-node-badge {
+  position: relative !important;
+  width: 54px !important;
+  height: 54px !important;
+  border-radius: 14px !important;
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 12px !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4) !important;
+}
+
+.approach-step-num {
+  position: absolute !important;
+  top: -8px !important;
+  right: -8px !important;
+  background: #f43f5e !important;
+  color: #fff !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  padding: 2px 6px !important;
+  border-radius: 10px !important;
+}
+
+.approach-icon {
+  color: #ffffff !important;
+}
+
+.approach-node strong {
+  color: #f8fafc !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  margin-bottom: 4px !important;
+}
+
+.approach-node small {
+  color: #94a3b8 !important;
+  font-size: 11px !important;
+  line-height: 1.4 !important;
+}
+
+.approach-connector {
+  position: absolute !important;
+  right: -14px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 10 !important;
+  width: 26px !important;
+  height: 26px !important;
+  border-radius: 50% !important;
+  background: #0f172a !important;
+  border: 1px solid #38bdf8 !important;
+  color: #38bdf8 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+
+/* 8. Align images & text in "Three systems, three kinds of useful" */
+.project-story {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  align-items: center !important;
+  gap: 3.5rem !important;
+}
+
+.project-story .proof-stack {
+  min-height: 380px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* 9. Fix "Library & study interests" text hiding */
+.proof-bento-others {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+  width: 100% !important;
+}
+
+.proof-bento-others .bento-item {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/* 9. Fix "Library & study interests" text hiding & uncropped images */
+.proof-bento-others {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 28px !important;
+  width: 100% !important;
+}
+
+.proof-bento-others .bento-item {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 0 !important;
+  background: transparent !important;
+}
+
+.proof-bento-others .bento-image {
+  width: 100% !important;
+  aspect-ratio: 4 / 3 !important;
+  height: auto !important;
+  min-height: 220px !important;
+  flex: 0 0 auto !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  background: rgba(17, 24, 39, 0.05) !important;
+}
+
+.proof-bento-others .bento-image img {
+  object-fit: contain !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: transparent !important;
+}
+
+.proof-bento-others figcaption {
+  position: static !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  margin-top: 14px !important;
+  z-index: 50 !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+.proof-bento-others figcaption strong {
+  color: #0f172a !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  line-height: 1.4 !important;
+}
+
+/* 10. Academic timeline - leave gap between logos and college/school text & enlarge academic year */
+.academic-entry {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: 80px minmax(0, 1fr) !important;
+  gap: 2.5rem !important;
+  align-items: center !important;
+  padding: 1.5rem 0 2rem !important;
+}
+
+.academic-logo-wrap {
+  width: 76px !important;
+  height: 76px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 2px solid #0284c7 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2) !important;
+  flex-shrink: 0 !important;
+}
+
+.academic-entry-content {
+  padding-left: 0.75rem !important;
+}
+
+.academic-entry-heading span {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: var(--coral) !important;
+}
+
+/* 11. Resume preview frame without viewer toolbars */
+.resume-frame {
+  width: min(860px, 100%) !important;
+  height: 900px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  background: #0f172a !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.3) !important;
+}
+
+.resume-frame iframe {
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+}
+
+/* 12. Top-align education and contact columns & eliminate extra bottom space */
+.education-section {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 4rem !important;
+  align-items: flex-start !important;
+}
+
+.studio-contact {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  gap: 1.25rem !important;
+}
+
+.contact-social-inline {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 12px !important;
+  margin-top: 0.75rem !important;
+  margin-bottom: 14px !important;
+  padding-bottom: 4px !important;
+  max-width: 100% !important;
+}
+
+.contact-social-inline .studio-button {
+  margin: 0 !important;
+}
+
+.section-art-contact,
+.art-sun,
+.art-horizon {
+  display: none !important;
+}
+
+footer,
+.studio-contact,
+#education,
+#contact,
+.education-section,
+.studio-page,
+.studio-wrap,
+main,
+body,
+#root {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+@media (max-width: 900px) {
+  .education-section {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .approach-flow {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .approach-connector {
+    display: none !important;
+  }
+  .proof-bento-others {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .approach-flow {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
