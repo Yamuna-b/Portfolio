@@ -1,174 +1,272 @@
-# Portfolio
+# Portfolio Website
 
-A professional FAANG-style portfolio website built with React, Vite, and TailwindCSS.
+A modern, responsive portfolio website built with Next.js 14, TypeScript, Tailwind CSS, and Framer Motion.
 
-## Features
+## 🌟 Features
 
-- **Clean Minimal Navigation**: Dropdown-based PROJECTS menu for professional organization
-- **Smart Search**: Real-time project filtering across all categories
-- **Responsive Design**: Works perfectly on all devices
-- **Video Support**: Auto-playing video demos for projects
-- **Social Integration**: LinkedIn, GitHub, LeetCode, Medium, Instagram
-- **Modern UI**: Dark theme with smooth animations using Framer Motion
+- **Responsive Design**: Looks great on all devices
+- **Dark/Light Mode**: Automatic theme switching based on system preferences
+- **Blog Support**: MDX-based blog with syntax highlighting
+- **Video Gallery**: YouTube video integration
+- **Gadgets Shop**: Curated list of recommended products
+- **Animations**: Smooth page transitions and micro-interactions
+- **GitHub Integration**: Live GitHub contribution graph
+- **GitHub Sponsors**: Display your GitHub sponsors with beautiful cards
+- **Twitter/X Testimonials**: Showcase tweets about your work in a marquee
+- **Command Palette**: Quick navigation with Ctrl+K / Cmd+K
+- **Smooth Cursor**: Custom animated cursor effect
+- **SEO Optimized**: Meta tags and OpenGraph support
+- **Performance Focused**: Optimized for Core Web Vitals
+- **Visitor Counter**: Real-time unique visitor tracking with Upstash Redis
+- **Social Hover Cards**: Live GitHub profile and Steam status hover cards on social icons
 
-## Tech Stack
+## 🚀 Tech Stack
 
-- **React 19** - UI framework
-- **Vite** - Build tool and dev server
-- **TailwindCSS** - Styling
-- **Framer Motion** - Animations
-- **Swiper** - Carousel components
-- **React Icons** - Icon library
+- **Framework**: [Next.js 14](https://nextjs.org/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Content**: [MDX](https://mdxjs.com/)
+- **Deployment**: [Vercel](https://vercel.com)
 
-## Prerequisites
+## 📦 Installation
 
-- Node.js (v18 or higher)
-- npm or yarn
+1. Clone the repository:
+```bash
+git clone https://github.com/StarKnightt/prasendev
+```
 
-## Installation
+2. Install dependencies:
+```bash
+npm install
+```
 
-1. **Clone the repository** (if not already cloned)
-   ```bash
-   git clone <your-repo-url>
-   cd portfolio
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-## Running the Project
-
-### Development Mode
-
-To start the development server:
+3. Run the development server:
 ```bash
 npm run dev
 ```
 
-The application will be available at `http://localhost:5173`
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Production Build
+## 🔧 Configuration
 
-To create an optimized production build:
-```bash
-npm run build
+1. Update `src/data/resume.tsx` with your personal information.
+2. Add your blog posts in the `content` directory as MDX files.
+3. Update `src/data/products.ts` to add your recommended products.
+4. Customize theme colors in `tailwind.config.ts`.
+
+## 🔑 Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```env
+# GitHub Token (Required for GitHub Sponsors)
+GITHUB_TOKEN=your_github_personal_access_token
+
+# Upstash Redis (Required for Visitor Counter)
+UPSTASH_REDIS_REST_URL=your_upstash_redis_url
+UPSTASH_REDIS_REST_TOKEN=your_upstash_redis_token
+
+# Steam Web API (Required for Steam Hover Card)
+STEAM_API_KEY=your_steam_web_api_key
 ```
 
-The built files will be in the `dist` folder.
+### Setting up GitHub Token
 
-### Preview Production Build
+1. Go to [GitHub Settings > Developer Settings > Personal Access Tokens](https://github.com/settings/tokens)
+2. Click "Generate new token (classic)"
+3. Give it a name (e.g., "Portfolio Sponsors")
+4. Select the following scopes:
+   - `read:user` - Read user profile data
+   - `read:org` - Read org membership (if applicable)
+5. Click "Generate token" and copy it
+6. Add it to your `.env.local` file
 
-To preview the production build locally:
-```bash
-npm run preview
+> **Note**: The token is used to fetch your GitHub sponsors. Without it, the sponsors section will show an error.
+
+### Setting up Steam Web API Key
+
+1. Go to [Steam Web API Key Registration](https://steamcommunity.com/dev/apikey)
+2. Sign in with your Steam account
+3. Enter your domain name and register
+4. Copy the API key
+5. Add it to your `.env.local` file
+6. Update `VANITY_URL` in `src/app/api/steam-stats/route.ts` with your Steam vanity URL
+
+> **Note**: The Steam API key is used for the Steam hover card which shows your live profile status, current game, level, and games count. Your Steam profile must be public for this to work.
+
+## 🐦 Twitter/X Testimonials
+
+To add testimonials from Twitter/X:
+
+1. Open `src/components/twitter-testimonials.tsx`
+2. Add tweet IDs to the `tweetIds` array:
+
+```typescript
+const tweetIds = [
+  "1862049464807989608", // @username
+  "1868648019119522142", // @another_user
+  // Add more tweet IDs here
+];
 ```
 
-## Project Structure
+**To get a tweet ID:**
+- Open the tweet on Twitter/X
+- Copy the URL: `https://x.com/username/status/1234567890`
+- The ID is the number at the end: `1234567890`
+
+## 👁 Visitor Counter
+
+The portfolio includes a unique visitor counter powered by Upstash Redis. It tracks real visitors without counting refreshes.
+
+### How It Works
 
 ```
-portfolio/
-├── public/              # Static assets (images, videos, PDFs)
+User visits site → Component fetches API → API checks cookie → Increment or not → Return count
+```
+
+1. **Component** (`visitor-counter.tsx`): Fetches count from API on page load
+2. **API Route** (`/api/visitor-count`): Checks for cookie, increments count in Redis if new visitor
+3. **Upstash Redis**: Stores the visitor count persistently in the cloud
+
+### Key Features
+
+| Feature | How |
+|---------|-----|
+| No duplicate counting | Cookie prevents re-counting for 24 hours |
+| Persists across deploys | Count stored in external Redis database |
+| Thread-safe | Redis `incr()` is atomic |
+| Fast | Upstash is edge-optimized |
+
+### Setting up Upstash Redis
+
+1. Go to [upstash.com](https://upstash.com) and sign up
+2. Click **Create Database** → Name it (e.g., `portfolio-visitors`)
+3. Select a region close to your users
+4. After creation, go to the **REST API** section
+5. Copy `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`
+6. Add them to your `.env.local` file:
+
+```env
+UPSTASH_REDIS_REST_URL=https://your-db.upstash.io
+UPSTASH_REDIS_REST_TOKEN=your-secret-token
+```
+
+7. For Vercel deployment, add these in **Settings → Environment Variables**
+
+> **Note**: Without these environment variables, the visitor counter will show 0.
+
+## 💖 GitHub Sponsors
+
+The portfolio automatically displays your GitHub sponsors. Features include:
+- Sponsor avatar, name, and username
+- Beautiful card design with hover effects
+- "Sponsor me" button linking to your GitHub Sponsors page
+
+To customize, edit `src/components/github-sponsors.tsx`.
+
+## 📁 Project Structure
+
+```
+├── content/          # Blog posts (MDX)
+├── public/           # Static assets
 ├── src/
-│   ├── App.jsx         # Main application component
-│   ├── main.jsx        # Entry point
-│   └── components/     # Reusable components
-│       └── Footer.jsx  # Footer component
-├── index.html          # HTML template
-├── package.json        # Dependencies and scripts
-└── README.md           # This file
+│   ├── app/         # Next.js app router pages
+│   ├── components/  # React components
+│   ├── data/        # Data files and types
+│   └── lib/         # Utility functions
 ```
 
-## Navigation Structure
+## 🎨 Customization
 
-- **HOME** - Hero section with profile and overview
-- **PROJECTS ▾** (Dropdown)
-  - Backend + Frontend
-  - AI/ML
-  - DevOps & Cloud
-  - Designs
-- **HIGHLIGHTS** - Certifications, awards, achievements
-- **CONTACT** - Contact information and social links
+### Theme
 
-## Adding New Projects
+The theme can be customized in `tailwind.config.ts`:
 
-To add a new project, update the `projectCatalog` object in `src/App.jsx`:
-
-```javascript
-{
-  title: "Your Project Name",
-  tagline: "Brief description",
-  stack: ["React", "Node.js"],
-  bullets: ["Key feature 1", "Key feature 2"],
-  links: {
-    github: "https://github.com/your-repo",
-    live: "https://your-demo-url"
-  },
-  image: "/your-image.jpg"
+```ts
+theme: {
+  extend: {
+    colors: {
+      primary: {...},
+      secondary: {...},
+    }
+  }
 }
 ```
 
-## Adding Images/Videos
+### Content
 
-Place your images and videos in the `public/` folder and reference them with absolute paths:
-- Images: `/your-image.jpg`
-- Videos: `/your-video.mp4`
+Update the following files to customize content:
 
-## Deployment
+- `src/data/resume.tsx`: Personal information and experience
+- `src/data/products.ts`: Recommended products
+- `content/*.mdx`: Blog posts
 
-### Vercel (Recommended)
+## 📝 Adding Blog Posts
 
-1. Push your code to GitHub
-2. Import repository in Vercel
-3. Vercel will auto-detect Vite and deploy
+Create a new MDX file in the `content` directory:
 
-### Netlify
-
-1. Run `npm run build`
-2. Drag and drop the `dist` folder to Netlify
-
-### GitHub Pages
-
-1. Run `npm run build`
-2. Deploy the `dist` folder to GitHub Pages
-
-## Customization
-
-### Personal Information
-
-Update the `personalInfo` object in `src/App.jsx` with your details:
-- Name, email, phone, WhatsApp
-- Social media links
-- Skills and languages
-- Experience and education
-
-### Theme Colors
-
-Modify TailwindCSS configuration in `tailwind.config.js` to customize colors.
-
-## Troubleshooting
-
-### Port Already in Use
-
-If port 5173 is in use, Vite will automatically use the next available port.
-
-### Images Not Loading
-
-Ensure all images are in the `public/` folder and referenced with absolute paths starting with `/`.
-
-### Videos Not Playing
-
-Check that video files are in the `public/` folder and have correct file extensions (.mp4, .webm, .ogg).
-
-## License
-
-This project is open source and available for personal and commercial use.
-
-## Author
-
-**Yamuna** - Full Stack Developer
-
+```mdx
+---
+title: "Your Post Title"
+publishedAt: "2024-01-01"
+summary: "Brief description of your post"
 ---
 
-Built with ❤️ using React and Vite
+Your content here...
+```
+
+## 🛠️ Development
+
+```bash
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+
+# Lint code
+npm run lint
+```
+
+## 📱 Progressive Web App
+
+This website is PWA-ready with:
+- Service Worker support
+- Offline functionality
+- Install prompt
+- App manifest
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=StarKnightt/prasendev&type=Date)](https://www.star-history.com/#StarKnightt/prasendev&Date)
+
+
+## 🙏 Acknowledgments
+
+- [shadcn/ui](https://ui.shadcn.com/) for the beautiful UI components
+- [Framer Motion](https://www.framer.com/motion/) for animations
+- [Tailwind CSS](https://tailwindcss.com/) for styling
+- [Next.js](https://nextjs.org/) for the framework
+
+## 📧 Contact
+
+Your Name - [@Prasenjit](https://x.com/prasenx)
+
+Project Link: [Try it here](https://prasen.dev)

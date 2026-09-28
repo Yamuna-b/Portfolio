@@ -1,0 +1,28 @@
+# llms.txt - AI discoverability for yamuna-b.vercel.app
+
+> Yamuna B's personal portfolio.
+
+Yamuna B is a Backend / Cloud Engineer with AI specialization from Madurai, Tamil Nadu, India. She is a final-year Computer Science student at Velammal College of Engineering and Technology (Graduating 2027). She builds practical software including REST APIs, database systems, AWS cloud deployments, and GenAI features.
+
+## Main Links
+- [Home](https://yamuna-b.vercel.app): Portfolio homepage with projects, skills, work experience, achievements, and contact details.
+- [Projects](https://yamuna-b.vercel.app/#projects): Portfolio of software systems built with Python, FastAPI, Node.js, Express, React, PostgreSQL, MongoDB, Docker, and AWS.
+
+## Featured Projects
+- [MoneyMirror](https://github.com/Yamuna-b/Money_Mirror): Personal finance digital twin built with Python, FastAPI, PostgreSQL, SQLite, Docker, GitHub Actions, and Hugging Face.
+- [LogBeacon](https://github.com/Yamuna-b/LogBeacon): Structured log analysis backend supporting filtering, incident linking, and summarization built with React, Node.js, Express, PostgreSQL, Prisma, Zod, and Vercel/Render.
+- [MarineTaxaAi](https://github.com/Yamuna-b/MarineTaxaAi): eDNA sequence classification pipeline for marine species prediction using Python, FastAPI, Streamlit, scikit-learn, NumPy, pandas, Biopython, and Plotly.
+- [NammaOorFix](https://github.com/Yamuna-b/NammaOorFix): Civic issue reporting portal with React/Vite, Node.js, Express, MongoDB, JWT, and geospatial clustering.
+- [Realtime Support Chat](https://github.com/Yamuna-b/client-support-realtime-chat): Real-time helpdesk chat widget built with Node.js, Express, Socket.io, and Firebase.
+
+## Research & Honors
+- [IEEE AIDE 2025 Paper](https://ieeexplore.ieee.org/document/10986878): Carbon footprint awareness and mitigation research publication.
+- Kalasalingam Designthon First Place
+- Sri Ramakrishna Techathon Gold Rank
+- VCET DesignVerse First Place
+
+## Social Profiles
+- GitHub: https://github.com/Yamuna-b
+- LinkedIn: https://www.linkedin.com/in/yamuna-bsvy/
+- LeetCode: https://leetcode.com/u/Yamuna_bsvy/
+- Contact Email: yamuna.bsvy@gmail.com
