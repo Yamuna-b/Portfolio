@@ -25,6 +25,7 @@ interface ResumeCardProps {
     icon?: React.ReactNode;
   }[];
   redacted?: boolean;
+  alwaysExpanded?: boolean;
 }
 export const ResumeCard = ({
   logoUrl,
@@ -38,8 +39,11 @@ export const ResumeCard = ({
   description,
   links,
   redacted,
+  alwaysExpanded = false,
 }: ResumeCardProps) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
+
+  const showDetails = alwaysExpanded || isExpanded;
 
   const toggle = () => setIsExpanded((v) => !v);
 
@@ -76,12 +80,12 @@ export const ResumeCard = ({
                   ))}
                 </span>
               )}
-              <ChevronRightIcon
+              {!alwaysExpanded && <ChevronRightIcon
                 className={cn(
                   "size-4 translate-x-0 transform opacity-70 transition-all duration-300 ease-out",
                   isExpanded ? "rotate-90" : "rotate-0"
                 )}
-              />
+              />}
             </h3>
             <div className="text-right text-xs tabular-nums text-muted-foreground sm:text-sm">
               {period}
@@ -89,17 +93,17 @@ export const ResumeCard = ({
           </div>
           {subtitle && <div className="pt-1 font-sans text-xs text-muted-foreground">{subtitle}</div>}
           {impact && (
-            <div className="w-full truncate pt-0.5 font-sans text-xs text-muted-foreground/80">
+            <div className="w-full pt-0.5 font-sans text-xs text-muted-foreground/80">
               {impact}
             </div>
           )}
         </CardHeader>
         {description && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
+            initial={alwaysExpanded ? false : { opacity: 0, height: 0 }}
             animate={{
-              opacity: isExpanded ? 1 : 0,
-              height: isExpanded ? "auto" : 0,
+              opacity: showDetails ? 1 : 0,
+              height: showDetails ? "auto" : 0,
             }}
             transition={{
               duration: 0.7,
@@ -109,14 +113,16 @@ export const ResumeCard = ({
           >
             {description}
             {links && links.length > 0 && (
-              <div className="mt-2 flex flex-row flex-wrap items-start gap-1">
+              <div className="mt-4">
+                {alwaysExpanded && <p className="mb-2 text-xs font-semibold text-foreground">Projects</p>}
+                <div className="flex flex-row flex-wrap items-start gap-2">
                 {links.map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
                     target={link.href.startsWith("mailto:") ? undefined : "_blank"}
                     rel="noopener noreferrer"
-                    tabIndex={isExpanded ? 0 : -1}
+                    tabIndex={showDetails ? 0 : -1}
                     onClick={(e) => e.stopPropagation()}
                   >
                     <Badge className="flex gap-2 px-2 py-1 text-[10px]">
@@ -125,6 +131,7 @@ export const ResumeCard = ({
                     </Badge>
                   </a>
                 ))}
+                </div>
               </div>
             )}
           </motion.div>
@@ -132,6 +139,8 @@ export const ResumeCard = ({
       </div>
     </Card>
   );
+
+  if (alwaysExpanded) return card;
 
   if (description) {
     return (

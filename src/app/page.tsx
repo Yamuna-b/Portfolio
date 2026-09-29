@@ -231,7 +231,6 @@ export default function Page() {
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {DATA.quotes.map((quote, idx) => (
                 <blockquote key={idx} className="relative rounded-xl border border-border/50 border-l-2 border-l-primary/60 bg-gradient-to-br from-primary/5 to-background/70 p-5 sm:p-6">
-                  <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-primary/80">{["Think boldly", "Stay curious", "Keep going", "Show up daily"][idx]}</p>
                   <p className="font-serif text-base leading-relaxed text-foreground/90 sm:text-lg">“{quote}”</p>
                 </blockquote>
               ))}
@@ -296,6 +295,7 @@ export default function Page() {
               >
                 <ResumeCard
                   key={work.company}
+                  alwaysExpanded
                   logoUrl={work.logoUrl}
                   altText={work.company}
                   title={work.company}
