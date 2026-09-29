@@ -38,7 +38,9 @@ const ALIASES = {
   g: 'gui',
   a: 'about',
   s: 'skills',
-  e: 'exp',
+  e: 'edu',
+  so: 'social',
+  cl: 'clear',
   p: 'projects',
   c: 'contact',
   t: 'theme',
@@ -50,12 +52,12 @@ const COMMANDS = {
     'about    (a)     - Display information about me\n' +
     'skills   (s)     - List my technical skills\n' +
     'projects (p, ls) - List my projects\n' +
-    'edu             - Show my education\n' +
-    'contact   (c)    - Display contact information\n' +
-    'social          - Show social media links\n' +
-    'version  (v)    - Show CLI version\n' +
-    'clear          - Clear the terminal\n' +
-    'gui      (g)    - Switch to GUI mode\n\n' +
+    'edu      (e)     - Show my education\n' +
+    'contact  (c)     - Display contact information\n' +
+    'social   (so)    - Show social media links\n' +
+    'version  (v)     - Show CLI version\n' +
+    'clear    (cl)    - Clear the terminal\n' +
+    'gui      (g)     - Switch to GUI mode\n\n' +
     'Tip: Use Tab for command completion and ↑↓ for command history',
   about: () => `${DATA.name}\n${DATA.description}\n\n${stripMarks(DATA.summary)}`,
   skills: () => `Skills:\n${DATA.skills.map(s => s.name).join(', ')}`,
