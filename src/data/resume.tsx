@@ -19,7 +19,7 @@ export const DATA = {
     { value: "140+", label: "GitHub contributions in last year", href: "https://github.com/Yamuna-b" },
     { value: "324", label: "LeetCode problems solved", href: "https://leetcode.com/u/Yamuna_bsvy/" },
     { value: "IEEE 2025", label: "Conference Research Publication", href: "https://ieeexplore.ieee.org/document/10986878" },
-    { value: "1st Place", label: "3x Hackathon & Designathon Champion", href: "https://www.linkedin.com/in/yamuna-bsvy/" },
+    { value: "1st Place", label: "3x Project & Design Competition Winner", href: "https://www.linkedin.com/in/yamuna-bsvy/" },
   ],
 
   quotes: [
@@ -222,7 +222,7 @@ export const DATA = {
   projects: [
     {
       title: "MoneyMirror",
-      href: "https://github.com/Yamuna-b/Money_Mirror",
+      href: "https://github.com/Yamuna-b/MoneyMirror",
       dates: "2024",
       active: true,
       description:
@@ -239,7 +239,7 @@ export const DATA = {
       links: [
         {
           type: "GitHub",
-          href: "https://github.com/Yamuna-b/Money_Mirror",
+          href: "https://github.com/Yamuna-b/MoneyMirror",
           icon: <Icons.github className="size-3" />,
         },
         {
@@ -247,6 +247,7 @@ export const DATA = {
           href: "https://drive.google.com/file/d/1H01AjMrU8kZ_mYTkO4IgUO7lQl5zsw2s/view?usp=sharing",
           icon: <Icons.globe className="size-3" />,
         },
+        { type: "Live Website", href: "https://yamunabalamurugan-moneymirror.hf.space/", icon: <Icons.globe className="size-3" /> },
       ],
       image: "/stuffs/Projects/MoneyMirror.png",
       video: "",
@@ -281,6 +282,7 @@ export const DATA = {
           href: "https://drive.google.com/file/d/1VIW1KpCmgK-CLCpHbwdMd8BppwnZfHd-/view?usp=sharing",
           icon: <Icons.globe className="size-3" />,
         },
+        { type: "Live Website", href: "https://logbeacon.onslate.in", icon: <Icons.globe className="size-3" /> },
       ],
       image: "/stuffs/Projects/LogBeacon.png",
       video: "",
@@ -314,6 +316,7 @@ export const DATA = {
           href: "https://drive.google.com/file/d/1aZN2iFA1QZwSP_ftBbqv21tr_xtpykPB/view?usp=sharing",
           icon: <Icons.globe className="size-3" />,
         },
+        { type: "Live Website", href: "https://marine-taxa-ai.vercel.app", icon: <Icons.globe className="size-3" /> },
       ],
       image: "/stuffs/Projects/MarineTaxaAI.png",
       video: "",
@@ -423,7 +426,7 @@ export const DATA = {
     },
     {
       title: "ExoVision AI (Exoplanets)",
-      href: "/projects/exovision-ai.png",
+      href: "https://github.com/Yamuna-b/ExoVision-SpaceApp",
       dates: "NASA Space Apps Project",
       active: true,
       description:
@@ -439,7 +442,7 @@ export const DATA = {
         "SQLite",
         "Docker",
       ],
-      links: [],
+      links: [{ type: "GitHub", href: "https://github.com/Yamuna-b/ExoVision-SpaceApp", icon: <Icons.github className="size-3" /> }],
       image: "/projects/exovision-ai.png",
       video: "",
     },
@@ -472,28 +475,8 @@ export const DATA = {
 
   certificationsList: [
     {
-      "name": "GreyLearn - Advance Excel",
-      "image": "/stuffs/Certification/Certificates/AdvanceExcel_GreyLearn.jpg"
-    },
-    {
-      "name": "GreyLearn - C++ Programming",
-      "image": "/stuffs/Certification/Certificates/C++Programming_GreyLearn.jpg"
-    },
-    {
       "name": "University of Michigan - Python for Everybody Specialization",
       "image": "/stuffs/Certification/Certificates/Coursera Certificate 6.jpg"
-    },
-    {
-      "name": "IBM - Python Project for Data Science",
-      "image": "/stuffs/Certification/Certificates/Coursera Certificate 7.jpg"
-    },
-    {
-      "name": "Tata STRIVE - Cybersecurity for Beginners",
-      "image": "/stuffs/Certification/Certificates/CYBERSECURITY.jpg"
-    },
-    {
-      "name": "LinkedIn Learning - Getting Started as a Java Developer",
-      "image": "/stuffs/Certification/Certificates/LinkedIn Learning-Java.jpg"
     },
     {
       "name": "NVIDIA - Fundamentals of Deep Learning",
@@ -504,12 +487,32 @@ export const DATA = {
       "image": "/stuffs/Certification/Certificates/SriRamakrishna_paper.jpg"
     },
     {
-      "name": "Thiagarajar College of Engineering - Robotics Workshop (MOBIUS 2K24)",
-      "image": "/stuffs/Certification/Certificates/TCE_Workshop.png"
+      "name": "IBM - Python Project for Data Science",
+      "image": "/stuffs/Certification/Certificates/Coursera Certificate 7.jpg"
+    },
+    {
+      "name": "GreyLearn - C++ Programming",
+      "image": "/stuffs/Certification/Certificates/C++Programming_GreyLearn.jpg"
+    },
+    {
+      "name": "LinkedIn Learning - Getting Started as a Java Developer",
+      "image": "/stuffs/Certification/Certificates/LinkedIn Learning-Java.jpg"
+    },
+    {
+      "name": "Tata STRIVE - Cybersecurity for Beginners",
+      "image": "/stuffs/Certification/Certificates/CYBERSECURITY.jpg"
+    },
+    {
+      "name": "GreyLearn - Advance Excel",
+      "image": "/stuffs/Certification/Certificates/AdvanceExcel_GreyLearn.jpg"
     },
     {
       "name": "VCET — Idea Contest",
       "image": "/stuffs/Certification/Certificates/Vcet_Idea_contest.jpg"
+    },
+    {
+      "name": "Thiagarajar College of Engineering - Robotics Workshop (MOBIUS 2K24)",
+      "image": "/stuffs/Certification/Certificates/TCE_Workshop.png"
     }
   ],
 
@@ -523,12 +526,16 @@ export const DATA = {
       "image": "/stuffs/Certification/Open Source Contributions/MLH_GitHub_Copilot_Code_Smarter_Quest_certificate.png"
     },
     {
-      "name": "GitHub Copilot Prompt Quest",
-      "image": "/stuffs/Certification/Open Source Contributions/MLH_GitHub_Copilot_Prompt_certificate.png"
+      "name": "Social Summer of Code Season 4 Contributor",
+      "image": "/stuffs/Certification/Open Source Contributions/SSOC24_Cert.png"
     },
     {
       "name": "MongoDB Basics for Students",
       "image": "/stuffs/Certification/Open Source Contributions/MLH_MongoDB_Basics_for_Students_Certificate.jpg"
+    },
+    {
+      "name": "GitHub Copilot Prompt Quest",
+      "image": "/stuffs/Certification/Open Source Contributions/MLH_GitHub_Copilot_Prompt_certificate.png"
     },
     {
       "name": "Open Source Connect India (OSCI) Contributor",
@@ -537,17 +544,13 @@ export const DATA = {
     {
       "name": "MLH Global Hack Week — Swag",
       "image": "/stuffs/Certification/Open Source Contributions/open_4.jpg"
-    },
-    {
-      "name": "Social Summer of Code Season 4 Contributor",
-      "image": "/stuffs/Certification/Open Source Contributions/SSOC24_Cert.png"
     }
   ],
 
   platformBadges: [
     {
-      "name": "SQL Badge",
-      "image": "/stuffs/Certification/badges/badge_8.png"
+      "name": "Harness Continuous Delivery & GitOps Developer Badge",
+      "image": "/stuffs/Certification/badges/Harness Certified Continuous Delivery & GitOps Developer Badge.png"
     },
     {
       "name": "Social Summer of Code — Contributor Badge",
@@ -558,16 +561,16 @@ export const DATA = {
       "image": "/stuffs/Certification/badges/Contributor's badge.jpg"
     },
     {
-      "name": "Harness Continuous Delivery & GitOps Developer Badge",
-      "image": "/stuffs/Certification/badges/Harness Certified Continuous Delivery & GitOps Developer Badge.png"
+      "name": "MLH — MongoDB Basics for Students Badge",
+      "image": "/stuffs/Certification/badges/mlh-mongodb-basics-for-students.png"
+    },
+    {
+      "name": "SQL Badge",
+      "image": "/stuffs/Certification/badges/badge_8.png"
     },
     {
       "name": "LeetCode Badge",
       "image": "/stuffs/Certification/badges/Leetcode.png"
-    },
-    {
-      "name": "MLH — MongoDB Basics for Students Badge",
-      "image": "/stuffs/Certification/badges/mlh-mongodb-basics-for-students.png"
     }
   ],
 

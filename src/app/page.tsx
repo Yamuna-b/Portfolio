@@ -19,7 +19,7 @@ import { FlipAvatar } from "@/components/flip-avatar";
 import { GitHubHoverCard } from "@/components/github-hover-card";
 import { LinkedInHoverCard } from "@/components/linkedin-hover-card";
 import { GithubContributions } from "@/components/lazy-client";
-import { Award, BookOpen, Cpu, ExternalLink, FileText, MapPin, Sparkles, Trophy, CheckCircle2, ArrowRight } from "lucide-react";
+import { Award, BookOpen, Cpu, ExternalLink, FileText, MapPin, Sparkles, Trophy, CheckCircle2, ArrowRight, Users, BriefcaseBusiness, GraduationCap } from "lucide-react";
 
 const BLUR_FADE_DELAY = 0.04;
 
@@ -230,9 +230,10 @@ export default function Page() {
             <h2 className="mt-1 text-lg font-bold tracking-tight">"I turn ideas into dependable systems."</h2>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {DATA.quotes.map((quote, idx) => (
-                <div key={idx} className="rounded-xl border border-border/40 bg-background/50 p-3.5 text-xs text-muted-foreground italic leading-relaxed">
-                  "{quote}"
-                </div>
+                <blockquote key={idx} className="relative rounded-xl border border-border/50 border-l-2 border-l-primary/60 bg-gradient-to-br from-primary/5 to-background/70 p-5 sm:p-6">
+                  <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-primary/80">{["Think boldly", "Stay curious", "Keep going", "Show up daily"][idx]}</p>
+                  <p className="font-serif text-base leading-relaxed text-foreground/90 sm:text-lg">“{quote}”</p>
+                </blockquote>
               ))}
             </div>
           </div>
@@ -354,7 +355,7 @@ export default function Page() {
       <section id="achievements">
         <BlurFade delay={BLUR_FADE_DELAY * 9}>
           <SectionLabel label="Honors & Awards" />
-          <h2 className="mt-1.5 text-xl font-bold tracking-tight">First Place & Hackathon Wins</h2>
+          <h2 className="mt-1.5 text-xl font-bold tracking-tight">First Place & Competition Wins</h2>
           <div className="mt-4 grid gap-4 sm:grid-cols-3">
             {DATA.achievements.map((ach) => (
               <a
@@ -380,16 +381,16 @@ export default function Page() {
       </section>
 
       {/* ─── LEETCODE & CODING STATS ─── */}
-      <section id="coding">
+      <section id="coding" className="min-w-0 w-full">
         <BlurFade delay={BLUR_FADE_DELAY * 10}>
           <SectionLabel label="Consistency & Problem Solving" />
           <h2 className="mt-1.5 text-xl font-bold tracking-tight">Coding Activity & LeetCode</h2>
-          
+
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {/* LeetCode Card */}
-            <div className="rounded-xl border border-border/60 bg-card/40 p-5 space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
+            <div className="min-w-0 w-full rounded-xl border border-border/60 bg-card/40 p-4 sm:p-5 space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex min-w-0 items-center gap-2">
                   <Icons.leetcode className="size-6 text-amber-500" />
                   <div>
                     <h3 className="text-sm font-semibold">LeetCode Profile</h3>
@@ -406,7 +407,7 @@ export default function Page() {
                 </a>
               </div>
 
-              <div className="grid grid-cols-4 gap-2 text-center pt-2">
+              <div className="grid grid-cols-2 min-[420px]:grid-cols-4 gap-2 text-center pt-2">
                 <div className="rounded-lg bg-background/60 p-2 border border-border/40">
                   <span className="text-lg font-bold text-foreground">{DATA.leetCodeStats.totalSolved}</span>
                   <p className="text-[10px] text-muted-foreground">Total Solved</p>
@@ -427,17 +428,17 @@ export default function Page() {
 
               <div className="flex flex-wrap gap-3 text-xs text-muted-foreground pt-1 border-t border-border/40">
                 <span><strong>Rating:</strong> {DATA.leetCodeStats.contestRating}</span>
-                <span>·</span>
+
                 <span><strong>Active Days:</strong> {DATA.leetCodeStats.activeDays}</span>
-                <span>·</span>
+
                 <span><strong>Max Streak:</strong> {DATA.leetCodeStats.maxStreak} days</span>
               </div>
             </div>
 
             {/* GitHub Card */}
-            <div className="rounded-xl border border-border/60 bg-card/40 p-5 space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
+            <div className="min-w-0 w-full rounded-xl border border-border/60 bg-card/40 p-4 sm:p-5 space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex min-w-0 items-center gap-2">
                   <Icons.github className="size-6 text-foreground" />
                   <div>
                     <h3 className="text-sm font-semibold">GitHub Activity</h3>
@@ -453,7 +454,7 @@ export default function Page() {
                   View Profile <ExternalLink className="size-3" />
                 </a>
               </div>
-              <div className="pt-2">
+              <div className="min-w-0 max-w-full pt-2">
                 <GithubContributions />
               </div>
             </div>
@@ -486,7 +487,7 @@ export default function Page() {
       </section>
 
       {[
-        { id: "certifications", label: "Credentials", title: "Certifications", items: DATA.certificationsList },
+        { id: "certifications", label: "Credentials", title: "Certifications & Courses", items: DATA.certificationsList },
         { id: "open-source", label: "Community & Collaboration", title: "Open Source Contributions", items: DATA.openSourceContributions },
         { id: "platform-badges", label: "Platform Achievements", title: "Platform Badges", items: DATA.platformBadges },
       ].map((group) => (
@@ -494,7 +495,7 @@ export default function Page() {
           <BlurFade delay={BLUR_FADE_DELAY * 12}>
             <SectionLabel label={group.label} />
             <h2 id={group.id + "-heading"} className="mt-1.5 text-xl font-bold tracking-tight">{group.title}</h2>
-            <div className={group.id === "platform-badges" ? "mt-4 grid gap-3 sm:grid-cols-3" : "mt-4 grid gap-3 sm:grid-cols-2"}>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {group.items.map((item) => (
                 <div key={item.image} className="self-start overflow-hidden rounded-xl border border-border/50 bg-card/40 transition-all hover:border-border">
                   <a href={item.image} target="_blank" rel="noopener noreferrer" className="block bg-muted/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary" aria-label={"Open full image: " + item.name}>
@@ -513,16 +514,25 @@ export default function Page() {
         <BlurFade delay={BLUR_FADE_DELAY * 13}>
           <SectionLabel label="Leadership & Community" />
           <h2 className="mt-1.5 text-xl font-bold tracking-tight">Responsibility Beyond The Code</h2>
-          <div className="mt-4 grid gap-4 sm:grid-cols-3">
-            {DATA.responsibilities.map((resp) => (
-              <div key={resp.title} className="rounded-xl border border-border/50 bg-card/40 p-4 space-y-1">
-                <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
-                  <CheckCircle2 className="size-4 text-emerald-500 shrink-0" />
-                  {resp.title}
-                </h3>
-                <p className="text-xs text-muted-foreground">{resp.description}</p>
-              </div>
-            ))}
+          <div className="mt-5 grid gap-4 sm:grid-cols-3">
+            {DATA.responsibilities.map((resp, index) => {
+              const Icon = [Users, BriefcaseBusiness, GraduationCap][index];
+              const accents = [
+                { card: "border-emerald-500/30 from-emerald-500/15", icon: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", label: "Student Representation" },
+                { card: "border-blue-500/30 from-blue-500/15", icon: "bg-blue-500/15 text-blue-700 dark:text-blue-300", label: "Career Readiness" },
+                { card: "border-violet-500/30 from-violet-500/15", icon: "bg-violet-500/15 text-violet-700 dark:text-violet-300", label: "Academic Leadership" },
+              ][index];
+              return (
+                <div key={resp.title} className={"relative rounded-2xl border bg-gradient-to-br to-card p-5 shadow-sm transition-shadow hover:shadow-lg sm:p-6 " + accents.card}>
+                  <div className={"mb-5 flex size-12 items-center justify-center rounded-xl " + accents.icon}>
+                    <Icon className="size-6" aria-hidden="true" />
+                  </div>
+                  <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">{accents.label}</p>
+                  <h3 className="text-lg font-bold leading-snug tracking-tight text-foreground sm:min-h-[3rem]">{resp.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{resp.description}</p>
+                </div>
+              );
+            })}
           </div>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-3">

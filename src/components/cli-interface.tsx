@@ -266,7 +266,23 @@ export function CliInterface({ onGuiCommand, onMinimize, onMaximize, onClose }: 
               key={i} 
               className={`group relative selection:bg-blue-500/30 ${line === ASCII_ART ? "whitespace-pre overflow-x-auto text-[10px] sm:text-sm leading-none tracking-normal" : "whitespace-pre-wrap break-words leading-relaxed"}`}
             >
-              <span className="text-zinc-200">
+              {line === ASCII_ART ? (
+                <svg
+                  viewBox="0 0 40 7"
+                  role="img"
+                  aria-label="YAMUNA"
+                  className="block w-full max-w-[560px] text-zinc-200"
+                  preserveAspectRatio="xMinYMid meet"
+                  shapeRendering="crispEdges"
+                >
+                  <title>YAMUNA</title>
+                  {ASCII_ART.split("\n").flatMap((row, y) =>
+                    Array.from(row).map((cell, x) => cell === "█" ? (
+                      <rect key={x + ":" + y} x={x} y={y} width="1" height="1" fill="currentColor" />
+                    ) : null)
+                  )}
+                </svg>
+              ) : <span className="text-zinc-200">
                 {line.startsWith('http') ? (
                   <a 
                     href={line} 
@@ -279,7 +295,7 @@ export function CliInterface({ onGuiCommand, onMinimize, onMaximize, onClose }: 
                 ) : (
                   formatCommandLine(line, 'dark')
                 )}
-              </span>
+              </span>}
               {line.trim() && (
                 <button
                   onClick={() => copyToClipboard(line)}

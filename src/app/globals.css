@@ -340,3 +340,36 @@ html {
     scroll-behavior: auto !important;
   }
 }
+/* Soft gray maple leaves: staggered fall, sideways drift, and gentle tumbling. */
+.maple-background {
+  color: #64748b;
+  --leaf-vein: #e2e8f0;
+}
+.dark .maple-background {
+  color: #cbd5e1;
+  --leaf-vein: #64748b;
+}
+.maple-fall {
+  animation-name: maple-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+.maple-sway {
+  animation: maple-sway ease-in-out infinite alternate;
+  transform-origin: 50% 35%;
+}
+@keyframes maple-fall {
+  from { transform: translate3d(0, -8vh, 0) rotate(var(--leaf-rotation)); }
+  to { transform: translate3d(var(--leaf-drift), calc(100vh + 160px), 0) rotate(calc(var(--leaf-rotation) + 240deg)); }
+}
+@keyframes maple-sway {
+  from { transform: translateX(-14px) rotate(-22deg) scaleX(0.85); }
+  to { transform: translateX(14px) rotate(22deg) scaleX(1); }
+}
+@media (max-width: 640px) {
+  .maple-fall:nth-child(n + 11) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .maple-background { display: none; }
+}

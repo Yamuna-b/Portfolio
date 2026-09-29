@@ -18,7 +18,7 @@ export function GithubContributions() {
   const containerHeight = "min-h-[200px]";
 
   return (
-    <div className={`relative overflow-hidden rounded-xl ${containerHeight}`}>
+    <div className={`relative min-w-0 w-full max-min-w-0 w-full max-w-full overflow-hidden rounded-xl ${containerHeight}`}>
       <BorderBeam
         duration={6}
         size={400}
@@ -39,7 +39,7 @@ export function GithubContributions() {
         {!mounted ? (
           <div className="w-full h-[160px] rounded-lg bg-muted/50 animate-pulse" />
         ) : (
-          <div className="overflow-x-auto p-4 -mx-1">
+          <div className="w-full min-w-0 overflow-x-auto pb-2" role="region" aria-label="GitHub contribution calendar — scroll horizontally to view the full year" tabIndex={0}>
             <GitHubCalendar
               username="Yamuna-b"
               colorScheme={resolvedTheme as "light" | "dark"}
